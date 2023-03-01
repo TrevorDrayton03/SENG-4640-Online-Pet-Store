@@ -8,8 +8,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      lists: ["Dogs"],
-      items: { Dogs: [{ name: "chase" }, { name: "joe" }] }
+      lists: [],
+      items: {}
     };
   }
 
