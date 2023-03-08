@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Lists from './Lists.js';
 
 class Pets extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -10,14 +9,6 @@ class Pets extends Component {
             items: props.items,
         };
     }
-
-    // componentDidUpdate() {
-    //     this.setState = {
-    //         lists: this.props.lists,
-    //         items: this.props.items,
-    //     };
-    // }
-
 
     handleAddItem(s) {
         let newItem = this.state.items;

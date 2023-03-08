@@ -17,10 +17,6 @@ app.get('/data', (req, res) => {
   res.json(data);
 });
 
-app.get('/hello', (req, res) => {
-  res.send("HELLO!");
-});
-
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });

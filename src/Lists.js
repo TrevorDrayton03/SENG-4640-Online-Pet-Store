@@ -3,7 +3,6 @@ import List from './List.js';
 import { v4 as uuidv4 } from "uuid";
 
 class Lists extends Component {
-
   render() {
     if (this.props.lists.length === 0) {
       return (

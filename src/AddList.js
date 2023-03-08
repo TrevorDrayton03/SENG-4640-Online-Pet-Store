@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 class AddList extends Component {
-
   constructor() {
     super();
     this.state = { input: '' };
