@@ -16,11 +16,11 @@ class List extends Component {
           <ul>
             {items.map(function (item) {
               return (
-                <li style={{display: 'list-item'}} key={uuidv4()}><ListItem item={item} key={uuidv4()} /></li>
+                <li style={{ display: 'list-item' }} key={uuidv4()}><ListItem item={item} key={uuidv4()} /></li>
               )
             })}
           </ul>
-          <AddItem idName={name} addItem={this.props.addItem.bind(this)} />
+          {/* <AddItem idName={name} addItem={this.props.addItem.bind(this)} /> */}
         </div>
       )
     }

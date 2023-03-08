@@ -23,13 +23,14 @@ h3 {
   margin-top: 15px;
 }
 
-<!--
 ul {
   /* list-style-type: none; */
   text-align: left;
 }
--->
 
+#navBarList {
+  text-align: center
+}
 
 dl {
   list-style-type: disc;
