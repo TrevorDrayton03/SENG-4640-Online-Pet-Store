@@ -25,12 +25,17 @@ h3 {
 }
 
 ul {
-  /* list-style-type: none; */
   text-align: left;
 }
 
-#navBarList {
-  text-align: center
+/* class select navbarlist and change lists within it */
+.navBarList li {
+  margin: 10px;
+  list-style-type: none;
+}
+
+button {
+  margin-top:15px;
 }
 
 dl {

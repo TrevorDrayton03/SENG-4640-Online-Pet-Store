@@ -12,16 +12,22 @@ class Navbar extends Component {
             <div className="Navbar">
                 <h2>
                     <nav>
-                        <ul className="navBarList">
-                            <a href="/#" onClick={e => this.handleOnClick(e, "/")} >
-                                Home
-                            </a>
-                            <a href="/#" onClick={e => this.handleOnClick(e, "/pets")} >
-                                Pets
-                            </a>
-                            <a href="/#" onClick={e => this.handleOnClick(e, "/admin")} >
-                                Admin
-                            </a>
+                        <ul className="navBarList" style={{ flexDirection: 'row', display: 'flex' }}>
+                            <li>
+                                <a href="/#" onClick={e => this.handleOnClick(e, "/")} >
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/#" onClick={e => this.handleOnClick(e, "/pets")} >
+                                    Pets
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/#" onClick={e => this.handleOnClick(e, "/admin")} >
+                                    Admin
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </h2>

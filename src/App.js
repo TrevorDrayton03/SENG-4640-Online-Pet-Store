@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    FileSystemDirectoryEntry
     window.addEventListener('popstate', () => {
       this.setState({ route: window.location.pathname });
     });
@@ -35,7 +34,6 @@ class App extends Component {
       this.setState({
         allPets: pets
       });
-      console.log(this.state.allPets);
     } catch (error) {
       console.error(error);
     }
@@ -46,13 +44,17 @@ class App extends Component {
     window.history.pushState(null, null, route);
   }
 
+  handleLogin(loggedIn) {
+    this.setState({ loggedIn });
+  }
   render() {
     return (
-      <div className="App">
+      <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
         {this.state.route === '/' && <Home />}
         {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
-        {this.state.route === '/admin' && <Admin />}
+        {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} />}
+        {<h1>HELLO </h1> && this.state.admin}
       </div>
     );
   }
