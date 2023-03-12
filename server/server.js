@@ -23,7 +23,7 @@ app.get('/api/petData', async (req, res) => {
     if (type) {
       pets = await PetModel.find({ type: type }); // find pets of a certain type
     } else {
-      pets = await PetModel.findAll(); // find all pets
+      pets = await PetModel.find(); // find all pets
     }
     res.send(pets);
   } catch (err) {
