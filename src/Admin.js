@@ -2,17 +2,12 @@ import React, { Component } from 'react';
 
 class Admin extends Component {
 
-    // need a form to enter password and username
-    // need a fetch to check if logInAttempt is true or false
-    // change the appstate based on the results
-    // need a logout button if user is logged in
     constructor(props) {
         super(props);
 
         this.state = {
             username: '',
-            password: '',
-            loggedIn: false
+            password: ''
         };
 
         this.handleUsernameChange = this.handleUsernameChange.bind(this);
@@ -53,7 +48,6 @@ class Admin extends Component {
 
             // Log in was successful
             this.props.handleLogin(true);
-            this.setState({ loggedIn: true })
         } catch (error) {
             console.error(error);
         }
