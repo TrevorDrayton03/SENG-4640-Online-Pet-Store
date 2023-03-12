@@ -36,7 +36,7 @@ app.use('/api/admin', async (req, res) => {
     const { username, password } = req.body;
     let admin = await AdminModel.findOne({ username: username, password: password }); // find pets of a certain type
     let logInAttempt;
-    if (!admin) {
+    if (admin.length === 0) {
       logInAttempt = false;
     }
     else {
