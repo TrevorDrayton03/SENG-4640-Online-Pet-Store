@@ -29,8 +29,8 @@ class Admin extends Component {
         this.setState({ password: e.target.value });
     }
 
-    handleLogout() {
-        this.setState({ loggedIn: false })
+    handleLogout(e) {
+        this.props.handleLogin(false);
     }
     async handleFormSubmit(e) {
         e.preventDefault();
@@ -60,7 +60,7 @@ class Admin extends Component {
     }
 
     render() {
-        if (!this.state.loggedIn) {
+        if (!this.props.admin) {
             return (
                 <div className="Admin" style={{ alignItems: 'center', justifyContent: 'center' }}>
                     <h2>Log In</h2>

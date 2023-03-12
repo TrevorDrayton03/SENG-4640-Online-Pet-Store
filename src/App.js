@@ -45,18 +45,31 @@ class App extends Component {
   }
 
   handleLogin(loggedIn) {
-    this.setState({ loggedIn });
+    this.setState({ admin: loggedIn });
   }
+
   render() {
-    return (
-      <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
-        {this.state.route === '/' && <Home pets={this.state.allPets} />}
-        {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
-        {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} />}
-        {<h1>HELLO </h1> && this.state.admin}
-      </div>
-    );
+    if (this.state.admin) {
+      return (
+        <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
+          <h3>HELLO ADMIN</h3>
+          {this.state.route === '/' && <Home pets={this.state.allPets} />}
+          {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
+          {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+        </div>
+      );
+    }
+    else {
+      return (
+        <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+          <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
+          {this.state.route === '/' && <Home pets={this.state.allPets} />}
+          {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
+          {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+        </div>
+      );
+    }
   }
 
 }
