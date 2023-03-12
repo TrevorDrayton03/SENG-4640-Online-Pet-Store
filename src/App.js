@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from './Navbar.js';
 import Home from './Home.js';
 import Pets from './Pets.js';
+import Admin from './Admin.js';
 
 import './App.css';
 
@@ -13,22 +14,31 @@ class App extends Component {
       route: window.location.pathname,
       lists: [],
       items: {},
-      message: null
+      message: null,
+      admin: false,
+      allPets: {}
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    FileSystemDirectoryEntry
     window.addEventListener('popstate', () => {
       this.setState({ route: window.location.pathname });
     });
 
-    fetch('http://localhost:3000/data')
-      .then(response => response.json())
-      .then(data => this.setState({
-        message: data.message,
-        lists: data.lists,
-        items: data.items
-      }));
+    // home fetches all pets for the slide show of randomized pets
+    // it gets all pets by *not* specifying a pet type
+    // see server.js app.get('/api/petData')
+    try {
+      const response = await fetch('http://localhost:3000/api/petData');
+      const pets = await response.json();
+      this.setState({
+        allPets: pets
+      });
+      console.log(this.state.allPets);
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   handleLinkClick(route) {
@@ -42,6 +52,7 @@ class App extends Component {
         <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
         {this.state.route === '/' && <Home />}
         {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
+        {this.state.route === '/admin' && <Admin />}
       </div>
     );
   }

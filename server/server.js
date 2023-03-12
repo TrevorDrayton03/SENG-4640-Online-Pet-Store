@@ -5,16 +5,24 @@ const path = require('path');
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
-app.get('/data', (req, res) => {
-  const data = {
-    message: 'Hello World!',
-    lists: ["Dogs", "Cats"],
-    items: {
-      Dogs: [{ name: "chase" }, { name: "joe" }],
-      Cats: [{ name: "boomer" }, { name: "cheddar" }],
+app.set("view engine", "ejs");
+
+var PetModel = require("../src/schemas/Pet.js");
+var AdminModel = require("../src/schemas/Admin.js");
+
+app.get('/api/petData', async (req, res) => {
+  try {
+    const type = req.query.type; // url query parameter
+    let pets;
+    if (type) {
+      pets = await PetModel.find({ type: type }); // find pets of a certain type
+    } else {
+      pets = await PetModel.find(); // find all pets
     }
+    res.send(pets);
+  } catch (err) {
+    res.status(500).send(err);
   };
-  res.json(data);
 });
 
 app.get('*', (req, res) => {
