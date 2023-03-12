@@ -51,7 +51,7 @@ class App extends Component {
     return (
       <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
-        {this.state.route === '/' && <Home />}
+        {this.state.route === '/' && <Home pets={this.state.allPets} />}
         {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} />}
         {<h1>HELLO </h1> && this.state.admin}
