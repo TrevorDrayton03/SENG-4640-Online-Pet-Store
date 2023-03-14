@@ -7,6 +7,7 @@ class Pets extends Component {
     this.state = {
       lists: props.lists,
       items: props.items,
+      value: "Dog",
     };
   }
 
@@ -19,13 +20,23 @@ class Pets extends Component {
     this.setState({ items: newItem });
   }
 
+  handleChange(event) {
+    this.setState({ value: event.target.value });
+  }
+
+  handlePetType(event) {
+    console.log("This is the pet you wanna look at " + this.state.value);
+    document.getElementById("petT").innerHTML = this.state.value;
+    event.preventDefault();
+  }
+
   render() {
     return (
       <div className="Pets">
         <h1>This is Pets component</h1>
-        <form>
+        <form onSubmit={this.handlePetType.bind(this)}>
           <h2>What animals would you like to look at?</h2>
-          <select name="animals" id="petType">
+          <select name="animals" id="petType" value={this.state.value} onChange = {this.handleChange.bind(this)}>
             <option value="Dog">Dogs</option>
             <option value="Cat">Cats</option>
             <option value="Fish">Fish</option>
@@ -33,9 +44,7 @@ class Pets extends Component {
           </select>
           <input type="submit" value="Submit"></input>
         </form>
-        <script>
-            let pType = document.getElementById("petType");
-        </script>
+        <div id = "petT"></div>
         <div id="listsDiv" className="List">
           <Lists
             lists={this.state.lists}
