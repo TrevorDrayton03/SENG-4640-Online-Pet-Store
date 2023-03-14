@@ -3,6 +3,7 @@ import Navbar from './Navbar.js';
 import Home from './Home.js';
 import Pets from './Pets.js';
 import Admin from './Admin.js';
+import Cart from './Cart.js';
 
 import './App.css';
 
@@ -56,6 +57,7 @@ class App extends Component {
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+          {this.state.route === '/cart' && <Cart pets={this.state.allPets} />}
         </div>
       );
     }
@@ -66,6 +68,7 @@ class App extends Component {
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+          {this.state.route === '/cart' && <Cart pets={this.state.allPets} />}
         </div>
       );
     }

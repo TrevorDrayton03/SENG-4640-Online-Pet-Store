@@ -33,6 +33,11 @@ class Navbar extends Component {
                                     Customer Service
                                 </a>
                             </li>
+                            <li>
+                                <a href="/#" onClick={e => this.handleOnClick(e, "/cart")} >
+                                    Cart
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </h2>
