@@ -35,17 +35,21 @@ class Cart extends Component {
     render() {
         return (
             <div className="Cart">
-                <Container>
-                    {this.state.items.map((item) => (
-                        <CartItem
-                            id={item._id}
-                            name={item.name}
-                            url={item.url}
-                            price={item.price}
-                        >
-                        </CartItem>
-                    ))}
-                    <p className="d-flex justify-content-end">Total: ${this.state.total.toFixed(2)}</p>
+                <Container style={{ alignItems: "center", justifyContent: "center" }}>
+                    <Row>
+                        {this.state.items.map((item) => (
+                            <CartItem
+                                id={item._id}
+                                name={item.name}
+                                url={item.url}
+                                price={item.price}
+                            >
+                            </CartItem>
+                        ))}
+                    </Row>
+                    <Row xs lg="2">
+                        <p className="d-flex justify-content-end">Total: ${this.state.total.toFixed(2)}</p>
+                    </Row>
                 </Container>
             </div>
         );

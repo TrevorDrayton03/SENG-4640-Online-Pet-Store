@@ -36,7 +36,7 @@ class Pets extends Component {
         <h1>This is Pets component</h1>
         <form onSubmit={this.handlePetType.bind(this)}>
           <h2>What animals would you like to look at?</h2>
-          <select name="animals" id="petType" value={this.state.value} onChange = {this.handleChange.bind(this)}>
+          <select name="animals" id="petType" value={this.state.value} onChange={this.handleChange.bind(this)}>
             <option value="Dog">Dogs</option>
             <option value="Cat">Cats</option>
             <option value="Fish">Fish</option>
@@ -44,7 +44,7 @@ class Pets extends Component {
           </select>
           <input type="submit" value="Submit"></input>
         </form>
-        <div id = "petT"></div>
+        <div id="petT"></div>
         <div id="listsDiv" className="List">
           <Lists
             lists={this.state.lists}

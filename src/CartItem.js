@@ -13,17 +13,17 @@ class CartItem extends Component {
     render() {
         return (
             <Row key={this.props.id} style={{ alignItems: "center", margin: 20 }}>
-                <Col>
+                <Col xs lg="2">
                     <h2>{this.props.name}</h2>
                 </Col>
-                <Col>
+                <Col xs lg="2">
                     <img
                         className="d-block w-100"
                         alt="Item"
                         src={this.props.url}
                     />
                 </Col>
-                <Col className="d-flex justify-content-end">
+                <Col className="d-flex justify-content-end" xs lg="2">
                     <div>
                         <p>Price: ${this.props.price}</p>
                         <p>Quantity: 1</p>

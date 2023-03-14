@@ -14,7 +14,6 @@ class Admin extends Component {
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.handleLogout = this.handleLogout.bind(this);
-
     }
     handleUsernameChange(e) {
         this.setState({ username: e.target.value });
