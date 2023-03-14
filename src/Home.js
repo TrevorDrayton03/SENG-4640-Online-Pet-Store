@@ -24,8 +24,8 @@ class Home extends Component {
                                 src={this.props.pets[0].url}
                             />
                             <Carousel.Caption>
-                                <h3>{this.props.pets[0].name}</h3>
-                                <p>{this.props.pets[0].breed}</p>
+                                <h3>NAME: {this.props.pets[0].name}</h3>
+                                <p>BREED: {this.props.pets[0].breed}</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                         <Carousel.Item>
@@ -35,8 +35,8 @@ class Home extends Component {
                                 src={this.props.pets[1].url}
                             />
                             <Carousel.Caption>
-                                <h3>{this.props.pets[1].name}</h3>
-                                <p>{this.props.pets[1].breed}</p>
+                                <h3>NAME: {this.props.pets[1].name}</h3>
+                                <p>BREED: {this.props.pets[1].breed}</p>
                             </Carousel.Caption>
                         </Carousel.Item>
                     </Carousel>

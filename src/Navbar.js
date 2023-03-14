@@ -28,6 +28,11 @@ class Navbar extends Component {
                                     Admin
                                 </a>
                             </li>
+                            <li>
+                                <a href="/#" onClick={e => this.handleOnClick(e, "/customer%20service")} >
+                                    Customer Service
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </h2>
