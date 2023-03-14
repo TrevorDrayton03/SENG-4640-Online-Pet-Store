@@ -16,7 +16,8 @@ class App extends Component {
       lists: [],
       items: {},
       admin: false,
-      allPets: {}
+      allPets: {},
+      cartItems: {}
     };
   }
 
@@ -32,7 +33,8 @@ class App extends Component {
       const response = await fetch('http://localhost:3000/api/petData');
       const pets = await response.json();
       this.setState({
-        allPets: pets
+        allPets: pets,
+        cartItems: pets
       });
     } catch (error) {
       console.error(error);
@@ -57,7 +59,7 @@ class App extends Component {
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-          {this.state.route === '/cart' && <Cart pets={this.state.allPets} />}
+          {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
         </div>
       );
     }
@@ -68,7 +70,7 @@ class App extends Component {
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-          {this.state.route === '/cart' && <Cart pets={this.state.allPets} />}
+          {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
         </div>
       );
     }
