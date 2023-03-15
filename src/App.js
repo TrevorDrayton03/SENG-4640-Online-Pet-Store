@@ -12,8 +12,7 @@ class App extends Component {
     super();
     this.state = {
       route: window.location.pathname,
-      lists: [],
-      items: {},
+      petType: {},
       admin: false,
       allPets: {}
     };
@@ -31,7 +30,8 @@ class App extends Component {
       const response = await fetch('http://localhost:3000/api/petData');
       const pets = await response.json();
       this.setState({
-        allPets: pets
+        allPets: pets,
+        petType : pets
       });
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ class App extends Component {
           <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
           <h3>HELLO ADMIN</h3>
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
-          {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
+          {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
         </div>
       );
@@ -64,7 +64,7 @@ class App extends Component {
         <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
           <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
-          {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
+          {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
         </div>
       );

@@ -5,8 +5,7 @@ class Pets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lists: props.lists,
-      items: props.items,
+      petType: this.props.petType,
       value: "Dog",
     };
   }
@@ -25,8 +24,9 @@ class Pets extends Component {
   }
 
   handlePetType(event) {
-    console.log("This is the pet you wanna look at " + this.state.value);
-    document.getElementById("petT").innerHTML = this.state.value;
+    let animal = this.props.petType;
+    console.log(animal);
+    document.getElementById("petPicURL").innerHTML = '<img id = "polarImg" name = "Doggy" alt = "Polar Bear" src =' + this.props.petType[2].url + '>';
     event.preventDefault();
   }
 
@@ -36,7 +36,12 @@ class Pets extends Component {
         <h1>This is Pets component</h1>
         <form onSubmit={this.handlePetType.bind(this)}>
           <h2>What animals would you like to look at?</h2>
-          <select name="animals" id="petType" value={this.state.value} onChange = {this.handleChange.bind(this)}>
+          <select
+            name="animals"
+            id="petType"
+            value={this.state.value}
+            onChange={this.handleChange.bind(this)}
+          >
             <option value="Dog">Dogs</option>
             <option value="Cat">Cats</option>
             <option value="Fish">Fish</option>
@@ -44,14 +49,17 @@ class Pets extends Component {
           </select>
           <input type="submit" value="Submit"></input>
         </form>
-        <div id = "petT"></div>
-        <div id="listsDiv" className="List">
+        <div id="petT">
+           <a href="localhost:3000/petDetails" id="petPicURL"></a> 
+        </div>
+        {this.props.petType[2].url}
+        {/* <div id="listsDiv" className="List">
           <Lists
             lists={this.state.lists}
             items={this.state.items}
             addItem={this.handleAddItem.bind(this)}
           />
-        </div>
+        </div> */}
       </div>
     );
   }
