@@ -35,8 +35,8 @@ class Cart extends Component {
     render() {
         return (
             <div className="Cart">
-                <Container style={{ alignItems: "center", justifyContent: "center" }}>
-                    <Row>
+                <Container fluid style={{ width: 700 }}>
+                    <Row fluid style={{ flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
                         {this.state.items.map((item) => (
                             <CartItem
                                 id={item._id}
@@ -47,7 +47,7 @@ class Cart extends Component {
                             </CartItem>
                         ))}
                     </Row>
-                    <Row xs lg="2">
+                    <Row>
                         <p className="d-flex justify-content-end">Total: ${this.state.total.toFixed(2)}</p>
                     </Row>
                 </Container>
