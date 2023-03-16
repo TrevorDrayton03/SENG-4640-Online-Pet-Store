@@ -25,8 +25,13 @@ class Pets extends Component {
 
   handlePetType(event) {
     let animal = this.props.petType;
-    console.log(animal);
-    document.getElementById("petPicURL").innerHTML = '<img id = "polarImg" name = "Doggy" alt = "Polar Bear" src =' + this.props.petType[2].url + '>';
+    document.getElementById("petPicURL").innerHTML = '';
+    for(let i = 0; i < animal.length; i++){
+      if(animal[i].type == this.state.value){
+        document.getElementById("petPicURL").innerHTML += '<img id = "polarImg" name = "Doggy" alt = "Polar Bear" src =' + animal[i].url + '>';
+        console.log(i);
+      }
+    }
     event.preventDefault();
   }
 
@@ -52,7 +57,6 @@ class Pets extends Component {
         <div id="petT">
            <a href="localhost:3000/petDetails" id="petPicURL"></a> 
         </div>
-        {this.props.petType[2].url}
         {/* <div id="listsDiv" className="List">
           <Lists
             lists={this.state.lists}
