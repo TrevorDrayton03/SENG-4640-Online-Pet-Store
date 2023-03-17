@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import DataManager from "./DataManager";
 
+// https://www.positronx.io/how-to-insert-form-values-or-data-in-react-table-component/
+// making admin alwyas true in App while I'm developing this 
 class Admin extends Component {
 
     constructor(props) {
@@ -82,11 +85,26 @@ class Admin extends Component {
                 </div>
             )
         }
+        /*
+        - type must be pets or supplies
+        - sort by column asc/desc
+        - search for a value and it appears in the table
+        - add button to create a new row to fill in followed by a submit button
+        - edit button on a row to begin editing the data followed by a submit button
+        - delete button by the row followed by a confirm button
+        - DataItem could be a form when editing
+        */
+
         else {
             return (
-                <div className="Admin">
-                    <h2>Log Out</h2>
-                    <button type="submit" onClick={this.handleLogout}> Logout</button>
+                <div className="Container">
+                    <div className="Admin">
+                        <h2>Log Out</h2>
+                        <button type="submit" onClick={this.handleLogout}> Logout</button>
+                    </div>
+                    <DataManager
+
+                    />
                 </div>
             )
         }
