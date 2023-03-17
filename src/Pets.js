@@ -25,10 +25,14 @@ class Pets extends Component {
 
   handlePetType(event) {
     let animal = this.props.petType;
-    document.getElementById("petPicURL").innerHTML = '';
+    document.getElementById("petsTy").innerHTML = '';
     for(let i = 0; i < animal.length; i++){
       if(animal[i].type == this.state.value){
-        document.getElementById("petPicURL").innerHTML += '<img id = "polarImg" name = "Doggy" alt = "Polar Bear" src =' + animal[i].url + '>';
+        document.getElementById("petsTy").innerHTML += '<tr>'+ '<th>'+ '<h3> Their name is '+ animal[i].name +'</h3>'+ '</th>'+'</tr>' 
+        +'<tr>'+'<td>'+ '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id ='
+        + animal[i]._id + 'name = '+ animal[i].name + ' alt ='+ animal[i].breed +' src =' 
+        + animal[i].url + '>' +'</td>'
+        +'<td>'+ '<h3> They cost $' + animal[i].price +'</h3>' +'</td>' +'</tr>';
         console.log(i);
       }
     }
@@ -54,8 +58,8 @@ class Pets extends Component {
           </select>
           <input type="submit" value="Submit"></input>
         </form>
-        <div id="petT">
-           <a href="localhost:3000/petDetails" id="petPicURL"></a> 
+        <div id="petT"> 
+        <table id = "petsTy"></table>
         </div>
         {/* <div id="listsDiv" className="List">
           <Lists
