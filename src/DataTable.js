@@ -33,8 +33,16 @@ class DataTable extends Component {
             console.error(error);
         }
     }
-    handleUpdate = (key) => {
-        // fetch update
+    handleUpdate = async (key, info) => {
+        try {
+            const response = await fetch(`http://localhost:3000/api/update?key=${key}&info=${info}`);
+            const result = await response.text();
+            // if (result === 'Success') {
+            //     this.fetchData();
+            // }
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     render() {
@@ -54,7 +62,7 @@ class DataTable extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    {/* <tr>
                         <td>123 </td>
                         <td>123 </td>
                         <td>123 </td>
@@ -68,7 +76,7 @@ class DataTable extends Component {
                         <td>
                             <button className="btn btn-warning" onClick={() => this.handleUpdate(2)}>Update</button>
                         </td>
-                    </tr>
+                    </tr> */}
                     {this.state.tableData && this.state.tableData.map((data) => {
                         return (
                             <tr key={data._id}>

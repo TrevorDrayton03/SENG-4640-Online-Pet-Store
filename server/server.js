@@ -70,6 +70,17 @@ app.get('/api/delete/', async (req, res) => {
   }
 });
 
+app.get('/api/update/', async (req, res) => {
+  try {
+    const key = req.query.key;
+    await PetModel.deleteOne({ _id: key });
+    res.status(200).send("delete success")
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
