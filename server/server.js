@@ -48,6 +48,28 @@ app.use('/api/admin', async (req, res) => {
   };
 });
 
+// get all unique pet types
+app.get('/api/types', async (req, res) => {
+  try {
+    const types = await PetModel.distinct('type');
+    res.status(200).json(types);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/api/delete/', async (req, res) => {
+  try {
+    const key = req.query.key;
+    await PetModel.deleteOne({ _id: key });
+    res.status(200).send("delete success")
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });

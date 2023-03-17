@@ -15,7 +15,7 @@ class App extends Component {
       route: window.location.pathname,
       lists: [],
       items: {},
-      admin: false,
+      admin: true,
       allPets: {},
       cartItems: {}
     };
@@ -53,9 +53,8 @@ class App extends Component {
   render() {
     if (this.state.admin) {
       return (
-        <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="Container">
           <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
-          <h3>HELLO ADMIN</h3>
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
@@ -65,7 +64,7 @@ class App extends Component {
     }
     else {
       return (
-        <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="Container">
           <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets lists={this.state.lists} items={this.state.items} />}

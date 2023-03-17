@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import DataManager from "./DataManager";
 
-// https://www.positronx.io/how-to-insert-form-values-or-data-in-react-table-component/
-// making admin alwyas true in App while I'm developing this 
 class Admin extends Component {
 
     constructor(props) {
@@ -58,11 +56,10 @@ class Admin extends Component {
     render() {
         if (!this.props.admin) {
             return (
-                <div className="Admin" style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <h2>Log In</h2>
+                <div className="Container">
                     <form onSubmit={this.handleFormSubmit}>
                         <label>
-                            <p>Username</p>
+                            <p><strong>Username</strong></p>
                             <input
                                 type="text"
                                 onChange={this.handleUsernameChange}
@@ -70,7 +67,7 @@ class Admin extends Component {
                             />
                         </label>
                         <label>
-                            <p>Password</p>
+                            <p><strong>Password</strong></p>
                             <input
                                 type="password"
                                 onChange={this.handlePasswordChange}
@@ -79,6 +76,7 @@ class Admin extends Component {
                         </label>
                         <div>
                             <button
+                                className="btn btn-secondary"
                                 type="submit">Submit</button>
                         </div>
                     </form>
@@ -98,12 +96,15 @@ class Admin extends Component {
         else {
             return (
                 <div className="Container">
-                    <div className="Admin">
-                        <h2>Log Out</h2>
-                        <button type="submit" onClick={this.handleLogout}> Logout</button>
+                    <div className="centerText medPad">
+                        <button
+                            className="medPad btn btn-secondary"
+                            type="submit"
+                            onClick={this.handleLogout}
+                            id="logout"
+                        >Logout</button>
                     </div>
                     <DataManager
-
                     />
                 </div>
             )

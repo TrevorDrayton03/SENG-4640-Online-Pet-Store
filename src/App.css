@@ -4,11 +4,97 @@
   list-style-type: none;
 }
 
-.App {
+.Container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.blackBorder {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.smallPad {
+  padding: 5px;
+}
+
+.medPad {
+  padding: 10px;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.flex {
+  flex: 1;
+}
+
+.small {
+  width: 300px;
+}
+
+.medium {
+  width: 500px;
+}
+
+.large {
+  width: 1200px;
+}
+
+.width5 {
+  width: 5%;
+}
+
+.width6 {
+  width: 6%;
+}
+
+.width7 {
+  width: 7%;
+}
+
+.width8 {
+  width: 8%;
+}
+
+.width9 {
+  width: 9%;
+}
+
+.width10 {
+  width: 10%;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  overflow: auto;
+}
+
+td {
+  flex: 1;
+  flex-basis: auto;
 }
 
 div button {
