@@ -29,9 +29,9 @@ class Pets extends Component {
     for(let i = 0; i < animal.length; i++){
       if(animal[i].type == this.state.value){
         document.getElementById("petsTy").innerHTML += '<tr>'+ '<th>'+ '<h3> Their name is '+ animal[i].name +'</h3>'+ '</th>'+'</tr>' 
-        +'<tr>'+'<td>'+ '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id ='
+        +'<tr>'+'<td>'+ '<a href = localhost:3000/petsData?animal='+ animal[i].name + '>' +'<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id ='
         + animal[i]._id + 'name = '+ animal[i].name + ' alt ='+ animal[i].breed +' src =' 
-        + animal[i].url + '>' +'</td>'
+        + animal[i].url + '>'+ '</a>' +'</td>'
         +'<td>'+ '<h3> They cost $' + animal[i].price +'</h3>' +'</td>' +'</tr>';
         console.log(i);
       }
