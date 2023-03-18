@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PetModal from "./modals/PetModal";
 
 // DataTable displays database data for the admin and offers options to update, delete, or add data.
-// DataTable is the parent component to PetModal and SuppliesModal.
+// DataTable utilizes PetModal to update objects in MongoDB.
 
 class DataTable extends Component {
     constructor(props) {
@@ -15,7 +15,7 @@ class DataTable extends Component {
             modalData: null
         };
 
-        this.handleUpdatePress = this.handleUpdatePress.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
         this.handleClosePetModal = this.handleClosePetModal.bind(this);
 
     }
@@ -30,7 +30,7 @@ class DataTable extends Component {
         }
     }
 
-    handleUpdatePress = (data) => {
+    handleUpdate = (data) => {
         this.setState({ showPetModal: true, modalData: data });
     }
 
@@ -51,28 +51,28 @@ class DataTable extends Component {
                             <th>Description</th>
                             <th>Image URL</th>
                             <th className="width7">Price</th>
-                            <th className="width8"></th>
                             <th className="width9"></th>
+                            <th className="width8"></th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.state.tableData && this.state.tableData.map((data) => {
                             return (
-                                <tr key={data._id}>
-                                    <td className="width7">{data.name}</td>
-                                    <td className="width7">{data.age}</td>
-                                    <td className="width7">{data.type}</td>
-                                    <td className="width7">{data.breed}</td>
-                                    <td>{data.description}</td>
-                                    <td>{data.url}</td>
-                                    <td className="width7">{data.price}</td>
-                                    <td className="width8">
-                                        <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
-                                    </td>
+                                <tr key={data && data._id}>
+                                    <td className="width7">{data && data.name ? data.name : ''}</td>
+                                    <td className="width7">{data && data.age ? data.age : ''}</td>
+                                    <td className="width7">{data && data.type ? data.type : ''}</td>
+                                    <td className="width7">{data && data.breed ? data.breed : ''}</td>
+                                    <td>{data && data.description ? data.description : ''}</td>
+                                    <td>{data && data.url ? data.url : ''}</td>
+                                    <td className="width7">{data && data.price ? data.price : ''}</td>
                                     <td className="width9">
                                         <button className="btn btn-warning" onClick={() => {
-                                            this.handleUpdatePress(data)
+                                            this.handleUpdate(data)
                                         }}>Update</button>
+                                    </td>
+                                    <td className="width8">
+                                        <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
                                     </td>
                                 </tr>
                             );
@@ -83,7 +83,9 @@ class DataTable extends Component {
                     handleClosePetModal={this.handleClosePetModal}
                     update={this.props.update}
                     pet={this.state.modalData}
-                    show={this.state.showPetModal}>
+                    show={this.state.showPetModal}
+                    job="update"
+                >
                 </PetModal>
             </div>
         )

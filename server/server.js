@@ -59,7 +59,7 @@ app.get('/api/types', async (req, res) => {
   }
 });
 
-app.get('/api/delete/', async (req, res) => {
+app.get('/api/delete', async (req, res) => {
   try {
     const key = req.query.key;
     await PetModel.deleteOne({ _id: key });
@@ -70,7 +70,7 @@ app.get('/api/delete/', async (req, res) => {
   }
 });
 
-app.use('/api/update/', async (req, res) => {
+app.use('/api/update', async (req, res) => {
   try {
     const { key, name, age, type, breed, description, url, price } = req.body;
     const update = {
@@ -91,10 +91,10 @@ app.use('/api/update/', async (req, res) => {
   }
 });
 
-app.use('/api/save/', async (req, res) => {
+app.use('/api/save', async (req, res) => {
   try {
-    const { key, name, age, type, breed, description, url, price } = req.body;
-    const newPet = new PetModel({
+    const { name, age, type, breed, description, url, price } = req.body;
+    const newPetData = new PetModel({
       name: name,
       age: age,
       type: type,
@@ -104,14 +104,8 @@ app.use('/api/save/', async (req, res) => {
       price: price
     });
 
-    newPet.save(function (err) {
-      if (err) return handleError(err);
-      // saved
-    });
-
-    await PetModel.findOneAndUpdate({ _id: key }, update);
-    let updatedPet = await PetModel.findOne({ _id: key })
-    res.status(200).send(updatedPet)
+    let newPet = await PetModel.create(newPetData)
+    res.status(200).send(newPet)
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

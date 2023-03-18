@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import DataTable from "./DataTable";
 import Form from 'react-bootstrap/Form';
+import PetModal from "./modals/PetModal";
+
 
 // DataManager is the parent component to DataTable.
 // DataManager has three states: type, search, and fetchedData.
 // Datamanager manages the data which the DataTable displays.
+// Datamanager utilizes PetModal for saving new objects to MongoDB.
 
 class DataManager extends Component {
     constructor(props) {
@@ -12,10 +15,23 @@ class DataManager extends Component {
         this.state = {
             search: null,
             fetchedData: null,
+            showPetModal: false
         };
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleSave = this.handleSave.bind(this);
+        this.handleClosePetModal = this.handleClosePetModal.bind(this);
+        this.handleOpenPetModal = this.handleOpenPetModal.bind(this);
+
+    }
+
+    handleOpenPetModal = () => {
+        this.setState({ showPetModal: true });
+    }
+
+    handleClosePetModal = () => {
+        this.setState({ showPetModal: false });
     }
 
     // fetches pets or supplies data based on the Form.Select selection
@@ -49,6 +65,22 @@ class DataManager extends Component {
             return data;
         });
         this.setState({ fetchedData: fetchedDataCopy });
+    }
+
+    // handleSave = async () => {
+    //     try {
+    //         const response = await fetch('http://localhost:3000/api/petData');
+    //         const pets = await response.json();
+    //         this.setState({
+    //             fetchedData: pets
+    //         });
+    //     } catch (error) {
+    //         console.error(error);
+    //     }
+    // }
+    handleSave = (newData) => {
+        const updatedData = [...this.state.fetchedData, newData];
+        this.setState({ fetchedData: updatedData });
     }
 
     // back tick "`" is used here for string interpolation
@@ -92,7 +124,7 @@ class DataManager extends Component {
                                 <option value="supplies">Supplies</option>
                             </Form.Select>
                         </div>
-                        <button type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
+                        <button onClick={this.handleOpenPetModal} type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
                         <input type="search" className="smallPad flex" id="search" placeholder="Search"></input>
 
                     </div>
@@ -105,6 +137,14 @@ class DataManager extends Component {
                         delete={this.handleDelete}
                     />
                 </div>
+                <PetModal
+                    handleClosePetModal={this.handleClosePetModal}
+                    save={this.handleSave}
+                    show={this.state.showPetModal}
+                    pet={null}
+                    job="save"
+                >
+                </PetModal>
             </div>
         )
     }
