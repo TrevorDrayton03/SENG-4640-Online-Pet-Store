@@ -106,10 +106,10 @@ class DataManager extends Component {
     render() {
         return (
             <div className="Container blackBorder row large">
-                <div className="blackBorder centerText">
+                <div className="centerText">
                     <h2>Database Manager</h2>
                 </div>
-                <div className="col medPad">
+                <div className="col medPad blackBorder" style={{margin:10}}>
                     <div className="row">
                         <div className="col-4 smallPad">
                             <Form.Select onChange={this.handleTypeChange}>
