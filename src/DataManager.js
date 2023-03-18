@@ -67,17 +67,6 @@ class DataManager extends Component {
         this.setState({ fetchedData: fetchedDataCopy });
     }
 
-    // handleSave = async () => {
-    //     try {
-    //         const response = await fetch('http://localhost:3000/api/petData');
-    //         const pets = await response.json();
-    //         this.setState({
-    //             fetchedData: pets
-    //         });
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // }
     handleSave = (newData) => {
         const updatedData = [...this.state.fetchedData, newData];
         this.setState({ fetchedData: updatedData });
