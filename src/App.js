@@ -15,7 +15,7 @@ class App extends Component {
       route: window.location.pathname,
       lists: [],
       items: {},
-      admin: true,
+      admin: false,
       allPets: {},
       cartItems: {}
     };

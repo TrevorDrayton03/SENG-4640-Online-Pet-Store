@@ -67,6 +67,7 @@ class DataManager extends Component {
         this.setState({ fetchedData: fetchedDataCopy });
     }
 
+    // shallow copy the current state and add the new data to the end
     handleSave = (newData) => {
         const updatedData = [...this.state.fetchedData, newData];
         this.setState({ fetchedData: updatedData });
@@ -74,14 +75,17 @@ class DataManager extends Component {
 
     // back tick "`" is used here for string interpolation
     handleDelete = async (key) => {
-        try {
-            await fetch(`http://localhost:3000/api/delete?key=${key}`);
-            // update the state to remove the deleted item
-            // filter creates a shallow copy of the array and filters what does not pass the conditional statement
-            const updatedData = this.state.fetchedData.filter(data => data._id !== key);
-            this.setState({ fetchedData: updatedData });
-        } catch (error) {
-            console.error(error);
+        const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+        if (confirmDelete) {
+            try {
+                await fetch(`http://localhost:3000/api/delete?key=${key}`);
+                // update the state to remove the deleted item
+                // filter creates a shallow copy of the array and filters what does not pass the conditional statement
+                const updatedData = this.state.fetchedData.filter(data => data._id !== key);
+                this.setState({ fetchedData: updatedData });
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 

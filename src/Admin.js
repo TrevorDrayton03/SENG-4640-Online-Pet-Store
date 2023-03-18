@@ -25,7 +25,10 @@ class Admin extends Component {
     }
 
     handleLogout(e) {
-        this.props.handleLogin(false);
+        const confirmLogout = window.confirm("Are you sure you want to logout?");
+        if (confirmLogout) {
+            this.props.handleLogin(false);
+        }
     }
     async handleFormSubmit(e) {
         e.preventDefault();
