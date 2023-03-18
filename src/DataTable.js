@@ -9,7 +9,6 @@ class DataTable extends Component {
         super(props);
         this.state = {
             tableData: this.props.tableData,
-            search: this.props.search,
             showPetModal: false,
             showSuppliesModal: false,
             modalData: null
@@ -21,12 +20,9 @@ class DataTable extends Component {
     }
     // required because tableData is asynchronous information that is retreived after the render
     // componentDidUpdate will execute if the props or state are updated after the render
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if (prevProps.tableData !== this.props.tableData) {
             this.setState({ tableData: this.props.tableData });
-        }
-        if (prevProps.search !== this.props.search) {
-            this.setState({ search: this.props.search });
         }
     }
 
@@ -39,6 +35,23 @@ class DataTable extends Component {
     }
 
     render() {
+        let filteredData = null;
+        // filters tableData with search string
+        if (this.state.tableData) {
+            filteredData = this.state.tableData.filter((data) => {
+                const searchRegex = new RegExp(this.props.search, 'i');
+                return (
+                    searchRegex.test(data.name) ||
+                    searchRegex.test(data.age) ||
+                    searchRegex.test(data.type) ||
+                    searchRegex.test(data.breed) ||
+                    searchRegex.test(data.description) ||
+                    searchRegex.test(data.url) ||
+                    searchRegex.test(data.price)
+                );
+            });
+        }
+
         return (
             <div className="Container">
                 <table className="table" width="100%">
@@ -56,27 +69,51 @@ class DataTable extends Component {
                         </tr>
                     </thead>
                     <tbody>
-                        {this.state.tableData && this.state.tableData.map((data) => {
-                            return (
-                                <tr key={data && data._id}>
-                                    <td className="width7">{data && data.name ? data.name : ''}</td>
-                                    <td className="width7">{data && data.age ? data.age : ''}</td>
-                                    <td className="width7">{data && data.type ? data.type : ''}</td>
-                                    <td className="width7">{data && data.breed ? data.breed : ''}</td>
-                                    <td>{data && data.description ? data.description : ''}</td>
-                                    <td>{data && data.url ? data.url : ''}</td>
-                                    <td className="width7">{data && data.price ? data.price : ''}</td>
-                                    <td className="width9">
-                                        <button className="btn btn-warning" onClick={() => {
-                                            this.handleUpdate(data)
-                                        }}>Update</button>
-                                    </td>
-                                    <td className="width8">
-                                        <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
+                        {this.state.tableData &&
+                            filteredData ? filteredData.map((data) => {
+                                return (
+                                    <tr key={data && data._id}>
+                                        <td className="width7">{data.name}</td>
+                                        <td className="width7">{data.age}</td>
+                                        <td className="width7">{data.type}</td>
+                                        <td className="width7">{data.breed}</td>
+                                        <td>{data.description}</td>
+                                        <td>{data.url}</td>
+                                        <td className="width7">{data.price}</td>
+                                        <td className="width9">
+                                            <button className="btn btn-warning" onClick={() => {
+                                                this.handleUpdate(data)
+                                            }}>Update</button>
+                                        </td>
+                                        <td className="width8">
+                                            <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                            : this.state.tableData &&
+                            this.state.tableData.map((data) => {
+                                return (
+                                    <tr key={data && data._id}>
+                                        <td className="width7">{data.name}</td>
+                                        <td className="width7">{data.age}</td>
+                                        <td className="width7">{data.type}</td>
+                                        <td className="width7">{data.breed}</td>
+                                        <td>{data.description}</td>
+                                        <td>{data.url}</td>
+                                        <td className="width7">{data.price}</td>
+                                        <td className="width9">
+                                            <button className="btn btn-warning" onClick={() => {
+                                                this.handleUpdate(data)
+                                            }}>Update</button>
+                                        </td>
+                                        <td className="width8">
+                                            <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                );
+                            })
+                        }
                     </tbody>
                 </table>
                 <PetModal

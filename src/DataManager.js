@@ -13,7 +13,7 @@ class DataManager extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search: null,
+            search: '',
             fetchedData: null,
             showPetModal: false
         };
@@ -23,6 +23,7 @@ class DataManager extends Component {
         this.handleSave = this.handleSave.bind(this);
         this.handleClosePetModal = this.handleClosePetModal.bind(this);
         this.handleOpenPetModal = this.handleOpenPetModal.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
 
     }
 
@@ -32,6 +33,10 @@ class DataManager extends Component {
 
     handleClosePetModal = () => {
         this.setState({ showPetModal: false });
+    }
+
+    handleSearch = (e) => {
+        this.setState({ search: e.target.value });
     }
 
     // fetches pets or supplies data based on the Form.Select selection
@@ -106,10 +111,10 @@ class DataManager extends Component {
     render() {
         return (
             <div className="Container blackBorder row large">
-                <div className="centerText">
-                    <h2>Database Manager</h2>
+                <div className="centerText blackBorder">
+                    <h2>Database Manager </h2>
                 </div>
-                <div className="col medPad blackBorder" style={{margin:10}}>
+                <div className="col medPad" >
                     <div className="row">
                         <div className="col-4 smallPad">
                             <Form.Select onChange={this.handleTypeChange}>
@@ -118,7 +123,7 @@ class DataManager extends Component {
                             </Form.Select>
                         </div>
                         <button onClick={this.handleOpenPetModal} type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
-                        <input type="search" className="smallPad flex" id="search" placeholder="Search"></input>
+                        <input onChange={this.handleSearch} type="search" className="smallPad flex" id="search" placeholder="Search"></input>
 
                     </div>
                 </div>
