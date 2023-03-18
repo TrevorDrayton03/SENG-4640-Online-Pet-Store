@@ -91,6 +91,33 @@ app.use('/api/update/', async (req, res) => {
   }
 });
 
+app.use('/api/save/', async (req, res) => {
+  try {
+    const { key, name, age, type, breed, description, url, price } = req.body;
+    const newPet = new PetModel({
+      name: name,
+      age: age,
+      type: type,
+      breed: breed,
+      description: description,
+      url: url,
+      price: price
+    });
+
+    newPet.save(function (err) {
+      if (err) return handleError(err);
+      // saved
+    });
+
+    await PetModel.findOneAndUpdate({ _id: key }, update);
+    let updatedPet = await PetModel.findOne({ _id: key })
+    res.status(200).send(updatedPet)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });

@@ -15,6 +15,7 @@ class DataManager extends Component {
         };
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     // fetches pets or supplies data based on the Form.Select selection
@@ -48,6 +49,19 @@ class DataManager extends Component {
             return data;
         });
         this.setState({ fetchedData: fetchedDataCopy });
+    }
+
+    // back tick "`" is used here for string interpolation
+    handleDelete = async (key) => {
+        try {
+            await fetch(`http://localhost:3000/api/delete?key=${key}`);
+            // update the state to remove the deleted item
+            // filter creates a shallow copy of the array and filters what does not pass the conditional statement
+            const updatedData = this.state.fetchedData.filter(data => data._id !== key);
+            this.setState({ fetchedData: updatedData });
+        } catch (error) {
+            console.error(error);
+        }
     }
 
     // by default fetch pets data to display
@@ -88,6 +102,7 @@ class DataManager extends Component {
                         tableData={this.state.fetchedData}
                         search={this.state.search}
                         update={this.handleUpdate}
+                        delete={this.handleDelete}
                     />
                 </div>
             </div>

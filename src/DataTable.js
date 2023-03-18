@@ -15,7 +15,6 @@ class DataTable extends Component {
             modalData: null
         };
 
-        this.handleDelete = this.handleDelete.bind(this);
         this.handleUpdatePress = this.handleUpdatePress.bind(this);
         this.handleClosePetModal = this.handleClosePetModal.bind(this);
 
@@ -28,15 +27,6 @@ class DataTable extends Component {
         }
         if (prevProps.search !== this.props.search) {
             this.setState({ search: this.props.search });
-        }
-    }
-
-    // back tick "`" is used here for string interpolation
-    handleDelete = async (key) => {
-        try {
-            await fetch(`http://localhost:3000/api/delete?key=${key}`);
-        } catch (error) {
-            console.error(error);
         }
     }
 
@@ -59,7 +49,7 @@ class DataTable extends Component {
                             <th className="width7">Type</th>
                             <th className="width7">Breed</th>
                             <th>Description</th>
-                            <th>Image</th>
+                            <th>Image URL</th>
                             <th className="width7">Price</th>
                             <th className="width8"></th>
                             <th className="width9"></th>
@@ -77,7 +67,7 @@ class DataTable extends Component {
                                     <td>{data.url}</td>
                                     <td className="width7">{data.price}</td>
                                     <td className="width8">
-                                        <button className="btn btn-danger" onClick={() => this.handleDelete(data._id)}>Delete</button>
+                                        <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
                                     </td>
                                     <td className="width9">
                                         <button className="btn btn-warning" onClick={() => {
