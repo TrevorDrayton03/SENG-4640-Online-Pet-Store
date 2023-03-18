@@ -2,23 +2,25 @@ import React, { Component } from 'react';
 import DataTable from "./DataTable";
 import Form from 'react-bootstrap/Form';
 
+// DataManager is the parent component to DataTable.
+// DataManager has three states: type, search, and fetchedData.
+// Datamanager manages the data which the DataTable displays.
+
 class DataManager extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            type: null,
             search: null,
             fetchedData: null,
         };
         this.handleTypeChange = this.handleTypeChange.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
     }
 
-    handleTypeChange = (e) => {
-        this.setState({ type: e.target.value });
-    }
-
-    async componentDidUpdate() {
-        if (this.state.type === "pets") {
+    // fetches pets or supplies data based on the Form.Select selection
+    // is called onChange
+    handleTypeChange = async (e) => {
+        if (e.target.value === "pets") {
             try {
                 const response = await fetch('http://localhost:3000/api/petData');
                 const pets = await response.json();
@@ -29,15 +31,36 @@ class DataManager extends Component {
                 console.error(error);
             }
         }
-        else if (this.state.type === "supplies") {
+        else if (e.target.value === "supplies") {
             this.setState({
                 fetchedData: null
             });
         }
-        else {
+    }
+
+    handleUpdate = (updatedData) => {
+        const keyToUpdate = updatedData._id;
+        // fetchedDataCopy is fetchedData but the object with the same key as keyToUpdate is being replaced with updatedData
+        const fetchedDataCopy = this.state.fetchedData.map((data) => {
+            if (data._id === keyToUpdate) {
+                return updatedData;
+            }
+            return data;
+        });
+        this.setState({ fetchedData: fetchedDataCopy });
+    }
+
+    // by default fetch pets data to display
+    // componentDidMount gets called once the component has been rendered for the first time (mounted onto the DOM)
+    async componentDidMount() {
+        try {
+            const response = await fetch('http://localhost:3000/api/petData');
+            const pets = await response.json();
             this.setState({
-                fetchedData: null
+                fetchedData: pets
             });
+        } catch (error) {
+            console.error(error);
         }
     }
 
@@ -51,7 +74,6 @@ class DataManager extends Component {
                     <div className="row">
                         <div className="col-4 smallPad">
                             <Form.Select onChange={this.handleTypeChange}>
-                                <option value="">Select a type</option>
                                 <option value="pets">Pets</option>
                                 <option value="supplies">Supplies</option>
                             </Form.Select>
@@ -65,6 +87,7 @@ class DataManager extends Component {
                     <DataTable
                         tableData={this.state.fetchedData}
                         search={this.state.search}
+                        update={this.handleUpdate}
                     />
                 </div>
             </div>

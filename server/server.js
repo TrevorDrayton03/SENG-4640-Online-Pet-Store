@@ -70,11 +70,21 @@ app.get('/api/delete/', async (req, res) => {
   }
 });
 
-app.get('/api/update/', async (req, res) => {
+app.use('/api/update/', async (req, res) => {
   try {
-    const key = req.query.key;
-    await PetModel.deleteOne({ _id: key });
-    res.status(200).send("delete success")
+    const { key, name, age, type, breed, description, url, price } = req.body;
+    const update = {
+      name: name,
+      age: age,
+      type: type,
+      breed: breed,
+      description: description,
+      url: url,
+      price: price
+    }
+    await PetModel.findOneAndUpdate({ _id: key }, update);
+    let updatedPet = await PetModel.findOne({ _id: key })
+    res.status(200).send(updatedPet)
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

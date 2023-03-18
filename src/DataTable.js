@@ -1,103 +1,101 @@
 import React, { Component } from 'react';
+import PetModal from "./modals/PetModal";
 
+// DataTable displays database data for the admin and offers options to update, delete, or add data.
+// DataTable is the parent component to PetModal and SuppliesModal.
 
 class DataTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             tableData: this.props.tableData,
-            search: this.props.search
+            search: this.props.search,
+            showPetModal: false,
+            showSuppliesModal: false,
+            modalData: null
         };
-        this.handleDelete = this.handleDelete.bind(this);
-        this.handleUpdate = this.handleUpdate.bind(this);
-    }
 
+        this.handleDelete = this.handleDelete.bind(this);
+        this.handleUpdatePress = this.handleUpdatePress.bind(this);
+        this.handleClosePetModal = this.handleClosePetModal.bind(this);
+
+    }
+    // required because tableData is asynchronous information that is retreived after the render
+    // componentDidUpdate will execute if the props or state are updated after the render
     componentDidUpdate(prevProps) {
         if (prevProps.tableData !== this.props.tableData) {
             this.setState({ tableData: this.props.tableData });
         }
-        if (prevProps.tableData !== this.props.tableData) {
-            this.setState({ tableData: this.props.tableData });
+        if (prevProps.search !== this.props.search) {
+            this.setState({ search: this.props.search });
         }
     }
 
     // back tick "`" is used here for string interpolation
     handleDelete = async (key) => {
         try {
-            const response = await fetch(`http://localhost:3000/api/delete?key=${key}`);
-            const result = await response.text();
-            // if (result === 'Success') {
-            //     this.fetchData();
-            // }
-        } catch (error) {
-            console.error(error);
-        }
-    }
-    handleUpdate = async (key, info) => {
-        try {
-            const response = await fetch(`http://localhost:3000/api/update?key=${key}&info=${info}`);
-            const result = await response.text();
-            // if (result === 'Success') {
-            //     this.fetchData();
-            // }
+            await fetch(`http://localhost:3000/api/delete?key=${key}`);
         } catch (error) {
             console.error(error);
         }
     }
 
+    handleUpdatePress = (data) => {
+        this.setState({ showPetModal: true, modalData: data });
+    }
+
+    handleClosePetModal = () => {
+        this.setState({ showPetModal: false, modalData: null });
+    }
+
     render() {
         return (
-            <table className="table" width="100%">
-                <thead>
-                    <tr>
-                        <th className="width6">Name</th>
-                        <th className="width6">Age</th>
-                        <th className="width6">Type</th>
-                        <th className="width6">Breed</th>
-                        <th>Description</th>
-                        <th>Image</th>
-                        <th className="width6">Price</th>
-                        <th className="width8"></th>
-                        <th className="width9"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {/* <tr>
-                        <td>123 </td>
-                        <td>123 </td>
-                        <td>123 </td>
-                        <td>123 123 1123123 123 1123123 123 1123123 123 1123</td>
-                        <td>123 123 1123123 123 1123123 123 1123123 123 11231123123 123 1123123 123 11231123123 123 1123123 123 1123</td>
-                        <td>123 123 1123123 123 1123123 123 1123123 123 1123</td>
-                        <td>11231123123112311231231123112312311231123123112311231231123112312311231123123112311231231123112312311231123123112311231231123112312311231123123112311231231123112312311231123123112311231231123112312311231123123</td>
-                        <td>
-                            <button className="btn btn-danger" onClick={() => this.handleDelete(1)}>Delete</button>
-                        </td>
-                        <td>
-                            <button className="btn btn-warning" onClick={() => this.handleUpdate(2)}>Update</button>
-                        </td>
-                    </tr> */}
-                    {this.state.tableData && this.state.tableData.map((data) => {
-                        return (
-                            <tr key={data._id}>
-                                <td className="width6">{data.name}</td>
-                                <td className="width6">{data.age}</td>
-                                <td className="width6">{data.type}</td>
-                                <td className="width6">{data.breed}</td>
-                                <td>{data.description}</td>
-                                <td>{data.url}</td>
-                                <td className="width6">{data.price}</td>
-                                <td className="width8">
-                                    <button className="btn btn-danger" onClick={() => this.handleDelete(data._id)}>Delete</button>
-                                </td>
-                                <td className="width9">
-                                    <button className="btn btn-warning" onClick={() => this.handleUpdate(data._id)}>Update</button>
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
+            <div className="Container">
+                <table className="table" width="100%">
+                    <thead>
+                        <tr>
+                            <th className="width7">Name</th>
+                            <th className="width7">Age</th>
+                            <th className="width7">Type</th>
+                            <th className="width7">Breed</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th className="width7">Price</th>
+                            <th className="width8"></th>
+                            <th className="width9"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.tableData && this.state.tableData.map((data) => {
+                            return (
+                                <tr key={data._id}>
+                                    <td className="width7">{data.name}</td>
+                                    <td className="width7">{data.age}</td>
+                                    <td className="width7">{data.type}</td>
+                                    <td className="width7">{data.breed}</td>
+                                    <td>{data.description}</td>
+                                    <td>{data.url}</td>
+                                    <td className="width7">{data.price}</td>
+                                    <td className="width8">
+                                        <button className="btn btn-danger" onClick={() => this.handleDelete(data._id)}>Delete</button>
+                                    </td>
+                                    <td className="width9">
+                                        <button className="btn btn-warning" onClick={() => {
+                                            this.handleUpdatePress(data)
+                                        }}>Update</button>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+                <PetModal
+                    handleClosePetModal={this.handleClosePetModal}
+                    update={this.props.update}
+                    pet={this.state.modalData}
+                    show={this.state.showPetModal}>
+                </PetModal>
+            </div>
         )
     }
 }
