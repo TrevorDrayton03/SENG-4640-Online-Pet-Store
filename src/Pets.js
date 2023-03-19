@@ -58,10 +58,8 @@ class Pets extends Component {
           </select>
           <input type="submit" value="Submit"></input>
         </form>
-        <div id="petT"> 
-        <table id = "petsTy"></table>
-        </div>
-        {/* <div id="listsDiv" className="List">
+        <div id = "petT"></div>
+        <div id="listsDiv" className="List">
           <Lists
             lists={this.state.lists}
             items={this.state.items}

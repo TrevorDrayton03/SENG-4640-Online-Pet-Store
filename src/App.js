@@ -3,6 +3,7 @@ import Navbar from './Navbar.js';
 import Home from './Home.js';
 import Pets from './Pets.js';
 import Admin from './Admin.js';
+import Cart from './Cart.js';
 
 import './App.css';
 
@@ -12,9 +13,12 @@ class App extends Component {
     super();
     this.state = {
       route: window.location.pathname,
-      petType: {},
-      admin: false,
-      allPets: {}
+      lists: [],
+      items: {},
+      admin: true,
+      allPets: {},
+      cartItems: {},
+      petType: {}
     };
   }
 
@@ -50,22 +54,23 @@ class App extends Component {
   render() {
     if (this.state.admin) {
       return (
-        <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="Container">
           <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
-          <h3>HELLO ADMIN</h3>
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+          {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
         </div>
       );
     }
     else {
       return (
-        <div className="App" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div className="Container">
           <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
           {this.state.route === '/' && <Home pets={this.state.allPets} />}
           {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
           {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+          {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
         </div>
       );
     }

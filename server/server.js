@@ -48,6 +48,70 @@ app.use('/api/admin', async (req, res) => {
   };
 });
 
+// get all unique pet types
+app.get('/api/types', async (req, res) => {
+  try {
+    const types = await PetModel.distinct('type');
+    res.status(200).json(types);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/api/delete', async (req, res) => {
+  try {
+    const key = req.query.key;
+    await PetModel.deleteOne({ _id: key });
+    res.status(200).send("delete success")
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.use('/api/update', async (req, res) => {
+  try {
+    const { key, name, age, type, breed, description, url, price } = req.body;
+    const update = {
+      name: name,
+      age: age,
+      type: type,
+      breed: breed,
+      description: description,
+      url: url,
+      price: price
+    }
+    await PetModel.findOneAndUpdate({ _id: key }, update);
+    let updatedPet = await PetModel.findOne({ _id: key })
+    res.status(200).send(updatedPet)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.use('/api/save', async (req, res) => {
+  try {
+    const { name, age, type, breed, description, url, price } = req.body;
+    const newPetData = new PetModel({
+      name: name,
+      age: age,
+      type: type,
+      breed: breed,
+      description: description,
+      url: url,
+      price: price
+    });
+
+    let newPet = await PetModel.create(newPetData)
+    res.status(200).send(newPet)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
