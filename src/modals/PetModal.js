@@ -7,10 +7,23 @@ class PetModal extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            showToast: false
+        }
     }
+
+    handleToast = () => {
+        this.setState({ showToast: !this.state.showToast })
+    }
+
 
     handleSubmit = async (e) => {
         e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            return;
+        }
+
         if (this.props.job === "update") {
             try {
                 const response = await fetch('http://localhost:3000/api/update', {
@@ -35,8 +48,6 @@ class PetModal extends Component {
                 }
 
                 this.props.update(await response.json());
-                this.props.handleClosePetModal();
-
             } catch (error) {
                 console.error(error);
             }
@@ -62,7 +73,6 @@ class PetModal extends Component {
                 if (!response.ok) {
                     throw new Error('Failed to save');
                 }
-
                 this.props.save(await response.json());
 
             } catch (error) {
@@ -79,42 +89,83 @@ class PetModal extends Component {
                         <Modal.Title>Update {this.props.pet ? this.props.pet.name : ''}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form
+                            noValidate
+                            validated={true}
+                            onSubmit={this.handleSubmit}
+                        >
                             <Form.Group className="mb-3">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control name="name" defaultValue={this.props.pet ? this.props.pet.name : ''} type="text" />
+                                <Form.Control
+                                    name="name"
+                                    defaultValue={this.props.pet ? this.props.pet.name : ''}
+                                    type="text"
+                                    required
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Age</Form.Label>
-                                <Form.Control name="age" defaultValue={this.props.pet ? this.props.pet.age : ''} type="text" />
+                                <Form.Control
+                                    name="age"
+                                    defaultValue={this.props.pet ? this.props.pet.age : ''}
+                                    type="text"
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Type</Form.Label>
-                                <Form.Control name="type" defaultValue={this.props.pet ? this.props.pet.type : ''} type="text" />
+                                <Form.Control
+                                    required
+                                    name="type"
+                                    defaultValue={this.props.pet ? this.props.pet.type : ''}
+                                    type="text"
+                                />
+                                {/* <Form.Control.Feedback type="invalid">Type is required!</Form.Control.Feedback> */}
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Breed</Form.Label>
-                                <Form.Control name="breed" defaultValue={this.props.pet ? this.props.pet.breed : ''} type="text" />
+                                <Form.Control
+                                    name="breed"
+                                    defaultValue={this.props.pet ? this.props.pet.breed : ''}
+                                    type="text"
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control name="description" defaultValue={this.props.pet ? this.props.pet.description : ''} type="text" />
+                                <Form.Control
+                                    name="description"
+                                    defaultValue={this.props.pet ? this.props.pet.description : ''}
+                                    type="text"
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Image URL</Form.Label>
-                                <Form.Control name="url" defaultValue={this.props.pet ? this.props.pet.url : ''} type="text" />
+                                <Form.Control
+                                    name="url"
+                                    defaultValue={this.props.pet ? this.props.pet.url : ''}
+                                    type="text"
+                                    required
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Price</Form.Label>
-                                <Form.Control name="price" defaultValue={this.props.pet ? this.props.pet.price : ''} type="text" />
+                                <Form.Control
+                                    name="price"
+                                    defaultValue={this.props.pet ? this.props.pet.price : ''}
+                                    type="text"
+                                    required
+                                />
                             </Form.Group>
-                            <Button variant="primary" type="submit">
+                            <Button
+                                variant="primary"
+                                type="submit">
                                 Submit
                             </Button>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.handleClosePetModal}>
+                        <Button
+                            variant="secondary"
+                            onClick={this.props.handleClosePetModal}>
                             Close
                         </Button>
                     </Modal.Footer>
@@ -128,42 +179,84 @@ class PetModal extends Component {
                         <Modal.Title>Add New Pet</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form onSubmit={this.handleSubmit}>
+                        <Form
+                            noValidate
+                            validated={true}
+                            onSubmit={this.handleSubmit}
+                        >
                             <Form.Group className="mb-3">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control name="name" defaultValue={null} type="text" />
+                                <Form.Control
+                                    name="name"
+                                    defaultValue={null}
+                                    type="text"
+                                    required
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Age</Form.Label>
-                                <Form.Control name="age" defaultValue={null} type="text" />
+                                <Form.Control
+                                    name="age"
+                                    defaultValue={null}
+                                    type="text"
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Type</Form.Label>
-                                <Form.Control name="type" defaultValue={null} type="text" />
+                                <Form.Control
+                                    required
+                                    name="type"
+                                    defaultValue={null}
+                                    type="text"
+                                />
+                                {/* <Form.Control.Feedback type="invalid">Type is required!</Form.Control.Feedback> */}
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Breed</Form.Label>
-                                <Form.Control name="breed" defaultValue={null} type="text" />
+                                <Form.Control
+                                    name="breed"
+                                    defaultValue={null}
+                                    type="text"
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Description</Form.Label>
-                                <Form.Control name="description" defaultValue={null} type="text" />
+                                <Form.Control
+                                    name="description"
+                                    defaultValue={null}
+                                    type="text"
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Image URL</Form.Label>
-                                <Form.Control name="url" defaultValue={null} type="text" />
+                                <Form.Control
+                                    name="url"
+                                    defaultValue={null}
+                                    type="text"
+                                    required
+                                />
                             </Form.Group>
                             <Form.Group className="mb-3">
                                 <Form.Label>Price</Form.Label>
-                                <Form.Control name="price" defaultValue={null} type="text" />
+                                <Form.Control
+                                    name="price"
+                                    defaultValue={null}
+                                    type="text"
+                                    required
+                                />
                             </Form.Group>
-                            <Button variant="primary" defaultValue={null} type="submit">
+                            <Button
+                                variant="primary"
+                                defaultValue={null}
+                                type="submit">
                                 Submit
                             </Button>
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button variant="secondary" onClick={this.props.handleClosePetModal}>
+                        <Button
+                            variant="secondary"
+                            onClick={this.props.handleClosePetModal}>
                             Close
                         </Button>
                     </Modal.Footer>

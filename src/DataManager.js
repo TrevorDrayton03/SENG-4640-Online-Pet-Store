@@ -110,7 +110,7 @@ class DataManager extends Component {
 
     render() {
         return (
-            <div className="Container blackBorder row large">
+            <div className="Container blackBorder row xLarge">
                 <div className="centerText blackBorder">
                     <h2>Database Manager </h2>
                 </div>

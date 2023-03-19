@@ -64,8 +64,8 @@ class DataTable extends Component {
                             <th>Description</th>
                             <th>Image URL</th>
                             <th className="width7">Price</th>
-                            <th className="width9"></th>
-                            <th className="width8"></th>
+                            <th className="width7"></th>
+                            <th className="width7"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,17 +75,17 @@ class DataTable extends Component {
                                     <tr key={data && data._id}>
                                         <td className="width7">{data.name}</td>
                                         <td className="width7">{data.age}</td>
-                                        <td className="width7">{data.type}</td>
-                                        <td className="width7">{data.breed}</td>
+                                        <td className="width10">{data.type}</td>
+                                        <td className="width10">{data.breed}</td>
                                         <td>{data.description}</td>
                                         <td>{data.url}</td>
                                         <td className="width7">{data.price}</td>
-                                        <td className="width9">
+                                        <td className="width7">
                                             <button className="btn btn-warning" onClick={() => {
                                                 this.handleUpdate(data)
                                             }}>Update</button>
                                         </td>
-                                        <td className="width8">
+                                        <td className="width7">
                                             <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
                                         </td>
                                     </tr>
@@ -97,17 +97,17 @@ class DataTable extends Component {
                                     <tr key={data && data._id}>
                                         <td className="width7">{data.name}</td>
                                         <td className="width7">{data.age}</td>
-                                        <td className="width7">{data.type}</td>
-                                        <td className="width7">{data.breed}</td>
+                                        <td className="width10">{data.type}</td>
+                                        <td className="width10">{data.breed}</td>
                                         <td>{data.description}</td>
                                         <td>{data.url}</td>
                                         <td className="width7">{data.price}</td>
-                                        <td className="width9">
+                                        <td className="width5">
                                             <button className="btn btn-warning" onClick={() => {
                                                 this.handleUpdate(data)
                                             }}>Update</button>
                                         </td>
-                                        <td className="width8">
+                                        <td className="width5">
                                             <button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete</button>
                                         </td>
                                     </tr>
