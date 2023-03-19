@@ -68,6 +68,13 @@
 .col img {
   width: 200px;
   height: 200px;
+  object-fit: cover;
+}
+
+.carouselImg {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
 }
 
 .flex {

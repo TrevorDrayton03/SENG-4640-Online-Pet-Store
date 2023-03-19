@@ -51,7 +51,7 @@ class Home extends Component {
                         <Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
                             <Carousel.Item>
                                 <img
-                                    className="d-block w-100"
+                                    className="carouselImg"
                                     alt="First Slide"
                                     src={this.props.pets[0].url}
                                 />
@@ -62,7 +62,7 @@ class Home extends Component {
                             </Carousel.Item>
                             <Carousel.Item>
                                 <img
-                                    className="d-block w-100"
+                                    className="carouselImg"
                                     alt="Second Slide"
                                     src={this.props.pets[1].url}
                                 />
@@ -73,7 +73,7 @@ class Home extends Component {
                             </Carousel.Item>
                             <Carousel.Item>
                                 <img
-                                    className="d-block w-100"
+                                    className="carouselImg"
                                     alt="Second Slide"
                                     src={this.props.pets[2].url}
                                 />
