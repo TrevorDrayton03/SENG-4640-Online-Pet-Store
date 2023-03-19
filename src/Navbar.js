@@ -28,16 +28,16 @@ class Navbar extends Component {
                                     Admin
                                 </a>
                             </li>
-                            {/* <li>
+                            <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/customer%20service")} >
                                     Customer Service
                                 </a>
-                            </li> */}
-                            {/* <li>
+                            </li>
+                            <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/cart")} >
                                     Cart
                                 </a>
-                            </li> */}
+                            </li>
                         </ul>
                     </nav>
                 </h2>
