@@ -15,7 +15,7 @@ class App extends Component {
       route: window.location.pathname,
       lists: [],
       items: {},
-      admin: true,
+      admin: false,
       allPets: {},
       cartItems: {},
       petType: {}
@@ -35,7 +35,7 @@ class App extends Component {
       const pets = await response.json();
       this.setState({
         allPets: pets,
-        petType : pets
+        petType: pets
       });
     } catch (error) {
       console.error(error);

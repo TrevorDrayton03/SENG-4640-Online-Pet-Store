@@ -8,7 +8,7 @@ var petsSchema = new Schema({
     type: { type: String, required: true },
     name: { type: String },
     breed: { type: String },
-    age: { type: Number },
+    age: { type: String },
     description: { type: String },
     url: { type: String },
     price: { type: String },

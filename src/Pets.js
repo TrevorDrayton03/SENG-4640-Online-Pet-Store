@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Lists from "./Lists.js";
 
 class Pets extends Component {
   constructor(props) {
@@ -58,14 +57,9 @@ class Pets extends Component {
           </select>
           <input type="submit" value="Submit"></input>
         </form>
-        <div id = "petT"></div>
-        <div id="listsDiv" className="List">
-          <Lists
-            lists={this.state.lists}
-            items={this.state.items}
-            addItem={this.handleAddItem.bind(this)}
-          />
-        </div> */}
+        <div id="petT"> 
+        <table id = "petsTy"></table>
+        </div>
       </div>
     );
   }
