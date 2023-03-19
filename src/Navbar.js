@@ -9,10 +9,10 @@ class Navbar extends Component {
 
     render() {
         return (
-            <div className="Navbar">
+            <div className="Container blackBorder">
                 <h2>
                     <nav>
-                        <ul className="navBarList" style={{ flexDirection: 'row', display: 'flex' }}>
+                        <ul className="navBarList large center" style={{ flexDirection: 'row', display: 'flex' }}>
                             <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/")} >
                                     Home
@@ -28,16 +28,16 @@ class Navbar extends Component {
                                     Admin
                                 </a>
                             </li>
-                            <li>
+                            {/* <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/customer%20service")} >
                                     Customer Service
                                 </a>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/cart")} >
                                     Cart
                                 </a>
-                            </li>
+                            </li> */}
                         </ul>
                     </nav>
                 </h2>

@@ -12,9 +12,24 @@
   justify-content: center;
 }
 
+.App {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
 .blackBorder {
   border: 1px solid black;
   padding: 10px;
+}
+
+.blackTextBorder {
+  /* 1 pixel black shadow to left, top, right and bottom */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
 }
 
 .smallPad {
@@ -23,6 +38,10 @@
 
 .medPad {
   padding: 10px;
+}
+
+.bottomPad {
+  padding-bottom: 10px;
 }
 
 .centerText {
@@ -39,6 +58,16 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.col img {
+  width: 200px;
+  height: 200px;
 }
 
 .flex {
@@ -97,6 +126,11 @@ td {
   flex-basis: auto;
 }
 
+div {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
 div button {
   margin-top: 15px;
 }
@@ -107,5 +141,21 @@ img {
 }
 
 body h1 {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+}
+
+h3 {
+  font-family: 'Pacifico', cursive;
+}
+
+p {
   text-align: center;
 }

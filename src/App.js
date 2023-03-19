@@ -18,7 +18,8 @@ class App extends Component {
       admin: false,
       allPets: {},
       cartItems: {},
-      petType: {}
+      petType: {},
+      carouselData: null
     };
   }
 
@@ -27,9 +28,6 @@ class App extends Component {
       this.setState({ route: window.location.pathname });
     });
 
-    // home fetches all pets for the slide show of randomized pets
-    // it gets all pets by *not* specifying a pet type
-    // see server.js app.get('/api/petData')
     try {
       const response = await fetch('http://localhost:3000/api/petData');
       const pets = await response.json();
@@ -40,6 +38,17 @@ class App extends Component {
     } catch (error) {
       console.error(error);
     }
+
+    try {
+      const response = await fetch('http://localhost:3000/api/carousel');
+      const carouselPets = await response.json();
+      this.setState({
+        carouselData: carouselPets
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
   }
 
   handleLinkClick(route) {
@@ -52,30 +61,16 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.admin) {
-      return (
-        <div className="Container">
-          <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
-          {this.state.route === '/' && <Home pets={this.state.allPets} />}
-          {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
-          {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-          {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
-        </div>
-      );
-    }
-    else {
-      return (
-        <div className="Container">
-          <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
-          {this.state.route === '/' && <Home pets={this.state.allPets} />}
-          {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
-          {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-          {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
-        </div>
-      );
-    }
+    return (
+      <div className="App">
+        <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
+        {this.state.route === '/' && <Home pets={this.state.carouselData} />}
+        {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
+        {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
+        {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
+      </div>
+    );
   }
-
 }
 
 export default App;

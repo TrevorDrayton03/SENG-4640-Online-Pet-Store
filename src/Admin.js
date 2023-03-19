@@ -86,22 +86,13 @@ class Admin extends Component {
                 </div>
             )
         }
-        /*
-        - type must be pets or supplies
-        - sort by column asc/desc
-        - search for a value and it appears in the table
-        - add button to create a new row to fill in followed by a submit button
-        - edit button on a row to begin editing the data followed by a submit button
-        - delete button by the row followed by a confirm button
-        - DataItem could be a form when editing
-        */
 
         else {
             return (
                 <div className="Container">
-                    <div className="centerText medPad">
+                    <div className="centerText">
                         <button
-                            className="medPad btn btn-secondary"
+                            className="btn btn-secondary"
                             type="submit"
                             onClick={this.handleLogout}
                             id="logout"

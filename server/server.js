@@ -112,6 +112,17 @@ app.use('/api/save', async (req, res) => {
   }
 });
 
+// get random pets for carousel using an ES6 style of synax
+app.get('/api/carousel', async (req, res) => {
+  PetModel.aggregate([{ $sample: { size: 3 } }])
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
