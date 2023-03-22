@@ -77,6 +77,12 @@
   object-fit: cover;
 }
 
+.cartImg {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
 .flex {
   flex: 1;
 }
@@ -95,6 +101,10 @@
 
 .xLarge {
   width: 1500px;
+}
+
+.cart {
+  width: 700px;
 }
 
 .width5 {

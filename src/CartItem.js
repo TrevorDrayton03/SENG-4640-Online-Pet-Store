@@ -1,9 +1,4 @@
 import React, { Component } from 'react';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-
-// each cart item needs a name, price, and image
-// if the item is a supply, then it needs a quantity
 
 class CartItem extends Component {
     constructor(props) {
@@ -12,24 +7,24 @@ class CartItem extends Component {
 
     render() {
         return (
-            <Row key={this.props.id} style={{ flexDirection: "row", alignItems: "center", margin: 20, justifyContent: "center", flexBasis: "25%" }}>
-                <Col style={{ flex: 1, alignItems: "center" }}>
+            <div className='row'>
+                {/* <div className="col">
                     <h2>{this.props.name}</h2>
-                </Col>
-                <Col style={{ flex: 1, alignItems: "center" }}>
+                </div> */}
+                <div className="col">
                     <img
-                        className="d-block w-100"
+                        className="cartImg"
                         alt="Item"
                         src={this.props.url}
                     />
-                </Col>
-                <Col className="d-flex justify-content-end" style={{ flex: 1, alignItems: "center", flexBasis: "25%" }}>
-                    <div>
-                        <p>Price: ${this.props.price}</p>
-                        <p>Quantity: 1</p>
-                    </div>
-                </Col>
-            </Row>
+                </div>
+                <div className="col">
+                    <p>Name: {this.props.name}</p>
+                    <p>Breed: {this.props.breed}</p>
+                    <p>Age: {this.props.age}</p>
+                    <p>Price: ${this.props.price}</p>
+                </div>
+            </div>
         );
     }
 }

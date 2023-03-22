@@ -15,12 +15,11 @@ class Home extends Component {
         this.setState({ index: selectedIndex });
     };
 
-    // ES6 style fetch for distinct pet types
+    // ES6 style fetch for getting distinct pet types
     async componentDidMount() {
         await fetch('http://localhost:3000/api/types')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 this.setState({ petTypes: data });
             })
             .catch(error => console.log(error))
