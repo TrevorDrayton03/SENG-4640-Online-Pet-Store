@@ -13,26 +13,73 @@ class Pets extends Component {
     this.setState({ value: event.target.value });
   }
 
-  handlePetType(event) {
-    let animal = this.props.petType;
-    document.getElementById("petsTy").innerHTML = '';
-    for (let i = 0; i < animal.length; i++) {
-      if (animal[i].type == this.state.value) {
-        document.getElementById("petsTy").innerHTML += '<tr>' + '<th>' + '<h3> Their name is ' + animal[i].name + '</h3>' + '</th>' + '</tr>'
-          + '<tr>' + '<td>' + '<a href = localhost:3000/petsData?animal=' + animal[i].name + '>' + '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id ='
-          + animal[i]._id + 'name = ' + animal[i].name + ' alt =' + animal[i].breed + ' src ='
-          + animal[i].url + '>' + '</a>' + '</td>'
-          + '<td>' + '<h3> They cost $' + animal[i].price + '</h3>' + '</td>' + '</tr>';
-        console.log(i);
+  selectOptions(){
+  var select = document.getElementById("petType");
+  let ani = this.state.petType;
+  let arra = ["Dog","Cat"];
+  let count = 0;
+  for (let a = 0; a < ani.length; a++) {
+    for(let b = 0; b < arra.length; b++)
+    if(arra[count] != ani[a].type){
+          arra[count] = ani[a].type;
+          count++;
+        }
+
+        console.log(arra); //code above is trying to find all unique types in array of petType
+  }
+  // for(let index in arra) {
+  //     select.add(new Option(arra[index]));
+  //     console.log(arra[index]);
+  // }
+  }
+
+  handleDisplay = () =>{ //meant to create a table that displays to page
+    let cute = this.state.petType;
+    for(let a = 0; a < cute.length; a++ ){
+      if(this.state.value == cute[a].type){
+        return(
+          <table>
+            <tr>
+              <th>
+                Their name is {cute[a].name}
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id = {cute[a]._id} name = {cute[a].name} alt = {cute[a].breed} src = {cute[a].url} >
+                </img>
+              </td>
+              <td>
+                They cost $ {cute[a].price}
+              </td>
+            </tr>
+          </table>
+        );
       }
     }
-    event.preventDefault();
-  }
+  };
+
+  // handlePetType(event) {
+  //   let animal = this.props.petType;
+  //   document.getElementById("petsTy").innerHTML = '';
+  //   for (let i = 0; i < animal.length; i++) {
+  //     if (animal[i].type == this.state.value) {
+  //       document.getElementById("petsTy").innerHTML += '<tr>' + '<th>' + '<h3> Their name is ' + animal[i].name + '</h3>' + '</th>' + '</tr>'
+  //         + '<tr>' + '<td>' + '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" '
+  //         + 'name = ' + animal[i].name + ' alt =' + animal[i].breed + ' src ='
+  //         + animal[i].url + '>' + '</td>'
+  //         + '<td>' + '<h3> They cost $' + animal[i].price + '</h3>' + '</td>'+ '</tr>';
+  //       console.log(i);
+  //     }
+  //   }
+  //   event.preventDefault();
+  // }
 
   render() {
     return (
       <div className="Pets">
-        <form onSubmit={this.handlePetType.bind(this)}>
+        {this.selectOptions()}
+        <form onSubmit={this.handleDisplay.bind("petT")}>
           <h2>What animals would you like to look at?</h2>
           <select
             name="animals"
@@ -40,15 +87,16 @@ class Pets extends Component {
             value={this.state.value}
             onChange={this.handleChange.bind(this)}
           >
-            <option value="Dog">Dogs</option>
+             <option value="Dog">Dogs</option>
             <option value="Cat">Cats</option>
             <option value="Fish">Fish</option>
             <option value="Bird">Birds</option>
           </select>
           <input type="submit" value="Submit"></input>
         </form>
+        
         <div id="petT">
-          <table id="petsTy"></table>
+          {/* <table id="petsTy"></table> */}
         </div>
       </div>
     );
