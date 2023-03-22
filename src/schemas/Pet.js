@@ -6,12 +6,12 @@ var Schema = mongoose.Schema;
 
 var petsSchema = new Schema({
     type: { type: String, required: true },
-    name: { type: String, required: true },
-    breed: { type: String, required: true },
-    age: { type: Number, required: true },
-    description: { type: String, required: true },
-    img: { type: String, required: true },
-
+    name: { type: String },
+    breed: { type: String },
+    age: { type: String },
+    description: { type: String },
+    url: { type: String },
+    price: { type: String },
 });
 
 module.exports = mongoose.model("Pet", petsSchema);

@@ -4,11 +4,142 @@
   list-style-type: none;
 }
 
-.App {
+.Container {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.App {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.blackBorder {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.blackTextBorder {
+  /* 1 pixel black shadow to left, top, right and bottom */
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+}
+
+.smallPad {
+  padding: 5px;
+}
+
+.medPad {
+  padding: 10px;
+}
+
+.bottomPad {
+  padding-bottom: 10px;
+}
+
+.centerText {
+  text-align: center;
+}
+
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
+}
+
+.col img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.carouselImg {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}
+
+.flex {
+  flex: 1;
+}
+
+.small {
+  width: 300px;
+}
+
+.medium {
+  width: 500px;
+}
+
+.large {
+  width: 1200px;
+}
+
+.xLarge {
+  width: 1500px;
+}
+
+.width5 {
+  width: 5%;
+}
+
+.width6 {
+  width: 6%;
+}
+
+.width7 {
+  width: 7%;
+}
+
+.width8 {
+  width: 8%;
+}
+
+.width9 {
+  width: 9%;
+}
+
+.width10 {
+  width: 10%;
+}
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  overflow: auto;
+}
+
+td {
+  flex: 1;
+  flex-basis: auto;
+}
+
+div {
+  padding-bottom: 10px;
+  padding-top: 10px;
 }
 
 div button {
@@ -21,5 +152,21 @@ img {
 }
 
 body h1 {
+  text-align: center;
+}
+
+h1 {
+  font-family: 'Pacifico', cursive;
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+}
+
+h3 {
+  font-family: 'Pacifico', cursive;
+}
+
+p {
   text-align: center;
 }

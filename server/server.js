@@ -8,8 +8,6 @@ app.use(express.static(path.join(__dirname, '..', 'build')));
 
 app.set("view engine", "ejs");
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
 // parse application/json (header content type)
 app.use(bodyParser.json());
 
@@ -46,6 +44,81 @@ app.use('/api/admin', async (req, res) => {
   } catch (err) {
     res.status(500).send(err);
   };
+});
+
+// get all unique pet types
+app.get('/api/types', async (req, res) => {
+  try {
+    const types = await PetModel.distinct('type');
+    res.status(200).json(types);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/api/delete', async (req, res) => {
+  try {
+    const key = req.query.key;
+    await PetModel.deleteOne({ _id: key });
+    res.status(200).send("delete success")
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.use('/api/update', async (req, res) => {
+  try {
+    const { key, name, age, type, breed, description, url, price } = req.body;
+    const update = {
+      name: name,
+      age: age,
+      type: type,
+      breed: breed,
+      description: description,
+      url: url,
+      price: price
+    }
+    await PetModel.findOneAndUpdate({ _id: key }, update);
+    let updatedPet = await PetModel.findOne({ _id: key })
+    res.status(200).send(updatedPet)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.use('/api/save', async (req, res) => {
+  try {
+    const { name, age, type, breed, description, url, price } = req.body;
+    const newPetData = new PetModel({
+      name: name,
+      age: age,
+      type: type,
+      breed: breed,
+      description: description,
+      url: url,
+      price: price
+    });
+
+    let newPet = await PetModel.create(newPetData)
+    res.status(200).send(newPet)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// get random pets for carousel using an ES6 style of synax
+app.get('/api/carousel', async (req, res) => {
+  PetModel.aggregate([{ $sample: { size: 3 } }])
+    .then((result) => {
+      res.status(200).send(result);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 app.get('*', (req, res) => {

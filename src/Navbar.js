@@ -9,10 +9,10 @@ class Navbar extends Component {
 
     render() {
         return (
-            <div className="Navbar">
+            <div className="Container blackBorder">
                 <h2>
                     <nav>
-                        <ul className="navBarList" style={{ flexDirection: 'row', display: 'flex' }}>
+                        <ul className="navBarList large center" style={{ flexDirection: 'row', display: 'flex' }}>
                             <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/")} >
                                     Home

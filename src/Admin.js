@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import DataManager from "./DataManager";
 
 class Admin extends Component {
 
@@ -24,7 +25,10 @@ class Admin extends Component {
     }
 
     handleLogout(e) {
-        this.props.handleLogin(false);
+        const confirmLogout = window.confirm("Are you sure you want to logout?");
+        if (confirmLogout) {
+            this.props.handleLogin(false);
+        }
     }
     async handleFormSubmit(e) {
         e.preventDefault();
@@ -55,11 +59,10 @@ class Admin extends Component {
     render() {
         if (!this.props.admin) {
             return (
-                <div className="Admin" style={{ alignItems: 'center', justifyContent: 'center' }}>
-                    <h2>Log In</h2>
+                <div className="Container">
                     <form onSubmit={this.handleFormSubmit}>
                         <label>
-                            <p>Username</p>
+                            <p><strong>Username</strong></p>
                             <input
                                 type="text"
                                 onChange={this.handleUsernameChange}
@@ -67,7 +70,7 @@ class Admin extends Component {
                             />
                         </label>
                         <label>
-                            <p>Password</p>
+                            <p><strong>Password</strong></p>
                             <input
                                 type="password"
                                 onChange={this.handlePasswordChange}
@@ -76,17 +79,27 @@ class Admin extends Component {
                         </label>
                         <div>
                             <button
+                                className="btn btn-secondary"
                                 type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
             )
         }
+
         else {
             return (
-                <div className="Admin">
-                    <h2>Log Out</h2>
-                    <button type="submit" onClick={this.handleLogout}> Logout</button>
+                <div className="Container">
+                    <div className="centerText">
+                        <button
+                            className="btn btn-secondary"
+                            type="submit"
+                            onClick={this.handleLogout}
+                            id="logout"
+                        >Logout</button>
+                    </div>
+                    <DataManager
+                    />
                 </div>
             )
         }
