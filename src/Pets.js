@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import petData from './petData';
 
 class Pets extends Component {
   constructor(props) {
@@ -6,6 +7,7 @@ class Pets extends Component {
     this.state = {
       petType: this.props.petType,
       value: "Dog",
+      chosen: false
     };
   }
 
@@ -18,15 +20,16 @@ class Pets extends Component {
   let ani = this.state.petType;
   let arra = ["Dog","Cat"];
   let count = 0;
-  for (let a = 0; a < ani.length; a++) {
-    for(let b = 0; b < arra.length; b++)
-    if(arra[count] != ani[a].type){
-          arra[count] = ani[a].type;
-          count++;
-        }
-
+    for (let i=0; i<ani.length; i++)
+    {
+        var j;
+        for (j=0; j<i; j++)
+          if (ani[i] == ani[j])
+              break;
+        if (i == j)
+          console.log(ani[i] + " ");
+    }
         console.log(arra); //code above is trying to find all unique types in array of petType
-  }
   // for(let index in arra) {
   //     select.add(new Option(arra[index]));
   //     console.log(arra[index]);
@@ -76,30 +79,37 @@ class Pets extends Component {
   // }
 
   render() {
-    return (
-      <div className="Pets">
-        {this.selectOptions()}
-        <form onSubmit={this.handleDisplay.bind("petT")}>
-          <h2>What animals would you like to look at?</h2>
-          <select
-            name="animals"
-            id="petType"
-            value={this.state.value}
-            onChange={this.handleChange.bind(this)}
-          >
-             <option value="Dog">Dogs</option>
-            <option value="Cat">Cats</option>
-            <option value="Fish">Fish</option>
-            <option value="Bird">Birds</option>
-          </select>
-          <input type="submit" value="Submit"></input>
-        </form>
-        
-        <div id="petT">
-          {/* <table id="petsTy"></table> */}
+    if(!this.state.chosen){
+      return (
+        <div className="Pets">
+          {this.selectOptions()}
+          <form onSubmit={this.handleDisplay.bind("petT")}>
+            <h2>What animals would you like to look at?</h2>
+            <select
+              name="animals"
+              id="petType"
+              value={this.state.value}
+              onChange={this.handleChange.bind(this)}
+            >
+              <option value="Dog">Dogs</option>
+              <option value="Cat">Cats</option>
+              <option value="Fish">Fish</option>
+              <option value="Bird">Birds</option>
+            </select>
+            <input type="submit" value="Submit"></input>
+          </form>
+          
+          <div id="petT">
+            {/* <table id="petsTy"></table> */}
+          </div>
         </div>
-      </div>
-    );
+      );
+    }
+    else{
+      return(
+        <petData/>
+      )
+    }
   }
 }
 
