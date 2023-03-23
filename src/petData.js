@@ -6,50 +6,60 @@ class PetData extends Component {
     super(props);
     this.state = {
       goodPet: this.props.goodPet,
+      chosen: this.props.chosen
     };
   }
 
-  handleDisp(e){
+  handleDisp(e) {
     let pet = this.state.goodPet;
-    return(
-        <div>
-            <table>
-            <tr>
-              <th>
-                This is {pet.name}
+    return (
+      <div>
+        <table>
+          <tr>
+            <th>
+              <h1>This is {pet.name}</h1>
+              <br></br>
+              <h1>
                 They are a {pet.breed} and {pet.age} year(s) old
-              </th>
-            </tr>
-            <tr>
-              <td>
-              {/* <img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id = {pet._id} name = {pet.name} alt = {pet.breed} src = {pet.url} > */}
-              <img style={{ display: "block", marginLeft: "auto", height: "50%", marginRight: "auto", width:"50%" }} id = {pet._id} name = {pet.name} alt = {pet.breed} src = {pet.url} >
-                </img>
-              </td>
-              <td>
-                <tr>
-                They cost $ {pet.price}
-                </tr>
-                <tr>
-                    {pet.description}
-                </tr>
-              </td>
-            </tr>
-            <tr>
-                <button id="addToCart"> Click here to add them to your cart</button>
-            </tr>
-          </table>
-        </div>
+              </h1>
+            </th>
+          </tr>
+          <tr>
+            <td>
+              <img
+                style={{
+                  display: "block",
+                  height: "100%",
+                  width: "100%",
+                  flex: 1,
+                }}
+                id={pet._id}
+                name={pet.name}
+                alt={pet.breed}
+                src={pet.url}
+              ></img>
+            </td>
+            <td>
+              <tr>
+                <h1>They cost $ {pet.price}</h1>
+                <br></br>
+              </tr>
+              <tr>
+                <h1>All a little bit about them: <br></br>{pet.description}</h1>
+              </tr>
+            </td>
+          </tr>
+          <tr>
+            <button id="addToCart"> Click here to add them to your cart</button>
+          </tr>
+        </table>
+      </div>
     );
   }
 
-  render(){
-    console.log("POG");
-    return(
-      <div>
-      {this.handleDisp()}
-      </div>
-    );
+  render() {
+    console.log(this.state.chosen);
+    return <div>{this.handleDisp()}</div>;
   }
 }
 export default PetData;

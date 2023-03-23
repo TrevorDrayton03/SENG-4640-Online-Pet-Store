@@ -74,9 +74,10 @@ class Pets extends Component {
     let cute = this.state.petType;
     let arra = this.selectOptions();
     let good = this.handleDisplay();
+    let chooser = this.state.chosen;
     const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
 
-    if (!this.state.chosen) {
+    if (!chooser) {
       return (
         <div>
           <div className="Pets">
@@ -132,7 +133,7 @@ class Pets extends Component {
       );
     }
     else {
-      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} />;
+      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} chosen = {chooser} />;
     }
   }
 }
