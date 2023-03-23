@@ -35,29 +35,36 @@ class Pets extends Component {
       same = false;
       count = 0;
   }
-
+  arra.map((type) => {
+    return (
+        <option value={type}> {type} </option>
+    )
+  })
   console.log(arra); //code above is trying to find all unique types in array of petType
   }
 
   handleDisplay = () =>{ //meant to create a table that displays to page
     let cute = this.state.petType;
     console.log("test");
+
+    const imgStyle = {display: 'block', height: '50%', width: '50%', flex: 1};
+      
     for(let a = 0; a < cute.length; a++ ){
       if(this.state.value == cute[a].type){
         return(
           <table>
             <tr>
               <th>
-                Their name is {cute[a].name}
+                <h1>Their name is {cute[a].name}</h1>
               </th>
             </tr>
             <tr>
               <td>
-                <img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id = {cute[a]._id} name = {cute[a].name} alt = {cute[a].breed} src = {cute[a].url} >
+                <img style = {imgStyle} id = {cute[a]._id} name = {cute[a].name} alt = {cute[a].breed} src = {cute[a].url} >
                 </img>
               </td>
               <td>
-                They cost $ {cute[a].price}
+                <h1>They cost $ {cute[a].price}</h1>
               </td>
             </tr>
           </table>
@@ -89,7 +96,26 @@ class Pets extends Component {
         return(
           <div>
             {this.handleDisplay()}
+            <div className="Pets">
+              {this.selectOptions()}
+              <form onSubmit={this.state.display = true}>
+                <h2>What animals would you like to look at?</h2>
+                <select
+                  name="animals"
+                  id="petType"
+                  value={this.state.value}
+                  onChange={this.handleChange.bind(this)}
+                >
+                  <option value="Dog">Dogs</option>
+                  <option value="Cat">Cats</option>
+                  <option value="Fish">Fish</option>
+                  <option value="Bird">Birds</option>
+                </select>
+                <input type="submit" value="Submit"></input>
+              </form>
+            </div>
           </div>
+          
         );
       }
       return (
