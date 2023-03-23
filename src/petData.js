@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Pets from "./Pets";
+// import Pets from "./Pets";
 
-class petData extends Component {
+class PetData extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,8 @@ class petData extends Component {
             </tr>
             <tr>
               <td>
-                <img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id = {pet._id} name = {pet.name} alt = {pet.breed} src = {pet.url} >
+              {/* <img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" id = {pet._id} name = {pet.name} alt = {pet.breed} src = {pet.url} > */}
+              <img style={{ display: "block", marginLeft: "auto", height: "50%", marginRight: "auto", width:"50%" }} id = {pet._id} name = {pet.name} alt = {pet.breed} src = {pet.url} >
                 </img>
               </td>
               <td>
@@ -51,4 +52,4 @@ class petData extends Component {
     );
   }
 }
-export default petData;
+export default PetData;

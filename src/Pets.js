@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import petData from "./petData";
+import PetData from "./PetData";
 
 class Pets extends Component {
   constructor(props) {
@@ -120,7 +120,7 @@ class Pets extends Component {
                     </td>
                   </tr>
                   <tr>
-                    <button value={cute[type]} onClick = {this.setState({chosen: true,goodAnimal: type})}>
+                    <button value={cute[type]} onClick={this.setState({ chosen: true, goodAnimal: type })}>
                       Click here to learn more about them
                     </button>
                   </tr>
@@ -132,7 +132,7 @@ class Pets extends Component {
       );
     }
     else {
-      return <petData goodPet = {this.state.petType[this.state.goodAnimal]}/>;
+      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} />;
     }
   }
 }
