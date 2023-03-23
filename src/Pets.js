@@ -36,7 +36,8 @@ class Pets extends Component {
       count = 0;
     }
     arra.map((type) => {
-      document.getElementById("petType").innerHTML = "<option value=" + { type } + ">" + { type } + "</option>";
+      document.getElementById("petType").innerHTML =
+        "<option value=" + { type } + ">" + { type } + "</option>";
     });
     console.log(arra); //code above is trying to find all unique types in array of petType
   }
@@ -45,42 +46,37 @@ class Pets extends Component {
     //meant to create a table that displays to page
     let cute = this.state.petType;
     const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
-    for (let anNum = 0; anNum < cute.length; anNum++) {
-      if (this.state.value == cute[anNum].type) {
-        return (
-          <table>
-            {" "}
-            <tr>
-              {" "}
-              <th>
-                {" "}
-                <h1>Their name is + {cute[anNum].name}+ '</h1>{" "}
-              </th>
-            </tr>
-            <tr>
-              <td>
-                {" "}
-                <img
-                  style={imgStyle}
-                  id={cute[anNum]._id}
-                  name={cute[anNum].name}
-                  alt={cute[anNum].breed}
-                  src={cute[anNum].url}
-                ></img>
-              </td>
-              <td>
-                <h1>They cost $ {cute[anNum].price}</h1>
-              </td>
-            </tr>
-            <tr>
-              <button value={cute[anNum]}>
-                Click here to learn more about them
-              </button>
-            </tr>
-          </table>
-        );
+    let info;
+    for (let i = 0; i < cute.length; i++) {
+      if (this.state.value == cute[i].type) {
+        info +=
+          "<tr>" +
+          "<th>" +
+          "<h3> Their name is " +
+          cute[i].name +
+          "</h3>" +
+          "</th>" +
+          "</tr>" +
+          "<tr>" +
+          "<td>" +
+          '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" ' +
+          "name = " +
+          cute[i].name +
+          " alt =" +
+          cute[i].breed +
+          " src =" +
+          cute[i].url +
+          ">" +
+          "</td>" +
+          "<td>" +
+          "<h3> They cost $" +
+          cute[i].price +
+          "</h3>" +
+          "</td>" +
+          "</tr>";
       }
     }
+    return info;
   };
 
   // handlePetType(event) {
