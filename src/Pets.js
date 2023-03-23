@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import petData from "./petData";
+// import petData from "./petData";
 
 class Pets extends Component {
   constructor(props) {
@@ -8,7 +8,6 @@ class Pets extends Component {
       petType: this.props.petType,
       value: "Dog",
       chosen: false,
-      display: false,
     };
   }
 
@@ -35,77 +34,51 @@ class Pets extends Component {
       same = false;
       count = 0;
     }
+    return arra;
+    // arra.map((type) => {
+    //   document.getElementById("petType").innerHTML = "<option value=" + { type } + ">" + { type } + "</option>";
+    // });
     console.log(arra); //code above is trying to find all unique types in array of petType
   }
 
-  handleDisplay = (e) => {
+  handleDisplay = () => {
     //meant to create a table that displays to page
     let cute = this.state.petType;
-    const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
-    for (let i = 0; i < cute.length; i++) {
-      if (this.state.value == cute[i].type) {
-        document.getElementById("petsTy").innerHTML +=
-          "<table>" +
-          "<tr>" +
-          "<th>" +
-          "<h3> Their name is " +
-          cute[i].name +
-          "</h3>" +
-          "</th>" +
-          "</tr>" +
-          "<tr>" +
-          "<td>" +
-          '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" ' +
-          "name = " +
-          cute[i].name +
-          " alt =" +
-          cute[i].breed +
-          " src =" +
-          cute[i].url +
-          ">" +
-          "</td>" +
-          "<td>" +
-          "<h3> They cost $" +
-          cute[i].price +
-          "</h3>" +
-          "</td>" +
-          "</tr>" +
-          "</table>";
+    const good = [];
+    for (let anNum = 0; anNum < cute.length; anNum++) {
+      if (this.state.value == cute[anNum].type) {
+        good.push(anNum);
       }
     }
+    return good;
   };
 
+  // handlePetType(event) {
+  //   let animal = this.props.petType;
+  //   document.getElementById("petsTy").innerHTML = '';
+  //   for (let i = 0; i < animal.length; i++) {
+  //     if (animal[i].type == this.state.value) {
+  //       document.getElementById("petsTy").innerHTML += '<tr>' + '<th>' + '<h3> Their name is ' + animal[i].name + '</h3>' + '</th>' + '</tr>'
+  //         + '<tr>' + '<td>' + '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" '
+  //         + 'name = ' + animal[i].name + ' alt =' + animal[i].breed + ' src ='
+  //         + animal[i].url + '>' + '</td>'
+  //         + '<td>' + '<h3> They cost $' + animal[i].price + '</h3>' + '</td>'+ '</tr>';
+  //       console.log(i);
+  //     }
+  //   }
+  //   event.preventDefault();
+  // }
+
   render() {
+    let cute = this.state.petType;
+    let arra = this.selectOptions();
+    let good = this.handleDisplay();
+    const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
+
     if (!this.state.chosen) {
-      if (this.state.display) {
-        return (
-          <div>
-            <div className="Pets">
-              {this.selectOptions()}
-              <form onSubmit={(this.handleDisplay)}>
-                <h2>What animals would you like to look at?</h2>
-                <select
-                  name="animals"
-                  id="petType"
-                  value={this.state.value}
-                  onChange={this.handleChange.bind(this)}
-                >
-                  <option value="Dog">Dogs</option>
-                  <option value="Cat">Cats</option>
-                  <option value="Fish">Fish</option>
-                  <option value="Bird">Birds</option>
-                </select>
-                <input type="submit" value="Submit"></input>
-              </form>
-              <table id="petsTy"></table>
-            </div>
-          </div>
-        );
-      }
       return (
-        <div className="Pets">
-          {this.selectOptions()}
-          <form onSubmit={(this.state.display = true, this.handleDisplay)}>
+        <div>
+          <div className="Pets">
             <h2>What animals would you like to look at?</h2>
             <select
               name="animals"
@@ -113,20 +86,54 @@ class Pets extends Component {
               value={this.state.value}
               onChange={this.handleChange.bind(this)}
             >
-              <option value="Dog">Dogs</option>
-              <option value="Cat">Cats</option>
-              <option value="Fish">Fish</option>
-              <option value="Bird">Birds</option>
+              {arra.map((type) => {
+                return <option value={type}>{type}</option>;
+              })}
             </select>
-            <input type="submit" value="Submit"></input>
-          </form>
-          <table id="petsTy"></table>
+          </div>
+          <div id="petDis">
+            {good.map((type) => {
+              return (
+                <table>
+                  {" "}
+                  <tr>
+                    {" "}
+                    <th>
+                      {" "}
+                      <h1>Their name is {cute[type].name} </h1>{" "}
+                    </th>
+                  </tr>
+                  <tr>
+                    <td>
+                      {" "}
+                      <img
+                        style={imgStyle}
+                        id={cute[type]._id}
+                        name={cute[type].name}
+                        alt={cute[type].breed}
+                        src={cute[type].url}
+                      ></img>
+                    </td>
+                    <td>
+                      <h1>They cost $ {cute[type].price}</h1>
+                    </td>
+                  </tr>
+                  <tr>
+                    <button value={cute[type]}>
+                      Click here to learn more about them
+                    </button>
+                  </tr>
+                </table>
+              );
+            })}
+          </div>
         </div>
       );
-    } else {
-      return <petData />;
     }
   }
+  // else {
+  //   return <petData />;
+  // }
 }
 
 export default Pets;
