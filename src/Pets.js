@@ -7,7 +7,8 @@ class Pets extends Component {
     this.state = {
       petType: this.props.petType,
       value: "Dog",
-      chosen: false
+      chosen: false,
+      display: false
     };
   }
 
@@ -18,26 +19,29 @@ class Pets extends Component {
   selectOptions(){
   var select = document.getElementById("petType");
   let ani = this.state.petType;
-  let arra = ["Dog","Cat"];
+  let arra = [];
+  let same = false;
   let count = 0;
-    for (let i=0; i<ani.length; i++)
-    {
-        var j;
-        for (j=0; j<i; j++)
-          if (ani[i] == ani[j])
-              break;
-        if (i == j)
-          console.log(ani[i] + " ");
+  for (let i = 0; i < ani.length; i++) {
+    for (let j = 0; j < arra.length; j++) {
+          if ( ani[i].type == arra[j] ) {
+               same = true;
+          }
     }
-        console.log(arra); //code above is trying to find all unique types in array of petType
-  // for(let index in arra) {
-  //     select.add(new Option(arra[index]));
-  //     console.log(arra[index]);
-  // }
+    count++;
+  if (count == 1 && same == false) {
+          arra.push(ani[i].type);
+  }
+      same = false;
+      count = 0;
+  }
+
+  console.log(arra); //code above is trying to find all unique types in array of petType
   }
 
   handleDisplay = () =>{ //meant to create a table that displays to page
     let cute = this.state.petType;
+    console.log("test");
     for(let a = 0; a < cute.length; a++ ){
       if(this.state.value == cute[a].type){
         return(
@@ -59,6 +63,7 @@ class Pets extends Component {
           </table>
         );
       }
+      console.log("as");
     }
   };
 
@@ -80,10 +85,17 @@ class Pets extends Component {
 
   render() {
     if(!this.state.chosen){
+      if(this.state.display){
+        return(
+          <div>
+            {this.handleDisplay()}
+          </div>
+        );
+      }
       return (
         <div className="Pets">
           {this.selectOptions()}
-          <form onSubmit={this.handleDisplay.bind("petT")}>
+          <form onSubmit={this.state.display = true}>
             <h2>What animals would you like to look at?</h2>
             <select
               name="animals"
@@ -98,10 +110,6 @@ class Pets extends Component {
             </select>
             <input type="submit" value="Submit"></input>
           </form>
-          
-          <div id="petT">
-            {/* <table id="petsTy"></table> */}
-          </div>
         </div>
       );
     }
