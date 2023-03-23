@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import petData from "./petData";
+import petData from "./petData";
 
 class Pets extends Component {
   constructor(props) {
@@ -129,11 +129,10 @@ class Pets extends Component {
           </div>
         </div>
       );
+    } else {
+      return <div><petData /></div>;
     }
   }
-  // else {
-  //   return <petData />;
-  // }
 }
 
 export default Pets;
