@@ -33,17 +33,36 @@ class Cart extends Component {
     }
 
     render() {
+        let total = null
+        this.state.items && this.state.items.filter((item) => {
+            const temp = parseFloat(item.price)
+            if (!isNaN(temp))
+                return (
+                    total += temp
+                )
+        })
+
         return (
             <div className="Container blackBorder cart">
-                {this.state.items && this.state.items.map((item) => (
-                    <CartItem
-                        id={item._id}
-                        name={item.name}
-                        url={item.url}
-                        price={item.price}
-                    >
-                    </CartItem>
-                ))}
+                <h3 className="centerText">
+                    Cart
+                </h3>
+                <div style={{ justifyContent: "space-evenly" }}>
+                    {this.state.items && this.state.items.map((item) => (
+                        <CartItem
+                            id={item._id}
+                            name={item.name}
+                            url={item.url}
+                            price={item.price}
+                            removeFromCart={this.props.removeFromCart}
+                        >
+                        </CartItem>
+                    ))
+                    }
+                </div>
+                <div className="text">
+                    {this.state.items && <p>Total: ${total}</p>}
+                </div>
             </div>
         );
     }

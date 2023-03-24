@@ -59,6 +59,13 @@ class App extends Component {
     this.setState({ admin: loggedIn });
   }
 
+  handleRemoveFromCart(key) {
+    console.log(this.state.cartItems)
+    const updatedCart = this.state.cartItems.filter(data => data._id !== key);
+    this.setState({ cartItems: updatedCart });
+    console.log(this.state.cartItems)
+  }
+
   render() {
     return (
       <div className="App">
@@ -66,7 +73,7 @@ class App extends Component {
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-        {this.state.route === '/cart' && <Cart items={this.state.cartItems} />}
+        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
       </div>
     );
   }

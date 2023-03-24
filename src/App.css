@@ -12,6 +12,14 @@
   justify-content: center;
 }
 
+.RowContainer {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
 .App {
   display: flex;
   flex: 1;
@@ -47,6 +55,7 @@
 .centerText {
   text-align: center;
 }
+
 
 .flexStart {
   display: flex;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Button } from 'react-bootstrap';
 class CartItem extends Component {
     constructor(props) {
         super(props);
@@ -7,10 +7,7 @@ class CartItem extends Component {
 
     render() {
         return (
-            <div className='row'>
-                {/* <div className="col">
-                    <h2>{this.props.name}</h2>
-                </div> */}
+            <div className="row">
                 <div className="col">
                     <img
                         className="cartImg"
@@ -19,10 +16,20 @@ class CartItem extends Component {
                     />
                 </div>
                 <div className="col">
-                    <p>Name: {this.props.name}</p>
-                    <p>Breed: {this.props.breed}</p>
-                    <p>Age: {this.props.age}</p>
-                    <p>Price: ${this.props.price}</p>
+                    <p style={{ textAlign: "left" }}>Name:</p>
+                    <p style={{ textAlign: "left" }}>Price:</p>
+                </div>
+                <div className="col">
+                    <p style={{ textAlign: "left" }}>{this.props.name}</p>
+                    <p style={{ textAlign: "left" }}>${this.props.price}</p>
+                </div>
+                <div className="col" style={{ padding: 0, margin: 0 }}>
+                    <Button
+                        onClick={() => this.props.removeFromCart(this.props.id)}
+                        variant="outline-danger"
+                    >
+                        Remove
+                    </Button>
                 </div>
             </div>
         );
