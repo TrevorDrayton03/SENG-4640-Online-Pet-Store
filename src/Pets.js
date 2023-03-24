@@ -77,7 +77,7 @@ class Pets extends Component {
     const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
 
     if (this.state.chosen === true) {
-      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} chosen = {this.state.chosen} />;
+      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} petType = {this.state.petType} />;
     }
     else {
       return (

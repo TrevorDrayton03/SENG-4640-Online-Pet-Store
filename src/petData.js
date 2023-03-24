@@ -7,7 +7,7 @@ class PetData extends Component {
     super(props);
     this.state = {
       goodPet: this.props.goodPet,
-      chosen: this.props.chosen,
+      petType: this.props.petType,
       cart: false,
       petPage: true,
     };
@@ -80,12 +80,12 @@ class PetData extends Component {
     if (this.state.petPage === true) {
       return <div>{this.handleDisp()}</div>;
     } else if (this.state.petPage === false){
-      return <div><Pets/></div>
+      return <div><Pets petType = {this.state.petType}/></div>
     } 
     
     if(this.state.cart === true) {
       <App cartItems = {this.props.goodPet}/>
-      return <div><Pets/></div>
+      return <div><Pets petType = {this.state.petType}/></div>
     }
 
   }
