@@ -3,14 +3,13 @@ import React, { Component } from "react";
 class PetData extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      goodPet: this.props.goodPet,
-      petType: this.props.petType,
-    };
+    // this.state = {
+    //   goodPet: this.props.goodPet,
+    // };
   }
 
   handleDisp(e) {
-    let pet = this.state.goodPet;
+    let pet = this.props.goodPet;
     return (
       <div className="large">
         <table>

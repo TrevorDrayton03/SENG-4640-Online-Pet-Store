@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
+const mongoose = require('mongoose');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'build')));
@@ -14,6 +15,11 @@ app.use(bodyParser.json());
 const PetModel = require("../src/schemas/Pet.js");
 const AdminModel = require("../src/schemas/Admin.js");
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 app.get('/api/petData', async (req, res) => {
   try {
     const type = req.query.type;
@@ -24,6 +30,23 @@ app.get('/api/petData', async (req, res) => {
       pets = await PetModel.find(); // find all pets
     }
     res.send(pets);
+  } catch (err) {
+    res.status(500).send(err);
+  };
+});
+
+// get a specific pet for petData
+app.get('/api/pet', async (req, res) => {
+  try {
+    // _id needs to be converted from string to ObjectId, as it is in DB
+    let id = req.query.id;
+    // id = mongoose.types.ObjectId(id);
+    let pet;
+    if (id) {
+      // pet = await PetModel.findById(id); // find a specific pet
+      pet = await PetModel.findOne({ name: id }); // find a specific pet
+    }
+    res.send(pet);
   } catch (err) {
     res.status(500).send(err);
   };

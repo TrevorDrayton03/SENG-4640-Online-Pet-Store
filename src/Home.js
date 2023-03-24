@@ -9,9 +9,14 @@ class Home extends Component {
             petTypes: null,
         };
     }
-    // 
-    handleClick = () => {
-        window.location.href = '/pets'
+    // used to send the user to the pets page with the type they want to see
+    handleIconClick = (type) => {
+        window.location.href = '/pets?type=' + type;
+    };
+    handleCarouselClick = (id) => {
+        console.log(id, " id in handle click")
+        window.location.href = '/pets?id=' + id;
+        console.log(window.location.href, "  window.location.href")
     };
     // carousel index handler
     handleSelect = (selectedIndex, e) => {
@@ -52,33 +57,40 @@ class Home extends Component {
                     {this.props.pets && this.props.pets.length > 0 &&
                         <Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
                             <Carousel.Item>
-                                <img
-                                    className="carouselImg"
-                                    alt="First Slide"
-                                    src={this.props.pets[0].url}
-                                />
+                                <a key={this.props.pets[0]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[0]._id)}>
+                                    <img
+                                        className="carouselImg"
+                                        alt="First Slide"
+                                        src={this.props.pets[0].url}
+                                    />
+                                </a>
                                 <Carousel.Caption className="blackTextBorder">
                                     <h3>{this.props.pets[0].name}</h3>
                                     <p>{this.props.pets[0].breed}</p>
                                 </Carousel.Caption>
+
                             </Carousel.Item>
                             <Carousel.Item>
-                                <img
-                                    className="carouselImg"
-                                    alt="Second Slide"
-                                    src={this.props.pets[1].url}
-                                />
+                                <a key={this.props.pets[1]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[1]._id)}>
+                                    <img
+                                        className="carouselImg"
+                                        alt="Second Slide"
+                                        src={this.props.pets[1].url}
+                                    />
+                                </a >
                                 <Carousel.Caption className="blackTextBorder">
                                     <h3>{this.props.pets[1].name}</h3>
                                     <p>{this.props.pets[1].breed}</p>
                                 </Carousel.Caption>
                             </Carousel.Item>
                             <Carousel.Item>
-                                <img
-                                    className="carouselImg"
-                                    alt="Second Slide"
-                                    src={this.props.pets[2].url}
-                                />
+                                <a key={this.props.pets[2]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[2]._id)}>
+                                    <img
+                                        className="carouselImg"
+                                        alt="Second Slide"
+                                        src={this.props.pets[2].url}
+                                    />
+                                </a>
                                 <Carousel.Caption className="blackTextBorder">
                                     <h3>{this.props.pets[2].name}</h3>
                                     <p>{this.props.pets[2].breed}</p>
@@ -96,7 +108,7 @@ class Home extends Component {
                         {this.state.petTypes && this.state.petTypes.map((type) => {
                             return (
                                 <div className="col">
-                                    <a key={type} href="#" onClick={this.handleClick}>
+                                    <a key={type} href="#" onClick={() => this.handleIconClick(type)}>
                                         <img src={require("./images/" + type + ".jpg")}></img>
                                     </a>
                                 </div>

@@ -8,7 +8,8 @@ class Pets extends Component {
       petType: null,
       value: "Dog",
       chosen: false,
-      goodAnimal: 0
+      goodAnimal: null,
+      isLoading: true
     };
   }
 
@@ -30,6 +31,26 @@ class Pets extends Component {
     } catch (error) {
       console.error(error);
     }
+    // this will check the URL for a query parameter and will set the state if it's there
+    // this is how this component knows what to display when clicking on the pet icons or carousel in Home
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const type = params.get('type');
+    const id = params.get('id');
+    console.log(id);
+    // prevent the code from continueing until petType is set
+    while (!this.state.petType) {
+      await new Promise(resolve => setTimeout(resolve, 10));
+    }
+    if (id) {
+      let pet = this.state.petType.find(pets => pets._id === id)
+      console.log(pet)
+      this.setState({ goodAnimal: pet, chosen: true });
+    }
+    else if (type && !id) {
+      this.setState({ value: type });
+    }
+    this.setState({ isLoading: false })
   }
 
   selectOptions() {
@@ -55,10 +76,10 @@ class Pets extends Component {
 
   handleDisplay = () => {
     //meant to create a table that displays to page
-    let cute = this.state.petType;
+    let allPets = this.state.petType;
     const good = [];
-    for (let anNum = 0; anNum < cute.length; anNum++) {
-      if (this.state.value == cute[anNum].type) {
+    for (let anNum = 0; anNum < allPets.length; anNum++) {
+      if (this.state.value == allPets[anNum].type) {
         good.push(anNum);
       }
     }
@@ -66,15 +87,20 @@ class Pets extends Component {
   };
 
   render() {
-    if (this.state.petType) {
-      let cute = this.state.petType;
-      let arra = this.selectOptions();
-      let good = this.handleDisplay();
+    if (this.state.isLoading) {
+      <div><p>Loading...</p></div>
+    }
+    else if (this.state.petType) {
+      let allPets = this.state.petType;
+      let arra = this.selectOptions(); // this is an array of distinct pet types 
+      let good = this.handleDisplay(); // these are indexes of pets 
+      console.log(arra)
+      console.log(good)
+      console.log(this.state.goodAnimal);
 
       if (this.state.chosen === true) {
         return <PetData
-          goodPet={this.state.petType[this.state.goodAnimal]}
-          petType={this.state.petType}
+          goodPet={this.state.goodAnimal}
           addToCart={this.props.addToCart}
           handleChosen={this.handleToggleChosen.bind(this)}
         />;
@@ -96,6 +122,7 @@ class Pets extends Component {
               </select>
             </div>
             <div id="petDis">
+              {/* for each pet index value, use it to get the pet data we want from all the pets */}
               {good.map((type) => {
                 return (
                   <table>
@@ -104,7 +131,7 @@ class Pets extends Component {
                       {" "}
                       <th>
                         {" "}
-                        <h1>Their name is {cute[type].name} </h1>{" "}
+                        <h1>Their name is {allPets[type].name} </h1>{" "}
                       </th>
                     </tr>
                     <tr>
@@ -112,18 +139,18 @@ class Pets extends Component {
                         {" "}
                         <img
                           className="itemImg"
-                          id={cute[type]._id}
-                          name={cute[type].name}
-                          alt={cute[type].breed}
-                          src={cute[type].url}
+                          id={allPets[type]._id}
+                          name={allPets[type].name}
+                          alt={allPets[type].breed}
+                          src={allPets[type].url}
                         ></img>
                       </td>
                       <td>
-                        <h1>They cost $ {cute[type].price}</h1>
+                        <h1>They cost $ {allPets[type].price}</h1>
                       </td>
                     </tr>
                     <tr>
-                      <button value={cute[type]} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: type })}>
+                      <button value={allPets[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: allPets[type] })}>
                         Click here to learn more about them
                       </button>
                     </tr>

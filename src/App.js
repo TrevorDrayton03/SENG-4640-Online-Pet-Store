@@ -70,7 +70,15 @@ class App extends Component {
   handleLogin(loggedIn) {
     this.setState({ admin: loggedIn });
   }
-
+  shouldComponentUpdate(nextProps, nextState) {
+    // compare current props and state with next props and state
+    if (this.props === nextProps && this.state === nextState) {
+      // no changes, don't re-render
+      return false;
+    }
+    // changes, re-render
+    return true;
+  }
   render() {
     return (
       <div className="App">
