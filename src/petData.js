@@ -12,7 +12,7 @@ class PetData extends Component {
   handleDisp(e) {
     let pet = this.state.goodPet;
     return (
-      <div>
+      <div className="large">
         <table>
           <tr>
             <th>
@@ -26,12 +26,7 @@ class PetData extends Component {
           <tr>
             <td>
               <img
-                style={{
-                  display: "block",
-                  height: "100%",
-                  width: "100%",
-                  flex: 1,
-                }}
+                className="itemImg"
                 id={pet._id}
                 name={pet.name}
                 alt={pet.breed}

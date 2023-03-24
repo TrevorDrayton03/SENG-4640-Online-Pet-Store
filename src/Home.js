@@ -9,7 +9,10 @@ class Home extends Component {
             petTypes: null,
         };
     }
-
+    // 
+    handleClick = () => {
+        window.location.href = '/pets'
+    };
     // carousel index handler
     handleSelect = (selectedIndex, e) => {
         this.setState({ index: selectedIndex });
@@ -93,7 +96,7 @@ class Home extends Component {
                         {this.state.petTypes && this.state.petTypes.map((type) => {
                             return (
                                 <div className="col">
-                                    <a key={type} href="#" onClick={null}>
+                                    <a key={type} href="#" onClick={this.handleClick}>
                                         <img src={require("./images/" + type + ".jpg")}></img>
                                     </a>
                                 </div>

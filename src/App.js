@@ -18,7 +18,6 @@ class App extends Component {
       admin: false,
       allPets: {},
       cartItems: [],
-      petType: {},
       carouselData: null
     };
   }
@@ -33,7 +32,6 @@ class App extends Component {
       const pets = await response.json();
       this.setState({
         allPets: pets,
-        petType: pets
       });
     } catch (error) {
       console.error(error);
@@ -78,7 +76,7 @@ class App extends Component {
       <div className="App">
         <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
-        {this.state.route === '/pets' && <Pets petType={this.state.petType} addToCart={this.handleAddToCart.bind(this)} />}
+        {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
         {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
       </div>

@@ -74,6 +74,13 @@
   align-items: center;
 }
 
+.itemImg {
+  display: block;
+  height: 50%;
+  width: 50%;
+  flex: 1;
+}
+
 .col img {
   width: 200px;
   height: 200px;
