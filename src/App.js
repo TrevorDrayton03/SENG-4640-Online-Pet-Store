@@ -17,7 +17,7 @@ class App extends Component {
       items: {},
       admin: false,
       allPets: {},
-      cartItems: {},
+      cartItems: [],
       petType: {},
       carouselData: null
     };
@@ -50,10 +50,18 @@ class App extends Component {
     }
   }
 
-  handleCart(){
-    if(this.props.cartItems !== undefined){
-      this.setState({cartItems: this.props.cartItems});
+  handleAddToCart(item) {
+    let itemInCart = this.state.cartItems.find(cartItem => cartItem._id === item._id);
+    if (!itemInCart) {
+      const updatedCart = [...this.state.cartItems];
+      updatedCart.push(item);
+      this.setState({ cartItems: updatedCart });
     }
+  }
+
+  handleRemoveFromCart(key) {
+    const updatedCart = this.state.cartItems.filter(data => data._id !== key);
+    this.setState({ cartItems: updatedCart });
   }
 
   handleLinkClick(route) {
@@ -65,20 +73,12 @@ class App extends Component {
     this.setState({ admin: loggedIn });
   }
 
-  handleRemoveFromCart(key) {
-    console.log(this.state.cartItems)
-    const updatedCart = this.state.cartItems.filter(data => data._id !== key);
-    this.setState({ cartItems: updatedCart });
-    console.log(this.state.cartItems)
-  }
-
   render() {
-    {this.handleCart()}
     return (
       <div className="App">
         <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
-        {this.state.route === '/pets' && <Pets petType={this.state.petType} />}
+        {this.state.route === '/pets' && <Pets petType={this.state.petType} addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
         {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
       </div>

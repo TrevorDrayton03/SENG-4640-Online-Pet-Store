@@ -5,13 +5,11 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // items: this.props.items,
-            items: null,
-            total: 0
+            total: 0,
         }
         // calculates the total (if the price is listed)
         // won't work until data is passed as a prop
-        this.state.items && this.state.items.forEach(item => {
+        this.props.items && this.props.items.forEach(item => {
             const price = parseFloat(item.price);
             if (!isNaN(price)) {
                 this.state.total += price;
@@ -19,22 +17,9 @@ class Cart extends Component {
         });
     }
 
-    // temp using this just to get data to the cart
-    async componentDidMount() {
-        try {
-            const response = await fetch('http://localhost:3000/api/carousel');
-            const carouselPets = await response.json();
-            this.setState({
-                items: carouselPets
-            });
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
     render() {
         let total = null
-        this.state.items && this.state.items.filter((item) => {
+        this.props.items && this.props.items.filter((item) => {
             const temp = parseFloat(item.price)
             if (!isNaN(temp))
                 return (
@@ -48,7 +33,8 @@ class Cart extends Component {
                     Cart
                 </h3>
                 <div style={{ justifyContent: "space-evenly" }}>
-                    {this.state.items && this.state.items.map((item) => (
+                    {this.props.items.length === 0 && <p>Cart is empty.</p>}
+                    {this.props.items.length !== 0 && this.props.items.map((item) => (
                         <CartItem
                             id={item._id}
                             name={item.name}
@@ -61,7 +47,7 @@ class Cart extends Component {
                     }
                 </div>
                 <div className="text">
-                    {this.state.items && <p>Total: ${total}</p>}
+                    {this.props.items.length !== 0 && <p>Total: ${total}</p>}
                 </div>
             </div>
         );

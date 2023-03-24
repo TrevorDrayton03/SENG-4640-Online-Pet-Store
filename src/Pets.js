@@ -15,6 +15,9 @@ class Pets extends Component {
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
+  handleToggleChosen() {
+    this.setState({ chosen: !this.state.chosen });
+  }
 
   selectOptions() {
     var select = document.getElementById("petType");
@@ -36,10 +39,6 @@ class Pets extends Component {
       count = 0;
     }
     return arra;
-    // arra.map((type) => {
-    //   document.getElementById("petType").innerHTML = "<option value=" + { type } + ">" + { type } + "</option>";
-    // });
-    console.log(arra); //code above is trying to find all unique types in array of petType
   }
 
   handleDisplay = () => {
@@ -54,22 +53,6 @@ class Pets extends Component {
     return good;
   };
 
-  // handlePetType(event) {
-  //   let animal = this.props.petType;
-  //   document.getElementById("petsTy").innerHTML = '';
-  //   for (let i = 0; i < animal.length; i++) {
-  //     if (animal[i].type == this.state.value) {
-  //       document.getElementById("petsTy").innerHTML += '<tr>' + '<th>' + '<h3> Their name is ' + animal[i].name + '</h3>' + '</th>' + '</tr>'
-  //         + '<tr>' + '<td>' + '<img style = "display: block;margin-left: auto; height: 50%;margin-right: auto;width: 50%;" '
-  //         + 'name = ' + animal[i].name + ' alt =' + animal[i].breed + ' src ='
-  //         + animal[i].url + '>' + '</td>'
-  //         + '<td>' + '<h3> They cost $' + animal[i].price + '</h3>' + '</td>'+ '</tr>';
-  //       console.log(i);
-  //     }
-  //   }
-  //   event.preventDefault();
-  // }
-
   render() {
     let cute = this.state.petType;
     let arra = this.selectOptions();
@@ -77,11 +60,16 @@ class Pets extends Component {
     const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
 
     if (this.state.chosen === true) {
-      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} petType = {this.state.petType} />;
+      return <PetData
+        goodPet={this.state.petType[this.state.goodAnimal]}
+        petType={this.state.petType}
+        addToCart={this.props.addToCart}
+        handleChosen={this.handleToggleChosen.bind(this)}
+      />;
     }
     else {
       return (
-        <div>
+        <div className="large">
           <div className="Pets">
             <h2>What animals would you like to look at?</h2>
             <select

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Pets from "./Pets";
-import App from "./App";
 
 class PetData extends Component {
   constructor(props) {
@@ -8,8 +6,6 @@ class PetData extends Component {
     this.state = {
       goodPet: this.props.goodPet,
       petType: this.props.petType,
-      cart: false,
-      petPage: true,
     };
   }
 
@@ -59,13 +55,16 @@ class PetData extends Component {
             <td>
               <button
                 id="backToPets"
-                onClick={() => this.setState({ petPage: !this.state.petPage })}>
+                onClick={() => this.props.handleChosen()}>
                 {" "}
                 Back to Pets Page
               </button>
             </td>
             <td>
-              <button id="addToCart" onClick={() => this.setState({petPage: !this.state.petPage, cart: !this.state.petPage})}>
+              <button id="addToCart" onClick={() => {
+                this.props.addToCart(pet);
+                this.props.handleChosen();
+              }}>
                 {" "}
                 Click here to add them to your cart
               </button>
@@ -77,17 +76,7 @@ class PetData extends Component {
   }
 
   render() {
-    if (this.state.petPage === true) {
-      return <div>{this.handleDisp()}</div>;
-    } else if (this.state.petPage === false){
-      return <div><Pets petType = {this.state.petType}/></div>
-    } 
-    
-    if(this.state.cart === true) {
-      <App cartItems = {this.props.goodPet}/>
-      return <div><Pets petType = {this.state.petType}/></div>
-    }
-
+    return <div>{this.handleDisp()}</div>;
   }
 }
 export default PetData;
