@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 const PetModel = require("../src/schemas/Pet.js");
 const AdminModel = require("../src/schemas/Admin.js");
 
+// this middleware always console logs the requests
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
@@ -30,23 +31,6 @@ app.get('/api/petData', async (req, res) => {
       pets = await PetModel.find(); // find all pets
     }
     res.send(pets);
-  } catch (err) {
-    res.status(500).send(err);
-  };
-});
-
-// get a specific pet for petData
-app.get('/api/pet', async (req, res) => {
-  try {
-    // _id needs to be converted from string to ObjectId, as it is in DB
-    let id = req.query.id;
-    // id = mongoose.types.ObjectId(id);
-    let pet;
-    if (id) {
-      // pet = await PetModel.findById(id); // find a specific pet
-      pet = await PetModel.findOne({ name: id }); // find a specific pet
-    }
-    res.send(pet);
   } catch (err) {
     res.status(500).send(err);
   };
@@ -85,6 +69,19 @@ app.get('/api/delete', async (req, res) => {
     const key = req.query.key;
     await PetModel.deleteOne({ _id: key });
     res.status(200).send("delete success")
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.use('/api/checkout', async (req, res) => {
+  try {
+    const keys = req.body;
+    for (const key of keys) {
+      await PetModel.findByIdAndDelete(key);
+    }
+    res.status(200).send("checkout success")
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');

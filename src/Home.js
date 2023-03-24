@@ -14,9 +14,7 @@ class Home extends Component {
         window.location.href = '/pets?type=' + type;
     };
     handleCarouselClick = (id) => {
-        console.log(id, " id in handle click")
         window.location.href = '/pets?id=' + id;
-        console.log(window.location.href, "  window.location.href")
     };
     // carousel index handler
     handleSelect = (selectedIndex, e) => {

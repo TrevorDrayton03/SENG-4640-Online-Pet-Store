@@ -62,6 +62,20 @@ class App extends Component {
     this.setState({ cartItems: updatedCart });
   }
 
+  async handleCheckoutCart() {
+    const keys = this.state.cartItems.map((obj => obj._id));
+    await fetch('http://localhost:3000/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(keys)
+    })
+      .then(response => response.json())
+      .catch(error => console.log(error))
+    this.setState({ cartItems: [] });
+  }
+
   handleLinkClick(route) {
     this.setState({ route });
     window.history.pushState(null, null, route);
@@ -86,7 +100,7 @@ class App extends Component {
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
+        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} checkout={this.handleCheckoutCart.bind(this)} />}
       </div>
     );
   }

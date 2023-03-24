@@ -7,13 +7,6 @@ class PetModal extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.state = {
-            showToast: false
-        }
-    }
-
-    handleToast = () => {
-        this.setState({ showToast: !this.state.showToast })
     }
 
 

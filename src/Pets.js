@@ -37,14 +37,12 @@ class Pets extends Component {
     const params = new URLSearchParams(search);
     const type = params.get('type');
     const id = params.get('id');
-    console.log(id);
     // prevent the code from continueing until petType is set
     while (!this.state.petType) {
       await new Promise(resolve => setTimeout(resolve, 10));
     }
     if (id) {
       let pet = this.state.petType.find(pets => pets._id === id)
-      console.log(pet)
       this.setState({ goodAnimal: pet, chosen: true });
     }
     else if (type && !id) {
@@ -94,9 +92,6 @@ class Pets extends Component {
       let allPets = this.state.petType;
       let arra = this.selectOptions(); // this is an array of distinct pet types 
       let good = this.handleDisplay(); // these are indexes of pets 
-      console.log(arra)
-      console.log(good)
-      console.log(this.state.goodAnimal);
 
       if (this.state.chosen === true) {
         return <PetData

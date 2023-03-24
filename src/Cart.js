@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CartItem from './CartItem.js';
+import { Button } from 'react-bootstrap';
 
 class Cart extends Component {
     constructor(props) {
@@ -46,8 +47,17 @@ class Cart extends Component {
                     ))
                     }
                 </div>
-                <div className="text">
+                <div>
                     {this.props.items.length !== 0 && <p>Total: ${total}</p>}
+                    <Button
+                        onClick={() => {
+                            this.props.checkout()
+                            window.alert("Congratulations!")
+                        }}
+                        variant="primary"
+                    >
+                        Checkout
+                    </Button>
                 </div>
             </div>
         );
