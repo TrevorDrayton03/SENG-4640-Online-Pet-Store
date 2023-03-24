@@ -51,6 +51,12 @@ class App extends Component {
 
   }
 
+  handleCart(){
+    if(this.props.cartItems !== undefined){
+      this.setState({cartItems: this.props.cartItems});
+    }
+  }
+
   handleLinkClick(route) {
     this.setState({ route });
     window.history.pushState(null, null, route);
@@ -61,6 +67,7 @@ class App extends Component {
   }
 
   render() {
+    {this.handleCart()}
     return (
       <div className="App">
         <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>

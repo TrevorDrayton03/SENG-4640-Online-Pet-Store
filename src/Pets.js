@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import PetData from "./PetData";
+import PetData from "./PetData";
 
 class Pets extends Component {
   constructor(props) {
@@ -77,8 +77,7 @@ class Pets extends Component {
     const imgStyle = { display: "block", height: "50%", width: "50%", flex: 1 };
 
     if (this.state.chosen === true) {
-      console.log(this.state.chosen);
-      //   return <PetData goodPet={this.state.petType[this.state.goodAnimal]} chosen = {chooser} />;
+      return <PetData goodPet={this.state.petType[this.state.goodAnimal]} chosen = {this.state.chosen} />;
     }
     else {
       return (
@@ -124,7 +123,7 @@ class Pets extends Component {
                     </td>
                   </tr>
                   <tr>
-                    <button value={cute[type]} onClick={this.setState({ chosen: !this.state.chosen, goodAnimal: type })}>
+                    <button value={cute[type]} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: type })}>
                       Click here to learn more about them
                     </button>
                   </tr>

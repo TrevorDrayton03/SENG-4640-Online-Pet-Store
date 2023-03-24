@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-// import Pets from "./Pets";
+import Pets from "./Pets";
+import App from "./App";
 
 class PetData extends Component {
   constructor(props) {
     super(props);
     this.state = {
       goodPet: this.props.goodPet,
-      chosen: this.props.chosen
+      chosen: this.props.chosen,
+      cart: false,
+      petPage: true,
     };
   }
 
@@ -45,12 +48,28 @@ class PetData extends Component {
                 <br></br>
               </tr>
               <tr>
-                <h1>All a little bit about them: <br></br>{pet.description}</h1>
+                <h1>
+                  All a little bit about them: <br></br>
+                  {pet.description}
+                </h1>
               </tr>
             </td>
           </tr>
           <tr>
-            <button id="addToCart"> Click here to add them to your cart</button>
+            <td>
+              <button
+                id="backToPets"
+                onClick={() => this.setState({ petPage: !this.state.petPage })}>
+                {" "}
+                Back to Pets Page
+              </button>
+            </td>
+            <td>
+              <button id="addToCart" onClick={() => this.setState({petPage: !this.state.petPage, cart: !this.state.petPage})}>
+                {" "}
+                Click here to add them to your cart
+              </button>
+            </td>
           </tr>
         </table>
       </div>
@@ -58,8 +77,17 @@ class PetData extends Component {
   }
 
   render() {
-    console.log(this.state.chosen);
-    return <div>{this.handleDisp()}</div>;
+    if (this.state.petPage === true) {
+      return <div>{this.handleDisp()}</div>;
+    } else if (this.state.petPage === false){
+      return <div><Pets/></div>
+    } 
+    
+    if(this.state.cart === true) {
+      <App cartItems = {this.props.goodPet}/>
+      return <div><Pets/></div>
+    }
+
   }
 }
 export default PetData;
