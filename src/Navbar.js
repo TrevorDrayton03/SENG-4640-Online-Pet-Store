@@ -24,6 +24,11 @@ class Navbar extends Component {
                                 </a>
                             </li>
                             <li>
+                                <a href="/#" onClick={e => this.handleOnClick(e, "/petsupplies")} >
+                                    Pet Supplies
+                                </a>
+                            </li>
+                            <li>
                                 <a href="/#" onClick={e => this.handleOnClick(e, "/admin")} >
                                     Admin
                                 </a>
