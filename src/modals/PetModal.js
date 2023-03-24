@@ -72,6 +72,7 @@ class PetModal extends Component {
                 console.error(error);
             }
         }
+        this.props.handleClosePetModal();
     };
 
     render() {

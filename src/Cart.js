@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import CartItem from './CartItem.js';
 import { Button } from 'react-bootstrap';
+import CheckoutModal from "./modals/CheckoutModal";
 
 class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
             total: 0,
+            showModal: false
         }
         // calculates the total (if the price is listed)
         // won't work until data is passed as a prop
@@ -16,6 +18,10 @@ class Cart extends Component {
                 this.state.total += price;
             }
         });
+    }
+
+    handleCloseModal = () => {
+        this.setState({ showModal: false });
     }
 
     render() {
@@ -30,6 +36,12 @@ class Cart extends Component {
 
         return (
             <div className="Container blackBorder cart">
+                <CheckoutModal
+                    checkout={this.props.checkout}
+                    show={this.state.showModal}
+                    close={this.handleCloseModal}
+                >
+                </CheckoutModal>
                 <h3 className="centerText">
                     Cart
                 </h3>
@@ -51,8 +63,12 @@ class Cart extends Component {
                     {this.props.items.length !== 0 && <p>Total: ${total}</p>}
                     <Button
                         onClick={() => {
-                            this.props.checkout()
-                            window.alert("Congratulations!")
+                            if (this.props.items.length !== 0) {
+                                this.setState({ showModal: true })
+                            }
+                            else {
+                                window.alert("Cart is empty.")
+                            }
                         }}
                         variant="primary"
                     >
