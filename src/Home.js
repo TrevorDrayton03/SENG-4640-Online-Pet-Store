@@ -108,9 +108,9 @@ class Home extends Component {
                         {this.state.petTypes && this.state.petTypes.map((type) => {
                             return (
                                 <div className="col">
-                                    <a key={type} href="#" onClick={() => this.handleIconClick(type)}>
+                                    {/* <a key={type} href="#" onClick={() => this.handleIconClick(type)}>
                                         <img src={require("./images/" + type + ".jpg")}></img>
-                                    </a>
+                                    </a> */}
                                 </div>
                             )
                         })}
