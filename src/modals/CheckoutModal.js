@@ -26,7 +26,7 @@ class CheckoutModal extends Component {
         return (
             <Modal show={this.props.show} onHide={this.props.close}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Checkout Cart</Modal.Title>
+                    <Modal.Title>Cart Checkout</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form
