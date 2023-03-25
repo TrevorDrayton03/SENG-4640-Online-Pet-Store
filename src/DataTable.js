@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import PetModal from "./modals/PetModal";
+import SuppliesModal from "./modals/SuppliesModal";
 
 // DataTable displays database data for the admin and offers options to update, delete, or add data.
-// DataTable utilizes PetModal to update objects in MongoDB.
+// DataTable utilizes Modals to update objects in MongoDB.
 
 class DataTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             tableData: this.props.tableData,
-            showPetModal: false,
+            showModal: false,
             showSuppliesModal: false,
             modalData: null
         };
 
         this.handleUpdate = this.handleUpdate.bind(this);
-        this.handleClosePetModal = this.handleClosePetModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
 
     }
     // required because tableData is asynchronous information that is retreived after the render
@@ -27,14 +28,15 @@ class DataTable extends Component {
     }
 
     handleUpdate = (data) => {
-        this.setState({ showPetModal: true, modalData: data });
+        this.setState({ showModal: true, modalData: data });
     }
 
-    handleClosePetModal = () => {
-        this.setState({ showPetModal: false, modalData: null });
+    handleCloseModal = () => {
+        this.setState({ showModal: false, modalData: null });
     }
 
     render() {
+        let type = this.props.type;
         let filteredData = null;
         // filters tableData with search string
         if (this.state.tableData) {
@@ -42,11 +44,12 @@ class DataTable extends Component {
                 const searchRegex = new RegExp(this.props.search, 'i');
                 return (
                     searchRegex.test(data.name) ||
-                    searchRegex.test(data.age) ||
+                    searchRegex.test(type === "pets" ? data.age : data.weight) ||
                     searchRegex.test(data.type) ||
                     searchRegex.test(data.breed) ||
-                    searchRegex.test(data.description) ||
+                    searchRegex.test(type === "pets" ? data.breed : data.dimension) ||
                     searchRegex.test(data.url) ||
+                    searchRegex.test(data.description) ||
                     searchRegex.test(data.price)
                 );
             });
@@ -58,9 +61,9 @@ class DataTable extends Component {
                     <thead>
                         <tr>
                             <th className="width7">Name</th>
-                            <th className="width7">Age</th>
+                            <th className="width7">{type === "pets" ? "Age" : "Weight"}</th>
                             <th className="width7">Type</th>
-                            <th className="width7">Breed</th>
+                            <th className="width7">{type === "pets" ? "Breed" : "Dimension"}</th>
                             <th>Description</th>
                             <th>Image URL</th>
                             <th className="width7">Price</th>
@@ -74,9 +77,9 @@ class DataTable extends Component {
                                 return (
                                     <tr key={data && data._id}>
                                         <td className="width7">{data.name}</td>
-                                        <td className="width7">{data.age}</td>
+                                        <td className="width7">{type === "pets" ? data.age : data.weight}</td>
                                         <td className="width10">{data.type}</td>
-                                        <td className="width10">{data.breed}</td>
+                                        <td className="width10">{type === "pets" ? data.breed : data.dimension}</td>
                                         <td>{data.description}</td>
                                         <td>{data.url}</td>
                                         <td className="width7">{data.price}</td>
@@ -96,9 +99,9 @@ class DataTable extends Component {
                                 return (
                                     <tr key={data && data._id}>
                                         <td className="width7">{data.name}</td>
-                                        <td className="width7">{data.age}</td>
+                                        <td className="width7">{type === "pets" ? data.age : data.weight}</td>
                                         <td className="width10">{data.type}</td>
-                                        <td className="width10">{data.breed}</td>
+                                        <td className="width10">{type === "pets" ? data.breed : data.dimension}</td>
                                         <td>{data.description}</td>
                                         <td>{data.url}</td>
                                         <td className="width7">{data.price}</td>
@@ -116,14 +119,26 @@ class DataTable extends Component {
                         }
                     </tbody>
                 </table>
-                <PetModal
-                    handleClosePetModal={this.handleClosePetModal}
-                    update={this.props.update}
+                {this.props.type === "pets" ? <PetModal
+                    handleCloseModal={this.handleCloseModal}
+                    save={null}
+                    show={this.state.showModal}
                     pet={this.state.modalData}
-                    show={this.state.showPetModal}
                     job="update"
+                    update={this.props.update}
                 >
                 </PetModal>
+                    :
+                    <SuppliesModal
+                        handleCloseModal={this.handleCloseModal}
+                        save={null}
+                        show={this.state.showModal}
+                        supply={this.state.modalData}
+                        job="update"
+                        update={this.props.update}
+                    >
+                    </SuppliesModal>
+                }
             </div>
         )
     }

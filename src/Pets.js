@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PetData from "./PetData";
+import Data from "./Data";
 
 class Pets extends Component {
   constructor(props) {
@@ -35,16 +35,14 @@ class Pets extends Component {
     // this is how this component knows what to display when clicking on the pet icons or carousel in Home
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const type = params.get("type");
-    const id = params.get("id");
-    console.log(id);
+    const type = params.get('type');
+    const id = params.get('id');
     // prevent the code from continueing until petType is set
     while (!this.state.petType) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     if (id) {
-      let pet = this.state.petType.find((pets) => pets._id === id);
-      console.log(pet);
+      let pet = this.state.petType.find(pets => pets._id === id)
       this.setState({ goodAnimal: pet, chosen: true });
     } else if (type && !id) {
       this.setState({ value: type });
@@ -92,21 +90,17 @@ class Pets extends Component {
       </div>;
     } else if (this.state.petType) {
       let allPets = this.state.petType;
-      let arra = this.selectOptions(); // this is an array of distinct pet types
-      let good = this.handleDisplay(); // these are indexes of pets
-      console.log(arra);
-      console.log(good);
-      console.log(this.state.goodAnimal);
+      let arra = this.selectOptions(); // this is an array of distinct pet types 
+      let good = this.handleDisplay(); // these are indexes of pets 
 
       if (this.state.chosen === true) {
-        return (
-          <PetData
-            goodPet={this.state.goodAnimal}
-            addToCart={this.props.addToCart}
-            handleChosen={this.handleToggleChosen.bind(this)}
-          />
-        );
-      } else {
+        return <Data
+          goodPet={this.state.goodAnimal}
+          addToCart={this.props.addToCart}
+          handleChosen={this.handleToggleChosen.bind(this)}
+        />;
+      }
+      else {
         return (
           <div className="large">
             <div className="Pets">

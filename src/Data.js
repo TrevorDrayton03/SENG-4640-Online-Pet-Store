@@ -1,12 +1,6 @@
 import React, { Component } from "react";
 
-class PetData extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   goodPet: this.props.goodPet,
-    // };
-  }
+class Data extends Component {
 
   handleDisp(e) {
     if (this.props.goodPet != undefined) {
@@ -79,4 +73,4 @@ class PetData extends Component {
     return <div>{this.handleDisp()}</div>;
   }
 }
-export default PetData;
+export default Data;

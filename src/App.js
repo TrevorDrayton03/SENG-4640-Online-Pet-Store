@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar.js';
+import NavigationBar from './NavigationBar.js';
 import Home from './Home.js';
 import Pets from './Pets.js';
 import Admin from './Admin.js';
@@ -19,7 +19,25 @@ class App extends Component {
       admin: false,
       allPets: {},
       cartItems: [],
-      carouselData: null
+      // carouselData: null
+      carouselData: [{
+        _id: 1,
+        name: 'Fluffy',
+        breed: 'Persian',
+        url: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'
+      },
+      {
+        _id: 2,
+        name: 'Buddy',
+        breed: 'Golden Retriever',
+        url: 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg'
+      },
+      {
+        _id: 3,
+        name: 'Lola',
+        breed: 'Siamese',
+        url: 'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg'
+      }]
     };
   }
 
@@ -33,6 +51,16 @@ class App extends Component {
       const pets = await response.json();
       this.setState({
         allPets: pets,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/api/suppliesData');
+      const supplies = await response.json();
+      this.setState({
+        allSupplies: supplies,
       });
     } catch (error) {
       console.error(error);
@@ -63,6 +91,20 @@ class App extends Component {
     this.setState({ cartItems: updatedCart });
   }
 
+  async handleCheckoutCart() {
+    const keys = this.state.cartItems.map((obj => obj._id));
+    await fetch('http://localhost:3000/api/checkout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(keys)
+    })
+      .then(response => response.json())
+      .catch(error => console.log(error))
+    this.setState({ cartItems: [] });
+  }
+
   handleLinkClick(route) {
     this.setState({ route });
     window.history.pushState(null, null, route);
@@ -83,12 +125,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar linkClick={this.handleLinkClick.bind(this)}></Navbar>
+        <NavigationBar linkClick={this.handleLinkClick.bind(this)}></NavigationBar>
+        <div className="spacer"></div>
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
-        {this.state.route === '/petsupplies' && <PetSupplies addToCart={this.handleAddToCart.bind(this)}/>}
+        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} checkout={this.handleCheckoutCart.bind(this)} />}
+        {this.state.route === '/petsupplies' && <PetSupplies addToCart={this.handleAddToCart.bind(this)} />}
       </div>
     );
   }

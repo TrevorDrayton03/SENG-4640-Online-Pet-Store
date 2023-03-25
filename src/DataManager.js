@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import DataTable from "./DataTable";
 import Form from 'react-bootstrap/Form';
 import PetModal from "./modals/PetModal";
+import SuppliesModal from "./modals/SuppliesModal";
 
 
 // DataManager is the parent component to DataTable.
 // DataManager has three states: type, search, and fetchedData.
 // Datamanager manages the data which the DataTable displays.
-// Datamanager utilizes PetModal for saving new objects to MongoDB.
+// Datamanager utilizes Modals for saving new objects to MongoDB.
 
 class DataManager extends Component {
     constructor(props) {
@@ -15,24 +16,25 @@ class DataManager extends Component {
         this.state = {
             search: '',
             fetchedData: null,
-            showPetModal: false
+            showModal: false,
+            type: "pets"
         };
         this.handleTypeChange = this.handleTypeChange.bind(this);
         this.handleUpdate = this.handleUpdate.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.handleSave = this.handleSave.bind(this);
-        this.handleClosePetModal = this.handleClosePetModal.bind(this);
-        this.handleOpenPetModal = this.handleOpenPetModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
 
     }
 
-    handleOpenPetModal = () => {
-        this.setState({ showPetModal: true });
+    handleOpenModal = () => {
+        this.setState({ showModal: true });
     }
 
-    handleClosePetModal = () => {
-        this.setState({ showPetModal: false });
+    handleCloseModal = () => {
+        this.setState({ showModal: false });
     }
 
     handleSearch = (e) => {
@@ -42,6 +44,7 @@ class DataManager extends Component {
     // fetches pets or supplies data based on the Form.Select selection
     // is called onChange
     handleTypeChange = async (e) => {
+        this.setState({ type: e.target.value })
         if (e.target.value === "pets") {
             try {
                 const response = await fetch('http://localhost:3000/api/petData');
@@ -54,9 +57,15 @@ class DataManager extends Component {
             }
         }
         else if (e.target.value === "supplies") {
-            this.setState({
-                fetchedData: null
-            });
+            try {
+                const response = await fetch('http://localhost:3000/api/suppliesData');
+                const supplies = await response.json();
+                this.setState({
+                    fetchedData: supplies
+                });
+            } catch (error) {
+                console.error(error);
+            }
         }
     }
 
@@ -82,14 +91,26 @@ class DataManager extends Component {
     handleDelete = async (key) => {
         const confirmDelete = window.confirm("Are you sure you want to delete this item?");
         if (confirmDelete) {
-            try {
-                await fetch(`http://localhost:3000/api/delete?key=${key}`);
-                // update the state to remove the deleted item
-                // filter creates a shallow copy of the array and filters what does not pass the conditional statement
-                const updatedData = this.state.fetchedData.filter(data => data._id !== key);
-                this.setState({ fetchedData: updatedData });
-            } catch (error) {
-                console.error(error);
+            if (this.state.type === "pets")
+                try {
+                    await fetch(`http://localhost:3000/api/deletePet?key=${key}`);
+                    // update the state to remove the deleted item
+                    // filter creates a shallow copy of the array and filters what does not pass the conditional statement
+                    const updatedData = this.state.fetchedData.filter(data => data._id !== key);
+                    this.setState({ fetchedData: updatedData });
+                } catch (error) {
+                    console.error(error);
+                }
+            else if (this.state.type === "supplies") {
+                try {
+                    await fetch(`http://localhost:3000/api/deleteSupply?key=${key}`);
+                    // update the state to remove the deleted item
+                    // filter creates a shallow copy of the array and filters what does not pass the conditional statement
+                    const updatedData = this.state.fetchedData.filter(data => data._id !== key);
+                    this.setState({ fetchedData: updatedData });
+                } catch (error) {
+                    console.error(error);
+                }
             }
         }
     }
@@ -110,39 +131,54 @@ class DataManager extends Component {
 
     render() {
         return (
-            <div className="Container blackBorder row xLarge">
-                <div className="centerText blackBorder">
-                    <h2>Database Manager </h2>
-                </div>
-                <div className="col medPad" >
-                    <div className="row">
-                        <div className="col-4 smallPad">
-                            <Form.Select onChange={this.handleTypeChange}>
-                                <option value="pets">Pets</option>
-                                <option value="supplies">Supplies</option>
-                            </Form.Select>
+            <div className="maxvp flexCenter whitebg">
+                <div className="xLarge">
+                    <div className="Container row">
+                        <div className="centerText ">
+                            <h1>Database Manager </h1>
                         </div>
-                        <button onClick={this.handleOpenPetModal} type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
-                        <input onChange={this.handleSearch} type="search" className="smallPad flex" id="search" placeholder="Search"></input>
+                        <div className="col medPad" >
+                            <div className="row">
+                                <div className="col-4 smallPad">
+                                    <Form.Select onChange={this.handleTypeChange}>
+                                        <option value="pets">Pets</option>
+                                        <option value="supplies">Supplies</option>
+                                    </Form.Select>
+                                </div>
+                                <button onClick={this.handleOpenModal} type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
+                                <input onChange={this.handleSearch} type="search" className="smallPad flex" id="search" placeholder="Search"></input>
 
+                            </div>
+                        </div>
+                        <div>
+                            <DataTable
+                                tableData={this.state.fetchedData}
+                                search={this.state.search}
+                                update={this.handleUpdate}
+                                delete={this.handleDelete}
+                                type={this.state.type}
+                            />
+                        </div>
+                        {this.state.type === "pets" ? <PetModal
+                            handleCloseModal={this.handleCloseModal}
+                            save={this.handleSave}
+                            show={this.state.showModal}
+                            pet={null}
+                            job="save"
+                        >
+                        </PetModal>
+                            :
+                            <SuppliesModal
+                                handleCloseModal={this.handleCloseModal}
+                                save={this.handleSave}
+                                show={this.state.showModal}
+                                supply={null}
+                                job="save"
+                            >
+                            </SuppliesModal>
+                        }
                     </div>
                 </div>
-                <div className="blackBorder">
-                    <DataTable
-                        tableData={this.state.fetchedData}
-                        search={this.state.search}
-                        update={this.handleUpdate}
-                        delete={this.handleDelete}
-                    />
-                </div>
-                <PetModal
-                    handleClosePetModal={this.handleClosePetModal}
-                    save={this.handleSave}
-                    show={this.state.showPetModal}
-                    pet={null}
-                    job="save"
-                >
-                </PetModal>
             </div>
         )
     }

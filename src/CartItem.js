@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
 class CartItem extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return (
@@ -26,7 +23,7 @@ class CartItem extends Component {
                 <div className="col" style={{ padding: 0, margin: 0 }}>
                     <Button
                         onClick={() => this.props.removeFromCart(this.props.id)}
-                        variant="outline-danger"
+                        variant="danger"
                     >
                         Remove
                     </Button>

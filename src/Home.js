@@ -7,37 +7,48 @@ class Home extends Component {
         this.state = {
             index: 0,
             petTypes: null,
+            supplyTypes: null
         };
     }
     // used to send the user to the pets page with the type they want to see
-    handleIconClick = (type) => {
+    handlePetIconClick = (type) => {
         window.location.href = '/pets?type=' + type;
     };
+
+    handleSupplyIconClick = (type) => {
+        window.location.href = '/petsupplies?type=' + type;
+    };
+
     handleCarouselClick = (id) => {
-        console.log(id, " id in handle click")
         window.location.href = '/pets?id=' + id;
-        console.log(window.location.href, "  window.location.href")
     };
     // carousel index handler
     handleSelect = (selectedIndex, e) => {
         this.setState({ index: selectedIndex });
     };
 
-    // ES6 style fetch for getting distinct pet types
+    // ES6 style fetch for getting distinct types
     async componentDidMount() {
-        await fetch('http://localhost:3000/api/types')
+        await fetch('http://localhost:3000/api/petTypes')
             .then(response => response.json())
             .then(data => {
                 this.setState({ petTypes: data });
+            })
+            .catch(error => console.log(error))
+
+        await fetch('http://localhost:3000/api/supplyTypes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ supplyTypes: data });
             })
             .catch(error => console.log(error))
     }
 
     render() {
         return (
-            <div className="Container large">
+            <div className="Container maxvp">
                 <div className="large">
-                    <h3 className="center centerText">About Us</h3>
+                    <h1 className="center centerText">About Us</h1>
                     <p>
                         Welcome to Pet Universe, where we believe that every pet is a star in its own universe! Our mission is to provide the best pet products and supplies that will help your furry friends shine like the brightest stars in the galaxy.
                     </p>
@@ -50,76 +61,90 @@ class Home extends Component {
                     <p>
                         So join us on a journey to the Pet Universe, where every pet is a star and the possibilities are endless!
                     </p>
-                    <hr></hr>
                 </div>
-                <div className="centerText">
-                    <h3 className="center centerText">Some Good Boys and Girls</h3>
-                    {this.props.pets && this.props.pets.length > 0 &&
-                        <Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
-                            <Carousel.Item>
-                                <a key={this.props.pets[0]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[0]._id)}>
-                                    <img
-                                        className="carouselImg"
-                                        alt="First Slide"
-                                        src={this.props.pets[0].url}
-                                    />
-                                </a>
-                                <Carousel.Caption className="blackTextBorder">
-                                    <h3>{this.props.pets[0].name}</h3>
-                                    <p>{this.props.pets[0].breed}</p>
-                                </Carousel.Caption>
+                <div className="maxvp flexCenter whitebg">
+                    <div className="centerText large">
+                        <h1 className="center centerText whitebg">Featured Pets</h1>
+                        {this.props.pets && this.props.pets.length > 0 &&
+                            <Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
+                                <Carousel.Item>
+                                    <a key={this.props.pets[0]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[0]._id)}>
+                                        <img
+                                            className="carouselImg"
+                                            alt="First Slide"
+                                            src={this.props.pets[0].url}
+                                        />
+                                    </a>
+                                    <Carousel.Caption className="blackTextBorder">
+                                        <h1>{this.props.pets[0].name}</h1>
+                                        <p>{this.props.pets[0].breed}</p>
+                                    </Carousel.Caption>
 
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <a key={this.props.pets[1]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[1]._id)}>
-                                    <img
-                                        className="carouselImg"
-                                        alt="Second Slide"
-                                        src={this.props.pets[1].url}
-                                    />
-                                </a >
-                                <Carousel.Caption className="blackTextBorder">
-                                    <h3>{this.props.pets[1].name}</h3>
-                                    <p>{this.props.pets[1].breed}</p>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-                            <Carousel.Item>
-                                <a key={this.props.pets[2]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[2]._id)}>
-                                    <img
-                                        className="carouselImg"
-                                        alt="Second Slide"
-                                        src={this.props.pets[2].url}
-                                    />
-                                </a>
-                                <Carousel.Caption className="blackTextBorder">
-                                    <h3>{this.props.pets[2].name}</h3>
-                                    <p>{this.props.pets[2].breed}</p>
-                                </Carousel.Caption>
-                            </Carousel.Item>
-                        </Carousel>
-                    }
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <a key={this.props.pets[1]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[1]._id)}>
+                                        <img
+                                            className="carouselImg"
+                                            alt="Second Slide"
+                                            src={this.props.pets[1].url}
+                                        />
+                                    </a >
+                                    <Carousel.Caption className="blackTextBorder">
+                                        <h1>{this.props.pets[1].name}</h1>
+                                        <p>{this.props.pets[1].breed}</p>
+                                    </Carousel.Caption>
+                                </Carousel.Item>
+                                <Carousel.Item>
+                                    <a key={this.props.pets[2]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[2]._id)}>
+                                        <img
+                                            className="carouselImg"
+                                            alt="Second Slide"
+                                            src={this.props.pets[2].url}
+                                        />
+                                    </a>
+                                    <Carousel.Caption className="blackTextBorder">
+                                        <h1>{this.props.pets[2].name}</h1>
+                                        <p>{this.props.pets[2].breed}</p>
+                                    </Carousel.Caption>
+                                </Carousel.Item>
+                            </Carousel>
+                        }
+                    </div>
                 </div>
                 <div>
-                    <hr className="large"></hr>
                 </div>
-                <div className="large">
-                    <h3 className="centerText">Pets</h3>
-                    <div className="row">
+                <div className="large" >
+                    <h1 className="centerText">Shop By Pet</h1>
+                    <div className="row centerText" >
                         {this.state.petTypes && this.state.petTypes.map((type) => {
                             return (
-                                <div className="col">
-                                    {/* <a key={type} href="#" onClick={() => this.handleIconClick(type)}>
+                                <div className="col centerText" >
+                                    <a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
                                         <img src={require("./images/" + type + ".jpg")}></img>
-                                    </a> */}
+                                    </a>
                                 </div>
                             )
                         })}
-                        <hr></hr>
+
                     </div>
                 </div>
-                <div className="large">
-                    <h3 className="centerText">Supplies</h3>
-                    <hr></hr>
+                <div className="maxvp flexCenter whitebg">
+
+                    <div className="large">
+                        <h1 className="centerText">Shop By Product</h1>
+                        <div className="row centerText" >
+                            {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
+                                return (
+                                    <div className="col centerText">
+                                        <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
+                                            <img src={require("./images/" + type + ".jpg")}></img>
+                                        </a>
+                                    </div>
+                                )
+                            })}
+
+                        </div>
+                    </div>
                 </div>
             </div>
         );

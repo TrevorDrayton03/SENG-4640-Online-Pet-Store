@@ -9,6 +9,9 @@ var petsuppliesSchema = new Schema({
     name: { type: String },
     url: { type: String },
     price: { type: String },
+    description: { type: String },
+    dimension: { type: String },
+    weight: { type: String },
 });
 
 module.exports = mongoose.model("PetSupplies", petsuppliesSchema);
