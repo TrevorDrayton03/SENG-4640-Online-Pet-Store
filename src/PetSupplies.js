@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PetSuppliesData from "./PetSuppliesData";
+import PetData from "./PetData";
 
 class PetSupplies extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class PetSupplies extends Component {
       value: "Collar",
       chosen: false,
       supply: null,
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -23,7 +23,7 @@ class PetSupplies extends Component {
   // this has to be done instead of passing props down from App if we are going to make supplyWanted and supplyToBeBought types clickable from Home
   async componentDidMount() {
     try {
-      const response = await fetch('http://localhost:3000/api/PetSupplies');
+      const response = await fetch("http://localhost:3000/api/PetSupplies");
       const petsupplies = await response.json();
       this.setState({
         supplyType: petsupplies,
@@ -35,22 +35,23 @@ class PetSupplies extends Component {
     // this is how this component knows what to display when clicking on the supplyToBeBought icons or carousel in Home
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const type = params.get('type');
-    const id = params.get('id');
+    const type = params.get("type");
+    const id = params.get("id");
     console.log(id);
     // prevent the code from continueing until supplyType is set
     while (!this.state.supplyType) {
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
     }
     if (id) {
-      let supplyToBeBought = this.state.supplyType.find(petsupplies => petsupplies._id === id)
-      console.log(supplyToBeBought)
+      let supplyToBeBought = this.state.supplyType.find(
+        (petsupplies) => petsupplies._id === id
+      );
+      console.log(supplyToBeBought);
       this.setState({ supply: supplyToBeBought, chosen: true });
-    }
-    else if (type && !id) {
+    } else if (type && !id) {
       this.setState({ value: type });
     }
-    this.setState({ isLoading: false })
+    this.setState({ isLoading: false });
   }
 
   selectOptions() {
@@ -77,35 +78,37 @@ class PetSupplies extends Component {
   handleDisplay = () => {
     //meant to create a table that displays to page
     let allSup = this.state.supplyType;
-    const good = [];
+    const item = [];
     for (let anNum = 0; anNum < allSup.length; anNum++) {
       if (this.state.value == allSup[anNum].type) {
-        good.push(anNum);
+        item.push(anNum);
       }
     }
-    return good;
+    return item;
   };
 
   render() {
     if (this.state.isLoading) {
-      <div><p>Loading...</p></div>
-    }
-    else if (this.state.supplyType) {
+      <div>
+        <p>Loading...</p>
+      </div>;
+    } else if (this.state.supplyType) {
       let allSup = this.state.supplyType;
-      let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types 
-      let good = this.handleDisplay(); // these are indexes of supplyWanted 
-      console.log(arra)
-      console.log(good)
+      let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
+      let item = this.handleDisplay(); // these are indexes of supplyWanted
+      console.log(arra);
+      console.log(item);
       console.log(this.state.supply);
 
       if (this.state.chosen === true) {
-        return <PetData
-          goodPet={this.state.supply}
-          addToCart={this.props.addToCart}
-          handleChosen={this.handleToggleChosen.bind(this)}
-        />;
-      }
-      else {
+        return (
+          <PetData
+            Product={this.state.supply}
+            addToCart={this.props.addToCart}
+            handleChosen={this.handleToggleChosen.bind(this)}
+          />
+        );
+      } else {
         return (
           <div className="large">
             <div className="Pets">
@@ -123,7 +126,7 @@ class PetSupplies extends Component {
             </div>
             <div id="petDis">
               {/* for each supplyToBeBought index value, use it to get the supplyToBeBought data we want from all the supplyWanted */}
-              {good.map((type) => {
+              {item.map((type) => {
                 return (
                   <table>
                     {" "}
@@ -131,29 +134,39 @@ class PetSupplies extends Component {
                       {" "}
                       <th>
                         {" "}
-                        <h1>Their name is {allSup[type].name} </h1>{" "}
+                        <h1>This is a {allSup[type].name} </h1>{" "}
                       </th>
                     </tr>
                     <tr>
                       <td>
                         {" "}
+                        <button value={allPets[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: allPets[type] })}>
                         <img
                           className="itemImg"
                           id={allSup[type]._id}
                           name={allSup[type].name}
                           alt={allSup[type].breed}
                           src={allSup[type].url}
+                          style={{ display: "block", height: "100%", width:"100%" }}
                         ></img>
+                        </button>
                       </td>
                       <td>
-                        <h1>They cost $ {allSup[type].price}</h1>
+                        <h1>It cost $ {allSup[type].price}</h1>
                       </td>
                     </tr>
-                    <tr>
-                      <button value={allSup[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, supply: allSup[type] })}>
-                        Click here to learn more about them
+                    {/* <tr>
+                      <button
+                        value={allSup[type]._id}
+                        onClick={() =>
+                          this.setState({
+                            chosen: !this.state.chosen,
+                            supply: allSup[type],
+                          })
+                        }>
+                        Click here to learn more about this item
                       </button>
-                    </tr>
+                    </tr> */}
                   </table>
                 );
               })}
