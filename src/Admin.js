@@ -61,23 +61,29 @@ class Admin extends Component {
             return (
                 <div className="Container">
                     <form onSubmit={this.handleFormSubmit}>
-                        <label>
-                            <p><strong>Username</strong></p>
-                            <input
-                                type="text"
-                                onChange={this.handleUsernameChange}
-                                value={this.state.username}
-                            />
-                        </label>
-                        <label>
-                            <p><strong>Password</strong></p>
-                            <input
-                                type="password"
-                                onChange={this.handlePasswordChange}
-                                value={this.state.password}
-                            />
-                        </label>
                         <div>
+                            <label>
+                                <p><strong>Username</strong></p>
+                                <input
+                                    type="text"
+                                    onChange={this.handleUsernameChange}
+                                    value={this.state.username}
+                                    className='centerText'
+                                />
+                            </label>
+                        </div>
+                        <div>
+                            <label>
+                                <p><strong>Password</strong></p>
+                                <input
+                                    type="password"
+                                    onChange={this.handlePasswordChange}
+                                    value={this.state.password}
+                                    className='centerText'
+                                />
+                            </label>
+                        </div>
+                        <div className='centerText'>
                             <button
                                 className="btn btn-secondary"
                                 type="submit">Submit</button>

@@ -35,48 +35,52 @@ class Cart extends Component {
         })
 
         return (
-            <div className="Container blackBorder cart">
-                <CheckoutModal
-                    checkout={this.props.checkout}
-                    show={this.state.showModal}
-                    close={this.handleCloseModal}
-                >
-                </CheckoutModal>
-                <h1 className="centerText">
-                    Cart
-                </h1>
-                <div style={{ justifyContent: "space-evenly" }}>
-                    {this.props.items.length === 0 && <p>Cart is empty.</p>}
-                    {this.props.items.length !== 0 && this.props.items.map((item) => (
-                        <CartItem
-                            id={item._id}
-                            name={item.name}
-                            url={item.url}
-                            price={item.price}
-                            removeFromCart={this.props.removeFromCart}
-                        >
-                        </CartItem>
-                    ))
-                    }
-                </div>
-                <div className='row' style={{ alignItems: "center", justifyContent: "center" }}>
-                    <div className='col text-center'>
-                        {this.props.items.length !== 0 && <p>Total: ${total}</p>}
+            <div className="Container whitebg maxvp">
+                <div className="cart Container">
+                    <CheckoutModal
+                        checkout={this.props.checkout}
+                        show={this.state.showModal}
+                        close={this.handleCloseModal}
+                    >
+                    </CheckoutModal>
+                    <h1 className="centerText">
+                        Cart
+                    </h1>
+                    <div style={{ justifyContent: "space-evenly", width:'100%' }}>
+                        {this.props.items.length === 0 && <p>Cart is empty.</p>}
+                        {this.props.items.length !== 0 && this.props.items.map((item) => (
+                            <CartItem
+                                id={item._id}
+                                name={item.name}
+                                url={item.url}
+                                price={item.price}
+                                removeFromCart={this.props.removeFromCart}
+                            >
+                            </CartItem>
+                        ))
+                        }
                     </div>
-                    <div className='col text-center'>
-                        <Button
-                            onClick={() => {
-                                if (this.props.items.length !== 0) {
-                                    this.setState({ showModal: true })
-                                }
-                                else {
-                                    window.alert("Cart is empty.")
-                                }
-                            }}
-                            variant="primary"
-                        >
-                            Checkout
-                        </Button>
+                    <div className='row' style={{ alignItems: "baseline" }}>
+                        {this.props.items.length !== 0 &&
+                            <div className='col' style={{ display: "flex", alignItems: "center" }}>
+                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${total}</p>
+                            </div>
+                        }
+                        <div className='col text-center' style={{ display: "flex", alignItems: "center" }}>
+                            <Button
+                                onClick={() => {
+                                    if (this.props.items.length !== 0) {
+                                        this.setState({ showModal: true })
+                                    }
+                                    else {
+                                        window.alert("Cart is empty.")
+                                    }
+                                }}
+                                variant="primary"
+                            >
+                                Checkout
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>
