@@ -137,6 +137,15 @@ class PetSupplies extends Component {
                     <tr>
                       <td>
                         {" "}
+                        <button
+                          value={allSup[type]._id}
+                          onClick={() =>
+                            this.setState({
+                              chosen: !this.state.chosen,
+                              supply: allSup[type],
+                            })
+                          }
+                        >
                         <img
                           className="itemImg"
                           id={allSup[type]._id}
@@ -144,16 +153,17 @@ class PetSupplies extends Component {
                           alt={allSup[type].breed}
                           src={allSup[type].url}
                         ></img>
+                        </button>
                       </td>
                       <td>
                         <h1>${allSup[type].price}</h1>
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <button value={allSup[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, supply: allSup[type] })}>
                         Click here to learn more about them
                       </button>
-                    </tr>
+                    </tr> */}
                   </table>
                 );
               })}
