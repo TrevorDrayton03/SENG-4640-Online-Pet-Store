@@ -25,6 +25,7 @@ class SuppliesModal extends Component {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        key: this.props.supply._id,
                         name: e.target.name.value,
                         type: e.target.type.value,
                         dimension: e.target.dimension.value,
@@ -97,10 +98,10 @@ class SuppliesModal extends Component {
                                 />
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>Age</Form.Label>
+                                <Form.Label>Weight</Form.Label>
                                 <Form.Control
-                                    name="age"
-                                    defaultValue={this.props.supply ? this.props.supply.age : ''}
+                                    name="weight"
+                                    defaultValue={this.props.supply ? this.props.supply.weight : ''}
                                     type="text"
                                 />
                             </Form.Group>
@@ -115,10 +116,10 @@ class SuppliesModal extends Component {
                                 {/* <Form.Control.Feedback type="invalid">Type is required!</Form.Control.Feedback> */}
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>Breed</Form.Label>
+                                <Form.Label>Dimension</Form.Label>
                                 <Form.Control
-                                    name="breed"
-                                    defaultValue={this.props.supply ? this.props.supply.breed : ''}
+                                    name="dimension"
+                                    defaultValue={this.props.supply ? this.props.supply.dimension : ''}
                                     type="text"
                                 />
                             </Form.Group>

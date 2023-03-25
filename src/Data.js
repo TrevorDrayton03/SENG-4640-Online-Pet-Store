@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 class Data extends Component {
+
   handleDisp(e) {
     let pet = this.props.goodPet;
     return (
