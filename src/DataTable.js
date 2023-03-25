@@ -49,6 +49,7 @@ class DataTable extends Component {
                     searchRegex.test(data.breed) ||
                     searchRegex.test(type === "pets" ? data.breed : data.dimension) ||
                     searchRegex.test(data.url) ||
+                    searchRegex.test(data.description) ||
                     searchRegex.test(data.price)
                 );
             });

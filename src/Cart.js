@@ -42,9 +42,9 @@ class Cart extends Component {
                     close={this.handleCloseModal}
                 >
                 </CheckoutModal>
-                <h3 className="centerText">
+                <h1 className="centerText">
                     Cart
-                </h3>
+                </h1>
                 <div style={{ justifyContent: "space-evenly" }}>
                     {this.props.items.length === 0 && <p>Cart is empty.</p>}
                     {this.props.items.length !== 0 && this.props.items.map((item) => (
@@ -59,21 +59,25 @@ class Cart extends Component {
                     ))
                     }
                 </div>
-                <div>
-                    {this.props.items.length !== 0 && <p>Total: ${total}</p>}
-                    <Button
-                        onClick={() => {
-                            if (this.props.items.length !== 0) {
-                                this.setState({ showModal: true })
-                            }
-                            else {
-                                window.alert("Cart is empty.")
-                            }
-                        }}
-                        variant="primary"
-                    >
-                        Checkout
-                    </Button>
+                <div className='row' style={{ alignItems: "center", justifyContent: "center" }}>
+                    <div className='col text-center'>
+                        {this.props.items.length !== 0 && <p>Total: ${total}</p>}
+                    </div>
+                    <div className='col text-center'>
+                        <Button
+                            onClick={() => {
+                                if (this.props.items.length !== 0) {
+                                    this.setState({ showModal: true })
+                                }
+                                else {
+                                    window.alert("Cart is empty.")
+                                }
+                            }}
+                            variant="primary"
+                        >
+                            Checkout
+                        </Button>
+                    </div>
                 </div>
             </div>
         );
