@@ -64,7 +64,7 @@ class Home extends Component {
                     <hr></hr>
                 </div>
                 <div className="centerText">
-                    <h3 className="center centerText">Some Good Boys and Girls</h3>
+                    <h3 className="center centerText">Featured Pets</h3>
                     {this.props.pets && this.props.pets.length > 0 &&
                         <Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
                             <Carousel.Item>
@@ -114,7 +114,7 @@ class Home extends Component {
                     <hr className="large"></hr>
                 </div>
                 <div className="large" >
-                    <h3 className="centerText">Pets</h3>
+                    <h3 className="centerText">Shop By Pet</h3>
                     <div className="row centerText" >
                         {this.state.petTypes && this.state.petTypes.map((type) => {
                             return (
@@ -129,7 +129,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="large">
-                    <h3 className="centerText">Supplies</h3>
+                    <h3 className="centerText">Shop By Product</h3>
                     <div className="row centerText" >
                         {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
                             return (
