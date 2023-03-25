@@ -113,70 +113,71 @@ class DataManager extends Component {
                 }
             }
         }
+    }
 
     // by default fetch pets data to display
     // componentDidMount gets called once the component has been rendered for the first time (mounted onto the DOM)
     async componentDidMount() {
-            try {
-                const response = await fetch('http://localhost:3000/api/petData');
-                const pets = await response.json();
-                this.setState({
-                    fetchedData: pets
-                });
-            } catch (error) {
-                console.error(error);
-            }
+        try {
+            const response = await fetch('http://localhost:3000/api/petData');
+            const pets = await response.json();
+            this.setState({
+                fetchedData: pets
+            });
+        } catch (error) {
+            console.error(error);
         }
+    }
 
-        render() {
-            return (
-                <div className="Container blackBorder row xLarge">
-                    <div className="centerText blackBorder">
-                        <h2>Database Manager </h2>
-                    </div>
-                    <div className="col medPad" >
-                        <div className="row">
-                            <div className="col-4 smallPad">
-                                <Form.Select onChange={this.handleTypeChange}>
-                                    <option value="pets">Pets</option>
-                                    <option value="supplies">Supplies</option>
-                                </Form.Select>
-                            </div>
-                            <button onClick={this.handleOpenModal} type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
-                            <input onChange={this.handleSearch} type="search" className="smallPad flex" id="search" placeholder="Search"></input>
-
+    render() {
+        return (
+            <div className="Container blackBorder row xLarge">
+                <div className="centerText blackBorder">
+                    <h2>Database Manager </h2>
+                </div>
+                <div className="col medPad" >
+                    <div className="row">
+                        <div className="col-4 smallPad">
+                            <Form.Select onChange={this.handleTypeChange}>
+                                <option value="pets">Pets</option>
+                                <option value="supplies">Supplies</option>
+                            </Form.Select>
                         </div>
+                        <button onClick={this.handleOpenModal} type="submit" className="col-3 smallPad btn btn-success" style={{ marginRight: 10 }}>Add</button>
+                        <input onChange={this.handleSearch} type="search" className="smallPad flex" id="search" placeholder="Search"></input>
+
                     </div>
-                    <div className="blackBorder">
-                        <DataTable
-                            tableData={this.state.fetchedData}
-                            search={this.state.search}
-                            update={this.handleUpdate}
-                            delete={this.handleDelete}
-                            type={this.state.type}
-                        />
-                    </div>
-                    {this.state.type === "pets" ? <PetModal
+                </div>
+                <div className="blackBorder">
+                    <DataTable
+                        tableData={this.state.fetchedData}
+                        search={this.state.search}
+                        update={this.handleUpdate}
+                        delete={this.handleDelete}
+                        type={this.state.type}
+                    />
+                </div>
+                {this.state.type === "pets" ? <PetModal
+                    handleCloseModal={this.handleCloseModal}
+                    save={this.handleSave}
+                    show={this.state.showModal}
+                    pet={null}
+                    job="save"
+                >
+                </PetModal>
+                    :
+                    <SuppliesModal
                         handleCloseModal={this.handleCloseModal}
                         save={this.handleSave}
                         show={this.state.showModal}
-                        pet={null}
+                        supply={null}
                         job="save"
                     >
-                    </PetModal>
-                        :
-                        <SuppliesModal
-                            handleCloseModal={this.handleCloseModal}
-                            save={this.handleSave}
-                            show={this.state.showModal}
-                            supply={null}
-                            job="save"
-                        >
-                        </SuppliesModal>
-                    }
-                </div>
-            )
-        }
+                    </SuppliesModal>
+                }
+            </div>
+        )
     }
+}
 
 export default DataManager;

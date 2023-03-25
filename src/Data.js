@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 
 class Data extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   goodPet: this.props.goodPet,
-    // };
-  }
-
   handleDisp(e) {
     let pet = this.props.goodPet;
     return (
