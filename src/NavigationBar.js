@@ -11,7 +11,6 @@ class NavigationBar extends Component {
     render() {
         return (
             <nav className="navbar navbar-expand-lg large navbar-custom">
-                {/* <a className="navbar-brand" href="#"><h1 style={{fontSize:"50px"}}>Pet Universe</h1></a> */}
                 <a className="navbar-brand" href="#" onClick={e => this.handleOnClick(e, "/")}>
                     <div className="col">
                         <img src="./logo192.png" alt="Logo" />

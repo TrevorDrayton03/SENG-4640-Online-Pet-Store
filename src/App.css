@@ -67,7 +67,7 @@ body {
 }
 
 .navbar-nav {
-  font-size: 35px;
+  font-size: 26px;
   width: 100% !important;
   justify-content: space-evenly;
 }
@@ -243,20 +243,14 @@ body {
   flex: 1;
 }
 
-.small {
-  width: 300px;
-}
-
-.medium {
-  width: 500px;
-}
-
 .large {
-  width: 1200px;
+  max-width: 1200px;
+  width: 100% !important;
 }
 
 .xLarge {
-  width: 1500px;
+  max-width: 1500px;
+  width: 100% !important;
 }
 
 .cart {
@@ -323,7 +317,7 @@ body h1 {
 
 h1 {
   font-size: 30px !important;
-  font-weight:900 !important;
+  font-weight: 900 !important;
 
 }
 
