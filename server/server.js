@@ -118,6 +118,7 @@ app.use('/api/checkout', async (req, res) => {
     const keys = req.body;
     for (const key of keys) {
       await PetModel.findByIdAndDelete(key);
+      await SuppliesModel.findByIdAndDelete(key);
     }
     res.status(200).send("checkout success")
   } catch (err) {
