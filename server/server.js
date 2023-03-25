@@ -13,6 +13,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 
 const PetModel = require("../src/schemas/Pet.js");
+const SuppliesModel = require("../src/schemas/PetSupplies.js");
 const AdminModel = require("../src/schemas/Admin.js");
 
 // this middleware always console logs the requests
@@ -36,6 +37,21 @@ app.get('/api/petData', async (req, res) => {
   };
 });
 
+app.get('/api/suppliesData', async (req, res) => {
+  try {
+    const type = req.query.type;
+    let supplies;
+    if (type) {
+      supplies = await SuppliesModel.find({ type: type }); // find supplies of a certain type
+    } else {
+      supplies = await SuppliesModel.find(); // find all supplies
+    }
+    res.send(supplies);
+  } catch (err) {
+    res.status(500).send(err);
+  };
+});
+
 app.use('/api/admin', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -54,9 +70,20 @@ app.use('/api/admin', async (req, res) => {
 });
 
 // get all unique pet types
-app.get('/api/types', async (req, res) => {
+app.get('/api/petTypes', async (req, res) => {
   try {
     const types = await PetModel.distinct('type');
+    res.status(200).json(types);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// get all unique supply types
+app.get('/api/supplyTypes', async (req, res) => {
+  try {
+    const types = await SuppliesModel.distinct('type');
     res.status(200).json(types);
   } catch (err) {
     console.error(err.message);

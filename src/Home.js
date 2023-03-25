@@ -7,12 +7,18 @@ class Home extends Component {
         this.state = {
             index: 0,
             petTypes: null,
+            supplyTypes: null
         };
     }
     // used to send the user to the pets page with the type they want to see
-    handleIconClick = (type) => {
+    handlePetIconClick = (type) => {
         window.location.href = '/pets?type=' + type;
     };
+
+    handleSupplyIconClick = (type) => {
+        window.location.href = '/petsupplies?type=' + type;
+    };
+
     handleCarouselClick = (id) => {
         window.location.href = '/pets?id=' + id;
     };
@@ -21,12 +27,19 @@ class Home extends Component {
         this.setState({ index: selectedIndex });
     };
 
-    // ES6 style fetch for getting distinct pet types
+    // ES6 style fetch for getting distinct types
     async componentDidMount() {
-        await fetch('http://localhost:3000/api/types')
+        await fetch('http://localhost:3000/api/petTypes')
             .then(response => response.json())
             .then(data => {
                 this.setState({ petTypes: data });
+            })
+            .catch(error => console.log(error))
+
+        await fetch('http://localhost:3000/api/supplyTypes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ supplyTypes: data });
             })
             .catch(error => console.log(error))
     }
@@ -100,23 +113,32 @@ class Home extends Component {
                 <div>
                     <hr className="large"></hr>
                 </div>
-                <div className="large">
+                <div className="large" >
                     <h3 className="centerText">Pets</h3>
-                    <div className="row">
+                    <div className="row centerText" >
                         {this.state.petTypes && this.state.petTypes.map((type) => {
                             return (
-                                <div className="col">
-                                    {/* <a key={type} href="#" onClick={() => this.handleIconClick(type)}>
+                                <div className="col centerText" >
+                                    <a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
                                         <img src={require("./images/" + type + ".jpg")}></img>
-                                    </a> */}
+                                    </a>
                                 </div>
                             )
                         })}
                         <hr></hr>
                     </div>
                 </div>
-                <div className="large">
+                <div className="large centerText">
                     <h3 className="centerText">Supplies</h3>
+                    {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
+                        return (
+                            <div className="col centerText">
+                                <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
+                                    <img src={require("./images/" + type + ".jpg")}></img>
+                                </a>
+                            </div>
+                        )
+                    })}
                     <hr></hr>
                 </div>
             </div>

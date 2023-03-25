@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import PetData from "./PetData";
+import Data from "./Data";
 
 class Pets extends Component {
   constructor(props) {
@@ -94,7 +94,7 @@ class Pets extends Component {
       let good = this.handleDisplay(); // these are indexes of pets 
 
       if (this.state.chosen === true) {
-        return <PetData
+        return <Data
           goodPet={this.state.goodAnimal}
           addToCart={this.props.addToCart}
           handleChosen={this.handleToggleChosen.bind(this)}

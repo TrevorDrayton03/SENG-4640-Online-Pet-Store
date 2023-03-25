@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class PetData extends Component {
+class Data extends Component {
   constructor(props) {
     super(props);
     // this.state = {
@@ -73,4 +73,4 @@ class PetData extends Component {
     return <div>{this.handleDisp()}</div>;
   }
 }
-export default PetData;
+export default Data;

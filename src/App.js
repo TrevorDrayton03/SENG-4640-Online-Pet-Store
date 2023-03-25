@@ -4,6 +4,7 @@ import Home from './Home.js';
 import Pets from './Pets.js';
 import Admin from './Admin.js';
 import Cart from './Cart.js';
+import PetSupplies from './PetSupplies.js';
 
 import './App.css';
 
@@ -32,6 +33,16 @@ class App extends Component {
       const pets = await response.json();
       this.setState({
         allPets: pets,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+
+    try {
+      const response = await fetch('http://localhost:3000/api/suppliesData');
+      const supplies = await response.json();
+      this.setState({
+        allSupplies: supplies,
       });
     } catch (error) {
       console.error(error);
@@ -101,7 +112,7 @@ class App extends Component {
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
         {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
-        {this.state.route === '/petsupplies' && <PetsSupplies addToCart={this.handleAddToCart.bind(this)}/>}
+        {this.state.route === '/petsupplies' && <PetSupplies addToCart={this.handleAddToCart.bind(this)} />}
       </div>
     );
   }
