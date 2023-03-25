@@ -111,7 +111,7 @@ class App extends Component {
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} />}
+        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} checkout={this.handleCheckoutCart.bind(this)} />}
         {this.state.route === '/petsupplies' && <PetSupplies addToCart={this.handleAddToCart.bind(this)} />}
       </div>
     );

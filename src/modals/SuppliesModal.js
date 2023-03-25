@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-// PetModal is used to add to the pet collection or update data from the pet collection in our MongoDB.
+// SuppliesModal is used to add to the pet collection or update data from the pet collection in our MongoDB.
 
-class PetModal extends Component {
+class SuppliesModal extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,17 +19,16 @@ class PetModal extends Component {
 
         if (this.props.job === "update") {
             try {
-                const response = await fetch('http://localhost:3000/api/updatePet', {
+                const response = await fetch('http://localhost:3000/api/updateSupply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        key: this.props.pet._id,
                         name: e.target.name.value,
-                        age: e.target.age.value,
                         type: e.target.type.value,
-                        breed: e.target.breed.value,
+                        dimension: e.target.dimension.value,
+                        weight: e.target.weight.value,
                         description: e.target.description.value,
                         url: e.target.url.value,
                         price: e.target.price.value
@@ -47,16 +46,16 @@ class PetModal extends Component {
         }
         else if (this.props.job === "save") {
             try {
-                const response = await fetch('http://localhost:3000/api/savePet', {
+                const response = await fetch('http://localhost:3000/api/saveSupply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
                         name: e.target.name.value,
-                        age: e.target.age.value,
                         type: e.target.type.value,
-                        breed: e.target.breed.value,
+                        dimension: e.target.dimension.value,
+                        weight: e.target.weight.value,
                         description: e.target.description.value,
                         url: e.target.url.value,
                         price: e.target.price.value
@@ -80,7 +79,7 @@ class PetModal extends Component {
             return (
                 <Modal show={this.props.show} onHide={this.props.handleCloseModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Update {this.props.pet ? this.props.pet.name : ''}</Modal.Title>
+                        <Modal.Title>Update {this.props.supply ? this.props.supply.name : ''}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form
@@ -92,7 +91,7 @@ class PetModal extends Component {
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control
                                     name="name"
-                                    defaultValue={this.props.pet ? this.props.pet.name : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.name : ''}
                                     type="text"
                                     required
                                 />
@@ -101,7 +100,7 @@ class PetModal extends Component {
                                 <Form.Label>Age</Form.Label>
                                 <Form.Control
                                     name="age"
-                                    defaultValue={this.props.pet ? this.props.pet.age : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.age : ''}
                                     type="text"
                                 />
                             </Form.Group>
@@ -110,7 +109,7 @@ class PetModal extends Component {
                                 <Form.Control
                                     required
                                     name="type"
-                                    defaultValue={this.props.pet ? this.props.pet.type : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.type : ''}
                                     type="text"
                                 />
                                 {/* <Form.Control.Feedback type="invalid">Type is required!</Form.Control.Feedback> */}
@@ -119,7 +118,7 @@ class PetModal extends Component {
                                 <Form.Label>Breed</Form.Label>
                                 <Form.Control
                                     name="breed"
-                                    defaultValue={this.props.pet ? this.props.pet.breed : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.breed : ''}
                                     type="text"
                                 />
                             </Form.Group>
@@ -127,7 +126,7 @@ class PetModal extends Component {
                                 <Form.Label>Description</Form.Label>
                                 <Form.Control
                                     name="description"
-                                    defaultValue={this.props.pet ? this.props.pet.description : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.description : ''}
                                     type="text"
                                 />
                             </Form.Group>
@@ -135,7 +134,7 @@ class PetModal extends Component {
                                 <Form.Label>Image URL</Form.Label>
                                 <Form.Control
                                     name="url"
-                                    defaultValue={this.props.pet ? this.props.pet.url : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.url : ''}
                                     type="text"
                                     required
                                 />
@@ -144,7 +143,7 @@ class PetModal extends Component {
                                 <Form.Label>Price</Form.Label>
                                 <Form.Control
                                     name="price"
-                                    defaultValue={this.props.pet ? this.props.pet.price : ''}
+                                    defaultValue={this.props.supply ? this.props.supply.price : ''}
                                     type="text"
                                     required
                                 />
@@ -170,7 +169,7 @@ class PetModal extends Component {
             return (
                 <Modal show={this.props.show} onHide={this.props.handleCloseModal}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Add New Pet</Modal.Title>
+                        <Modal.Title>Add New Supply</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form
@@ -188,9 +187,9 @@ class PetModal extends Component {
                                 />
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>Age</Form.Label>
+                                <Form.Label>Weight</Form.Label>
                                 <Form.Control
-                                    name="age"
+                                    name="weight"
                                     defaultValue={null}
                                     type="text"
                                 />
@@ -206,9 +205,9 @@ class PetModal extends Component {
                                 {/* <Form.Control.Feedback type="invalid">Type is required!</Form.Control.Feedback> */}
                             </Form.Group>
                             <Form.Group className="mb-3">
-                                <Form.Label>Breed</Form.Label>
+                                <Form.Label>Dimension</Form.Label>
                                 <Form.Control
-                                    name="breed"
+                                    name="dimension"
                                     defaultValue={null}
                                     type="text"
                                 />
@@ -260,4 +259,4 @@ class PetModal extends Component {
     }
 }
 
-export default PetModal;
+export default SuppliesModal;

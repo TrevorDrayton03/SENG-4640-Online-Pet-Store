@@ -128,18 +128,20 @@ class Home extends Component {
                         <hr></hr>
                     </div>
                 </div>
-                <div className="large centerText">
+                <div className="large">
                     <h3 className="centerText">Supplies</h3>
-                    {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
-                        return (
-                            <div className="col centerText">
-                                <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
-                                    <img src={require("./images/" + type + ".jpg")}></img>
-                                </a>
-                            </div>
-                        )
-                    })}
-                    <hr></hr>
+                    <div className="row centerText" >
+                        {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
+                            return (
+                                <div className="col centerText">
+                                    <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
+                                        <img src={require("./images/" + type + ".jpg")}></img>
+                                    </a>
+                                </div>
+                            )
+                        })}
+                        <hr></hr>
+                    </div>
                 </div>
             </div>
         );

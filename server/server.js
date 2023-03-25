@@ -91,10 +91,21 @@ app.get('/api/supplyTypes', async (req, res) => {
   }
 });
 
-app.get('/api/delete', async (req, res) => {
+app.get('/api/deletePet', async (req, res) => {
   try {
     const key = req.query.key;
     await PetModel.deleteOne({ _id: key });
+    res.status(200).send("delete success")
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.get('/api/deleteSupply', async (req, res) => {
+  try {
+    const key = req.query.key;
+    await SuppliesModel.deleteOne({ _id: key });
     res.status(200).send("delete success")
   } catch (err) {
     console.error(err.message);
@@ -115,7 +126,7 @@ app.use('/api/checkout', async (req, res) => {
   }
 });
 
-app.use('/api/update', async (req, res) => {
+app.use('/api/updatePet', async (req, res) => {
   try {
     const { key, name, age, type, breed, description, url, price } = req.body;
     const update = {
@@ -136,7 +147,29 @@ app.use('/api/update', async (req, res) => {
   }
 });
 
-app.use('/api/save', async (req, res) => {
+app.use('/api/updateSupply', async (req, res) => {
+  try {
+    const { key, name, dimension, type, weight, description, url, price } = req.body;
+    const update = {
+      name: name,
+      dimension: dimension,
+      type: type,
+      weight: weight,
+      description: description,
+      url: url,
+      price: price
+    }
+    await SuppliesModel.findOneAndUpdate({ _id: key }, update);
+    let updatedSupply = await SuppliesModel.findOne({ _id: key })
+    res.status(200).send(updatedSupply)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// saves pet to 
+app.use('/api/savePet', async (req, res) => {
   try {
     const { name, age, type, breed, description, url, price } = req.body;
     const newPetData = new PetModel({
@@ -156,6 +189,28 @@ app.use('/api/save', async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+app.use('/api/saveSupply', async (req, res) => {
+  try {
+    const { name, weight, type, dimension, description, url, price } = req.body;
+    const newSupplyData = new SuppliesModel({
+      name: name,
+      weight: weight,
+      type: type,
+      dimension: dimension,
+      description: description,
+      url: url,
+      price: price
+    });
+
+    let newSupply = await SuppliesModel.create(newSupplyData)
+    res.status(200).send(newSupply)
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 // get random pets for carousel using an ES6 style of synax
 app.get('/api/carousel', async (req, res) => {

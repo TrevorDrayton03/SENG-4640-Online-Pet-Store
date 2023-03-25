@@ -10,7 +10,7 @@ var petsuppliesSchema = new Schema({
     url: { type: String },
     price: { type: String },
     description: { type: String },
-    dimensions: { type: String },
+    dimension: { type: String },
     weight: { type: String },
 });
 

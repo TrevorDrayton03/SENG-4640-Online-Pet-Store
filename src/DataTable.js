@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import PetModal from "./modals/PetModal";
+import SuppliesModal from "./modals/SuppliesModal";
 
 // DataTable displays database data for the admin and offers options to update, delete, or add data.
-// DataTable utilizes PetModal to update objects in MongoDB.
+// DataTable utilizes Modals to update objects in MongoDB.
 
 class DataTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
             tableData: this.props.tableData,
-            showPetModal: false,
+            showModal: false,
             showSuppliesModal: false,
             modalData: null
         };
 
         this.handleUpdate = this.handleUpdate.bind(this);
-        this.handleClosePetModal = this.handleClosePetModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
 
     }
     // required because tableData is asynchronous information that is retreived after the render
@@ -27,11 +28,11 @@ class DataTable extends Component {
     }
 
     handleUpdate = (data) => {
-        this.setState({ showPetModal: true, modalData: data });
+        this.setState({ showModal: true, modalData: data });
     }
 
-    handleClosePetModal = () => {
-        this.setState({ showPetModal: false, modalData: null });
+    handleCloseModal = () => {
+        this.setState({ showModal: false, modalData: null });
     }
 
     render() {
@@ -116,14 +117,24 @@ class DataTable extends Component {
                         }
                     </tbody>
                 </table>
-                <PetModal
-                    handleClosePetModal={this.handleClosePetModal}
-                    update={this.props.update}
-                    pet={this.state.modalData}
-                    show={this.state.showPetModal}
-                    job="update"
+                {this.props.type === "pets" ? <PetModal
+                    handleCloseModal={this.handleCloseModal}
+                    save={null}
+                    show={this.state.showModal}
+                    pet={null}
+                    job="save"
                 >
                 </PetModal>
+                    :
+                    <SuppliesModal
+                        handleCloseModal={this.handleCloseModal}
+                        save={null}
+                        show={this.state.showModal}
+                        supply={null}
+                        job="save"
+                    >
+                    </SuppliesModal>
+                }
             </div>
         )
     }
