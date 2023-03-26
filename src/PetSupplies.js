@@ -9,7 +9,7 @@ class PetSupplies extends Component {
       value: "Collar",
       chosen: false,
       supply: null,
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -23,7 +23,7 @@ class PetSupplies extends Component {
   // this has to be done instead of passing props down from App if we are going to make supplyWanted and supplyToBeBought types clickable from Home
   async componentDidMount() {
     try {
-      const response = await fetch('http://localhost:3000/api/suppliesData');
+      const response = await fetch("http://localhost:3000/api/suppliesData");
       const petsupplies = await response.json();
       this.setState({
         supplyType: petsupplies,
@@ -35,12 +35,12 @@ class PetSupplies extends Component {
     // this is how this component knows what to display when clicking on the supplyToBeBought icons or carousel in Home
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const type = params.get('type');
+    const type = params.get("type");
     // const id = params.get('id');
     // console.log(id);
     // prevent the code from continueing until supplyType is set
     while (!this.state.supplyType) {
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
     }
     // if (id) {
     //   let supplyToBeBought = this.state.supplyType.find(petsupplies => petsupplies._id === id)
@@ -50,7 +50,7 @@ class PetSupplies extends Component {
     if (type) {
       this.setState({ value: type });
     }
-    this.setState({ isLoading: false })
+    this.setState({ isLoading: false });
   }
 
   selectOptions() {
@@ -88,24 +88,26 @@ class PetSupplies extends Component {
 
   render() {
     if (this.state.isLoading) {
-      <div><p>Loading...</p></div>
-    }
-    else if (this.state.supplyType) {
+      <div>
+        <p>Loading...</p>
+      </div>;
+    } else if (this.state.supplyType) {
       let allSup = this.state.supplyType;
-      let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types 
-      let good = this.handleDisplay(); // these are indexes of supplyWanted 
-      console.log(arra)
-      console.log(good)
+      let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
+      let good = this.handleDisplay(); // these are indexes of supplyWanted
+      //console.log(arra);
+      //console.log(good);
       console.log(this.state.supply);
 
       if (this.state.chosen === true) {
-        return <Data
-          goodPet={this.state.supply}
-          addToCart={this.props.addToCart}
-          handleChosen={this.handleToggleChosen.bind(this)}
-        />;
-      }
-      else {
+        return (
+          <Data
+            goodPet={this.state.supply}
+            addToCart={this.props.addToCart}
+            handleChosen={this.handleToggleChosen.bind(this)}
+          />
+        );
+      } else {
         return (
           <div className="large">
             <div className="Pets">
@@ -137,23 +139,38 @@ class PetSupplies extends Component {
                     <tr>
                       <td>
                         {" "}
-                        <img
-                          className="itemImg"
-                          id={allSup[type]._id}
-                          name={allSup[type].name}
-                          alt={allSup[type].breed}
-                          src={allSup[type].url}
-                        ></img>
+                        <button
+                          value={allSup[type]._id}
+                          onClick={() =>
+                            this.setState({
+                              chosen: !this.state.chosen,
+                              supply: allSup[type],
+                            })
+                          }
+                        >
+                          <img
+                            className="itemImg"
+                            id={allSup[type]._id}
+                            name={allSup[type].name}
+                            alt={allSup[type].breed}
+                            src={allSup[type].url}
+                            style={{
+                              display: "block",
+                              height: "100%",
+                              width: "100%",
+                            }}
+                          ></img>
+                        </button>
                       </td>
                       <td>
                         <h1>${allSup[type].price}</h1>
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <button value={allSup[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, supply: allSup[type] })}>
                         Click here to learn more about them
                       </button>
-                    </tr>
+                    </tr> */}
                   </table>
                 );
               })}

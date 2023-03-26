@@ -9,7 +9,7 @@ class Pets extends Component {
       value: "Dog",
       chosen: false,
       goodAnimal: null,
-      isLoading: true
+      isLoading: true,
     };
   }
 
@@ -23,7 +23,7 @@ class Pets extends Component {
   // this has to be done instead of passing props down from App if we are going to make pets and pet types clickable from Home
   async componentDidMount() {
     try {
-      const response = await fetch('http://localhost:3000/api/petData');
+      const response = await fetch("http://localhost:3000/api/petData");
       const pets = await response.json();
       this.setState({
         petType: pets,
@@ -39,16 +39,15 @@ class Pets extends Component {
     const id = params.get('id');
     // prevent the code from continueing until petType is set
     while (!this.state.petType) {
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
     }
     if (id) {
       let pet = this.state.petType.find(pets => pets._id === id)
       this.setState({ goodAnimal: pet, chosen: true });
-    }
-    else if (type && !id) {
+    } else if (type && !id) {
       this.setState({ value: type });
     }
-    this.setState({ isLoading: false })
+    this.setState({ isLoading: false });
   }
 
   selectOptions() {
@@ -86,9 +85,10 @@ class Pets extends Component {
 
   render() {
     if (this.state.isLoading) {
-      <div><p>Loading...</p></div>
-    }
-    else if (this.state.petType) {
+      <div>
+        <p>Loading...</p>
+      </div>;
+    } else if (this.state.petType) {
       let allPets = this.state.petType;
       let arra = this.selectOptions(); // this is an array of distinct pet types 
       let good = this.handleDisplay(); // these are indexes of pets 
@@ -126,29 +126,44 @@ class Pets extends Component {
                       {" "}
                       <th>
                         {" "}
-                        <h1>Their name is {allPets[type].name} </h1>{" "}
+                        <h1>This is {allPets[type].name} </h1>{" "}
                       </th>
                     </tr>
                     <tr>
                       <td>
                         {" "}
-                        <img
-                          className="itemImg"
-                          id={allPets[type]._id}
-                          name={allPets[type].name}
-                          alt={allPets[type].breed}
-                          src={allPets[type].url}
-                        ></img>
+                        <button
+                          value={allPets[type]._id}
+                          onClick={() =>
+                            this.setState({
+                              chosen: !this.state.chosen,
+                              goodAnimal: allPets[type],
+                            })
+                          }
+                        >
+                          <img
+                            className="itemImg"
+                            id={allPets[type]._id}
+                            name={allPets[type].name}
+                            alt={allPets[type].breed}
+                            src={allPets[type].url}
+                            style={{
+                              display: "block",
+                              height: "100%",
+                              width: "100%",
+                            }}
+                          ></img>
+                        </button>
                       </td>
                       <td>
                         <h1>They cost $ {allPets[type].price}</h1>
                       </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                       <button value={allPets[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: allPets[type] })}>
                         Click here to learn more about them
                       </button>
-                    </tr>
+                    </tr> */}
                   </table>
                 );
               })}
