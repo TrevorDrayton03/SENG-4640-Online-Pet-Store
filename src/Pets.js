@@ -126,7 +126,7 @@ class Pets extends Component {
                       {" "}
                       <th>
                         {" "}
-                        <h1>Their name is {allPets[type].name} </h1>{" "}
+                        <h1>This is {allPets[type].name} </h1>{" "}
                       </th>
                     </tr>
                     <tr>
