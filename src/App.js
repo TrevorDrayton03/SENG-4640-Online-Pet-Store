@@ -18,26 +18,44 @@ class App extends Component {
       items: {},
       admin: false,
       allPets: {},
-      cartItems: [],
-      carouselData: null
-      // carouselData: [{
-      //   _id: 1,
-      //   name: 'Fluffy',
-      //   breed: 'Persian',
-      //   url: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'
-      // },
-      // {
-      //   _id: 2,
-      //   name: 'Buddy',
-      //   breed: 'Golden Retriever',
-      //   url: 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg'
-      // },
-      // {
-      //   _id: 3,
-      //   name: 'Lola',
-      //   breed: 'Siamese',
-      //   url: 'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg'
-      // }]
+      // cartItems: [],
+      cartItems: [{
+        _id: 1,
+        name: 'Fluffy',
+        breed: 'Persian',
+        url: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'
+      },
+      {
+        _id: 2,
+        name: 'Buddy',
+        breed: 'Golden Retriever',
+        url: 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg'
+      },
+      {
+        _id: 3,
+        name: 'Lola',
+        breed: 'Siamese',
+        url: 'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg'
+      }],
+      // carouselData: null
+      carouselData: [{
+        _id: 1,
+        name: 'Fluffy',
+        breed: 'Persian',
+        url: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*'
+      },
+      {
+        _id: 2,
+        name: 'Buddy',
+        breed: 'Golden Retriever',
+        url: 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg'
+      },
+      {
+        _id: 3,
+        name: 'Lola',
+        breed: 'Siamese',
+        url: 'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg'
+      }]
     };
   }
 
@@ -126,7 +144,7 @@ class App extends Component {
     return (
       <div className="App">
         <NavigationBar linkClick={this.handleLinkClick.bind(this)}></NavigationBar>
-        <div className="spacer"></div>
+        <div className="bottomPad"></div>
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}

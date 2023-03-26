@@ -25,6 +25,10 @@ body {
   background-color: white !important;
 }
 
+.pinkbg {
+  background-color: #FFD1DC !important;
+}
+
 #root {
   background: #000080;
   height: 155px;
@@ -36,10 +40,6 @@ body {
   background-color: #000080;
   align-items: center;
   justify-content: center;
-}
-
-.spacer {
-  padding-bottom: 30px;
 }
 
 .navbar-link {
@@ -127,7 +127,7 @@ body {
 }
 
 .bottomPad {
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
 .centerText {
@@ -323,8 +323,34 @@ h1 {
 
 h2 {
   font-size: 25px;
-
 }
+
+.btn-primary {
+  background-color: #000080 !important;
+  border-color: #000080 !important;
+}
+
+.btn-danger {
+  background-color: #FF7F50 !important;
+  border-color: #FF7F50 !important;
+}
+
+.btn-warning {
+  background-color: #FFD700 !important;
+  border-color: #FFD700 !important;
+}
+
+.btn-secondary {
+  background-color: #065DE0 !important;
+  border-color: #065DE0 !important;
+}
+
+/* 
+.modal-footer {
+  display: flex;
+  align-items: space-between !important;
+  justify-content: space-between !important;
+} */
 
 h3 {
   font-size: 20px !important;
