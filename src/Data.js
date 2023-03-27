@@ -67,7 +67,7 @@ class Data extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="large">
           <table>
             <tr>
               <th>
