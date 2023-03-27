@@ -117,6 +117,15 @@ class PetSupplies extends Component {
                 id="supplyType"
                 value={this.state.value}
                 onChange={this.handleChange.bind(this)}
+                style={{  
+                  width: "13em",
+                  height: "50px",
+                  border: "2px solid #182",
+                  color: "#1c87c9",
+                  backgroundColor: "OldLace",
+                  boxShadow: "6px 5px #ccc",
+                  flexWrap: "nowrap",
+                  flex: 2}}
               >
                 {arra.map((type) => {
                   return <option value={type}>{type}</option>;
