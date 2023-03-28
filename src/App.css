@@ -52,17 +52,17 @@ body {
   border: 1px solid transparent;
 }
 
-.navbar .navbar-nav .nav-item:hover {
+/* .navbar .navbar-nav .nav-item:hover {
   border: 1px solid white;
-}
+} */
 
 .navbar .navbar-brand {
   border: 1px solid transparent;
 }
 
-.navbar .navbar-brand:hover {
+/* .navbar .navbar-brand:hover {
   border: 1px solid white;
-}
+} */
 
 .navbar-custom {
   font-size: 20px;
