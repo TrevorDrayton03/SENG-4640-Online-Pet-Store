@@ -57,12 +57,12 @@ class Pets extends Component {
     let count = 0;
     for (let i = 0; i < ani.length; i++) {
       for (let j = 0; j < arra.length; j++) {
-        if (ani[i].type == arra[j]) {
+        if (ani[i].type === arra[j]) {
           same = true;
         }
       }
       count++;
-      if (count == 1 && same == false) {
+      if (count === 1 && same === false) {
         arra.push(ani[i].type);
       }
       same = false;
@@ -76,7 +76,7 @@ class Pets extends Component {
     let allPets = this.state.petType;
     const good = [];
     for (let anNum = 0; anNum < allPets.length; anNum++) {
-      if (this.state.value == allPets[anNum].type) {
+      if (this.state.value === allPets[anNum].type) {
         good.push(anNum);
       }
     }

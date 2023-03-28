@@ -49,16 +49,13 @@ class Home extends Component {
             <div className="Container maxvp">
                 <div className="large">
                     <h1 className="center centerText">About Us</h1>
-                    <p>
-                        Welcome to Pet Universe, where we believe that every pet is a star! Our mission is to provide the best pet products and supplies that will help your furry friends shine!.
+                    <p style={{ textAlign: "left" }}>
+                        Welcome to Pet Universe, where we believe that every pet is a star! Our mission is to provide the best pet products and supplies that will help your furry friends shine!
                     </p>
-                    {/* <p>
-                        At Pet Universe, we understand that every pet is unique and special. That's why we offer a wide range of products that cater to different types of pets and their needs. Whether your pet is a shining star, a quirky comet, or a loyal planet, we have everything you need to keep them happy and healthy.
-                    </p> */}
-                    <p>
-                        At Pet Universe, we believe that pets are family, and we treat every customer like one of our own. Our knowledgeable and friendly staff are always ready to help you find the perfect products for your pet. We are committed to providing exceptional customer service and making sure that you and your pet have a stellar experience shopping with us.
+                    <p style={{ textAlign: "left" }}>
+                        We believe that pets are family, and we treat every customer like one of our own. Our knowledgeable and friendly staff are always ready to help you find the perfect products for your pet. We are committed to providing exceptional customer service and making sure that you and your pet have a stellar experience shopping with us.
                     </p>
-                    <p>
+                    <p style={{ textAlign: "left" }}>
                         So join us on a journey to the Pet Universe, where every pet is a star and the possibilities are endless!
                     </p>
                 </div>
@@ -120,7 +117,7 @@ class Home extends Component {
                             return (
                                 <div className="col centerText" >
                                     <a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
-                                        <img src={require("./images/" + type + ".jpg")}></img>
+                                        <img src={require(`./images/${type}.jpg`).default}></img>
                                     </a>
                                 </div>
                             )
@@ -137,12 +134,11 @@ class Home extends Component {
                                 return (
                                     <div className="col centerText">
                                         <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
-                                            <img src={require("./images/" + type + ".jpg")}></img>
+                                            <img src={require(`./images/${type}.jpg`).default}></img>
                                         </a>
                                     </div>
                                 )
                             })}
-
                         </div>
                     </div>
                 </div>
