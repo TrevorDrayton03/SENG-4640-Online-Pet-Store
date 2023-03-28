@@ -34,8 +34,10 @@ class Data extends Component {
                 <tr>
                   <h1>
                     A little bit about them: <br></br>
-                    {product.description}
                   </h1>
+                  <h4>
+                  {product.description}
+                  </h4>
                 </tr>
               </td>
             </tr>
@@ -43,6 +45,7 @@ class Data extends Component {
               <td>
                 <button
                   id="backToPets"
+                  className="btn btn-secondary"
                   onClick={() => this.props.handleChosen()}
                 >
                   {" "}
@@ -52,6 +55,7 @@ class Data extends Component {
               <td>
                 <button
                   id="addToCart"
+                  className="btn btn-secondary"
                   onClick={() => {
                     this.props.addToCart(product);
                     this.props.handleChosen();
@@ -92,10 +96,14 @@ class Data extends Component {
                 <tr>
                   <h1>
                     A little bit about the product: <br></br>
-                    {product.description}<br></br>
-                    {product.dimension}<br></br>
-                    {product.weight}
                   </h1>
+                  <h4>
+                  {product.description}
+                  <br></br>
+                  {product.dimension}
+                  <br></br>
+                  {product.weight}
+                  </h4>
                 </tr>
               </td>
             </tr>
@@ -103,6 +111,7 @@ class Data extends Component {
               <td>
                 <button
                   id="backToPets"
+                  className="btn btn-secondary"
                   onClick={() => this.props.handleChosen()}
                 >
                   {" "}
@@ -112,6 +121,7 @@ class Data extends Component {
               <td>
                 <button
                   id="addToCart"
+                  className="btn btn-secondary"
                   onClick={() => {
                     this.props.addToCart(product);
                     this.props.handleChosen();
