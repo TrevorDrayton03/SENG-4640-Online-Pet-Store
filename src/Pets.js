@@ -1,4 +1,3 @@
-import { Cursor } from "mongoose";
 import React, { Component } from "react";
 import Data from "./Data";
 
