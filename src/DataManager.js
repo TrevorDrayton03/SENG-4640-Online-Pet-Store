@@ -132,8 +132,7 @@ class DataManager extends Component {
     render() {
         return (
             <div className="maxvp flexCenter whitebg">
-                <div className="xLarge">
-                    <div className="Container row">
+                    <div className="Container row xLarge">
                         <div className="centerText ">
                             <h1>Database Manager </h1>
                         </div>
@@ -178,7 +177,6 @@ class DataManager extends Component {
                             </SuppliesModal>
                         }
                     </div>
-                </div>
             </div>
         )
     }

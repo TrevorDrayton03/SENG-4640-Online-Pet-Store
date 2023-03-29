@@ -10,8 +10,6 @@ class Cart extends Component {
             total: 0,
             showModal: false
         }
-        // calculates the total (if the price is listed)
-        // won't work until data is passed as a prop
         this.props.items && this.props.items.forEach(item => {
             const price = parseFloat(item.price);
             if (!isNaN(price)) {
@@ -22,6 +20,11 @@ class Cart extends Component {
 
     handleCloseModal = () => {
         this.setState({ showModal: false });
+    }
+
+    handleRemoveFromTotal = (price, quantity) => {
+        let updatedTotal = this.state.total - price * quantity;
+        this.setState({ total: updatedTotal });
     }
 
     handleIncrementPrice = (price) => {
@@ -35,15 +38,6 @@ class Cart extends Component {
     }
 
     render() {
-        // let total = null
-        // this.props.items && this.props.items.filter((item) => {
-        //     const temp = parseFloat(item.price)
-        //     if (!isNaN(temp))
-        //         return (
-        //             total += temp
-        //         )
-        // })
-
         return (
             <div className="Container maxvp">
                 <div className="cart Container">
@@ -69,6 +63,7 @@ class Cart extends Component {
                                 price={item.price}
                                 type={item.type}
                                 removeFromCart={this.props.removeFromCart}
+                                removeFromTotal={this.handleRemoveFromTotal.bind(this)}
                                 incrementPrice={this.handleIncrementPrice.bind(this)}
                                 decrementPrice={this.handleDecrementPrice.bind(this)}
                             >

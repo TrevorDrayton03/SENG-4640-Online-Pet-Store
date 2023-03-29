@@ -8,7 +8,7 @@ class CartItem extends Component {
         super()
         this.state = {
             quantity: 1,
-            type: null
+            type: 'supply'
         }
         this.incrementQuantity = this.incrementQuantity.bind(this)
         this.decrementQuantity = this.decrementQuantity.bind(this)
@@ -52,9 +52,10 @@ class CartItem extends Component {
         const price = parseFloat(this.props.price);
         const newPrice = price * this.state.quantity;
         return (
-            <div className="blackBorder Container whitebg" style={{ width: '100%', height: '100%' }}>
+            <div className="blackBorder Container whitebg" style={{ width: '100%', height: '100%', paddingTop: 0, marginTop: 0 }}>
                 <div className="row" style={{ width: '100%', height: '100%', justifyContent: 'center' }}>
-                    <div className="col" style={{ width: '100%', height: '100%', justifyContent: 'center' }}>
+                    {/* the first column */}
+                    <div className="col" style={{ width: '100%', height: '100%', justifyContent: 'center', flexGrow: 2 }}>
                         <div className="row">
                             <div className="col" style={{ paddingLeft: '20px', paddingRight: '20px', justifyContent: 'flex-start' }}>
                                 <img
@@ -63,38 +64,49 @@ class CartItem extends Component {
                                     src={this.props.url}
                                 />
                             </div>
-                            <div className="col" style={{ paddingTop: 0, paddingBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                            <div className="col" style={{ paddingTop: 0, paddingBottom: 0, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                                 <div className="row">
                                     <strong style={{ padding: '0', fontSize: '20px' }}>{this.props.name}</strong>
                                 </div>
-                                {this.state.type && this.state.type === 'supply' &&
-                                    <div className="row">
-                                        <div className="row">
-                                            <button
-                                                onClick={() => this.incrementQuantity()}
-                                                className="btn btn-success"
-                                            >
-                                                <AiOutlinePlus></AiOutlinePlus>
-                                            </button>
-                                            <div style={{ textAlign: 'center' }}><strong style={{ padding: 0 }}>{this.state.quantity}</strong></div>
+                                {
+                                    <div className="row" style={{ alignItems: 'baseline' }}>
+                                        <div className="col noPad" >
                                             <button
                                                 onClick={() => this.decrementQuantity()}
-                                                className="btn btn-warning"
+                                                className="btn btn-warning noPad"
+                                                style={{ textAlign: 'center', width: '40px', height: '40px' }}
                                             >
                                                 <AiOutlineMinus></AiOutlineMinus>
                                             </button>
                                         </div>
-                                    </div>}
+                                        <div className="col noPad" style={{ textAlign: 'center', alignSelf: 'baseline' }}>
+                                            <strong style={{ padding: '10px', }}>{this.state.quantity}</strong>
+                                        </div>
+                                        <div className="col noPad" style={{ paddingLeft: 0, justifyContent: 'center', alignItems: 'center' }}>
+                                            <button
+                                                onClick={() => this.incrementQuantity()}
+                                                className="btn btn-success noPad"
+                                                style={{ textAlign: 'center', width: '40px', height: '40px' }}
+                                            >
+                                                <AiOutlinePlus></AiOutlinePlus>
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
+                    {/* the second column */}
                     <div className="col" style={{ width: '100%', height: '260px', justifyContent: 'space-between', display: 'flex' }}>
                         <div className="col" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', }}>
                             <div className="row" style={{ paddingRight: '15px', justifyContent: 'flex-end' }}>
                                 <button
-                                    onClick={() => this.props.removeFromCart(this.props.id)}
+                                    onClick={() => {
+                                        this.props.removeFromCart(this.props.id)
+                                        this.props.removeFromTotal(this.props.price, this.state.quantity)
+                                    }}
                                     className="btn btn-danger"
-                                    style={{ width: '30%' }}
+                                    style={{ width: '40%' }}
                                 >Remove</button>
                             </div>
                             <div className="row" style={{ paddingLeft: '20px', paddingRight: '10px' }}>

@@ -50,7 +50,7 @@ class ProductDetails extends Component {
                   onClick={() => this.props.handleChosen()}
                 >
                   {" "}
-                  Back to Pets Page
+                  Back
                 </button>
               </td>
               <td>
@@ -63,7 +63,7 @@ class ProductDetails extends Component {
                   }}
                 >
                   {" "}
-                  Click here to add them to your cart
+                  Add to Cart
                 </button>
               </td>
             </tr>
@@ -116,7 +116,7 @@ class ProductDetails extends Component {
                   onClick={() => this.props.handleChosen()}
                 >
                   {" "}
-                  Back to Supplies Page
+                  Back
                 </button>
               </td>
               <td>
@@ -129,7 +129,7 @@ class ProductDetails extends Component {
                   }}
                 >
                   {" "}
-                  Click here to add this item to your cart
+                  Add to Cart
                 </button>
               </td>
             </tr>
