@@ -43,7 +43,7 @@ class PetSupplies extends Component {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     // if (id) {
-    //   let supplyToBeBought = this.state.allSupplies.find(petsupplies => petsupplies._id === id)
+    //   let supplyToBeBought = this.state.allSupplies.find(petsupplies => petsupplies._id ==== id)
     //   console.log(supplyToBeBought)
     //   this.setState({ supply: supplyToBeBought, chosen: true });
     // }
@@ -60,12 +60,12 @@ class PetSupplies extends Component {
     let count = 0;
     for (let i = 0; i < sup.length; i++) {
       for (let j = 0; j < arra.length; j++) {
-        if (sup[i].type == arra[j]) {
+        if (sup[i].type === arra[j]) {
           same = true;
         }
       }
       count++;
-      if (count == 1 && same == false) {
+      if (count === 1 && same === false) {
         arra.push(sup[i].type);
       }
       same = false;
@@ -79,7 +79,7 @@ class PetSupplies extends Component {
     let allSup = this.state.allSupplies;
     const good = [];
     for (let anNum = 0; anNum < allSup.length; anNum++) {
-      if (this.state.type == allSup[anNum].type) {
+      if (this.state.type === allSup[anNum].type) {
         good.push(anNum);
       }
     }

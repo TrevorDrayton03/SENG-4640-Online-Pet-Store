@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'build')));

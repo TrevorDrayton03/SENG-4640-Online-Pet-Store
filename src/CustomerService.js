@@ -10,12 +10,6 @@ class CustomerService extends Component {
         };
     }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const mailtoLink = `mailto:customerservice@petuniverse.com?subject=${encodeURIComponent(this.state.subject)}&body=${encodeURIComponent(`Name: ${this.state.name}\nMessage: ${this.state.message}`)}`;
-        window.location.href = mailtoLink;
-    };
-
     render() {
         return (
             <div className="Container maxvp">
@@ -27,40 +21,24 @@ class CustomerService extends Component {
                     <p style={{ textAlign: "left" }}>
                         Email us below or call us at 1 (250) 789-1234.
                     </p>
-                    <form onSubmit={this.handleSubmit.bind(this)}>
-                        <div>
-                            <div>
-                                <label htmlFor="name"><strong>Name:</strong></label>
-                            </div>
-                            <div>
-                                <input type="text" id="name" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} />
-                            </div>
-                        </div>
-                        <div>
-                            <div>
-                                <label htmlFor="subject"><strong>Subject:</strong></label>
-                                <div>
-                                    <input type="text" id="subject" value={this.state.subject} onChange={(e) => this.setState({ subject: e.target.value })} />
+                    <form target="_blank" action="https://formsubmit.co/trevorpdrayton@gmail.com" method="POST">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col">
+                                    <input type="text" name="name" class="form-control" placeholder="Full Name" required />
                                 </div>
+                                <div class="col">
+                                    <input type="email" name="email" class="form-control" placeholder="Email Address" required />
+                                </div>
+                                <input type="hidden" name="_next" value="http://localhost:3000/" />
                             </div>
                         </div>
-                        <div>
-                            <div>
-                                <label htmlFor="message"><strong>Message:</strong>
-                                </label>
-                            </div>
-                            <div>
-                                <textarea rows={10} cols={100} id="message" value={this.state.message} onChange={(e) => this.setState({ message: e.target.value })} />
-                            </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" class="form-control" name="message" rows="10" required></textarea>
                         </div>
-                        <div>
-                            <div>
-                                <button className="btn btn-primary" type="submit">Submit</button>
-                            </div>
-
-                        </div>
+                        <button type="submit" class="btn btn-lg btn-primary">Submit Form</button>
                     </form>
-                </div >
+                </div>
             </div >
         );
     }
