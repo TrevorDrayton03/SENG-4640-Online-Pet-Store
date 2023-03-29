@@ -40,11 +40,29 @@ body {
   background-color: #000080;
   align-items: center;
   justify-content: center;
+  border: 1px solid transparent;
 }
 
 .navbar-link {
   font-size: 20px;
+  border: 1px solid transparent;
 }
+
+.navbar .navbar-nav .nav-item {
+  border: 1px solid transparent;
+}
+
+/* .navbar .navbar-nav .nav-item:hover {
+  border: 1px solid white;
+} */
+
+.navbar .navbar-brand {
+  border: 1px solid transparent;
+}
+
+/* .navbar .navbar-brand:hover {
+  border: 1px solid white;
+} */
 
 .navbar-custom {
   font-size: 20px;
@@ -111,6 +129,7 @@ body {
 .blackBorder {
   border: 1px solid black;
   padding: 10px;
+  margin: 5px;
 }
 
 .blackTextBorder {
@@ -254,7 +273,8 @@ body {
 }
 
 .cart {
-  width: 700px;
+  max-width: 700px;
+  width: 100% !important;
 }
 
 .width5 {
@@ -340,9 +360,34 @@ h2 {
   border-color: #FFD700 !important;
 }
 
+
+.badge {
+  color: #FFD700 !important;
+  background-color: transparent !important;
+}
+
+/* .nav-link {
+  position: relative;
+  display: inline-block;
+}
+
+.nav-link .badge {
+  position: absolute;
+  top: -8px;
+  right: 1px;
+} */
+
+.text-dark {
+  color: #FFD700 !important;
+}
+
 .btn-secondary {
   background-color: #065DE0 !important;
   border-color: #065DE0 !important;
+}
+
+.btn:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0) !important;
 }
 
 /* 

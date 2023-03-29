@@ -43,11 +43,14 @@ class Cart extends Component {
                         close={this.handleCloseModal}
                     >
                     </CheckoutModal>
-                    <h1 className="centerText">
-                        Cart
-                    </h1>
-                    <div style={{ justifyContent: "space-evenly", width:'100%' }}>
-                        {this.props.items.length === 0 && <p>Cart is empty.</p>}
+                    {this.props.items.length === 0 ?
+                        (<><h1 className="centerText">
+                            Empty Cart
+                        </h1> <p>Why don't you try adding some items?</p></>) : <h1 className="centerText">
+                            Cart
+                        </h1>
+                    }
+                    <div style={{ justifyContent: "space-evenly", width: '100%' }}>
                         {this.props.items.length !== 0 && this.props.items.map((item) => (
                             <CartItem
                                 id={item._id}
@@ -60,27 +63,29 @@ class Cart extends Component {
                         ))
                         }
                     </div>
-                    <div className='row' style={{ alignItems: "baseline" }}>
+                    <div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '25px', paddingLeft: '20px' }}>
                         {this.props.items.length !== 0 &&
-                            <div className='col' style={{ display: "flex", alignItems: "center" }}>
+                            <div className='col' style={{ display: "flex", justifyContent: 'flex-start' }}>
+                                <Button
+                                    onClick={() => {
+                                        if (this.props.items.length !== 0) {
+                                            this.setState({ showModal: true })
+                                        }
+                                        else {
+                                            window.alert("Cart is empty.")
+                                        }
+                                    }}
+                                    variant="primary"
+                                >
+                                    Checkout
+                                </Button>
+                            </div>
+                        }
+                        {this.props.items.length !== 0 &&
+                            <div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
                                 <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${total}</p>
                             </div>
                         }
-                        <div className='col text-center' style={{ display: "flex", alignItems: "center" }}>
-                            <Button
-                                onClick={() => {
-                                    if (this.props.items.length !== 0) {
-                                        this.setState({ showModal: true })
-                                    }
-                                    else {
-                                        window.alert("Cart is empty.")
-                                    }
-                                }}
-                                variant="primary"
-                            >
-                                Checkout
-                            </Button>
-                        </div>
                     </div>
                 </div>
             </div>
