@@ -36,7 +36,7 @@ class CartItem extends Component {
         const price = parseFloat(this.props.price);
         const newPrice = price * this.state.quantity;
         return (
-            <div className="blackBorder Container" style={{ width: '100%', height: '100%' }}>
+            <div className="blackBorder Container whitebg" style={{ width: '100%', height: '100%' }}>
                 <div className="row" style={{ width: '100%', height: '100%', justifyContent: 'center' }}>
                     <div className="col" style={{ width: '100%', height: '100%', justifyContent: 'center' }}>
                         <div className="row">
