@@ -24,15 +24,25 @@ class Cart extends Component {
         this.setState({ showModal: false });
     }
 
+    handleIncrementPrice = (price) => {
+        let newPrice = this.state.total + price
+        this.setState({ total: newPrice })
+    }
+
+    handleDecrementPrice = (price) => {
+        let newPrice = this.state.total - price
+        this.setState({ total: newPrice })
+    }
+
     render() {
-        let total = null
-        this.props.items && this.props.items.filter((item) => {
-            const temp = parseFloat(item.price)
-            if (!isNaN(temp))
-                return (
-                    total += temp
-                )
-        })
+        // let total = null
+        // this.props.items && this.props.items.filter((item) => {
+        //     const temp = parseFloat(item.price)
+        //     if (!isNaN(temp))
+        //         return (
+        //             total += temp
+        //         )
+        // })
 
         return (
             <div className="Container maxvp">
@@ -58,6 +68,8 @@ class Cart extends Component {
                                 url={item.url}
                                 price={item.price}
                                 removeFromCart={this.props.removeFromCart}
+                                incrementPrice={this.handleIncrementPrice.bind(this)}
+                                decrementPrice={this.handleDecrementPrice.bind(this)}
                             >
                             </CartItem>
                         ))
@@ -83,7 +95,7 @@ class Cart extends Component {
                         }
                         {this.props.items.length !== 0 &&
                             <div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
-                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${total}</p>
+                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${this.state.total}</p>
                             </div>
                         }
                     </div>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { AiOutlineMinus } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
-import Badge from 'react-bootstrap/Badge';
 
 class CartItem extends Component {
 
@@ -11,13 +10,31 @@ class CartItem extends Component {
             quantity: 1,
             type: 'supply'
         }
+        this.incrementQuantity = this.incrementQuantity.bind(this)
+        this.decrementQuantity = this.decrementQuantity.bind(this)
     }
 
-    // if type is pet then no quantity
-    // if type is supply then quantity
-    // how will i determine?
+    incrementQuantity = () => {
+        this.setState(prevState => {
+            const newQuantity = prevState.quantity + 1;
+            this.props.incrementPrice(parseFloat(this.props.price));
+            return { quantity: newQuantity };
+        });
+    }
+
+    decrementQuantity = () => {
+        if (this.state.quantity > 1) {
+            this.setState(prevState => {
+                const newQuantity = prevState.quantity - 1;
+                this.props.decrementPrice(parseFloat(this.props.price));
+                return { quantity: newQuantity };
+            });
+        }
+    }
 
     render() {
+        const price = parseFloat(this.props.price);
+        const newPrice = price * this.state.quantity;
         return (
             <div className="blackBorder Container" style={{ width: '100%', height: '100%' }}>
                 <div className="row" style={{ width: '100%', height: '100%', justifyContent: 'center' }}>
@@ -38,12 +55,14 @@ class CartItem extends Component {
                                     <div className="row">
                                         <div className="row">
                                             <button
+                                                onClick={() => this.incrementQuantity()}
                                                 className="btn btn-success"
                                             >
                                                 <AiOutlinePlus></AiOutlinePlus>
                                             </button>
                                             <div style={{ textAlign: 'center' }}><strong style={{ padding: 0 }}>{this.state.quantity}</strong></div>
                                             <button
+                                                onClick={() => this.decrementQuantity()}
                                                 className="btn btn-warning"
                                             >
                                                 <AiOutlineMinus></AiOutlineMinus>
@@ -63,7 +82,7 @@ class CartItem extends Component {
                                 >Remove</button>
                             </div>
                             <div className="row" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-                                <strong style={{ textAlign: 'right' }}>${this.props.price}</strong>
+                                <strong style={{ textAlign: 'right' }}>${newPrice}</strong>
                             </div>
                         </div>
                     </div>
