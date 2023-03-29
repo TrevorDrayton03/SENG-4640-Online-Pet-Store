@@ -31,7 +31,7 @@ body {
 
 #root {
   background: #000080;
-  height: 155px;
+  height: 150px !important;
 }
 
 .navbar {
@@ -41,6 +41,7 @@ body {
   align-items: center;
   justify-content: center;
   border: 1px solid transparent;
+  height: 100% !important;
 }
 
 .navbar-link {

@@ -35,7 +35,7 @@ class Cart extends Component {
         })
 
         return (
-            <div className="Container whitebg maxvp">
+            <div className="Container maxvp">
                 <div className="cart Container">
                     <CheckoutModal
                         checkout={this.props.checkout}

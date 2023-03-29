@@ -117,7 +117,9 @@ class Home extends Component {
                             return (
                                 <div className="col centerText" >
                                     <a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
-                                        <img src={require(`./images/${type}.jpg`).default}></img>
+                                        <img
+                                            src={require(`./images/${type}.jpg`).default}
+                                        ></img>
                                     </a>
                                 </div>
                             )
@@ -125,8 +127,6 @@ class Home extends Component {
 
                     </div>
                 </div>
-                <div className="maxvp flexCenter whitebg">
-
                     <div className="large">
                         <h1 className="centerText">Shop By Product</h1>
                         <div className="row centerText" >
@@ -134,13 +134,14 @@ class Home extends Component {
                                 return (
                                     <div className="col centerText">
                                         <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
-                                            <img src={require(`./images/${type}.jpg`).default}></img>
+                                            <img
+                                                src={require(`./images/${type}.jpg`).default}
+                                            ></img>
                                         </a>
                                     </div>
                                 )
                             })}
                         </div>
-                    </div>
                 </div>
             </div>
         );

@@ -6,8 +6,8 @@ class Pets extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      petType: null,
-      value: "Dog",
+      allPets: null,
+      type: "Dog",
       chosen: false,
       goodAnimal: null,
       isLoading: true,
@@ -24,7 +24,7 @@ class Pets extends Component {
       const response = await fetch("http://localhost:3000/api/petData");
       const pets = await response.json();
       this.setState({
-        petType: pets,
+        allPets: pets,
       });
     } catch (error) {
       console.error(error);
@@ -35,21 +35,21 @@ class Pets extends Component {
     const params = new URLSearchParams(search);
     const type = params.get("type");
     const id = params.get("id");
-    // prevent the code from continueing until petType is set
-    while (!this.state.petType) {
+    // prevent the code from continueing until allPets is set
+    while (!this.state.allPets) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     if (id) {
-      let pet = this.state.petType.find((pets) => pets._id === id);
+      let pet = this.state.allPets.find((pets) => pets._id === id);
       this.setState({ goodAnimal: pet, chosen: true });
     } else if (type && !id) {
-      this.setState({ value: type });
+      this.setState({ type: type });
     }
     this.setState({ isLoading: false });
   }
 
   selectOptions() {
-    let ani = this.state.petType;
+    let ani = this.state.allPets;
     let arra = [];
     let same = false;
     let count = 0;
@@ -71,10 +71,10 @@ class Pets extends Component {
 
   handleDisplay = () => {
     //meant to create a table that displays to page
-    let allPets = this.state.petType;
+    let allPets = this.state.allPets;
     const good = [];
     for (let anNum = 0; anNum < allPets.length; anNum++) {
-      if (this.state.value === allPets[anNum].type) {
+      if (this.state.type === allPets[anNum].type) {
         good.push(anNum);
       }
     }
@@ -86,8 +86,8 @@ class Pets extends Component {
       <div>
         <p>Loading...</p>
       </div>;
-    } else if (this.state.petType) {
-      let allPets = this.state.petType;
+    } else if (this.state.allPets) {
+      let allPets = this.state.allPets;
       let arra = this.selectOptions(); // this is an array of distinct pet types
       let good = this.handleDisplay(); // these are indexes of pets
 
@@ -102,27 +102,27 @@ class Pets extends Component {
       } else {
         return (
           <div className="large">
-            <div className="Pets">
-              <h2>What animals would you like to look at?</h2>
+            <div className="row centerText" >
+              <h1 className="centerText">What type of pets would you like to look at?</h1>
               {arra.map((type) => {
                 return (
-                  <div>
-                    <div className="maxvp flexCenter large row col">
-                        <a
-                          style={{ cursor: "pointer" }}
-                          onClick={() =>
-                            (window.location.href = "/pets?type=" + type)
-                          }
-                        >
-                          <img src={require("./images/" + type + ".jpg")}></img>
-                        </a>
-                    </div>
+                  <div className="col centerText" >
+                    <a
+                      href="#"
+                      onClick={() =>
+                        (window.location.href = "/pets?type=" + type)
+                      }
+                    >
+                      <img
+                        src={require(`./images/${type}.jpg`).default}
+                      ></img>
+                    </a>
                   </div>
                 );
               })}
             </div>
             <div id="petDis">
-              {/* for each pet index value, use it to get the pet data we want from all the pets */}
+              {/* for each pet index type, use it to get the pet data we want from all the pets */}
               {good.map((type) => {
                 return (
                   <table>

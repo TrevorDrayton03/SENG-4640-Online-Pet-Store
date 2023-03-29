@@ -5,8 +5,8 @@ class PetSupplies extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      supplyType: null,
-      value: "Collar",
+      allSupplies: null,
+      type: "Collar",
       chosen: false,
       supply: null,
       isLoading: true,
@@ -14,7 +14,7 @@ class PetSupplies extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ type: event.target.type });
   }
   handleToggleChosen() {
     this.setState({ chosen: !this.state.chosen });
@@ -26,7 +26,7 @@ class PetSupplies extends Component {
       const response = await fetch("http://localhost:3000/api/suppliesData");
       const petsupplies = await response.json();
       this.setState({
-        supplyType: petsupplies,
+        allSupplies: petsupplies,
       });
     } catch (error) {
       console.error(error);
@@ -38,23 +38,23 @@ class PetSupplies extends Component {
     const type = params.get("type");
     // const id = params.get('id');
     // console.log(id);
-    // prevent the code from continueing until supplyType is set
-    while (!this.state.supplyType) {
+    // prevent the code from continueing until allSupplies is set
+    while (!this.state.allSupplies) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     // if (id) {
-    //   let supplyToBeBought = this.state.supplyType.find(petsupplies => petsupplies._id === id)
+    //   let supplyToBeBought = this.state.allSupplies.find(petsupplies => petsupplies._id === id)
     //   console.log(supplyToBeBought)
     //   this.setState({ supply: supplyToBeBought, chosen: true });
     // }
     if (type) {
-      this.setState({ value: type });
+      this.setState({ type: type });
     }
     this.setState({ isLoading: false });
   }
 
   selectOptions() {
-    let sup = this.state.supplyType;
+    let sup = this.state.allSupplies;
     let arra = [];
     let same = false;
     let count = 0;
@@ -76,10 +76,10 @@ class PetSupplies extends Component {
 
   handleDisplay = () => {
     //meant to create a table that displays to page
-    let allSup = this.state.supplyType;
+    let allSup = this.state.allSupplies;
     const good = [];
     for (let anNum = 0; anNum < allSup.length; anNum++) {
-      if (this.state.value == allSup[anNum].type) {
+      if (this.state.type == allSup[anNum].type) {
         good.push(anNum);
       }
     }
@@ -91,8 +91,8 @@ class PetSupplies extends Component {
       <div>
         <p>Loading...</p>
       </div>;
-    } else if (this.state.supplyType) {
-      let allSup = this.state.supplyType;
+    } else if (this.state.allSupplies) {
+      let allSup = this.state.allSupplies;
       let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
       let good = this.handleDisplay(); // these are indexes of supplyWanted
       //console.log(arra);
@@ -110,26 +110,27 @@ class PetSupplies extends Component {
       } else {
         return (
           <div className="large">
-            <div className="Pets">
-              <h2>What type of supplies would you like to look at?</h2>
+            <div className="row centerText" >
+              <h1 className="centerText">What type of supplies would you like to look at?</h1>
               {arra.map((type) => {
                 return (
-                  <div style={{ cursor: "pointer" }}>
-                    <div className="maxvp flexCenter large row col">
-                      <a
-                        onClick={() =>
-                          (window.location.href = "/pets?type=" + type)
-                        }
-                      >
-                        <img src={require("./images/" + type + ".jpg")}></img>
-                      </a>
-                    </div>
+                  <div className="col centerText" >
+                    <a
+                      onClick={() =>
+                        (window.location.href = "/pets?type=" + type)
+                      }
+                      href="#"
+                    >
+                      <img
+                        src={require(`./images/${type}.jpg`).default}
+                      ></img>
+                    </a>
                   </div>
                 );
               })}
             </div>
             <div id="petDis">
-              {/* for each supplyToBeBought index value, use it to get the supplyToBeBought data we want from all the supplyWanted */}
+              {/* for each supplyToBeBought index type, use it to get the supplyToBeBought data we want from all the supplyWanted */}
               {good.map((type) => {
                 return (
                   <table>
