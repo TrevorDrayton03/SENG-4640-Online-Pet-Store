@@ -112,25 +112,21 @@ class PetSupplies extends Component {
           <div className="large">
             <div className="Pets">
               <h2>What type of supplies would you like to look at?</h2>
-              <select
-                name="supplies"
-                id="supplyType"
-                value={this.state.value}
-                onChange={this.handleChange.bind(this)}
-                style={{  
-                  width: "13em",
-                  height: "50px",
-                  border: "2px solid #182",
-                  color: "#1c87c9",
-                  backgroundColor: "OldLace",
-                  boxShadow: "6px 5px #ccc",
-                  flexWrap: "nowrap",
-                  flex: 2}}
-              >
-                {arra.map((type) => {
-                  return <option value={type}>{type}</option>;
-                })}
-              </select>
+              {arra.map((type) => {
+                return (
+                  <div style={{ cursor: "pointer" }}>
+                    <div className="maxvp flexCenter large row col">
+                      <a
+                        onClick={() =>
+                          (window.location.href = "/pets?type=" + type)
+                        }
+                      >
+                        <img src={require("./images/" + type + ".jpg")}></img>
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <div id="petDis">
               {/* for each supplyToBeBought index value, use it to get the supplyToBeBought data we want from all the supplyWanted */}

@@ -1,3 +1,4 @@
+import { Cursor } from "mongoose";
 import React, { Component } from "react";
 import Data from "./Data";
 
@@ -13,9 +14,6 @@ class Pets extends Component {
     };
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
   handleToggleChosen() {
     this.setState({ chosen: !this.state.chosen });
   }
@@ -35,14 +33,14 @@ class Pets extends Component {
     // this is how this component knows what to display when clicking on the pet icons or carousel in Home
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const type = params.get('type');
-    const id = params.get('id');
+    const type = params.get("type");
+    const id = params.get("id");
     // prevent the code from continueing until petType is set
     while (!this.state.petType) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     if (id) {
-      let pet = this.state.petType.find(pets => pets._id === id)
+      let pet = this.state.petType.find((pets) => pets._id === id);
       this.setState({ goodAnimal: pet, chosen: true });
     } else if (type && !id) {
       this.setState({ value: type });
@@ -90,40 +88,38 @@ class Pets extends Component {
       </div>;
     } else if (this.state.petType) {
       let allPets = this.state.petType;
-      let arra = this.selectOptions(); // this is an array of distinct pet types 
-      let good = this.handleDisplay(); // these are indexes of pets 
+      let arra = this.selectOptions(); // this is an array of distinct pet types
+      let good = this.handleDisplay(); // these are indexes of pets
 
       if (this.state.chosen === true) {
-        return <Data
-          goodPet={this.state.goodAnimal}
-          addToCart={this.props.addToCart}
-          handleChosen={this.handleToggleChosen.bind(this)}
-        />;
-      }
-      else {
+        return (
+          <Data
+            goodPet={this.state.goodAnimal}
+            addToCart={this.props.addToCart}
+            handleChosen={this.handleToggleChosen.bind(this)}
+          />
+        );
+      } else {
         return (
           <div className="large">
             <div className="Pets">
               <h2>What animals would you like to look at?</h2>
-              <select
-                name="animals"
-                id="petType"
-                value={this.state.value}
-                onChange={this.handleChange.bind(this)}
-                style={{  
-                  width: "13em",
-                  height: "50px",
-                  border: "2px solid #182",
-                  color: "#1c87c9",
-                  backgroundColor: "OldLace",
-                  boxShadow: "6px 5px #ccc",
-                  flexWrap: "nowrap",
-                  flex: 2}}
-              >
-                {arra.map((type) => {
-                  return <option value={type}>{type}</option>;
-                })}
-              </select>
+              {arra.map((type) => {
+                return (
+                  <div>
+                    <div className="maxvp flexCenter large row col">
+                        <a
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            (window.location.href = "/pets?type=" + type)
+                          }
+                        >
+                          <img src={require("./images/" + type + ".jpg")}></img>
+                        </a>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
             <div id="petDis">
               {/* for each pet index value, use it to get the pet data we want from all the pets */}
