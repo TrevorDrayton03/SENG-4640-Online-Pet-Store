@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Data extends Component {
+class ProductDetails extends Component {
 
   render() {
     let product = this.props.goodPet;
@@ -139,4 +139,4 @@ class Data extends Component {
     }
   }
 }
-export default Data;
+export default ProductDetails;

@@ -97,7 +97,7 @@ class CartItem extends Component {
                                     style={{ width: '30%' }}
                                 >Remove</button>
                             </div>
-                            <div className="row" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+                            <div className="row" style={{ paddingLeft: '20px', paddingRight: '10px' }}>
                                 <strong style={{ textAlign: 'right' }}>${newPrice.toFixed(2)}</strong>
                             </div>
                         </div>

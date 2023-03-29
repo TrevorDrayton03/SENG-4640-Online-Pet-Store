@@ -76,7 +76,7 @@ class Cart extends Component {
                         ))
                         }
                     </div>
-                    <div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '25px', paddingLeft: '20px' }}>
+                    <div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '10px', paddingLeft: '20px' }}>
                         {this.props.items.length !== 0 &&
                             <div className='col' style={{ display: "flex", justifyContent: 'flex-start' }}>
                                 <Button

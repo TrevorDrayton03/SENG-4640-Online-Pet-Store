@@ -13,12 +13,12 @@ class CustomerService extends Component {
     render() {
         return (
             <div className="Container maxvp">
-                <div className="large">
+                <div className="large centerText">
                     <h1 className="center centerText">Customer Service</h1>
-                    <p style={{ textAlign: "left" }}>
+                    <p>
                         Have any questions or concerns? Let us know right away!
                     </p>
-                    <p style={{ textAlign: "left" }}>
+                    <p>
                         Email us below or call us at 1 (250) 789-1234.
                     </p>
                     <form target="_blank" action="https://formsubmit.co/trevorpdrayton@gmail.com" method="POST">
