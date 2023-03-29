@@ -8,7 +8,7 @@ class CartItem extends Component {
         super()
         this.state = {
             quantity: 1,
-            type: 'supply'
+            type: null
         }
         this.incrementQuantity = this.incrementQuantity.bind(this)
         this.decrementQuantity = this.decrementQuantity.bind(this)
@@ -32,6 +32,22 @@ class CartItem extends Component {
         }
     }
 
+    async componentDidMount() {
+        await fetch('http://localhost:3000/api/petTypes')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                console.log(this.props.type);
+                console.log(data.includes(this.props.type));
+                if (data.includes(this.props.type)) {
+                    this.setState({ type: 'pet' });
+                }
+                else {
+                    this.setState({ type: 'supply' });
+                }
+            })
+            .catch(error => console.log(error))
+    }
     render() {
         const price = parseFloat(this.props.price);
         const newPrice = price * this.state.quantity;
@@ -51,7 +67,7 @@ class CartItem extends Component {
                                 <div className="row">
                                     <strong style={{ padding: '0', fontSize: '20px' }}>{this.props.name}</strong>
                                 </div>
-                                {this.state.type === 'supply' &&
+                                {this.state.type && this.state.type === 'supply' &&
                                     <div className="row">
                                         <div className="row">
                                             <button
@@ -82,7 +98,7 @@ class CartItem extends Component {
                                 >Remove</button>
                             </div>
                             <div className="row" style={{ paddingLeft: '20px', paddingRight: '20px' }}>
-                                <strong style={{ textAlign: 'right' }}>${newPrice}</strong>
+                                <strong style={{ textAlign: 'right' }}>${newPrice.toFixed(2)}</strong>
                             </div>
                         </div>
                     </div>

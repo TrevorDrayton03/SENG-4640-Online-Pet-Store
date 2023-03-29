@@ -67,6 +67,7 @@ class Cart extends Component {
                                 name={item.name}
                                 url={item.url}
                                 price={item.price}
+                                type={item.type}
                                 removeFromCart={this.props.removeFromCart}
                                 incrementPrice={this.handleIncrementPrice.bind(this)}
                                 decrementPrice={this.handleDecrementPrice.bind(this)}
@@ -95,7 +96,7 @@ class Cart extends Component {
                         }
                         {this.props.items.length !== 0 &&
                             <div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
-                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${this.state.total}</p>
+                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${this.state.total.toFixed(2)}</p>
                             </div>
                         }
                     </div>
