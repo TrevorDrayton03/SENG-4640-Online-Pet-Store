@@ -56,7 +56,7 @@ class Data extends Component {
               <td>
                 <button
                   id="addToCart"
-                  className="btn btn-secondary"
+                  className="btn btn-primary"
                   onClick={() => {
                     this.props.addToCart(product);
                     this.props.handleChosen();
@@ -116,13 +116,13 @@ class Data extends Component {
                   onClick={() => this.props.handleChosen()}
                 >
                   {" "}
-                  Back to Pet Supplies Page
+                  Back to Supplies Page
                 </button>
               </td>
               <td>
                 <button
                   id="addToCart"
-                  className="btn btn-secondary"
+                  className="btn btn-primary"
                   onClick={() => {
                     this.props.addToCart(product);
                     this.props.handleChosen();

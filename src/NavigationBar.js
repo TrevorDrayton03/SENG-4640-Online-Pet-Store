@@ -25,8 +25,8 @@ class NavigationBar extends Component {
                         </a>
                     </li>
                     <li className="nav-item">
-                        <a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/petsupplies")} >
-                            Pet Supplies
+                        <a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/supplies")} >
+                            Supplies
                         </a>
                     </li>
                     <li className="nav-item">

@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 
 const PetModel = require("../src/schemas/Pet.js");
-const SuppliesModel = require("../src/schemas/PetSupplies.js");
+const SuppliesModel = require("../src/schemas/Supplies.js");
 const AdminModel = require("../src/schemas/Admin.js");
 
 // this middleware always console logs the requests

@@ -16,7 +16,7 @@ class Home extends Component {
     };
 
     handleSupplyIconClick = (type) => {
-        window.location.href = '/petsupplies?type=' + type;
+        window.location.href = '/supplies?type=' + type;
     };
 
     handleCarouselClick = (id) => {
@@ -128,7 +128,7 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="large">
-                    <h1 className="centerText">Shop By Product</h1>
+                    <h1 className="centerText">Shop By Supplies</h1>
                     <div className="row centerText" >
                         {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
                             return (

@@ -85,7 +85,7 @@ class Admin extends Component {
                         </div>
                         <div className='centerText'>
                             <button
-                                className="btn btn-secondary"
+                                className="btn btn-primary"
                                 type="submit">Submit</button>
                         </div>
                     </form>
@@ -98,7 +98,7 @@ class Admin extends Component {
                 <div className="Container">
                     <div className="centerText">
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-primary"
                             type="submit"
                             onClick={this.handleLogout}
                             id="logout"

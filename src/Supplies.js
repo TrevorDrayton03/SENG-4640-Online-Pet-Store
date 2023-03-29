@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Data from "./Data";
 
-class PetSupplies extends Component {
+class Supplies extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -111,7 +111,7 @@ class PetSupplies extends Component {
         return (
           <div className="large">
             <div className="row centerText" >
-              <h1 className="centerText">What type of supplies would you like to look at?</h1>
+              <h1 className="centerText">Supplies</h1>
               {arra.map((type) => {
                 return (
                   <div className="col centerText" >
@@ -188,4 +188,4 @@ class PetSupplies extends Component {
   }
 }
 
-export default PetSupplies;
+export default Supplies;

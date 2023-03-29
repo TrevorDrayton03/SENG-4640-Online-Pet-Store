@@ -102,7 +102,7 @@ class Pets extends Component {
         return (
           <div className="large">
             <div className="row centerText" >
-              <h1 className="centerText">What type of pets would you like to look at?</h1>
+              <h1 className="centerText">Pets</h1>
               {arra.map((type) => {
                 return (
                   <div className="col centerText" >
