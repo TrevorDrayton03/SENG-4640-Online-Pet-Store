@@ -15,7 +15,7 @@ class NavigationBar extends Component {
                 <a className="navbar-brand" href="#" onClick={e => this.handleOnClick(e, "/")}>
                     <div className="col">
                         <img src="./logo192.png" alt="Logo" />
-                        <span class="logo-text">Pet Universe</span>
+                        <span className="logo-text">Pet Universe</span>
                     </div>
                 </a>
                 <ul className="navbar-nav mr-auto medium">
@@ -41,7 +41,7 @@ class NavigationBar extends Component {
                     </li>
                     <li className="nav-item">
                         <a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/cart")} >
-                            <FaShoppingCart />{" "}
+                            <FaShoppingCart></FaShoppingCart>
                             <Badge bg="btn-primary">{this.props.itemCount}</Badge>
                         </a>
                     </li>

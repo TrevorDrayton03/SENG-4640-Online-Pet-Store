@@ -63,14 +63,9 @@ class Cart extends Component {
                         ))
                         }
                     </div>
-                    <div className='row' style={{ alignItems: "baseline" }}>
+                    <div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '25px', paddingLeft: '20px' }}>
                         {this.props.items.length !== 0 &&
-                            <div className='col' style={{ display: "flex", alignItems: "center" }}>
-                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${total}</p>
-                            </div>
-                        }
-                        {this.props.items.length !== 0 &&
-                            <div className='col text-center' style={{ display: "flex", alignItems: "center" }}>
+                            <div className='col' style={{ display: "flex", justifyContent: 'flex-start' }}>
                                 <Button
                                     onClick={() => {
                                         if (this.props.items.length !== 0) {
@@ -84,6 +79,11 @@ class Cart extends Component {
                                 >
                                     Checkout
                                 </Button>
+                            </div>
+                        }
+                        {this.props.items.length !== 0 &&
+                            <div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
+                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${total}</p>
                             </div>
                         }
                     </div>

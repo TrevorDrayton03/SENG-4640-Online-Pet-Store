@@ -129,6 +129,7 @@ body {
 .blackBorder {
   border: 1px solid black;
   padding: 10px;
+  margin: 5px;
 }
 
 .blackTextBorder {
@@ -272,7 +273,8 @@ body {
 }
 
 .cart {
-  width: 700px;
+  max-width: 700px;
+  width: 100% !important;
 }
 
 .width5 {
@@ -364,7 +366,7 @@ h2 {
   background-color: transparent !important;
 }
 
-.nav-link {
+/* .nav-link {
   position: relative;
   display: inline-block;
 }
@@ -373,7 +375,7 @@ h2 {
   position: absolute;
   top: -8px;
   right: 1px;
-}
+} */
 
 .text-dark {
   color: #FFD700 !important;
