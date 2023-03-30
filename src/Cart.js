@@ -7,34 +7,12 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            total: 0,
             showModal: false
         }
-        this.props.items && this.props.items.forEach(item => {
-            const price = parseFloat(item.price);
-            if (!isNaN(price)) {
-                this.state.total += price;
-            }
-        });
     }
-
+    
     handleCloseModal = () => {
         this.setState({ showModal: false });
-    }
-
-    handleRemoveFromTotal = (price, quantity) => {
-        let updatedTotal = this.state.total - price * quantity;
-        this.setState({ total: updatedTotal });
-    }
-
-    handleIncrementPrice = (price) => {
-        let newPrice = this.state.total + price
-        this.setState({ total: newPrice })
-    }
-
-    handleDecrementPrice = (price) => {
-        let newPrice = this.state.total - price
-        this.setState({ total: newPrice })
     }
 
     render() {
@@ -62,10 +40,11 @@ class Cart extends Component {
                                 url={item.url}
                                 price={item.price}
                                 type={item.type}
+                                quantity={item.quantity}
                                 removeFromCart={this.props.removeFromCart}
-                                removeFromTotal={this.handleRemoveFromTotal.bind(this)}
-                                incrementPrice={this.handleIncrementPrice.bind(this)}
-                                decrementPrice={this.handleDecrementPrice.bind(this)}
+                                removeFromTotal={this.props.removeFromTotal}
+                                incrementTotal={this.props.incrementTotal}
+                                decrementTotal={this.props.decrementTotal}
                             >
                             </CartItem>
                         ))
@@ -91,7 +70,7 @@ class Cart extends Component {
                         }
                         {this.props.items.length !== 0 &&
                             <div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
-                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${this.state.total.toFixed(2)}</p>
+                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${parseFloat(this.props.total).toFixed(2)}</p>
                             </div>
                         }
                     </div>

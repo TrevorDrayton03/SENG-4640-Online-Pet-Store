@@ -95,9 +95,6 @@ class Supplies extends Component {
       let allSup = this.state.allSupplies;
       let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
       let good = this.handleDisplay(); // these are indexes of supplyWanted
-      //console.log(arra);
-      //console.log(good);
-      console.log(this.state.supply);
 
       if (this.state.chosen === true) {
         return (
