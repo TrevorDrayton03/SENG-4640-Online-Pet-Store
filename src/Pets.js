@@ -13,6 +13,10 @@ class Pets extends Component {
     };
   }
 
+  handleChange = (event) => {
+    this.setState({ type: event });
+  };
+
   handleToggleChosen() {
     this.setState({ chosen: !this.state.chosen });
   }
@@ -101,20 +105,13 @@ class Pets extends Component {
       } else {
         return (
           <div className="large">
-            <div className="row centerText" >
+            <div className="row centerText">
               <h1 className="centerText">Pets</h1>
               {arra.map((type) => {
                 return (
-                  <div className="col centerText" >
-                    <a
-                      href="#"
-                      onClick={() =>
-                        (window.location.href = "/pets?type=" + type)
-                      }
-                    >
-                      <img
-                        src={require(`./images/${type}.jpg`).default}
-                      ></img>
+                  <div className="col centerText">
+                    <a value={type} onClick={() => this.handleChange(type)}>
+                      <img src={require(`./images/${type}.jpg`).default}></img>
                     </a>
                   </div>
                 );

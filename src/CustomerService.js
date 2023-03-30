@@ -14,10 +14,29 @@ class CustomerService extends Component {
         return (
             <div className="Container maxvp">
                 <div className="large centerText">
-                    <h1 className="center centerText">Customer Service</h1>
+                    <h1 className="center centerText">FAQ & Customer Service</h1>
+                    <h2>
+                        Where do you get your pets from?
+                    </h2>
                     <p>
-                        Have any questions or concerns? Let us know right away!
+                        All of our good boys and girls are from our local humane society, because we believe every animal deserves a loving home and we hope you can help provide them with one.
                     </p>
+                    <h2>
+                        How do I feed my new pet?
+                    </h2>
+                    <p>
+                        When dealing with a new pet approach them with food in your hand, showing it clearly and place it near them.
+                    </p>
+                    <h2>
+                        What is your refund policy like?
+                    </h2>
+                    <p>
+                        We allow refunds up to 14 days with our pets and 30 days with our supplies if they have not been damaged.
+                    </p>
+                    <br></br>
+                    <h2 style = {{fontWeight: 'bold'}}>
+                        Have any further questions or concerns? Let us know right away!
+                    </h2>
                     <p>
                         Email us below or call us at 1 (250) 789-1234.
                     </p>
