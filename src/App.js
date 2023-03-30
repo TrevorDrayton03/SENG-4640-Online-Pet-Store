@@ -14,8 +14,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      // route: stores the current route/pathname of the application
+      // items: an object that contains all items in the application
+      // admin: a boolean that indicates if the user is an admin or not
+      // allPets: an object that contains all pet data
+      // cartItems: an array that contains all items in the cart
+      // carouselData: an array that contains the data for the carousel on the home page
+      // total: the total price of all items in the cart
       route: window.location.pathname,
-      lists: [],
       items: {},
       admin: false,
       allPets: {},
