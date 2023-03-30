@@ -1,6 +1,5 @@
-import { Cursor } from "mongoose";
 import React, { Component } from "react";
-import Data from "./Data";
+import ProductDetails from "./ProductDetails";
 
 class Pets extends Component {
   constructor(props) {
@@ -93,7 +92,7 @@ class Pets extends Component {
 
       if (this.state.chosen === true) {
         return (
-          <Data
+          <ProductDetails
             goodPet={this.state.goodAnimal}
             addToCart={this.props.addToCart}
             handleChosen={this.handleToggleChosen.bind(this)}
@@ -103,7 +102,7 @@ class Pets extends Component {
         return (
           <div className="large">
             <div className="row centerText" >
-              <h1 className="centerText">What type of pets would you like to look at?</h1>
+              <h1 className="centerText">Pets</h1>
               {arra.map((type) => {
                 return (
                   <div className="col centerText" >

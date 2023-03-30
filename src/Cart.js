@@ -7,33 +7,15 @@ class Cart extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            total: 0,
             showModal: false
         }
-        // calculates the total (if the price is listed)
-        // won't work until data is passed as a prop
-        this.props.items && this.props.items.forEach(item => {
-            const price = parseFloat(item.price);
-            if (!isNaN(price)) {
-                this.state.total += price;
-            }
-        });
     }
-
+    
     handleCloseModal = () => {
         this.setState({ showModal: false });
     }
 
     render() {
-        let total = null
-        this.props.items && this.props.items.filter((item) => {
-            const temp = parseFloat(item.price)
-            if (!isNaN(temp))
-                return (
-                    total += temp
-                )
-        })
-
         return (
             <div className="Container maxvp">
                 <div className="cart Container">
@@ -57,13 +39,18 @@ class Cart extends Component {
                                 name={item.name}
                                 url={item.url}
                                 price={item.price}
+                                type={item.type}
+                                quantity={item.quantity}
                                 removeFromCart={this.props.removeFromCart}
+                                removeFromTotal={this.props.removeFromTotal}
+                                incrementTotal={this.props.incrementTotal}
+                                decrementTotal={this.props.decrementTotal}
                             >
                             </CartItem>
                         ))
                         }
                     </div>
-                    <div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '25px', paddingLeft: '20px' }}>
+                    <div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '10px', paddingLeft: '20px' }}>
                         {this.props.items.length !== 0 &&
                             <div className='col' style={{ display: "flex", justifyContent: 'flex-start' }}>
                                 <Button
@@ -83,7 +70,7 @@ class Cart extends Component {
                         }
                         {this.props.items.length !== 0 &&
                             <div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
-                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${total}</p>
+                                <p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${parseFloat(this.props.total).toFixed(2)}</p>
                             </div>
                         }
                     </div>

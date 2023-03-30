@@ -16,7 +16,7 @@ class Home extends Component {
     };
 
     handleSupplyIconClick = (type) => {
-        window.location.href = '/petsupplies?type=' + type;
+        window.location.href = '/supplies?type=' + type;
     };
 
     handleCarouselClick = (id) => {
@@ -49,13 +49,13 @@ class Home extends Component {
             <div className="Container maxvp">
                 <div className="large">
                     <h1 className="center centerText">About Us</h1>
-                    <p style={{ textAlign: "left" }}>
+                    <p>
                         Welcome to Pet Universe, where we believe that every pet is a star! Our mission is to provide the best pet products and supplies that will help your furry friends shine!
                     </p>
-                    <p style={{ textAlign: "left" }}>
+                    <p>
                         We believe that pets are family, and we treat every customer like one of our own. Our knowledgeable and friendly staff are always ready to help you find the perfect products for your pet. We are committed to providing exceptional customer service and making sure that you and your pet have a stellar experience shopping with us.
                     </p>
-                    <p style={{ textAlign: "left" }}>
+                    <p>
                         So join us on a journey to the Pet Universe, where every pet is a star and the possibilities are endless!
                     </p>
                 </div>
@@ -127,21 +127,21 @@ class Home extends Component {
 
                     </div>
                 </div>
-                    <div className="large">
-                        <h1 className="centerText">Shop By Product</h1>
-                        <div className="row centerText" >
-                            {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
-                                return (
-                                    <div className="col centerText">
-                                        <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
-                                            <img
-                                                src={require(`./images/${type}.jpg`).default}
-                                            ></img>
-                                        </a>
-                                    </div>
-                                )
-                            })}
-                        </div>
+                <div className="large">
+                    <h1 className="centerText">Shop By Supplies</h1>
+                    <div className="row centerText" >
+                        {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
+                            return (
+                                <div className="col centerText">
+                                    <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
+                                        <img
+                                            src={require(`./images/${type}.jpg`).default}
+                                        ></img>
+                                    </a>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         );

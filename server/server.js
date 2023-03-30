@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'build')));
@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.json());
 
 const PetModel = require("../src/schemas/Pet.js");
-const SuppliesModel = require("../src/schemas/PetSupplies.js");
+const SuppliesModel = require("../src/schemas/Supplies.js");
 const AdminModel = require("../src/schemas/Admin.js");
 
 // this middleware always console logs the requests
@@ -118,7 +118,7 @@ app.use('/api/checkout', async (req, res) => {
     const keys = req.body;
     for (const key of keys) {
       await PetModel.findByIdAndDelete(key);
-      await SuppliesModel.findByIdAndDelete(key);
+      // await SuppliesModel.findByIdAndDelete(key); // don't delete the supply from the db
     }
     res.status(200).send("checkout success")
   } catch (err) {

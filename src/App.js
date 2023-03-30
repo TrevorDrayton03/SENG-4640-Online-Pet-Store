@@ -4,7 +4,8 @@ import Home from './Home.js';
 import Pets from './Pets.js';
 import Admin from './Admin.js';
 import Cart from './Cart.js';
-import PetSupplies from './PetSupplies.js';
+import Supplies from './Supplies.js';
+import CustomerService from './CustomerService.js';
 
 import './App.css';
 
@@ -24,21 +25,24 @@ class App extends Component {
       //   name: 'Fluffy',
       //   breed: 'Persian',
       //   url: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
-      //   price: '25.00'
+      //   price: '25.00',
+      //   type: "Dog"
       // },
       // {
       //   _id: 2,
       //   name: 'Buddy',
       //   breed: 'Golden Retriever',
       //   url: 'https://i.natgeofe.com/n/4f5aaece-3300-41a4-b2a8-ed2708a0a27c/domestic-dog_thumb_4x3.jpg',
-      //   price: '25.00'
+      //   price: '25.00',
+      //   type: "Dog"
       // },
       // {
       //   _id: 3,
       //   name: 'Lola',
       //   breed: 'Siamese',
       //   url: 'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
-      //   price: '25.00'
+      //   price: '25.00',
+      //   type: "Collar"
       // }],
       carouselData: null,
       // carouselData: [{
@@ -59,6 +63,7 @@ class App extends Component {
       //   breed: 'Siamese',
       //   url: 'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg'
       // }],
+      total: 0,
     };
   }
 
@@ -102,9 +107,11 @@ class App extends Component {
     let itemInCart = this.state.cartItems.find(cartItem => cartItem._id === item._id);
     if (!itemInCart) {
       const updatedCart = [...this.state.cartItems];
-      updatedCart.push(item);
+      itemInCart = { ...item, quantity: 1 }; // add quantity to cartItem
+      updatedCart.push(itemInCart);
       this.setState({ cartItems: updatedCart });
     }
+    this.setState({ total: this.state.total += parseFloat(item.price) })
   }
 
   handleRemoveFromCart(key) {
@@ -124,6 +131,47 @@ class App extends Component {
       .then(response => response.json())
       .catch(error => console.log(error))
     this.setState({ cartItems: [] });
+  }
+
+  handleRemoveFromTotal = (price, quantity) => {
+    let updatedTotal = this.state.total - price * quantity;
+    this.setState({ total: updatedTotal });
+  }
+
+  handleIncrementTotal = (price, key) => {
+    const updatedCart = this.state.cartItems.map((cartItem) => {
+      if (cartItem._id === key) {
+        return {
+          ...cartItem, quantity: cartItem.quantity + 1
+        }
+      } else {
+        return cartItem;
+      }
+    })
+    this.setState({ cartItems: updatedCart })
+
+    let newTotal = Number(this.state.total) + price
+    this.setState({ total: newTotal })
+  }
+
+  handleDecrementTotal = (price, key) => {
+    const currentCart = this.state.cartItems
+    const updatedCart = this.state.cartItems.map((cartItem) => {
+      if (cartItem._id === key && cartItem.quantity > 1) {
+        return {
+          ...cartItem, quantity: cartItem.quantity - 1
+        }
+      } else {
+        return cartItem;
+      }
+    })
+    this.setState({ cartItems: updatedCart })
+
+    const cartItem = currentCart.find((item) => item._id === key);
+    if (cartItem && cartItem.quantity > 1) {
+      const newTotal = Number(this.state.total) - price;
+      this.setState({ total: newTotal });
+    }
   }
 
   handleLinkClick(route) {
@@ -150,8 +198,18 @@ class App extends Component {
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}
-        {this.state.route === '/cart' && <Cart items={this.state.cartItems} removeFromCart={this.handleRemoveFromCart.bind(this)} checkout={this.handleCheckoutCart.bind(this)} />}
-        {this.state.route === '/petsupplies' && <PetSupplies addToCart={this.handleAddToCart.bind(this)} />}
+        {this.state.route === '/cart' &&
+          <Cart
+            items={this.state.cartItems}
+            removeFromCart={this.handleRemoveFromCart.bind(this)}
+            removeFromTotal={this.handleRemoveFromTotal.bind(this)}
+            incrementTotal={this.handleIncrementTotal.bind(this)}
+            decrementTotal={this.handleDecrementTotal.bind(this)}
+            checkout={this.handleCheckoutCart.bind(this)}
+            total={this.state.total}
+          />}
+        {this.state.route === '/supplies' && <Supplies addToCart={this.handleAddToCart.bind(this)} />}
+        {this.state.route === '/customer%20service' && <CustomerService />}
       </div>
     );
   }

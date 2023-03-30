@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import Data from "./Data";
+import ProductDetails from "./ProductDetails";
 
-class PetSupplies extends Component {
+class Supplies extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +43,7 @@ class PetSupplies extends Component {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
     // if (id) {
-    //   let supplyToBeBought = this.state.allSupplies.find(petsupplies => petsupplies._id === id)
+    //   let supplyToBeBought = this.state.allSupplies.find(petsupplies => petsupplies._id ==== id)
     //   console.log(supplyToBeBought)
     //   this.setState({ supply: supplyToBeBought, chosen: true });
     // }
@@ -60,12 +60,12 @@ class PetSupplies extends Component {
     let count = 0;
     for (let i = 0; i < sup.length; i++) {
       for (let j = 0; j < arra.length; j++) {
-        if (sup[i].type == arra[j]) {
+        if (sup[i].type === arra[j]) {
           same = true;
         }
       }
       count++;
-      if (count == 1 && same == false) {
+      if (count === 1 && same === false) {
         arra.push(sup[i].type);
       }
       same = false;
@@ -79,7 +79,7 @@ class PetSupplies extends Component {
     let allSup = this.state.allSupplies;
     const good = [];
     for (let anNum = 0; anNum < allSup.length; anNum++) {
-      if (this.state.type == allSup[anNum].type) {
+      if (this.state.type === allSup[anNum].type) {
         good.push(anNum);
       }
     }
@@ -95,13 +95,10 @@ class PetSupplies extends Component {
       let allSup = this.state.allSupplies;
       let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
       let good = this.handleDisplay(); // these are indexes of supplyWanted
-      //console.log(arra);
-      //console.log(good);
-      console.log(this.state.supply);
 
       if (this.state.chosen === true) {
         return (
-          <Data
+          <ProductDetails
             goodPet={this.state.supply}
             addToCart={this.props.addToCart}
             handleChosen={this.handleToggleChosen.bind(this)}
@@ -111,7 +108,7 @@ class PetSupplies extends Component {
         return (
           <div className="large">
             <div className="row centerText" >
-              <h1 className="centerText">What type of supplies would you like to look at?</h1>
+              <h1 className="centerText">Supplies</h1>
               {arra.map((type) => {
                 return (
                   <div className="col centerText" >
@@ -188,4 +185,4 @@ class PetSupplies extends Component {
   }
 }
 
-export default PetSupplies;
+export default Supplies;
