@@ -122,7 +122,6 @@ class Pets extends Component {
               {
                 good.map((type) => {
                   this.state.maxRow += 1;
-                  console.log(this.state.maxRow);
                   return (
                     <div>
                       <button
@@ -143,7 +142,7 @@ class Pets extends Component {
                           style={{ display: "block", height: "300px", width: "300px", objectFit: 'cover' }}
                         ></img>
                       </button>
-                      <h2 className="centerText">This is {allPets[type].name}</h2>
+                      <h2 className="centerText">{allPets[type].name}</h2>
                       <h2 className="centerText" style={{ color: "red" }}>$ {allPets[type].price}</h2>
                     </div>
                   );

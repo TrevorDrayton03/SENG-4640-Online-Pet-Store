@@ -119,21 +119,10 @@ class Supplies extends Component {
                 );
               })}
             </div>
-            <div id="petDis">
+            <div id="supDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection:'row', justifyContent:'space-evenly' }}>
               {good.map((type) => {
                 return (
-                  <table>
-                    {" "}
-                    <tr>
-                      {" "}
-                      <th>
-                        {" "}
-                        <h1>{allSup[type].name} </h1>{" "}
-                      </th>
-                    </tr>
-                    <tr>
-                      <td>
-                        {" "}
+                  <div>
                         <button
                           value={allSup[type]._id}
                           onClick={() =>
@@ -151,17 +140,14 @@ class Supplies extends Component {
                             src={allSup[type].url}
                             style={{
                               display: "block",
-                              height: "100%",
-                              width: "100%",
+                              height: "300px",
+                              width: "300px",
                             }}
                           ></img>
                         </button>
-                      </td>
-                      <td>
-                        <h1>${allSup[type].price}</h1>
-                      </td>
-                    </tr>
-                  </table>
+                        <h2 className="centerText">{allSup[type].name}</h2>
+                        <h2 className="centerText" style={{ color: "red" }}>$ {allSup[type].price}</h2>
+                  </div>
                 );
               })}
             </div>
