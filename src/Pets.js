@@ -118,48 +118,39 @@ class Pets extends Component {
                 );
               })}
             </div>
-            <div id="petDis">
-              <table>
-                {this.state.maxrow < 3
-                  ? good.map((type) => {
-                      this.state.maxRow += 1;
-                      console.log(this.state.maxRow);
-                      return (
-                        <td>
-                          {" "}
-                          <button
-                            value={allPets[type]._id}
-                            onClick={() =>
-                              this.setState({
-                                chosen: !this.state.chosen,
-                                goodAnimal: allPets[type],
-                              })
-                            }
-                          >
-                            <img
-                              className="itemImg"
-                              id={allPets[type]._id}
-                              name={allPets[type].name}
-                              alt={allPets[type].breed}
-                              src={allPets[type].url}
-                              style={{
-                                display: "block",
-                                height: "300px",
-                                width: "300px",
-                              }}
-                            ></img>
-                          </button>
-                          <h2>This is {allPets[type].name}</h2>
-                          <h2 style={{ color: "red" }}>
-                            $ {allPets[type].price}
-                          </h2>
-                        </td>
-                      );
-                    })
-                  : <tr>sada</tr> && this.setState({ maxRow: 0 })}
-              </table>
-            </div>
-          </div>
+            <div id="petDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection:'row', justifyContent:'space-evenly' }}>
+              {
+                good.map((type) => {
+                  this.state.maxRow += 1;
+                  console.log(this.state.maxRow);
+                  return (
+                    <div>
+                      <button
+                        value={allPets[type]._id}
+                        onClick={() =>
+                          this.setState({
+                            chosen: !this.state.chosen,
+                            goodAnimal: allPets[type],
+                          })
+                        }
+                      >
+                        <img
+                          className="itemImg"
+                          id={allPets[type]._id}
+                          name={allPets[type].name}
+                          alt={allPets[type].breed}
+                          src={allPets[type].url}
+                          style={{ display: "block", height: "300px", width: "300px", objectFit: 'cover' }}
+                        ></img>
+                      </button>
+                      <h2 className="centerText">This is {allPets[type].name}</h2>
+                      <h2 className="centerText" style={{ color: "red" }}>$ {allPets[type].price}</h2>
+                    </div>
+                  );
+                })
+              }
+            </div >
+          </div >
         );
       }
     }
