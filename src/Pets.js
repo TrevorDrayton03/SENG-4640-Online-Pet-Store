@@ -35,7 +35,6 @@ class Pets extends Component {
       chosen: false,
       goodAnimal: null,
       isLoading: true,
-      maxRow: 0,
     };
   }
 
@@ -47,7 +46,7 @@ class Pets extends Component {
   * @returns {void}
   */
   handleChange = (event) => {
-    this.setState({ type: event, maxRow: 0 });
+    this.setState({ type: event });
   };
 
   /**
@@ -132,7 +131,6 @@ class Pets extends Component {
   * @returns {Array} good - Array of indexes of pets that match the selected type.
   */
   handleDisplay = () => {
-    //meant to create a table that displays to page
     let allPets = this.state.allPets;
     const good = [];
     for (let anNum = 0; anNum < allPets.length; anNum++) {
@@ -191,7 +189,6 @@ class Pets extends Component {
             <div id="petDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
               {
                 good.map((type) => {
-                  this.state.maxRow += 1;
                   return (
                     <div>
                       <button
@@ -205,13 +202,11 @@ class Pets extends Component {
                         }
                       >
                         <img
-                          // className="itemImg"
                           id={allPets[type]._id}
                           name={allPets[type].name}
                           alt={allPets[type].breed}
                           src={allPets[type].url}
                           style={{
-                            // display: "block",
                             height: "300px",
                             width: "300px",
                             objectFit: 'cover'

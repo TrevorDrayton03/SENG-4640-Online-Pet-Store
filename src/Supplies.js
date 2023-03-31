@@ -79,7 +79,7 @@ class Supplies extends Component {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const type = params.get("type");
-    // prevent the code from continueing until allSupplies is set
+    // prevent the code from continuing until allSupplies is set
     while (!this.state.allSupplies) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
@@ -180,10 +180,10 @@ class Supplies extends Component {
             <div id="supDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
               {good.map((type) => {
                 return (
-                  <div style={{padding:0, margin: 0}}>
+                  <div style={{ padding: 0, margin: 0 }}>
                     <button
                       value={allSup[type]._id}
-                      style={{padding:0, margin: 0}}
+                      style={{ padding: 0, margin: 0 }}
                       onClick={() =>
                         this.setState({
                           chosen: !this.state.chosen,
@@ -192,20 +192,17 @@ class Supplies extends Component {
                       }
                     >
                       <img
-                        // className="itemImg"
                         id={allSup[type]._id}
                         name={allSup[type].name}
                         alt={allSup[type].breed}
                         src={allSup[type].url}
                         style={{
-                          // display: "block",
                           height: "300px",
                           width: "300px",
                           objectFit: 'cover'
                         }}
                       ></img>
                     </button>
-
                     <h2 className="centerText">{allSup[type].name}</h2>
                     <h2 className="centerText" style={{ color: "red" }}>$ {allSup[type].price}</h2>
                   </div>
