@@ -2,39 +2,94 @@ import React, { Component } from 'react';
 import PetModal from "./modals/PetModal";
 import SuppliesModal from "./modals/SuppliesModal";
 
-// DataTable displays database data for the admin and offers options to update, delete, or add data.
-// DataTable utilizes Modals to update objects in MongoDB.
-
+/**
+* A component that displays database data for the admin and offers options to update, delete, or add data.
+* Utilizes modals to update objects in MongoDB.
+* @component
+* @example
+* <DataTable
+* type="pets"
+* tableData={data}
+* search={searchString}
+* delete={deleteData}
+* update={updateData}
+* />
+* @param {string} type - A string representing the type of data to be displayed. (pets or supplies)
+* @param {Array} tableData - An array of objects representing the data to be displayed.
+* @param {string} search - A string representing the search term to filter the tableData.
+* @param {Function} delete - A function to delete data from the database.
+* @param {Function} update - A function to update data in the database.
+* @returns {JSX.Element} - A DataTable component displaying the database data.
+* */
 class DataTable extends Component {
+    /**
+    * Creates a new DataTable.
+    * @param {Object} props - The component's properties.
+    * @param {Array<Object>} props.tableData - The data to display in the table.
+    * @param {string} props.type - The type of data to display (either "pets" or "supplies").
+    * @param {string} props.search - The search string to filter the data.
+    * @param {Function} props.delete - A function to delete a row from the table.
+    * @param {Function} props.update - A function to update a row in the table.
+    */
+
     constructor(props) {
         super(props);
+        /**
+        * The component's state.
+        * @property {Array<Object>} tableData - The data to display in the table.
+        * @property {boolean} showModal - Whether the modal is visible.
+        * @property {Object|null} modalData - The data to display in the modal.
+        */
         this.state = {
             tableData: this.props.tableData,
             showModal: false,
-            showSuppliesModal: false,
             modalData: null
         };
-
+        /**
+        * The function to handle an update in the modal.
+        * @param {Object} data - The data to update.
+        */
         this.handleUpdate = this.handleUpdate.bind(this);
+
+        /**
+        * The function to close the modal.
+        */
         this.handleCloseModal = this.handleCloseModal.bind(this);
 
     }
-    // required because tableData is asynchronous information that is retreived after the render
-    // componentDidUpdate will execute if the props or state are updated after the render
-    componentDidUpdate(prevProps, prevState) {
+
+    /**
+    * Updates the state with new tableData if the props have changed.
+    * @param {Object} prevProps - The previous properties.
+    * @param {Array<Object>} prevProps.tableData - The previous table data.
+    * @param {string} prevProps.search - The previous search string.
+    */
+    componentDidUpdate(prevProps) {
         if (prevProps.tableData !== this.props.tableData) {
             this.setState({ tableData: this.props.tableData });
         }
     }
 
+    /**
+    * Handles an update in the modal.
+    * @param {Object} data - The data to update.
+    */
+
     handleUpdate = (data) => {
         this.setState({ showModal: true, modalData: data });
     }
 
+    /**
+    * Closes the modal.
+    */
     handleCloseModal = () => {
         this.setState({ showModal: false, modalData: null });
     }
 
+    /**
+    * Renders the component.
+    * @returns {JSX.Element} - The rendered component.
+    */
     render() {
         let type = this.props.type;
         let filteredData = null;

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: NavigationBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: NavigationBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import Badge from 'react-bootstrap/Badge';
+import { FaShoppingCart } from "react-icons/fa";
+
+/**
+* NavigationBar Component
+* 
+* This component renders the navigation bar for the Pet Universe application.
+* @param {object} props - Component props
+* @param {function} props.linkClick - Function to handle link clicks
+* @param {number} props.itemCount - Number of items in the shopping cart
+* @returns {JSX.Element} - Navigation bar JSX element
+*/
+class NavigationBar extends Component {
+
+    /**
+    * Handle link click event
+    * 
+    * Prevents default event and calls linkClick function from props
+    * 
+    * @param {object} e - Click event object
+    * @param {string} value - Link value to pass to linkClick function
+    */
+    handleOnClick(e, value) {
+        e.preventDefault();
+        this.props.linkClick(value)
+    }
+    /**
+    * 
+    * @function render
+    * @description Renders the NavigationBar component.
+    * @returns {JSX.Element} JSX element.
+    */
+    render() {
+        return (
+            &lt; nav className="navbar navbar-expand-lg large navbar-custom" >
+                &lt;a className="navbar-brand" href="#" onClick={e => this.handleOnClick(e, "/")}>
+                    &lt;div className="col">
+                        &lt;img src="./logo192.png" alt="Logo" />
+                        &lt;span className="logo-text">Pet Universe&lt;/span>
+                    &lt;/div>
+                &lt;/a>
+                &lt;ul className="navbar-nav mr-auto medium">
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/pets")} >
+                            Pets
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/supplies")} >
+                            Supplies
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/admin")} >
+                            Admin
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/customer%20service")} >
+                            Customer Service
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className="nav-link" onClick={e => this.handleOnClick(e, "/cart")} >
+                            &lt;FaShoppingCart>&lt;/FaShoppingCart>
+                            &lt;Badge bg="btn-primary">{this.props.itemCount}&lt;/Badge>
+                        &lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+            &lt;/nav >
+        );
+    }
+
+}
+
+export default NavigationBar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="Supplies.Supplies.html">Supplies</a></li></ul><h3>Global</h3><ul><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#handleCarouselClick">handleCarouselClick</a></li><li><a href="global.html#handleDisplay">handleDisplay</a></li><li><a href="global.html#handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue">handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true</a></li><li><a href="global.html#handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalse">handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false</a></li><li><a href="global.html#handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges">handlePasswordChange - Updates the password input value in the component state when the input changes</a></li><li><a href="global.html#handlePetIconClick">handlePetIconClick</a></li><li><a href="global.html#handleSelect">handleSelect</a></li><li><a href="global.html#handleSupplyIconClick">handleSupplyIconClick</a></li><li><a href="global.html#handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges">handleUsernameChange - Updates the username input value in the component state when the input changes</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed">render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 17:55:44 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

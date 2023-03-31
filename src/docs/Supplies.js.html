@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Supplies.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Supplies.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+import ProductDetails from "./ProductDetails";
+
+/**
+ * React component that displays pet supplies and their details.
+ *
+ * @class Supplies
+ * @component
+ * @example
+ * return (
+ *   &lt;Supplies addToCart={addToCart} />
+ * )
+ *
+ * @param {Object} props - Component props
+ * @param {function} props.addToCart - Function to add a product to cart
+ *
+ * @returns {JSX.Element} - Rendered component
+ */
+class Supplies extends Component {
+
+  /**
+  * Creates an instance of Supplies.
+  * @param {*} props
+  * @memberof Supplies
+  */
+  constructor(props) {
+    super(props);
+    /**
+    * State object of the Supplies component
+    * @property {Array|null} allSupplies - list of all pet supplies fetched from the API
+    * @property {string} type - selected type of pet supply
+    * @property {boolean} chosen - selection state of a pet supply
+    * @property {object|null} supply - pet supply object that is currently selected
+    * @property {boolean} isLoading - loading state of the component
+    */
+    this.state = {
+      allSupplies: null,
+      type: "Collar",
+      chosen: false,
+      supply: null,
+      isLoading: true,
+    };
+  }
+
+  /**
+  *Handle changes in supply type
+  *@memberof Supplies
+  *@param {string} event - Selected type of pet supply
+  */
+  handleChange = (event) => {
+    this.setState({ type: event });
+  };
+
+  /**
+  * Toggle the selection state of pet supply
+  * @memberof Supplies
+  */
+  handleToggleChosen() {
+    this.setState({ chosen: !this.state.chosen });
+  }
+
+  /**
+  * Fetches the list of pet supplies and sets the state
+  * Checks the URL for query parameters and sets the state
+  * @memberof Supplies
+  * @async
+  */
+  async componentDidMount() {
+    try {
+      const response = await fetch("http://localhost:3000/api/suppliesData");
+      const petsupplies = await response.json();
+      this.setState({
+        allSupplies: petsupplies,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    // this will check the URL for a query parameter and will set the state if it's there
+    // this is how this component knows what to display when clicking on the supplyToBeBought icons or carousel in Home
+    const search = window.location.search;
+    const params = new URLSearchParams(search);
+    const type = params.get("type");
+    // prevent the code from continueing until allSupplies is set
+    while (!this.state.allSupplies) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
+    }
+    if (type) {
+      this.setState({ type: type });
+    }
+    this.setState({ isLoading: false });
+  }
+
+  /**
+  * Select distinct types of pet supplies
+  * @memberof Supplies
+  * @returns {Array} distinct types of pet supplies
+  */
+  selectOptions() {
+    let sup = this.state.allSupplies;
+    let arra = [];
+    let same = false;
+    let count = 0;
+    for (let i = 0; i &lt; sup.length; i++) {
+      for (let j = 0; j &lt; arra.length; j++) {
+        if (sup[i].type === arra[j]) {
+          same = true;
+        }
+      }
+      count++;
+      if (count === 1 &amp;&amp; same === false) {
+        arra.push(sup[i].type);
+      }
+      same = false;
+      count = 0;
+    }
+    return arra;
+  }
+
+  /**
+  * Select pet supplies of the chosen type
+  * @memberof Supplies
+  * @returns {Array} indexes of the pet supplies to be displayed
+  */
+  handleDisplay = () => {
+    //meant to create a table that displays to page
+    let allSup = this.state.allSupplies;
+    const good = [];
+    for (let anNum = 0; anNum &lt; allSup.length; anNum++) {
+      if (this.state.type === allSup[anNum].type) {
+        good.push(anNum);
+      }
+    }
+    return good;
+  };
+
+  /**
+  * Render Supplies Component
+  * @memberof Supplies
+  * @returns {JSX.Element} Supplies Component
+  */
+  render() {
+    if (this.state.isLoading) {
+      return (
+        &lt;div>
+          &lt;p>Loading...&lt;/p>
+        &lt;/div>
+      )
+    } else if (this.state.allSupplies) {
+      let allSup = this.state.allSupplies;
+      let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
+      let good = this.handleDisplay(); // these are indexes of supplyWanted
+
+      if (this.state.chosen === true) {
+        return (
+          &lt;ProductDetails
+            goodPet={this.state.supply}
+            addToCart={this.props.addToCart}
+            handleChosen={this.handleToggleChosen.bind(this)}
+          />
+        );
+      } else {
+        return (
+          &lt;div className="large">
+            &lt;div className="row centerText">
+              &lt;h1 className="centerText">Supplies&lt;/h1>
+              {arra.map((type) => {
+                return (
+                  &lt;div className="col centerText">
+                    &lt;a onClick={() => this.handleChange(type)} value={type}>
+                      &lt;img src={require(`./images/${type}.jpg`).default}>&lt;/img>
+                    &lt;/a>
+                  &lt;/div>
+                );
+              })}
+            &lt;/div>
+            &lt;div id="petDis">
+              {/* for each supplyToBeBought index type, use it to get the supplyToBeBought data we want from all the supplyWanted */}
+              {good.map((type) => {
+                return (
+                  &lt;table>
+                    {" "}
+                    &lt;tr>
+                      {" "}
+                      &lt;th>
+                        {" "}
+                        &lt;h1>{allSup[type].name} &lt;/h1>{" "}
+                      &lt;/th>
+                    &lt;/tr>
+                    &lt;tr>
+                      &lt;td>
+                        {" "}
+                        &lt;button
+                          value={allSup[type]._id}
+                          onClick={() =>
+                            this.setState({
+                              chosen: !this.state.chosen,
+                              supply: allSup[type],
+                            })
+                          }
+                        >
+                          &lt;img
+                            className="itemImg"
+                            id={allSup[type]._id}
+                            name={allSup[type].name}
+                            alt={allSup[type].breed}
+                            src={allSup[type].url}
+                            style={{
+                              display: "block",
+                              height: "100%",
+                              width: "100%",
+                            }}
+                          >&lt;/img>
+                        &lt;/button>
+                      &lt;/td>
+                      &lt;td>
+                        &lt;h1>${allSup[type].price}&lt;/h1>
+                      &lt;/td>
+                    &lt;/tr>
+                  &lt;/table>
+                );
+              })}
+            &lt;/div>
+          &lt;/div>
+        );
+      }
+    }
+  }
+}
+
+export default Supplies;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="Supplies.Supplies.html">Supplies</a></li></ul><h3>Global</h3><ul><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#handleCarouselClick">handleCarouselClick</a></li><li><a href="global.html#handleDisplay">handleDisplay</a></li><li><a href="global.html#handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue">handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true</a></li><li><a href="global.html#handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalse">handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false</a></li><li><a href="global.html#handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges">handlePasswordChange - Updates the password input value in the component state when the input changes</a></li><li><a href="global.html#handlePetIconClick">handlePetIconClick</a></li><li><a href="global.html#handleSelect">handleSelect</a></li><li><a href="global.html#handleSupplyIconClick">handleSupplyIconClick</a></li><li><a href="global.html#handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges">handleUsernameChange - Updates the username input value in the component state when the input changes</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed">render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 17:55:44 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -2,13 +2,35 @@ import React, { Component } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import { FaShoppingCart } from "react-icons/fa";
 
+/**
+* NavigationBar Component
+* 
+* This component renders the navigation bar for the Pet Universe application.
+* @param {object} props - Component props
+* @param {function} props.linkClick - Function to handle link clicks
+* @param {number} props.itemCount - Number of items in the shopping cart
+* @returns {JSX.Element} - Navigation bar JSX element
+*/
 class NavigationBar extends Component {
 
+    /**
+    * Handle link click event
+    * 
+    * Prevents default event and calls linkClick function from props
+    * 
+    * @param {object} e - Click event object
+    * @param {string} value - Link value to pass to linkClick function
+    */
     handleOnClick(e, value) {
         e.preventDefault();
         this.props.linkClick(value)
     }
-
+    /**
+    * 
+    * @function render
+    * @description Renders the NavigationBar component.
+    * @returns {JSX.Element} JSX element.
+    */
     render() {
         return (
             < nav className="navbar navbar-expand-lg large navbar-custom" >

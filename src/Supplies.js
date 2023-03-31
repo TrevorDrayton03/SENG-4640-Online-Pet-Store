@@ -1,9 +1,37 @@
 import React, { Component } from "react";
 import ProductDetails from "./ProductDetails";
 
+/**
+ * React component that displays pet supplies and their details.
+ *
+ * @class Supplies
+ * @component
+ * @example
+ * return (
+ *   <Supplies addToCart={addToCart} />
+ * )
+ *
+ * @param {Object} props - Component props
+ * @param {function} props.addToCart - Function to add a product to cart
+ *
+ * @returns {JSX.Element} - Rendered component
+ */
 class Supplies extends Component {
+
+  /**
+  * Creates an instance of Supplies.
+  * @param {*} props
+  */
   constructor(props) {
     super(props);
+    /**
+    * State object of the Supplies component
+    * @property {Array|null} allSupplies - list of all pet supplies fetched from the API
+    * @property {string} type - selected type of pet supply
+    * @property {boolean} chosen - selection state of a pet supply
+    * @property {object|null} supply - pet supply object that is currently selected
+    * @property {boolean} isLoading - loading state of the component
+    */
     this.state = {
       allSupplies: null,
       type: "Collar",
@@ -13,14 +41,29 @@ class Supplies extends Component {
     };
   }
 
+  /**
+  *Handle changes in supply type
+  *@memberof Supplies
+  *@param {string} event - Selected type of pet supply
+  */
   handleChange = (event) => {
     this.setState({ type: event });
   };
+
+  /**
+  * Toggle the selection state of pet supply
+  * @memberof Supplies
+  */
   handleToggleChosen() {
     this.setState({ chosen: !this.state.chosen });
   }
 
-  // this has to be done instead of passing props down from App if we are going to make supplyWanted and supplyToBeBought types clickable from Home
+  /**
+  * Fetches the list of pet supplies and sets the state
+  * Checks the URL for query parameters and sets the state
+  * @memberof Supplies
+  * @async
+  */
   async componentDidMount() {
     try {
       const response = await fetch("http://localhost:3000/api/suppliesData");
@@ -36,23 +79,21 @@ class Supplies extends Component {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const type = params.get("type");
-    // const id = params.get('id');
-    // console.log(id);
     // prevent the code from continueing until allSupplies is set
     while (!this.state.allSupplies) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
-    // if (id) {
-    //   let supplyToBeBought = this.state.allSupplies.find(petsupplies => petsupplies._id ==== id)
-    //   console.log(supplyToBeBought)
-    //   this.setState({ supply: supplyToBeBought, chosen: true });
-    // }
     if (type) {
       this.setState({ type: type });
     }
     this.setState({ isLoading: false });
   }
 
+  /**
+  * Select distinct types of pet supplies
+  * @memberof Supplies
+  * @returns {Array} distinct types of pet supplies
+  */
   selectOptions() {
     let sup = this.state.allSupplies;
     let arra = [];
@@ -74,6 +115,11 @@ class Supplies extends Component {
     return arra;
   }
 
+  /**
+  * Select pet supplies of the chosen type
+  * @memberof Supplies
+  * @returns {Array} indexes of the pet supplies to be displayed
+  */
   handleDisplay = () => {
     //meant to create a table that displays to page
     let allSup = this.state.allSupplies;
@@ -86,11 +132,18 @@ class Supplies extends Component {
     return good;
   };
 
+  /**
+  * Render Supplies Component
+  * @memberof Supplies
+  * @returns {JSX.Element} Supplies Component
+  */
   render() {
     if (this.state.isLoading) {
-      <div>
-        <p>Loading...</p>
-      </div>;
+      return (
+        <div>
+          <p>Loading...</p>
+        </div>
+      )
     } else if (this.state.allSupplies) {
       let allSup = this.state.allSupplies;
       let arra = this.selectOptions(); // this is an array of distinct supplyToBeBought types
@@ -162,11 +215,6 @@ class Supplies extends Component {
                         <h1>${allSup[type].price}</h1>
                       </td>
                     </tr>
-                    {/* <tr>
-                      <button value={allSup[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, supply: allSup[type] })}>
-                        Click here to learn more about them
-                      </button>
-                    </tr> */}
                   </table>
                 );
               })}

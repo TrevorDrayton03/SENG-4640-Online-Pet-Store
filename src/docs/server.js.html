@@ -1,8 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @fileoverview This is the server file for the Pet Universe app.
+ * @author Trevor Drayton, Sanyam Gupta
+ * @version 1.0.0
+ */
+
 const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
-// const mongoose = require('mongoose');
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '..', 'build')));
@@ -12,16 +45,30 @@ app.set("view engine", "ejs");
 // parse application/json (header content type)
 app.use(bodyParser.json());
 
-const PetModel = require("../src/schemas/Pet.js");
-const SuppliesModel = require("../src/schemas/Supplies.js");
-const AdminModel = require("../src/schemas/Admin.js");
+const PetModel = require("../schemas/Pet.js");
+const SuppliesModel = require("../schemas/Supplies.js");
+const AdminModel = require("../schemas/Admin.js");
 
-// this middleware always console logs the requests
+/**
+* This middleware always console logs the requests.
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @param {function} next - The next middleware in the chain.
+* @returns {void}
+*/
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path}`);
   next();
 });
 
+/**
+ * GET endpoint to fetch all pet data.
+ * @function
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {void}
+ */
 app.get('/api/petData', async (req, res) => {
   try {
     const type = req.query.type;
@@ -37,6 +84,13 @@ app.get('/api/petData', async (req, res) => {
   };
 });
 
+/**
+* GET endpoint to fetch all supplies data.
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('/api/suppliesData', async (req, res) => {
   try {
     const type = req.query.type;
@@ -52,6 +106,13 @@ app.get('/api/suppliesData', async (req, res) => {
   };
 });
 
+/**
+* POST endpoint to authenticate an admin.
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.use('/api/admin', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -69,7 +130,13 @@ app.use('/api/admin', async (req, res) => {
   };
 });
 
-// get all unique pet types
+/**
+* GET endpoint to fetch all unique pet types.
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('/api/petTypes', async (req, res) => {
   try {
     const types = await PetModel.distinct('type');
@@ -80,7 +147,13 @@ app.get('/api/petTypes', async (req, res) => {
   }
 });
 
-// get all unique supply types
+/**
+* GET endpoint to fetch all unique supply types.
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('/api/supplyTypes', async (req, res) => {
   try {
     const types = await SuppliesModel.distinct('type');
@@ -91,6 +164,13 @@ app.get('/api/supplyTypes', async (req, res) => {
   }
 });
 
+/**
+* Route to delete a pet by id
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('/api/deletePet', async (req, res) => {
   try {
     const key = req.query.key;
@@ -102,6 +182,13 @@ app.get('/api/deletePet', async (req, res) => {
   }
 });
 
+/**
+* Route to delete a supply by id
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('/api/deleteSupply', async (req, res) => {
   try {
     const key = req.query.key;
@@ -113,6 +200,13 @@ app.get('/api/deleteSupply', async (req, res) => {
   }
 });
 
+/**
+* Route to checkout and remove multiple pets from the database by id
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.use('/api/checkout', async (req, res) => {
   try {
     const keys = req.body;
@@ -127,6 +221,13 @@ app.use('/api/checkout', async (req, res) => {
   }
 });
 
+/**
+* Route to update a pet by id
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.use('/api/updatePet', async (req, res) => {
   try {
     const { key, name, age, type, breed, description, url, price } = req.body;
@@ -148,6 +249,13 @@ app.use('/api/updatePet', async (req, res) => {
   }
 });
 
+/**
+* Route to update a supply by id
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.use('/api/updateSupply', async (req, res) => {
   try {
     const { key, name, dimension, type, weight, description, url, price } = req.body;
@@ -169,7 +277,13 @@ app.use('/api/updateSupply', async (req, res) => {
   }
 });
 
-// saves pet to 
+/**
+* Route to save a new pet to the database
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.use('/api/savePet', async (req, res) => {
   try {
     const { name, age, type, breed, description, url, price } = req.body;
@@ -191,6 +305,13 @@ app.use('/api/savePet', async (req, res) => {
   }
 });
 
+/**
+* Route to save a new supply to the database
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.use('/api/saveSupply', async (req, res) => {
   try {
     const { name, weight, type, dimension, description, url, price } = req.body;
@@ -213,7 +334,13 @@ app.use('/api/saveSupply', async (req, res) => {
 });
 
 
-// get random pets for carousel using an ES6 style of synax
+/**
+* Route to get a random set of pets for the carousel
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('/api/carousel', async (req, res) => {
   PetModel.aggregate([{ $sample: { size: 3 } }])
     .then((result) => {
@@ -224,10 +351,44 @@ app.get('/api/carousel', async (req, res) => {
     });
 });
 
+/**
+* Route to serve the index.html file for all unmatched routes
+* @function
+* @param {Object} req - The request object.
+* @param {Object} res - The response object.
+* @returns {void}
+*/
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
 });
 
+/**
+* Starts the server on port 3000 and logs to the console
+* @function
+* @returns {void}
+*/
 app.listen(3000, () => {
   console.log('Listening on port 3000');
-});
+});</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 17:54:44 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

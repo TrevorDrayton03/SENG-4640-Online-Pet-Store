@@ -1,7 +1,19 @@
 import React, { Component } from "react";
 
+/**
+* Renders the details of a product, including its name, image, price, description, and options to add to cart or go back to pets.
+* @param {object} goodPet - The product to display.
+* @param {function} handleChosen - Callback function to handle clicking the back button.
+* @param {function} addToCart - Callback function to handle adding the product to cart.
+* @returns {JSX.Element} - The ProductDetails component.
+*/
 class ProductDetails extends Component {
-
+  /**
+  * 
+  * @function render
+  * @description Renders the ProductDetails component.
+  * @returns {JSX.Element} JSX element.
+  */
   render() {
     let product = this.props.goodPet;
     if (product.breed !== undefined) {

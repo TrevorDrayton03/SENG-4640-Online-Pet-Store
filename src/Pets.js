@@ -1,9 +1,40 @@
 import React, { Component } from "react";
 import ProductDetails from "./ProductDetails";
+/**
+ * React component that displays pets data and details.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Pets addToCart={addToCart} />
+ * )
+ *
+ * @param {Object} props - Component props
+ * @param {function} props.addToCart - Function to add a product to cart
+ *
+ * @returns {JSX.Element} - Rendered component
+ */
 
 class Pets extends Component {
+  /**
+  * Creates an instance of Pets.
+  *
+  * @constructor
+  * @param {Object} props - Component props
+  */
   constructor(props) {
     super(props);
+    /**
+    * Component state
+    *
+    * @type {Object}
+    * @property {?Array<Object>} allPets - List of all available pets
+    * @property {string} type - Current type of pet to display
+    * @property {boolean} chosen - Whether a pet has been chosen for details view
+    * @property {?Object} goodAnimal - Selected pet for details view
+    * @property {boolean} isLoading - Whether the component is still loading data
+    */
+
     this.state = {
       allPets: null,
       type: "Dog",
@@ -12,16 +43,37 @@ class Pets extends Component {
       isLoading: true,
     };
   }
-
+  /**
+  * Handles changes in the pet type to display.
+  *
+  * @method
+  * @param {string} event - New pet type
+  * @returns {void}
+  */
   handleChange = (event) => {
     this.setState({ type: event });
   };
 
+  /**
+  * Toggles the chosen state between true and false.
+  * 
+  * Used to determine whether the details view should be mounted or dismounted.
+  * @method
+  * @returns {void}
+  */
   handleToggleChosen() {
     this.setState({ chosen: !this.state.chosen });
   }
 
-  // this has to be done instead of passing props down from App if we are going to make pets and pet types clickable from Home
+  /**
+  * Fetches pet data and updates component state.
+  * 
+  * Sets goodAnimal if query parameters exist in the URL.
+  *
+  * @async
+  * @method
+  * @returns {Promise<void>}
+  */
   async componentDidMount() {
     try {
       const response = await fetch("http://localhost:3000/api/petData");
@@ -51,6 +103,11 @@ class Pets extends Component {
     this.setState({ isLoading: false });
   }
 
+  /**
+  * Generates an array of distinct pet types from allPets.
+  * @method
+  * @returns {Array<string>} - Array of distinct pet types
+  */
   selectOptions() {
     let ani = this.state.allPets;
     let arra = [];
@@ -72,6 +129,11 @@ class Pets extends Component {
     return arra;
   }
 
+  /**
+  * @function handleDisplay
+  * @description Creates an array of indexes of pets that match the type of pet selected.
+  * @returns {Array} good - Array of indexes of pets that match the selected type.
+  */
   handleDisplay = () => {
     //meant to create a table that displays to page
     let allPets = this.state.allPets;
@@ -84,6 +146,12 @@ class Pets extends Component {
     return good;
   };
 
+  /**
+  * 
+  * @function render
+  * @description Renders the Pets component.
+  * @returns {JSX.Element} JSX element.
+  */
   render() {
     if (this.state.isLoading) {
       <div>
@@ -160,11 +228,6 @@ class Pets extends Component {
                         <h1>They cost $ {allPets[type].price}</h1>
                       </td>
                     </tr>
-                    {/* <tr>
-                      <button value={allPets[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: allPets[type] })}>
-                        Click here to learn more about them
-                      </button>
-                    </tr> */}
                   </table>
                 );
               })}

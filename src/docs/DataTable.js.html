@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: DataTable.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: DataTable.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import PetModal from "./modals/PetModal";
+import SuppliesModal from "./modals/SuppliesModal";
+
+/**
+* A component that displays database data for the admin and offers options to update, delete, or add data.
+* Utilizes modals to update objects in MongoDB.
+* @component
+* @example
+* &lt;DataTable
+* type="pets"
+* tableData={data}
+* search={searchString}
+* delete={deleteData}
+* update={updateData}
+* />
+* @param {string} type - A string representing the type of data to be displayed. (pets or supplies)
+* @param {Array} tableData - An array of objects representing the data to be displayed.
+* @param {string} search - A string representing the search term to filter the tableData.
+* @param {Function} delete - A function to delete data from the database.
+* @param {Function} update - A function to update data in the database.
+* @returns {JSX.Element} - A DataTable component displaying the database data.
+* */
+class DataTable extends Component {
+    /**
+    * Creates a new DataTable.
+    * @param {Object} props - The component's properties.
+    * @param {Array&lt;Object>} props.tableData - The data to display in the table.
+    * @param {string} props.type - The type of data to display (either "pets" or "supplies").
+    * @param {string} props.search - The search string to filter the data.
+    * @param {Function} props.delete - A function to delete a row from the table.
+    * @param {Function} props.update - A function to update a row in the table.
+    */
+
+    constructor(props) {
+        super(props);
+        /**
+        * The component's state.
+        * @property {Array&lt;Object>} tableData - The data to display in the table.
+        * @property {boolean} showModal - Whether the modal is visible.
+        * @property {Object|null} modalData - The data to display in the modal.
+        */
+        this.state = {
+            tableData: this.props.tableData,
+            showModal: false,
+            modalData: null
+        };
+        /**
+        * The function to handle an update in the modal.
+        * @param {Object} data - The data to update.
+        */
+        this.handleUpdate = this.handleUpdate.bind(this);
+
+        /**
+        * The function to close the modal.
+        */
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+
+    }
+
+    /**
+    * Updates the state with new tableData if the props have changed.
+    * @param {Object} prevProps - The previous properties.
+    * @param {Array&lt;Object>} prevProps.tableData - The previous table data.
+    * @param {string} prevProps.search - The previous search string.
+    */
+    componentDidUpdate(prevProps) {
+        if (prevProps.tableData !== this.props.tableData) {
+            this.setState({ tableData: this.props.tableData });
+        }
+    }
+
+    /**
+    * Handles an update in the modal.
+    * @param {Object} data - The data to update.
+    */
+
+    handleUpdate = (data) => {
+        this.setState({ showModal: true, modalData: data });
+    }
+
+    /**
+    * Closes the modal.
+    */
+    handleCloseModal = () => {
+        this.setState({ showModal: false, modalData: null });
+    }
+
+    /**
+    * Renders the component.
+    * @returns {JSX.Element} - The rendered component.
+    */
+    render() {
+        let type = this.props.type;
+        let filteredData = null;
+        // filters tableData with search string
+        if (this.state.tableData) {
+            filteredData = this.state.tableData.filter((data) => {
+                const searchRegex = new RegExp(this.props.search, 'i');
+                return (
+                    searchRegex.test(data.name) ||
+                    searchRegex.test(type === "pets" ? data.age : data.weight) ||
+                    searchRegex.test(data.type) ||
+                    searchRegex.test(data.breed) ||
+                    searchRegex.test(type === "pets" ? data.breed : data.dimension) ||
+                    searchRegex.test(data.url) ||
+                    searchRegex.test(data.description) ||
+                    searchRegex.test(data.price)
+                );
+            });
+        }
+
+        return (
+            &lt;div className="Container">
+                &lt;table className="table" width="100%">
+                    &lt;thead>
+                        &lt;tr>
+                            &lt;th className="width7">Name&lt;/th>
+                            &lt;th className="width7">{type === "pets" ? "Age" : "Weight"}&lt;/th>
+                            &lt;th className="width7">Type&lt;/th>
+                            &lt;th className="width7">{type === "pets" ? "Breed" : "Dimension"}&lt;/th>
+                            &lt;th>Description&lt;/th>
+                            &lt;th>Image URL&lt;/th>
+                            &lt;th className="width7">Price&lt;/th>
+                            &lt;th className="width7">&lt;/th>
+                            &lt;th className="width7">&lt;/th>
+                        &lt;/tr>
+                    &lt;/thead>
+                    &lt;tbody>
+                        {this.state.tableData &amp;&amp;
+                            filteredData ? filteredData.map((data) => {
+                                return (
+                                    &lt;tr key={data &amp;&amp; data._id}>
+                                        &lt;td className="width7">{data.name}&lt;/td>
+                                        &lt;td className="width7">{type === "pets" ? data.age : data.weight}&lt;/td>
+                                        &lt;td className="width10">{data.type}&lt;/td>
+                                        &lt;td className="width10">{type === "pets" ? data.breed : data.dimension}&lt;/td>
+                                        &lt;td>{data.description}&lt;/td>
+                                        &lt;td>{data.url}&lt;/td>
+                                        &lt;td className="width7">{data.price}&lt;/td>
+                                        &lt;td className="width7">
+                                            &lt;button className="btn btn-warning" onClick={() => {
+                                                this.handleUpdate(data)
+                                            }}>Update&lt;/button>
+                                        &lt;/td>
+                                        &lt;td className="width7">
+                                            &lt;button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete&lt;/button>
+                                        &lt;/td>
+                                    &lt;/tr>
+                                );
+                            })
+                            : this.state.tableData &amp;&amp;
+                            this.state.tableData.map((data) => {
+                                return (
+                                    &lt;tr key={data &amp;&amp; data._id}>
+                                        &lt;td className="width7">{data.name}&lt;/td>
+                                        &lt;td className="width7">{type === "pets" ? data.age : data.weight}&lt;/td>
+                                        &lt;td className="width10">{data.type}&lt;/td>
+                                        &lt;td className="width10">{type === "pets" ? data.breed : data.dimension}&lt;/td>
+                                        &lt;td>{data.description}&lt;/td>
+                                        &lt;td>{data.url}&lt;/td>
+                                        &lt;td className="width7">{data.price}&lt;/td>
+                                        &lt;td className="width5">
+                                            &lt;button className="btn btn-warning" onClick={() => {
+                                                this.handleUpdate(data)
+                                            }}>Update&lt;/button>
+                                        &lt;/td>
+                                        &lt;td className="width5">
+                                            &lt;button className="btn btn-danger" onClick={() => this.props.delete(data._id)}>Delete&lt;/button>
+                                        &lt;/td>
+                                    &lt;/tr>
+                                );
+                            })
+                        }
+                    &lt;/tbody>
+                &lt;/table>
+                {this.props.type === "pets" ? &lt;PetModal
+                    handleCloseModal={this.handleCloseModal}
+                    save={null}
+                    show={this.state.showModal}
+                    pet={this.state.modalData}
+                    job="update"
+                    update={this.props.update}
+                >
+                &lt;/PetModal>
+                    :
+                    &lt;SuppliesModal
+                        handleCloseModal={this.handleCloseModal}
+                        save={null}
+                        show={this.state.showModal}
+                        supply={this.state.modalData}
+                        job="update"
+                        update={this.props.update}
+                    >
+                    &lt;/SuppliesModal>
+                }
+            &lt;/div>
+        )
+    }
+}
+
+export default DataTable;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="Supplies.Supplies.html">Supplies</a></li></ul><h3>Global</h3><ul><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#handleCarouselClick">handleCarouselClick</a></li><li><a href="global.html#handleDisplay">handleDisplay</a></li><li><a href="global.html#handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue">handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true</a></li><li><a href="global.html#handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalse">handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false</a></li><li><a href="global.html#handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges">handlePasswordChange - Updates the password input value in the component state when the input changes</a></li><li><a href="global.html#handlePetIconClick">handlePetIconClick</a></li><li><a href="global.html#handleSelect">handleSelect</a></li><li><a href="global.html#handleSupplyIconClick">handleSupplyIconClick</a></li><li><a href="global.html#handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges">handleUsernameChange - Updates the username input value in the component state when the input changes</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed">render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 17:55:44 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
