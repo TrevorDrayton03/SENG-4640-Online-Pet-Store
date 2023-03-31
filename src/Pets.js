@@ -181,13 +181,14 @@ class Pets extends Component {
                       <img
                         src={require(`./images/${type}.jpg`).default}
                         className={isSelected ? "selected" : ""}
+                        style={{ cursor: "pointer" }}
                       ></img>
                     </a>
                   </div>
                 );
               })}
             </div>
-            <div id="petDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection:'row', justifyContent:'space-evenly' }}>
+            <div id="petDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
               {
                 good.map((type) => {
                   this.state.maxRow += 1;
@@ -195,6 +196,7 @@ class Pets extends Component {
                     <div>
                       <button
                         value={allPets[type]._id}
+                        style={{ padding: 0, margin: 0 }}
                         onClick={() =>
                           this.setState({
                             chosen: !this.state.chosen,
@@ -203,12 +205,17 @@ class Pets extends Component {
                         }
                       >
                         <img
-                          className="itemImg"
+                          // className="itemImg"
                           id={allPets[type]._id}
                           name={allPets[type].name}
                           alt={allPets[type].breed}
                           src={allPets[type].url}
-                          style={{ display: "block", height: "300px", width: "300px", objectFit: 'cover' }}
+                          style={{
+                            // display: "block",
+                            height: "300px",
+                            width: "300px",
+                            objectFit: 'cover'
+                          }}
                         ></img>
                       </button>
                       <h2 className="centerText">{allPets[type].name}</h2>

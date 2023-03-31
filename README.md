@@ -7,7 +7,7 @@
 
 An online pet store for pets and supplies developed with MERN (MongoDB, Express.js, React.js, and Node.js).
 
-Fully documented, generated using JSDoc.
+React components, schemas, and the server.js file are documented using JSDoc.
 
 ## Running the Application
 1. Download the files into your IDE (we used Visual Studio Code)

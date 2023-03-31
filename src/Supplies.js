@@ -170,41 +170,44 @@ class Supplies extends Component {
                       <img
                         src={require(`./images/${type}.jpg`).default}
                         className={isSelected ? "selected" : ""}
+                        style={{ cursor: "pointer" }}
                       ></img>
                     </a>
                   </div>
                 );
               })}
             </div>
-            <div id="supDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection:'row', justifyContent:'space-evenly' }}>
+            <div id="supDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
               {good.map((type) => {
                 return (
-                  <div>
-                        <button
-                          value={allSup[type]._id}
-                          onClick={() =>
-                            this.setState({
-                              chosen: !this.state.chosen,
-                              supply: allSup[type],
-                            })
-                          }
-                        >
-                          <img
-                            className="itemImg"
-                            id={allSup[type]._id}
-                            name={allSup[type].name}
-                            alt={allSup[type].breed}
-                            src={allSup[type].url}
-                            style={{
-                              display: "block",
-                              height: "300px",
-                              width: "300px",
-                            }}
-                          ></img>
-                        </button>
+                  <div style={{padding:0, margin: 0}}>
+                    <button
+                      value={allSup[type]._id}
+                      style={{padding:0, margin: 0}}
+                      onClick={() =>
+                        this.setState({
+                          chosen: !this.state.chosen,
+                          supply: allSup[type],
+                        })
+                      }
+                    >
+                      <img
+                        // className="itemImg"
+                        id={allSup[type]._id}
+                        name={allSup[type].name}
+                        alt={allSup[type].breed}
+                        src={allSup[type].url}
+                        style={{
+                          // display: "block",
+                          height: "300px",
+                          width: "300px",
+                          objectFit: 'cover'
+                        }}
+                      ></img>
+                    </button>
 
-                        <h2 className="centerText">{allSup[type].name}</h2>
-                        <h2 className="centerText" style={{ color: "red" }}>$ {allSup[type].price}</h2>
+                    <h2 className="centerText">{allSup[type].name}</h2>
+                    <h2 className="centerText" style={{ color: "red" }}>$ {allSup[type].price}</h2>
                   </div>
                 );
               })}
