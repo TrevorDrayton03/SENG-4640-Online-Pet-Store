@@ -10,22 +10,24 @@ import CustomerService from './CustomerService.js';
 import './App.css';
 
 /**
-* Main component of the application. 
-* @class
+* App.js is the root component of the application. 
+* @example
+* <App/>
 * @extends React.Component
+* @returns {JSX.Element}
 */
 class App extends Component {
   constructor() {
     super();
     /**
     * The initial state of the component.
-    * @type {Object}
-    * @property {string} route - The current route/pathname of the application.
-    * @property {boolean} admin - A boolean that indicates if the user is an admin or not.
-    * @property {Object} allPets - An object that contains all pet data.
-    * @property {Array} cartItems - An array that contains all items in the cart.
-    * @property {Array} carouselData - An array that contains the data for the carousel on the home page.
-    * @property {number} total - The total price of all items in the cart.
+    * @property {Object} state
+    * @property {string} state.route - The current route/pathname of the application.
+    * @property {boolean} state.admin - A boolean that indicates if the user is an admin or not.
+    * @property {Object} state.allPets - An object that contains all pet data.
+    * @property {Array} state.cartItems - An array that contains all items in the cart.
+    * @property {Array} state.carouselData - An array that contains the data for the carousel on the home page.
+    * @property {number} state.total - The total price of all items in the cart.
     */
     this.state = {
       route: window.location.pathname,

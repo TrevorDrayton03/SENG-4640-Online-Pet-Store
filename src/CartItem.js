@@ -3,8 +3,20 @@ import { AiOutlineMinus } from "react-icons/ai";
 import { AiOutlinePlus } from "react-icons/ai";
 
 /**
-* React component for a single item in a shopping cart.
-* @component
+* CartItem.js is a component that handles each cart item.
+* @example
+* <CartItem
+*   id="123"
+*   name="Dog Food"
+*   url="https://example.com/dog-food.jpg"
+*   type="pet"
+*   price={10.99}
+*   quantity={2}
+*   incrementTotal={handleIncrementTotal}
+*   decrementTotal={handleDecrementTotal}
+*   removeFromCart={handleRemoveFromCart}
+*   removeFromTotal={handleRemoveFromTotal}
+* />
 * @param {object} props - The props object containing the cart item details.
 * @param {string} props.id - The unique identifier for the cart item.
 * @param {string} props.name - The name of the cart item.
@@ -16,22 +28,15 @@ import { AiOutlinePlus } from "react-icons/ai";
 * @param {function} props.decrementTotal - A callback function to decrement the total price of all cart items.
 * @param {function} props.removeFromCart - A callback function to remove the cart item from the cart.
 * @param {function} props.removeFromTotal - A callback function to remove the total price of the cart item (price * quantity) from the total price of all cart items.
-* @example
-* <CartItem
-* id="123"
-* name="Dog Food"
-* url="https://example.com/dog-food.jpg"
-* type="pet"
-* price={10.99}
-* quantity={2}
-* incrementTotal={handleIncrementTotal}
-* decrementTotal={handleDecrementTotal}
-* removeFromCart={handleRemoveFromCart}
-* removeFromTotal={handleRemoveFromTotal}
-* />
+* @extends React.Component
+* @returns {JSX.Element}
 */
 
 class CartItem extends Component {
+    /**
+    * @property {object} state - The state object containing the type of th cart item (pet or supply).
+    * @property {string} state.type - The type of the cart item.
+    */
     constructor() {
         super()
         this.state = {

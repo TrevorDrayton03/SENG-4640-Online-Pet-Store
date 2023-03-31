@@ -15,7 +15,10 @@
             "./Admin.js",
             "./modals/CheckoutModal.js",
             "./modals/PetModal.js",
-            "./modals/SuppliesModal.js"
+            "./modals/SuppliesModal.js",
+            "./schemas/Admin.js",
+            "./schemas/Pet.js",
+            "./schemas/Supplies.js"
         ],
         "exclude": [
             "node_modules/"

@@ -2,17 +2,26 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 /**
-* CheckoutModal is used as the form for when checking out the cart.
-* @class
+* CheckoutModal.js is used as the form for checking out the cart.
+* @example
+* <CheckoutModal
+*     checkout={this.props.checkout}
+*     show={this.state.showModal}
+*     close={this.handleCloseModal}
+* >
 * @memberof module:components
 * @extends React.Component
+* @param {Object} props - The props that were passed to the component.
+* @param {function} props.checkout - Function to check out the cart.
+* @param {boolean} props.show - Whether or not the component should show.
+* @param {function} props.close - Closes the modal.
+* @returns {JSX.Element}
 */
 class CheckoutModal extends Component {
 
     /**
     * Creates a new instance of CheckoutModal.
     * @constructor
-    * @param {Object} props - The props that were passed to the component.
     */
     constructor(props) {
         super(props);

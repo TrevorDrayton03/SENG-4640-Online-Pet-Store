@@ -5,22 +5,23 @@ import PetModal from "./modals/PetModal";
 import SuppliesModal from "./modals/SuppliesModal";
 
 /**
-* A component to manage pet and supplies data displayed in a DataTable.
-* @component
+* DataManager.js is a component that manages pet and supply data displayed in a DataTable.
+* @example
+* <DataManager/>
+* @returns {JSX.Element}
+* @extends React.Component
 */
 
 class DataManager extends Component {
     constructor(props) {
         super(props);
         /**
-        * @typedef {Object} DataManagerState
-        * @memberof DataManager
-        * @property {string} search - Search string to filter displayed data.
-        * @property {Array<Object>} fetchedData - Data fetched from server.
-        * @property {boolean} showModal - Controls visibility of modals.
-        * @property {string} type - The type of data being displayed (pets or supplies).
+        * @property {Object} state
+        * @property {string} state.search - Search string to filter displayed data.
+        * @property {Array<Object>} state.fetchedData - Data fetched from server.
+        * @property {boolean} state.showModal - Controls visibility of modals.
+        * @property {string} state.type - The type of data being targeted (pets or supplies).
         */
-        /** @type {DataManagerState} */
         this.state = {
             search: '',
             fetchedData: null,

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 /**
-* React Component for adding or updating pet supplies in a MongoDB database.
-* @component
+* SuppliesModal.js is the component for adding or updating pet supplies in MongoDB.
 * @param {Object} props - The props object containing the following properties:
 * @param {string} props.job - Indicates whether the component should be used for saving a new supply or updating an existing one.
 * @param {boolean} props.show - Indicates whether the modal should be shown or hidden.
@@ -11,6 +10,7 @@ import { Modal, Button, Form } from 'react-bootstrap';
 * @param {Function} props.handleCloseModal - The function to close the modal.
 * @param {Function} props.save - The function to save a new supply to the MongoDB database.
 * @param {Function} props.update - The function to update an existing supply in the MongoDB database.
+* @extends React.Component
 * @returns {JSX.Element} - A modal with a form for adding or updating pet supplies.
 */
 class SuppliesModal extends Component {

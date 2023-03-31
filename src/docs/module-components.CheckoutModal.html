@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>CheckoutModal<span class="signature">(props)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>CheckoutModal<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
         
-            <div class="class-description">CheckoutModal is used as the form for when checking out the cart.</div>
+            <div class="class-description">CheckoutModal.js is used as the form for checking out the cart.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="CheckoutModal"><span class="type-signature"></span>new CheckoutModal<span class="signature">(props)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CheckoutModal"><span class="type-signature"></span>new CheckoutModal<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
     
@@ -105,7 +105,102 @@
 
             
 
-            <td class="description last">The props that were passed to the component.</td>
+            <td class="description last">The props that were passed to the component.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>checkout</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Function to check out the cart.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>show</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Whether or not the component should show.</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>close</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Closes the modal.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -146,7 +241,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line10">line 10</a>
+        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -171,8 +266,31 @@
 
 
 
+<h5>Returns:</h5>
+
+        
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;CheckoutModal    checkout={this.props.checkout}    show={this.state.showModal}    close={this.handleCloseModal}></code></pre>
 
 
 
@@ -314,7 +432,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line29">line 29</a>
+        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line38">line 38</a>
     </li></ul></dd>
     
 
@@ -420,7 +538,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line47">line 47</a>
+        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line56">line 56</a>
     </li></ul></dd>
     
 
@@ -488,13 +606,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 15:50:40 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

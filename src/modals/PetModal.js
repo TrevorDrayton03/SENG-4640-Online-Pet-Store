@@ -2,14 +2,30 @@ import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
 /**
-* A Modal component used for adding or updating pet data from MongoDB.
+* PetModal.js is used for adding or updating pet data from MongoDB.
+* @example 
+* <PetModal
+*     handleCloseModal={this.handleCloseModal}
+*     save={null}
+*     show={this.state.showModal}
+*     pet={this.state.modalData}
+*     job="update"
+*     update={this.props.update}
+* >
+* @param {Object} props Component props
+* @param {function} props.handleCloseModal The function to close the modal
+* @param {function} props.save Updates the fetchedData state in the DataManager component
+* @param {boolean} props.show Component props
+* @param {Object} props.pet The pet to display in the modal
+* @param {String} props.job Determines whether the modal's job is to "update" or "save" data in MongoDB
+* @param {Function} props.update - A function to update a row in the DataTable.
+* @returns {JSX.Element}
 * @extends Component
 */
 class PetModal extends Component {
 
     /**
     * @constructor
-    * @param {Object} props - The props object passed from parent.
     */
     constructor(props) {
         super(props);

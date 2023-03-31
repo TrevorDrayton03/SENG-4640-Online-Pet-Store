@@ -4,18 +4,16 @@ import React, { Component } from 'react';
 * CustomerService React Component.
 * Displays frequently asked questions and a contact form for customers to reach out.
 * Uses formsubmit.io to send emails.
-* @component
 * @example
-* return (
 * <CustomerService />
-* )
+* @extends React.Component
+* @returns {JSX.Element}
 */
 class CustomerService extends Component {
 
     /**
     * Constructor for CustomerService component.
     * @constructor
-    * @param {Object} props - The props that were passed into the component.
     */
     constructor(props) {
         super(props);

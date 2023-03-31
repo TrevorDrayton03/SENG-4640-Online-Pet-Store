@@ -31,51 +31,48 @@ import PetModal from "./modals/PetModal";
 import SuppliesModal from "./modals/SuppliesModal";
 
 /**
-* A component that displays database data for the admin and offers options to update, delete, or add data.
+* DataTable.js handles each row of data for the DataManager component.
+* It displays database data for the admin and offers options to update, delete, or add data.
 * Utilizes modals to update objects in MongoDB.
-* @component
 * @example
 * &lt;DataTable
-* type="pets"
-* tableData={data}
-* search={searchString}
-* delete={deleteData}
-* update={updateData}
+*   type="pets"
+*   tableData={data}
+*   search={searchString}
+*   delete={deleteData}
+*   update={updateData}
 * />
-* @param {string} type - A string representing the type of data to be displayed. (pets or supplies)
-* @param {Array} tableData - An array of objects representing the data to be displayed.
-* @param {string} search - A string representing the search term to filter the tableData.
-* @param {Function} delete - A function to delete data from the database.
-* @param {Function} update - A function to update data in the database.
+* @extends React.Component
+* @param {Object} props - The component's properties.
+* @param {string} props.type - The type of data to display (either "pets" or "supplies").
+* @param {Array&lt;Object>} props.tableData - The data to display in the table.
+* @param {string} props.search - The search string to filter the data.
+* @param {Function} props.delete - A function to delete a row from the table.
+* @param {Function} props.update - A function to update a row in the table.
 * @returns {JSX.Element} - A DataTable component displaying the database data.
-* */
+*/
 class DataTable extends Component {
 
     /**
     * Creates a new DataTable.
-    * @param {Object} props - The component's properties.
-    * @param {Array&lt;Object>} props.tableData - The data to display in the table.
-    * @param {string} props.type - The type of data to display (either "pets" or "supplies").
-    * @param {string} props.search - The search string to filter the data.
-    * @param {Function} props.delete - A function to delete a row from the table.
-    * @param {Function} props.update - A function to update a row in the table.
+    * @constructor
     */
-
     constructor(props) {
         super(props);
 
         /**
         * The component's state.
-        * @property {Array&lt;Object>} tableData - The data to display in the table.
-        * @property {boolean} showModal - Whether the modal is visible.
-        * @property {Object|null} modalData - The data to display in the modal.
+        * @property {Object} state
+        * @property {Array&lt;Object>} state.tableData - The data to display in the table.
+        * @property {boolean} state.showModal - Whether the modal is visible.
+        * @property {Object|null} state.modalData - The data to display in the modal.
         */
         this.state = {
             tableData: this.props.tableData,
             showModal: false,
             modalData: null
         };
-        
+
         /**
         * The function to handle an update in the modal.
         * @param {Object} data - The data to update.
@@ -242,13 +239,13 @@ export default DataTable;</code></pre>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 15:50:40 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

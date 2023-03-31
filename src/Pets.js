@@ -2,17 +2,12 @@ import React, { Component } from "react";
 import ProductDetails from "./ProductDetails";
 
 /**
- * React component that displays pets data and details.
- *
- * @component
+ * Pets.js is the component that displays pets and pet details when a pet is clicked on.
  * @example
- * return (
- *   <Pets addToCart={addToCart} />
- * )
- *
+ * <Pets addToCart={addToCart} />
  * @param {Object} props - Component props
- * @param {function} props.addToCart - Function to add a product to cart
- *
+ * @param {Object} props.addToCart - Function to add pet to cart
+ * @extends React.Component
  * @returns {JSX.Element} - Rendered component
  */
 
@@ -20,22 +15,19 @@ class Pets extends Component {
 
   /**
   * Creates an instance of Pets.
-  *
   * @constructor
-  * @param {Object} props - Component props
   */
   constructor(props) {
     super(props);
 
     /**
     * Component state
-    *
-    * @type {Object}
-    * @property {?Array<Object>} allPets - List of all available pets
-    * @property {string} type - Current type of pet to display
-    * @property {boolean} chosen - Whether a pet has been chosen for details view
-    * @property {?Object} goodAnimal - Selected pet for details view
-    * @property {boolean} isLoading - Whether the component is still loading data
+    * @property {Object} state - Component state
+    * @property {?Array<Object>} state.allPets - List of all available pets
+    * @property {string} state.type - Current type of pet to display
+    * @property {boolean} state.chosen - Whether a pet has been chosen for details view
+    * @property {?Object} state.goodAnimal - Selected pet for details view
+    * @property {boolean} state.isLoading - Whether the component is still loading data
     */
     this.state = {
       allPets: null,

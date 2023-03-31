@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>Admin<span class="signature">(props)</span><span class="type-signature"></span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>Admin<span class="signature">(handleLogin, admin)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
         
-            <div class="class-description">Admin.js is a React component that handles the authentication of the admin user.</div>
+            <div class="class-description">Admin.js is a component that handles the authentication of the admin user.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="Admin"><span class="type-signature"></span>new Admin<span class="signature">(props)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Admin"><span class="type-signature"></span>new Admin<span class="signature">(handleLogin, admin)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
     
@@ -85,13 +85,13 @@
 
         <tr>
             
-                <td class="name"><code>props</code></td>
+                <td class="name"><code>handleLogin</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">function</span>
 
 
             
@@ -101,28 +101,9 @@
 
             
 
-            <td class="description last">The props object that is passed to the component
-                <h6>Properties</h6>
-                
+            <td class="description last">Function passed to props to manage the admin state (admin logged in or not).</td>
+        </tr>
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
         <tr>
@@ -143,42 +124,136 @@
 
             
 
-            <td class="description last">A boolean indicating whether the user is an admin or not</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>handleLogin</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">A function that handles the login state of the user</td>
+            <td class="description last">True if admin is logged in, false if admin is not logged in.</td>
         </tr>
 
     
     </tbody>
 </table>
 
-            </td>
-        </tr>
+
+
+
+
+
+<dl class="details">
 
     
-    </tbody>
-</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;Admin handleLogin={handleLogin} admin={true}/></code></pre>
+
+
+
+    
+    </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>React.Component</li>
+    </ul>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="state"><span class="type-signature"></span>state<span class="type-signature"></span></h4>
+
+
+
+
 
 
 
@@ -227,7 +302,7 @@
 
             
 
-            <td class="description last">The state object that is managed by the component
+            <td class="description last">The props object that is passed to the component
                 <h6>Properties</h6>
 
 <table class="props">
@@ -337,177 +412,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Example</h5>
-    
-    <pre class="prettyprint"><code>&lt;Admin admin={true} handleLogin={handleLogin}/></code></pre>
-
-
-
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Members</h3>
-
-        
-            
-<h4 class="name" id="state"><span class="type-signature"></span>state<span class="type-signature"></span></h4>
-
-
-
-
-
-
-
-
-
-
-    <h5 class="subsection-title">Properties:</h5>
-
-    
-
-<table class="props">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>username</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The username input value</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>password</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">The password input value</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line28">line 28</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line22">line 22</a>
     </li></ul></dd>
     
 
@@ -632,7 +537,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line71">line 71</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line65">line 65</a>
     </li></ul></dd>
     
 
@@ -765,7 +670,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line58">line 58</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -898,7 +803,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line48">line 48</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -1031,7 +936,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line39">line 39</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line33">line 33</a>
     </li></ul></dd>
     
 
@@ -1115,7 +1020,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line101">line 101</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line95">line 95</a>
     </li></ul></dd>
     
 
@@ -1179,13 +1084,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 15:50:40 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

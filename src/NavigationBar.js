@@ -3,15 +3,21 @@ import Badge from 'react-bootstrap/Badge';
 import { FaShoppingCart } from "react-icons/fa";
 
 /**
-* NavigationBar Component
-* 
-* This component renders the navigation bar for the Pet Universe application.
-* @param {object} props - Component props
+* NavigationBar.js is the navigation bar component of the application and handles routing on the front end.
+* @example
+* <NavigationBar linkClick={this.handleLinkClick.bind(this)} itemCount={this.state.cartItems.length}></NavigationBar>
+* @param {Object} props - Component props
 * @param {function} props.linkClick - Function to handle link clicks
 * @param {number} props.itemCount - Number of items in the shopping cart
+* @extends React.Component
 * @returns {JSX.Element} - Navigation bar JSX element
 */
 class NavigationBar extends Component {
+
+    /**
+    * @property { Object } state - Component state
+    * @property { number } state.activeLink - The currently used/selected nav-link.
+    */
     constructor() {
         super();
         this.state = {

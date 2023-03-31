@@ -2,28 +2,22 @@ import React, { Component } from 'react';
 import DataManager from "./DataManager";
 
 /**
-* Admin.js is a React component that handles the authentication of the admin user.
-* @component
-* @param {Object} props - The props object that is passed to the component
-* @param {boolean} props.admin - A boolean indicating whether the user is an admin or not
-* @param {function} props.handleLogin - A function that handles the login state of the user
-* @property {Object} state - The state object that is managed by the component
-* @property {string} state.username - The username of the admin user
-* @property {string} state.password - The password of the admin user
+* Admin.js is a component that handles the authentication of the admin user.
 * @example
-* <Admin admin={true} handleLogin={handleLogin}/>
+* <Admin handleLogin={handleLogin} admin={true}/>
+* @extends React.Component
+* @param {function} handleLogin Function passed to props to manage the admin state (admin logged in or not).
+* @param {boolean} admin True if admin is logged in, false if admin is not logged in.
+* @returns {JSX.Element}
 */
 class Admin extends Component {
 
-    /**
-    * @param {object} props - The props that were passed to the component
-    */
     constructor(props) {
         super(props);
-
         /**
-        * @property {string} username - The username input value
-        * @property {string} password - The password input value
+        * @property {Object} state - The props object that is passed to the component
+        * @property {string} state.username - The username of the admin user
+        * @property {string} state.password - The password of the admin user
         */
         this.state = {
             username: '',
@@ -64,7 +58,7 @@ class Admin extends Component {
         const confirmLogout = window.confirm("Are you sure you want to logout?");
         if (confirmLogout) {
             this.props.handleLogin(false);
-            this.setState({username:'', password:''})
+            this.setState({ username: '', password: '' })
         }
     }
 
@@ -152,8 +146,7 @@ class Admin extends Component {
                             id="logout"
                         >Logout</button>
                     </div>
-                    <DataManager
-                    />
+                    <DataManager />
                 </div>
             )
         }

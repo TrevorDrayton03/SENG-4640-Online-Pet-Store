@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import ProductDetails from "./ProductDetails";
 
 /**
- * React component that displays pet supplies and their details.
+ * Supplies.js is the component component that displays pet supplies and their details.
  *
- * @class
- * @component
+ * @extends React.Component
  * @example
  * return (
  *   <Supplies addToCart={addToCart} />
@@ -13,27 +12,25 @@ import ProductDetails from "./ProductDetails";
  *
  * @param {Object} props - Component props
  * @param {function} props.addToCart - Function to add a product to cart
- *
+ * @extends React.Component
  * @returns {JSX.Element} - Rendered component
  */
 class Supplies extends Component {
 
   /**
   * Creates an instance of Supplies.
-  *
   * @constructor
-  * @param {Object} props - Component props
   */
   constructor(props) {
     super(props);
 
     /**
-    * State object of the Supplies component
-    * @property {Array|null} allSupplies - list of all pet supplies fetched from the API
-    * @property {string} type - selected type of pet supply
-    * @property {boolean} chosen - selection state of a pet supply
-    * @property {object|null} supply - pet supply object that is currently selected
-    * @property {boolean} isLoading - loading state of the component
+    * @property {Object} state - Component state
+    * @property {Array|null} state.allSupplies - list of all pet supplies fetched from the API
+    * @property {string} state.type - selected type of pet supply
+    * @property {boolean} state.chosen - selection state of a pet supply
+    * @property {object|null} state.supply - pet supply object that is currently selected
+    * @property {boolean} state.isLoading - loading state of the component
     */
     this.state = {
       allSupplies: null,

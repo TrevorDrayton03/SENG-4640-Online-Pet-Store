@@ -3,27 +3,23 @@ import Carousel from 'react-bootstrap/Carousel';
 
 /**
 *
-* @component
-* Home
-* @description
-* The Home component is the main landing page of the application. It consists of the following sections:
-* About Us section
-* Featured Pets section
-* Shop By Pet section
-* Shop By Supplies section
-* @property {Array} pets - An array of featured pets objects
+* The Home.js component is the main landing page of the application. It consists of the following sections:
+* About Us,
+* Featured Pets,
+* Shop By Pet, and
+* Shop By Supplies.
+* @param {Object} props
+* @param {Array} props.pets - An array of featured pets objects
+* @extends React.Component
+* @returns {JSX.Element}
 */
 class Home extends Component {
 
     /**
-    * @typedef {Object} HomeState
-    * @memberof Home
-    * @property {number} index - The index of the selected item.
-    * @property {Array<string>|null} petTypes - The list of available pet types, or null if not yet fetched.
-    * @property {Array<string>|null} supplyTypes - The list of available supply types, or null if not yet fetched.
-    */
-    /**
-    * @type {HomeState}
+    * @property {Object} state
+    * @property {number} state.index - The index of the selected item.
+    * @property {Array<string>|null} state.petTypes - The list of available pet types, or null if not yet fetched.
+    * @property {Array<string>|null} state.supplyTypes - The list of available supply types, or null if not yet fetched.
     */
     constructor(props) {
         super(props);

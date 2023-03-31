@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>DataTable<span class="signature">(type, tableData, search, delete, update)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>DataTable<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
         
-            <div class="class-description">A component that displays database data for the admin and offers options to update, delete, or add data.Utilizes modals to update objects in MongoDB.</div>
+            <div class="class-description">DataTable.js handles each row of data for the DataManager component.It displays database data for the admin and offers options to update, delete, or add data.Utilizes modals to update objects in MongoDB.</div>
         
     
 </header>
@@ -45,7 +45,7 @@
     
 
     
-    <h4 class="name" id="DataTable"><span class="type-signature"></span>new DataTable<span class="signature">(type, tableData, search, delete, update)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    <h4 class="name" id="DataTable"><span class="type-signature"></span>new DataTable<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
     
@@ -89,6 +89,48 @@
 
         <tr>
             
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The component's properties.
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
                 <td class="name"><code>type</code></td>
             
 
@@ -105,7 +147,7 @@
 
             
 
-            <td class="description last">A string representing the type of data to be displayed. (pets or supplies)</td>
+            <td class="description last">The type of data to display (either "pets" or "supplies").</td>
         </tr>
 
     
@@ -118,7 +160,7 @@
             <td class="type">
             
                 
-<span class="param-type">Array</span>
+<span class="param-type">Array.&lt;Object></span>
 
 
             
@@ -128,7 +170,7 @@
 
             
 
-            <td class="description last">An array of objects representing the data to be displayed.</td>
+            <td class="description last">The data to display in the table.</td>
         </tr>
 
     
@@ -151,7 +193,7 @@
 
             
 
-            <td class="description last">A string representing the search term to filter the tableData.</td>
+            <td class="description last">The search string to filter the data.</td>
         </tr>
 
     
@@ -174,7 +216,7 @@
 
             
 
-            <td class="description last">A function to delete data from the database.</td>
+            <td class="description last">A function to delete a row from the table.</td>
         </tr>
 
     
@@ -197,7 +239,14 @@
 
             
 
-            <td class="description last">A function to update data in the database.</td>
+            <td class="description last">A function to update a row in the table.</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -238,7 +287,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line24">line 24</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -291,12 +340,23 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>&lt;DataTabletype="pets"tableData={data}search={searchString}delete={deleteData}update={updateData}/></code></pre>
+    <pre class="prettyprint"><code>&lt;DataTable  type="pets"  tableData={data}  search={searchString}  delete={deleteData}  update={updateData}/></code></pre>
 
 
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>React.Component</li>
+    </ul>
+
 
     
 
@@ -359,7 +419,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line60">line 60</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line57">line 57</a>
     </li></ul></dd>
     
 
@@ -421,7 +481,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line88">line 88</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -483,7 +543,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line55">line 55</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line52">line 52</a>
     </li></ul></dd>
     
 
@@ -545,7 +605,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line81">line 81</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -581,6 +641,47 @@
     <h5 class="subsection-title">Properties:</h5>
 
     
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">
+                <h6>Properties</h6>
 
 <table class="props">
     <thead>
@@ -676,6 +777,13 @@
     </tbody>
 </table>
 
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
 
 
 
@@ -708,7 +816,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line45">line 45</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -909,7 +1017,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line70">line 70</a>
+        <a href="DataTable.js.html">DataTable.js</a>, <a href="DataTable.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -955,13 +1063,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 15:50:40 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>
