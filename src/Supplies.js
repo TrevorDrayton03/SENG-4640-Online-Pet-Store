@@ -120,7 +120,6 @@ class Supplies extends Component {
               })}
             </div>
             <div id="petDis">
-              {/* for each supplyToBeBought index type, use it to get the supplyToBeBought data we want from all the supplyWanted */}
               {good.map((type) => {
                 return (
                   <table>
@@ -162,11 +161,6 @@ class Supplies extends Component {
                         <h1>${allSup[type].price}</h1>
                       </td>
                     </tr>
-                    {/* <tr>
-                      <button value={allSup[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, supply: allSup[type] })}>
-                        Click here to learn more about them
-                      </button>
-                    </tr> */}
                   </table>
                 );
               })}

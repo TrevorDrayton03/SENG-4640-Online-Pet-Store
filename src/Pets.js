@@ -10,11 +10,12 @@ class Pets extends Component {
       chosen: false,
       goodAnimal: null,
       isLoading: true,
+      maxRow: 0,
     };
   }
 
   handleChange = (event) => {
-    this.setState({ type: event });
+    this.setState({ type: event, maxRow: 0 });
   };
 
   handleToggleChosen() {
@@ -118,56 +119,45 @@ class Pets extends Component {
               })}
             </div>
             <div id="petDis">
-              {/* for each pet index type, use it to get the pet data we want from all the pets */}
-              {good.map((type) => {
-                return (
-                  <table>
-                    {" "}
-                    <tr>
-                      {" "}
-                      <th>
-                        {" "}
-                        <h1>This is {allPets[type].name} </h1>{" "}
-                      </th>
-                    </tr>
-                    <tr>
-                      <td>
-                        {" "}
-                        <button
-                          value={allPets[type]._id}
-                          onClick={() =>
-                            this.setState({
-                              chosen: !this.state.chosen,
-                              goodAnimal: allPets[type],
-                            })
-                          }
-                        >
-                          <img
-                            className="itemImg"
-                            id={allPets[type]._id}
-                            name={allPets[type].name}
-                            alt={allPets[type].breed}
-                            src={allPets[type].url}
-                            style={{
-                              display: "block",
-                              height: "100%",
-                              width: "100%",
-                            }}
-                          ></img>
-                        </button>
-                      </td>
-                      <td>
-                        <h1>They cost $ {allPets[type].price}</h1>
-                      </td>
-                    </tr>
-                    {/* <tr>
-                      <button value={allPets[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: allPets[type] })}>
-                        Click here to learn more about them
-                      </button>
-                    </tr> */}
-                  </table>
-                );
-              })}
+              <table>
+                {this.state.maxrow < 3
+                  ? good.map((type) => {
+                      this.state.maxRow += 1;
+                      console.log(this.state.maxRow);
+                      return (
+                        <td>
+                          {" "}
+                          <button
+                            value={allPets[type]._id}
+                            onClick={() =>
+                              this.setState({
+                                chosen: !this.state.chosen,
+                                goodAnimal: allPets[type],
+                              })
+                            }
+                          >
+                            <img
+                              className="itemImg"
+                              id={allPets[type]._id}
+                              name={allPets[type].name}
+                              alt={allPets[type].breed}
+                              src={allPets[type].url}
+                              style={{
+                                display: "block",
+                                height: "300px",
+                                width: "300px",
+                              }}
+                            ></img>
+                          </button>
+                          <h2>This is {allPets[type].name}</h2>
+                          <h2 style={{ color: "red" }}>
+                            $ {allPets[type].price}
+                          </h2>
+                        </td>
+                      );
+                    })
+                  : <tr>sada</tr> && this.setState({ maxRow: 0 })}
+              </table>
             </div>
           </div>
         );
