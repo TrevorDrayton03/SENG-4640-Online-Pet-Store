@@ -1,0 +1,30 @@
+{
+    "source": {
+        "include": [
+            "./server/server.js",
+            "./DataTable.js",
+            "./Home.js",
+            "./DataManager.js",
+            "./NavigationBar.js",
+            "./ProductDetails.js",
+            "./Pets.js",
+            "./Cart.js",
+            "./App.js",
+            "./Supplies.js",
+            "./CartItem.js",
+            "./Admin.js",
+            "./modals/CheckoutModal.js",
+            "./modals/PetModal.js",
+            "./modals/SuppliesModal.js",
+            "./schemas/Admin.js",
+            "./schemas/Pet.js",
+            "./schemas/Supplies.js"
+        ],
+        "exclude": [
+            "node_modules/"
+        ]
+    },
+    "opts": {
+        "destination": "docs/"
+    }
+}

@@ -1,15 +1,43 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-// PetModal is used to add to the pet collection or update data from the pet collection in our MongoDB.
-
+/**
+* PetModal.js is used for adding or updating pet data from MongoDB.
+* @example 
+* <PetModal
+*     handleCloseModal={this.handleCloseModal}
+*     save={null}
+*     show={this.state.showModal}
+*     pet={this.state.modalData}
+*     job="update"
+*     update={this.props.update}
+* >
+* @param {Object} props Component props
+* @param {function} props.handleCloseModal The function to close the modal
+* @param {function} props.save Updates the fetchedData state in the DataManager component
+* @param {boolean} props.show Component props
+* @param {Object} props.pet The pet to display in the modal
+* @param {String} props.job Determines whether the modal's job is to "update" or "save" data in MongoDB
+* @param {Function} props.update - A function to update a row in the DataTable.
+* @returns {JSX.Element}
+* @extends Component
+*/
 class PetModal extends Component {
+
+    /**
+    * @constructor
+    */
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    /**
+     * Method to handle form submission.
+     * @async
+     * @method
+     * @param {Object} e - The event object.
+     */
     handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -75,6 +103,12 @@ class PetModal extends Component {
         this.props.handleCloseModal();
     };
 
+    /**
+    * Renders the component.
+    * 
+    * @memberof PetModal
+    * @returns {JSX.Element} - The rendered component.
+    */
     render() {
         if (this.props.job === "update") {
             return (

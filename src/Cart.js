@@ -3,18 +3,60 @@ import CartItem from './CartItem.js';
 import { Button } from 'react-bootstrap';
 import CheckoutModal from "./modals/CheckoutModal";
 
+/**
+* Cart.js is the shopping cart component of the application.
+* @example
+* <Cart
+*   items={cartItems}
+*   total={total}
+*   removeFromCart={removeFromCart}
+*   removeFromTotal={removeFromTotal}
+*   incrementTotal={incrementTotal}
+*   decrementTotal={decrementTotal}
+*   checkout={checkout}
+* />
+* @param {Object[]} items - Array of items in the cart.
+* @param {number} total - Total cost of items in the cart.
+* @param {Function} removeFromCart - Function to remove an item from the cart.
+* @param {Function} removeFromTotal - Function to subtract an item's total cost (price * quantity) from the total.
+* @param {Function} incrementTotal - Function to add an item's cost to the total.
+* @param {Function} decrementTotal - Function to subtract an item's cost from the total.
+* @param {Function} checkout - Function to check out items in the cart.
+* @returns {JSX.Element}
+* @extends React.Component
+*/
+
 class Cart extends Component {
+
+    /**
+    * Constructor for the Cart component.
+    * @constructor
+    * @property {Object} state - State of the component.
+    * @property {boolean} state.showModal - True or false for showing the CheckoutModal component.
+    */
     constructor(props) {
         super(props);
         this.state = {
             showModal: false
         }
     }
-    
+
+    /**
+    * Handles closing the checkout modal.
+    * 
+    * @function
+    */
     handleCloseModal = () => {
         this.setState({ showModal: false });
     }
 
+    /**
+    * Renders the Cart component.
+    * 
+    * @function
+    * @memberof Cart
+    * @returns {JSX.Element}
+    */
     render() {
         return (
             <div className="Container maxvp">

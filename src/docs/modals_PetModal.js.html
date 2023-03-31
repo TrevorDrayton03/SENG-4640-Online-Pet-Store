@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: modals/PetModal.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: modals/PetModal.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import { Modal, Button, Form } from 'react-bootstrap';
+
+/**
+* PetModal.js is used for adding or updating pet data from MongoDB.
+* @example 
+* &lt;PetModal
+*     handleCloseModal={this.handleCloseModal}
+*     save={null}
+*     show={this.state.showModal}
+*     pet={this.state.modalData}
+*     job="update"
+*     update={this.props.update}
+* >
+* @param {Object} props Component props
+* @param {function} props.handleCloseModal The function to close the modal
+* @param {function} props.save Updates the fetchedData state in the DataManager component
+* @param {boolean} props.show Component props
+* @param {Object} props.pet The pet to display in the modal
+* @param {String} props.job Determines whether the modal's job is to "update" or "save" data in MongoDB
+* @param {Function} props.update - A function to update a row in the DataTable.
+* @returns {JSX.Element}
+* @extends Component
+*/
+class PetModal extends Component {
+
+    /**
+    * @constructor
+    */
+    constructor(props) {
+        super(props);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    /**
+     * Method to handle form submission.
+     * @async
+     * @method
+     * @param {Object} e - The event object.
+     */
+    handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            return;
+        }
+
+        if (this.props.job === "update") {
+            try {
+                const response = await fetch('http://localhost:3000/api/updatePet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        key: this.props.pet._id,
+                        name: e.target.name.value,
+                        age: e.target.age.value,
+                        type: e.target.type.value,
+                        breed: e.target.breed.value,
+                        description: e.target.description.value,
+                        url: e.target.url.value,
+                        price: e.target.price.value
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to update');
+                }
+
+                this.props.update(await response.json());
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        else if (this.props.job === "save") {
+            try {
+                const response = await fetch('http://localhost:3000/api/savePet', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        name: e.target.name.value,
+                        age: e.target.age.value,
+                        type: e.target.type.value,
+                        breed: e.target.breed.value,
+                        description: e.target.description.value,
+                        url: e.target.url.value,
+                        price: e.target.price.value
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to save');
+                }
+                this.props.save(await response.json());
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        this.props.handleCloseModal();
+    };
+
+    /**
+    * Renders the component.
+    * 
+    * @memberof PetModal
+    * @returns {JSX.Element} - The rendered component.
+    */
+    render() {
+        if (this.props.job === "update") {
+            return (
+                &lt;Modal show={this.props.show} onHide={this.props.handleCloseModal}>
+                    &lt;Modal.Header closeButton>
+                        &lt;Modal.Title>Update {this.props.pet ? this.props.pet.name : ''}&lt;/Modal.Title>
+                    &lt;/Modal.Header>
+                    &lt;Modal.Body>
+                        &lt;Form
+                            noValidate
+                            validated={true}
+                            onSubmit={this.handleSubmit}
+                        >
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Name&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="name"
+                                    defaultValue={this.props.pet ? this.props.pet.name : ''}
+                                    type="text"
+                                    required
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Age&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="age"
+                                    defaultValue={this.props.pet ? this.props.pet.age : ''}
+                                    type="text"
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Type&lt;/Form.Label>
+                                &lt;Form.Control
+                                    required
+                                    name="type"
+                                    defaultValue={this.props.pet ? this.props.pet.type : ''}
+                                    type="text"
+                                />
+                                {/* &lt;Form.Control.Feedback type="invalid">Type is required!&lt;/Form.Control.Feedback> */}
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Breed&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="breed"
+                                    defaultValue={this.props.pet ? this.props.pet.breed : ''}
+                                    type="text"
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Description&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="description"
+                                    defaultValue={this.props.pet ? this.props.pet.description : ''}
+                                    type="text"
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Image URL&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="url"
+                                    defaultValue={this.props.pet ? this.props.pet.url : ''}
+                                    type="text"
+                                    required
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Price&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="price"
+                                    defaultValue={this.props.pet ? this.props.pet.price : ''}
+                                    type="text"
+                                    required
+                                />
+                            &lt;/Form.Group>
+                            &lt;Button
+                                variant="primary"
+                                type="submit">
+                                Submit
+                            &lt;/Button>
+                        &lt;/Form>
+                    &lt;/Modal.Body>
+                    &lt;Modal.Footer>
+                        &lt;Button
+                            variant="secondary"
+                            onClick={this.props.handleCloseModal}>
+                            Close
+                        &lt;/Button>
+                    &lt;/Modal.Footer>
+                &lt;/Modal>
+            );
+        }
+        else if (this.props.job === "save") {
+            return (
+                &lt;Modal show={this.props.show} onHide={this.props.handleCloseModal}>
+                    &lt;Modal.Header closeButton>
+                        &lt;Modal.Title>Add New Pet&lt;/Modal.Title>
+                    &lt;/Modal.Header>
+                    &lt;Modal.Body>
+                        &lt;Form
+                            noValidate
+                            validated={true}
+                            onSubmit={this.handleSubmit}
+                        >
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Name&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="name"
+                                    defaultValue={null}
+                                    type="text"
+                                    required
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Age&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="age"
+                                    defaultValue={null}
+                                    type="text"
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Type&lt;/Form.Label>
+                                &lt;Form.Control
+                                    required
+                                    name="type"
+                                    defaultValue={null}
+                                    type="text"
+                                />
+                                {/* &lt;Form.Control.Feedback type="invalid">Type is required!&lt;/Form.Control.Feedback> */}
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Breed&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="breed"
+                                    defaultValue={null}
+                                    type="text"
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Description&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="description"
+                                    defaultValue={null}
+                                    type="text"
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Image URL&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="url"
+                                    defaultValue={null}
+                                    type="text"
+                                    required
+                                />
+                            &lt;/Form.Group>
+                            &lt;Form.Group className="mb-3">
+                                &lt;Form.Label>Price&lt;/Form.Label>
+                                &lt;Form.Control
+                                    name="price"
+                                    defaultValue={null}
+                                    type="text"
+                                    required
+                                />
+                            &lt;/Form.Group>
+                            &lt;Button
+                                variant="primary"
+                                defaultValue={null}
+                                type="submit">
+                                Submit
+                            &lt;/Button>
+                        &lt;/Form>
+                    &lt;/Modal.Body>
+                    &lt;Modal.Footer>
+                        &lt;Button
+                            variant="secondary"
+                            onClick={this.props.handleCloseModal}>
+                            Close
+                        &lt;/Button>
+                    &lt;/Modal.Footer>
+                &lt;/Modal>
+            );
+        }
+    }
+}
+
+export default PetModal;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 16:08:37 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

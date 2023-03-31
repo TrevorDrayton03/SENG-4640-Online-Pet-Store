@@ -1,15 +1,40 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-// CheckoutModal is used as the form for when checking out the cart.
-
+/**
+* CheckoutModal.js is used as the form for checking out the cart.
+* @example
+* <CheckoutModal
+*     checkout={this.props.checkout}
+*     show={this.state.showModal}
+*     close={this.handleCloseModal}
+* >
+* @memberof module:components
+* @extends React.Component
+* @param {Object} props - The props that were passed to the component.
+* @param {function} props.checkout - Function to check out the cart.
+* @param {boolean} props.show - Whether or not the component should show.
+* @param {function} props.close - Closes the modal.
+* @returns {JSX.Element}
+*/
 class CheckoutModal extends Component {
+
+    /**
+    * Creates a new instance of CheckoutModal.
+    * @constructor
+    */
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    /**
+    * Handles the form submission and calls the parent checkout function.
+    * @async
+    * @function
+    * @param {Object} e - The form submission event.
+    * @returns {void}
+    */
     handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -22,6 +47,12 @@ class CheckoutModal extends Component {
         window.location.href = '/';
     };
 
+    /**
+    * Renders the component.
+    * 
+    * @memberof module:components.CheckoutModal
+    * @returns {JSX.Element} - The rendered component.
+    */
     render() {
         return (
             <Modal show={this.props.show} onHide={this.props.close}>

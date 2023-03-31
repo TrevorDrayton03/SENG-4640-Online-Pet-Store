@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
 
+/**
+* CustomerService React Component.
+* Displays frequently asked questions and a contact form for customers to reach out.
+* Uses formsubmit.io to send emails.
+* @example
+* <CustomerService />
+* @extends React.Component
+* @returns {JSX.Element}
+*/
 class CustomerService extends Component {
+
+    /**
+    * Constructor for CustomerService component.
+    * @constructor
+    */
     constructor(props) {
         super(props);
-        this.state = {
-            name: null,
-            subject: null,
-            message: null
-        };
     }
-
+    /**
+    * Render CustomerService Component
+    * @memberof CustomerService
+    * @returns {JSX.Element} CustomerService Component
+    */
     render() {
         return (
             <div className="Container maxvp">
@@ -34,7 +47,7 @@ class CustomerService extends Component {
                         We allow refunds up to 14 days with our pets and 30 days with our supplies if they have not been damaged.
                     </p>
                     <br></br>
-                    <h2 style = {{fontWeight: 'bold'}}>
+                    <h2 style={{ fontWeight: 'bold' }}>
                         Have any further questions or concerns? Let us know right away!
                     </h2>
                     <p>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Cart.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Cart.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import CartItem from './CartItem.js';
+import { Button } from 'react-bootstrap';
+import CheckoutModal from "./modals/CheckoutModal";
+
+/**
+* Cart.js is the shopping cart component of the application.
+* @example
+* &lt;Cart
+*   items={cartItems}
+*   total={total}
+*   removeFromCart={removeFromCart}
+*   removeFromTotal={removeFromTotal}
+*   incrementTotal={incrementTotal}
+*   decrementTotal={decrementTotal}
+*   checkout={checkout}
+* />
+* @param {Object[]} items - Array of items in the cart.
+* @param {number} total - Total cost of items in the cart.
+* @param {Function} removeFromCart - Function to remove an item from the cart.
+* @param {Function} removeFromTotal - Function to subtract an item's total cost (price * quantity) from the total.
+* @param {Function} incrementTotal - Function to add an item's cost to the total.
+* @param {Function} decrementTotal - Function to subtract an item's cost from the total.
+* @param {Function} checkout - Function to check out items in the cart.
+* @returns {JSX.Element}
+* @extends React.Component
+*/
+
+class Cart extends Component {
+
+    /**
+    * Constructor for the Cart component.
+    * @constructor
+    * @property {Object} state - State of the component.
+    * @property {boolean} state.showModal - True or false for showing the CheckoutModal component.
+    */
+    constructor(props) {
+        super(props);
+        this.state = {
+            showModal: false
+        }
+    }
+
+    /**
+    * Handles closing the checkout modal.
+    * 
+    * @function
+    */
+    handleCloseModal = () => {
+        this.setState({ showModal: false });
+    }
+
+    /**
+    * Renders the Cart component.
+    * 
+    * @function
+    * @memberof Cart
+    * @returns {JSX.Element}
+    */
+    render() {
+        return (
+            &lt;div className="Container maxvp">
+                &lt;div className="cart Container">
+                    &lt;CheckoutModal
+                        checkout={this.props.checkout}
+                        show={this.state.showModal}
+                        close={this.handleCloseModal}
+                    >
+                    &lt;/CheckoutModal>
+                    {this.props.items.length === 0 ?
+                        (&lt;>&lt;h1 className="centerText">
+                            Empty Cart
+                        &lt;/h1> &lt;p>Why don't you try adding some items?&lt;/p>&lt;/>) : &lt;h1 className="centerText">
+                            Cart
+                        &lt;/h1>
+                    }
+                    &lt;div style={{ justifyContent: "space-evenly", width: '100%' }}>
+                        {this.props.items.length !== 0 &amp;&amp; this.props.items.map((item) => (
+                            &lt;CartItem
+                                id={item._id}
+                                name={item.name}
+                                url={item.url}
+                                price={item.price}
+                                type={item.type}
+                                quantity={item.quantity}
+                                removeFromCart={this.props.removeFromCart}
+                                removeFromTotal={this.props.removeFromTotal}
+                                incrementTotal={this.props.incrementTotal}
+                                decrementTotal={this.props.decrementTotal}
+                            >
+                            &lt;/CartItem>
+                        ))
+                        }
+                    &lt;/div>
+                    &lt;div className='row' style={{ alignItems: "baseline", justifyContent: 'space-between', width: '100%', paddingRight: '10px', paddingLeft: '20px' }}>
+                        {this.props.items.length !== 0 &amp;&amp;
+                            &lt;div className='col' style={{ display: "flex", justifyContent: 'flex-start' }}>
+                                &lt;Button
+                                    onClick={() => {
+                                        if (this.props.items.length !== 0) {
+                                            this.setState({ showModal: true })
+                                        }
+                                        else {
+                                            window.alert("Cart is empty.")
+                                        }
+                                    }}
+                                    variant="primary"
+                                >
+                                    Checkout
+                                &lt;/Button>
+                            &lt;/div>
+                        }
+                        {this.props.items.length !== 0 &amp;&amp;
+                            &lt;div className='col' style={{ display: "flex", alignItems: "center", justifyContent: 'flex-end' }}>
+                                &lt;p style={{ fontWeight: 'bold', margin: 0 }}>Total: ${parseFloat(this.props.total).toFixed(2)}&lt;/p>
+                            &lt;/div>
+                        }
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        );
+    }
+}
+
+export default Cart;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 16:08:37 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

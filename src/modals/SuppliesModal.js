@@ -1,15 +1,32 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-// SuppliesModal is used to add to the pet collection or update data from the pet collection in our MongoDB.
-
+/**
+* SuppliesModal.js is the component for adding or updating pet supplies in MongoDB.
+* @param {Object} props - The props object containing the following properties:
+* @param {string} props.job - Indicates whether the component should be used for saving a new supply or updating an existing one.
+* @param {boolean} props.show - Indicates whether the modal should be shown or hidden.
+* @param {Object} props.supply - The supply object to be updated. If null, a new supply is being added.
+* @param {Function} props.handleCloseModal - The function to close the modal.
+* @param {Function} props.save - The function to save a new supply to the MongoDB database.
+* @param {Function} props.update - The function to update an existing supply in the MongoDB database.
+* @extends React.Component
+* @returns {JSX.Element} - A modal with a form for adding or updating pet supplies.
+*/
 class SuppliesModal extends Component {
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    /**
+     * Handles the submit event of the form by sending a POST request to the appropriate API endpoint.
+     * If the request is successful, the supply is either added or updated in the MongoDB database.
+     * Finally, the modal is closed.
+     * @memberof SuppliesModal
+     * @param {Object} e - The event object of the submit event.
+     * @returns {void}
+     */
     handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -75,6 +92,12 @@ class SuppliesModal extends Component {
         this.props.handleCloseModal();
     };
 
+    /**
+    * Renders the component.
+    * 
+    * @memberof SuppliesModal
+    * @returns {JSX.Element} - The rendered component.
+    */
     render() {
         if (this.props.job === "update") {
             return (

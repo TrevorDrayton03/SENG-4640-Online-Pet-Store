@@ -1,7 +1,26 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
+/**
+*
+* The Home.js component is the main landing page of the application. It consists of the following sections:
+* About Us,
+* Featured Pets,
+* Shop By Pet, and
+* Shop By Supplies.
+* @param {Object} props
+* @param {Array} props.pets - An array of featured pets objects
+* @extends React.Component
+* @returns {JSX.Element}
+*/
 class Home extends Component {
+
+    /**
+    * @property {Object} state
+    * @property {number} state.index - The index of the selected item.
+    * @property {Array<string>|null} state.petTypes - The list of available pet types, or null if not yet fetched.
+    * @property {Array<string>|null} state.supplyTypes - The list of available supply types, or null if not yet fetched.
+    */
     constructor(props) {
         super(props);
         this.state = {
@@ -10,24 +29,63 @@ class Home extends Component {
             supplyTypes: null
         };
     }
-    // used to send the user to the pets page with the type they want to see
+
+    /**
+    * @function
+    * handlePetIconClick
+    * @memberof Home
+    * @param {string} type - The type of pet to filter by
+    * @description
+    * This function is used to send the user to the pets page with the type they want to see.
+    */
     handlePetIconClick = (type) => {
         window.location.href = '/pets?type=' + type;
     };
 
+    /**
+    * @function
+    * handleSupplyIconClick
+    * @memberof Home
+    * @param {string} type - The type of supply to filter by
+    * @description
+    * This function is used to send the user to the supplies page with the type they want to see.
+    */
     handleSupplyIconClick = (type) => {
         window.location.href = '/supplies?type=' + type;
     };
 
+    /**
+    * @function
+    * handleCarouselClick
+    * @memberof Home
+    * @param {string} id - The id of the pet to display in detail
+    * @description
+    * This function is used to send the user to the pet detail page with the pet they want to see.
+    */
     handleCarouselClick = (id) => {
         window.location.href = '/pets?id=' + id;
     };
-    // carousel index handler
+
+    /**
+    * @function
+    * handleSelect
+    * @memberof Home
+    * @param {number} selectedIndex - The index of the selected carousel item
+    * @description
+    * This function is used to update the index of the carousel item.
+    */
     handleSelect = (selectedIndex, e) => {
         this.setState({ index: selectedIndex });
     };
 
-    // ES6 style fetch for getting distinct types
+    /**
+    * @function
+    * componentDidMount
+    * @async
+    * @memberof Home
+    * @description
+    * Fetches pet and supply types from the API to be used in the "Shop By Pet" and "Shop By Supplies" sections.
+    */
     async componentDidMount() {
         await fetch('http://localhost:3000/api/petTypes')
             .then(response => response.json())
@@ -44,6 +102,13 @@ class Home extends Component {
             .catch(error => console.log(error))
     }
 
+    /**
+    * 
+    * @function render
+    * @memberof Home
+    * @description Renders the Home component.
+    * @returns {JSX.Element} JSX element.
+    */
     render() {
         return (
             <div className="Container maxvp">

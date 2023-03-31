@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: NavigationBar.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: NavigationBar.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import Badge from 'react-bootstrap/Badge';
+import { FaShoppingCart } from "react-icons/fa";
+
+/**
+* NavigationBar.js is the navigation bar component of the application and handles routing on the front end.
+* @example
+* &lt;NavigationBar linkClick={this.handleLinkClick.bind(this)} itemCount={this.state.cartItems.length}>&lt;/NavigationBar>
+* @param {Object} props - Component props
+* @param {function} props.linkClick - Function to handle link clicks
+* @param {number} props.itemCount - Number of items in the shopping cart
+* @extends React.Component
+* @returns {JSX.Element} - Navigation bar JSX element
+*/
+class NavigationBar extends Component {
+
+    /**
+    * @property { Object } state - Component state
+    * @property { number } state.activeLink - The currently used/selected nav-link.
+    */
+    constructor() {
+        super();
+        this.state = {
+            activeLink: "/"
+        }
+    }
+
+    /**
+    * Handle link click event
+    * 
+    * Prevents default event and calls linkClick function from props
+    * 
+    * @param {object} e - Click event object
+    * @param {string} value - Link value to pass to linkClick function
+    */
+    handleOnClick(e, value) {
+        e.preventDefault();
+        this.props.linkClick(value)
+        this.setState({ activeLink: value });
+    }
+
+    /**
+    * 
+    * @function render
+    * @description Renders the NavigationBar component.
+    * @memberof NavigationBar
+    * @returns {JSX.Element} JSX element.
+    */
+    render() {
+        return (
+            &lt; nav className="navbar navbar-expand-lg large navbar-custom" >
+                &lt;a className={"navbar-brand " + (this.state.activeLink === "/" ? "navbar-brand-active" : "")} href="#" onClick={e => this.handleOnClick(e, "/")}>
+                    &lt;div className="col">
+                        &lt;img src="./logo192.png" alt="Logo" />
+                        &lt;span className="logo-text">Pet Universe&lt;/span>
+                    &lt;/div>
+                &lt;/a>
+                &lt;ul className="navbar-nav mr-auto medium">
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className={"nav-link " + (this.state.activeLink === "/pets" ? "active-nav-link" : "")} onClick={e => this.handleOnClick(e, "/pets")} >
+                            Pets
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className={"nav-link " + (this.state.activeLink === "/supplies" ? "active-nav-link" : "")} onClick={e => this.handleOnClick(e, "/supplies")} >
+                            Supplies
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className={"nav-link " + (this.state.activeLink === "/admin" ? "active-nav-link" : "")} onClick={e => this.handleOnClick(e, "/admin")} >
+                            Admin
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className={"nav-link " + (this.state.activeLink === "/customer%20service" ? "active-nav-link" : "")} onClick={e => this.handleOnClick(e, "/customer%20service")} >
+                            Customer Service
+                        &lt;/a>
+                    &lt;/li>
+                    &lt;li className="nav-item">
+                        &lt;a href="#" className={"nav-link " + (this.state.activeLink === "/cart" ? "active-nav-link" : "")} onClick={e => this.handleOnClick(e, "/cart")} >
+                            &lt;FaShoppingCart>&lt;/FaShoppingCart>
+                            &lt;Badge bg="btn-primary">{this.props.itemCount}&lt;/Badge>
+                        &lt;/a>
+                    &lt;/li>
+                &lt;/ul>
+            &lt;/nav >
+        );
+    }
+
+}
+
+export default NavigationBar;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AdminModel.html">AdminModel</a></li><li><a href="module-PetModel.html">PetModel</a></li><li><a href="module-Server.html">Server</a></li><li><a href="module-SuppliesModel.html">SuppliesModel</a></li></ul><h3>Namespaces</h3><ul><li><a href="module-Server-routes.html">routes</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-AdminModel.userSchema.html">userSchema</a></li><li><a href="module-PetModel.petsSchema.html">petsSchema</a></li><li><a href="module-SuppliesModel.suppliesSchema.html">suppliesSchema</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 16:08:37 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
