@@ -14,6 +14,7 @@ class DataManager extends Component {
         super(props);
         /**
         * @typedef {Object} DataManagerState
+        * @memberof DataManager
         * @property {string} search - Search string to filter displayed data.
         * @property {Array<Object>} fetchedData - Data fetched from server.
         * @property {boolean} showModal - Controls visibility of modals.
@@ -169,6 +170,7 @@ class DataManager extends Component {
     /**
     * Renders the DataManager component
     * @function
+    * @memberof DataManager
     * @returns {JSX.Element}
     */
     render() {

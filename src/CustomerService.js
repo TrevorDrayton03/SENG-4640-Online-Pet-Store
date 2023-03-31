@@ -20,7 +20,11 @@ class CustomerService extends Component {
     constructor(props) {
         super(props);
     }
-
+    /**
+    * Render CustomerService Component
+    * @memberof CustomerService
+    * @returns {JSX.Element} CustomerService Component
+    */
     render() {
         return (
             <div className="Container maxvp">

@@ -31,7 +31,7 @@ import CheckoutModal from "./modals/CheckoutModal";
 */
 
 class Cart extends Component {
-    
+
     /**
     * Constructor for the Cart component.
     * 
@@ -65,6 +65,7 @@ class Cart extends Component {
     * Renders the Cart component.
     * 
     * @function
+    * @memberof Cart
     * @returns {JSX.Element}
     */
     render() {

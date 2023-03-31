@@ -1,5 +1,6 @@
 /**
- * @fileoverview This is the server file for the Pet Universe app.
+ * This is the server file for the Pet Universe app.
+ * @file
  * @author Trevor Drayton, Sanyam Gupta
  * @version 1.0.0
  */
@@ -10,7 +11,7 @@ const path = require('path');
 const bodyParser = require("body-parser");
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname,'../../build')));
+app.use(express.static(path.join(__dirname, '../../build')));
 
 app.set("view engine", "ejs");
 
@@ -85,18 +86,18 @@ app.get('/api/suppliesData', async (req, res) => {
 * @param {Object} res - The response object.
 * @returns {void}
 */
-app.use('/api/admin', async (req, res) => {
+app.post('/api/admin', async (req, res) => {
   try {
     const { username, password } = req.body;
     let admin = await AdminModel.findOne({ username: username, password: password }); // find pets of a certain type
     let logInAttempt;
-    if (admin.length === 0) {
+    if (!admin) {
       logInAttempt = false;
     }
     else {
       logInAttempt = true;
     }
-    res.send(logInAttempt);
+    res.json(logInAttempt);
   } catch (err) {
     res.status(500).send(err);
   };

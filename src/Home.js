@@ -17,6 +17,7 @@ class Home extends Component {
 
     /**
     * @typedef {Object} HomeState
+    * @memberof Home
     * @property {number} index - The index of the selected item.
     * @property {Array<string>|null} petTypes - The list of available pet types, or null if not yet fetched.
     * @property {Array<string>|null} supplyTypes - The list of available supply types, or null if not yet fetched.
@@ -36,6 +37,7 @@ class Home extends Component {
     /**
     * @function
     * handlePetIconClick
+    * @memberof Home
     * @param {string} type - The type of pet to filter by
     * @description
     * This function is used to send the user to the pets page with the type they want to see.
@@ -47,6 +49,7 @@ class Home extends Component {
     /**
     * @function
     * handleSupplyIconClick
+    * @memberof Home
     * @param {string} type - The type of supply to filter by
     * @description
     * This function is used to send the user to the supplies page with the type they want to see.
@@ -58,6 +61,7 @@ class Home extends Component {
     /**
     * @function
     * handleCarouselClick
+    * @memberof Home
     * @param {string} id - The id of the pet to display in detail
     * @description
     * This function is used to send the user to the pet detail page with the pet they want to see.
@@ -69,6 +73,7 @@ class Home extends Component {
     /**
     * @function
     * handleSelect
+    * @memberof Home
     * @param {number} selectedIndex - The index of the selected carousel item
     * @description
     * This function is used to update the index of the carousel item.
@@ -81,6 +86,7 @@ class Home extends Component {
     * @function
     * componentDidMount
     * @async
+    * @memberof Home
     * @description
     * Fetches pet and supply types from the API to be used in the "Shop By Pet" and "Shop By Supplies" sections.
     */
@@ -99,10 +105,11 @@ class Home extends Component {
             })
             .catch(error => console.log(error))
     }
-    
+
     /**
     * 
     * @function render
+    * @memberof Home
     * @description Renders the Home component.
     * @returns {JSX.Element} JSX element.
     */

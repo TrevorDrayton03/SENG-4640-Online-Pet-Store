@@ -257,6 +257,7 @@ class App extends Component {
 
   /**
   * Renders the main application component.
+  * @memberof App
   * @returns {JSX.Element} - Returns a JSX element that represents the application component.
   */
   render() {

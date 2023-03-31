@@ -30,6 +30,8 @@
     
         <h2><span class="attribs"><span class="type-signature"></span></span>Admin<span class="signature">(props)</span><span class="type-signature"></span></h2>
         
+            <div class="class-description">Admin.js is a React component that handles the authentication of the admin user.</div>
+        
     
 </header>
 
@@ -38,6 +40,8 @@
     
         
 
+    
+    <h2>Constructor</h2>
     
 
     
@@ -87,7 +91,7 @@
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -97,7 +101,79 @@
 
             
 
-            <td class="description last">The props that were passed to the component</td>
+            <td class="description last">The props object that is passed to the component
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>admin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A boolean indicating whether the user is an admin or not</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>handleLogin</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">A function that handles the login state of the user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
         </tr>
 
     
@@ -105,6 +181,129 @@
 </table>
 
 
+
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>state</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The state object that is managed by the component
+                <h6>Properties</h6>
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>username</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The username of the admin user</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>password</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The password of the admin user</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+            </td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -138,7 +337,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line21">line 21</a>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -165,6 +364,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>&lt;Admin admin={true} handleLogin={handleLogin}/></code></pre>
 
 
 
@@ -323,6 +527,644 @@
     
 
     
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue"><span class="type-signature">(static) </span>handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line71">line 71</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalseandresettingusernameandpassword"><span class="type-signature">(static) </span>handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false and resetting username and password<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line58">line 58</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges"><span class="type-signature">(static) </span>handlePasswordChange - Updates the password input value in the component state when the input changes<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line48">line 48</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges"><span class="type-signature">(static) </span>handleUsernameChange - Updates the username input value in the component state when the input changes<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">The event object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line39">line 39</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed"><span class="type-signature">(static) </span>render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="Admin.js.html">Admin.js</a>, <a href="Admin.js.html#line101">line 101</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+    
 
     
 
@@ -337,13 +1179,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li></ul><h3>Global</h3><ul><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#handleCarouselClick">handleCarouselClick</a></li><li><a href="global.html#handleDisplay">handleDisplay</a></li><li><a href="global.html#handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue">handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true</a></li><li><a href="global.html#handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalse">handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false</a></li><li><a href="global.html#handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges">handlePasswordChange - Updates the password input value in the component state when the input changes</a></li><li><a href="global.html#handlePetIconClick">handlePetIconClick</a></li><li><a href="global.html#handleSelect">handleSelect</a></li><li><a href="global.html#handleSupplyIconClick">handleSupplyIconClick</a></li><li><a href="global.html#handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges">handleUsernameChange - Updates the username input value in the component state when the input changes</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed">render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 18:43:22 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 20:03:39 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -13,7 +13,9 @@
             "./Supplies.js",
             "./CartItem.js",
             "./Admin.js",
-            "./Index.js"
+            "./modals/CheckoutModal.js",
+            "./modals/PetModal.js",
+            "./modals/SuppliesModal.js"
         ],
         "exclude": [
             "node_modules/"

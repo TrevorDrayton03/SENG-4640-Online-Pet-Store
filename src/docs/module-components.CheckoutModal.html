@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: NavigationBar</title>
+    <title>JSDoc: Class: CheckoutModal</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: NavigationBar</h1>
+    <h1 class="page-title">Class: CheckoutModal</h1>
 
     
 
@@ -28,9 +28,9 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>NavigationBar<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>CheckoutModal<span class="signature">(props)</span><span class="type-signature"></span></h2>
         
-            <div class="class-description">NavigationBar ComponentThis component renders the navigation bar for the Pet Universe application.</div>
+            <div class="class-description">CheckoutModal is used as the form for when checking out the cart.</div>
         
     
 </header>
@@ -45,12 +45,16 @@
     
 
     
-    <h4 class="name" id="NavigationBar"><span class="type-signature"></span>new NavigationBar<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    <h4 class="name" id="CheckoutModal"><span class="type-signature"></span>new CheckoutModal<span class="signature">(props)</span><span class="type-signature"></span></h4>
     
 
     
 
 
+
+<div class="description">
+    Creates a new instance of CheckoutModal.
+</div>
 
 
 
@@ -91,7 +95,7 @@
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -101,79 +105,7 @@
 
             
 
-            <td class="description last">Component props
-                <h6>Properties</h6>
-                
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>linkClick</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">function</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Function to handle link clicks</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>itemCount</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">number</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Number of items in the shopping cart</td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-            </td>
+            <td class="description last">The props that were passed to the component.</td>
         </tr>
 
     
@@ -214,7 +146,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="NavigationBar.js.html">NavigationBar.js</a>, <a href="NavigationBar.js.html#line14">line 14</a>
+        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -239,28 +171,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    - Navigation bar JSX element
-</div>
-
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">JSX.Element</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 
@@ -268,6 +178,17 @@
 
     
     </div>
+
+    
+        <h3 class="subsection-title">Extends</h3>
+
+        
+
+
+    <ul>
+        <li>React.Component</li>
+    </ul>
+
 
     
 
@@ -292,7 +213,7 @@
     
 
     
-    <h4 class="name" id="handleOnClick"><span class="type-signature"></span>handleOnClick<span class="signature">(e, value)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="handleSubmit"><span class="type-signature">(async) </span>handleSubmit<span class="signature">(e)</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -300,7 +221,7 @@
 
 
 <div class="description">
-    Handle link click eventPrevents default event and calls linkClick function from props
+    Handles the form submission and calls the parent checkout function.
 </div>
 
 
@@ -342,7 +263,7 @@
             <td class="type">
             
                 
-<span class="param-type">object</span>
+<span class="param-type">Object</span>
 
 
             
@@ -352,30 +273,7 @@
 
             
 
-            <td class="description last">Click event object</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">string</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last">Link value to pass to linkClick function</td>
+            <td class="description last">The form submission event.</td>
         </tr>
 
     
@@ -416,7 +314,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="NavigationBar.js.html">NavigationBar.js</a>, <a href="NavigationBar.js.html#line24">line 24</a>
+        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line29">line 29</a>
     </li></ul></dd>
     
 
@@ -441,6 +339,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -452,7 +368,7 @@
     
 
     
-    <h4 class="name" id=".render"><span class="type-signature">(static) </span>render<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    <h4 class="name" id="render"><span class="type-signature">(static) </span>CheckoutModal#render<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
     
@@ -460,7 +376,7 @@
 
 
 <div class="description">
-    Renders the NavigationBar component.
+    Renders the component.
 </div>
 
 
@@ -504,7 +420,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="NavigationBar.js.html">NavigationBar.js</a>, <a href="NavigationBar.js.html#line29">line 29</a>
+        <a href="modals_CheckoutModal.js.html">modals/CheckoutModal.js</a>, <a href="modals_CheckoutModal.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -533,7 +449,7 @@
 
         
 <div class="param-desc">
-    JSX element.
+    - The rendered component.
 </div>
 
 

@@ -91,6 +91,8 @@ class DataTable extends Component {
 
     /**
     * Renders the component.
+    * 
+    * @memberof DataManager
     * @returns {JSX.Element} - The rendered component.
     */
     render() {

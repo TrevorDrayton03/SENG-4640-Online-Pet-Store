@@ -134,6 +134,7 @@ class Pets extends Component {
 
   /**
   * @function handleDisplay
+  * @memberof Pets
   * @description Creates an array of indexes of pets that match the type of pet selected.
   * @returns {Array} good - Array of indexes of pets that match the selected type.
   */
@@ -152,6 +153,7 @@ class Pets extends Component {
   /**
   * 
   * @function render
+  * @memberof Pets
   * @description Renders the Pets component.
   * @returns {JSX.Element} JSX element.
   */

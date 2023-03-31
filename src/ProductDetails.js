@@ -13,6 +13,7 @@ class ProductDetails extends Component {
   * 
   * @function render
   * @description Renders the ProductDetails component.
+  * @memberof ProductDetails
   * @returns {JSX.Element} JSX element.
   */
   render() {
