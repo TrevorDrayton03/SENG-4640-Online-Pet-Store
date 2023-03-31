@@ -31,6 +31,7 @@ import CheckoutModal from "./modals/CheckoutModal";
 */
 
 class Cart extends Component {
+    
     /**
     * Constructor for the Cart component.
     * 

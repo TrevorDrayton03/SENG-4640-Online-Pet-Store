@@ -24,6 +24,7 @@ class Supplies extends Component {
   */
   constructor(props) {
     super(props);
+
     /**
     * State object of the Supplies component
     * @property {Array|null} allSupplies - list of all pet supplies fetched from the API
@@ -163,10 +164,14 @@ class Supplies extends Component {
             <div className="row centerText">
               <h1 className="centerText">Supplies</h1>
               {arra.map((type) => {
+                const isSelected = this.state.type === type;
                 return (
                   <div className="col centerText">
                     <a onClick={() => this.handleChange(type)} value={type}>
-                      <img src={require(`./images/${type}.jpg`).default}></img>
+                      <img
+                        src={require(`./images/${type}.jpg`).default}
+                        className={isSelected ? "selected" : ""}
+                      ></img>
                     </a>
                   </div>
                 );

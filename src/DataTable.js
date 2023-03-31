@@ -22,6 +22,7 @@ import SuppliesModal from "./modals/SuppliesModal";
 * @returns {JSX.Element} - A DataTable component displaying the database data.
 * */
 class DataTable extends Component {
+
     /**
     * Creates a new DataTable.
     * @param {Object} props - The component's properties.
@@ -34,6 +35,7 @@ class DataTable extends Component {
 
     constructor(props) {
         super(props);
+
         /**
         * The component's state.
         * @property {Array<Object>} tableData - The data to display in the table.
@@ -45,6 +47,7 @@ class DataTable extends Component {
             showModal: false,
             modalData: null
         };
+        
         /**
         * The function to handle an update in the modal.
         * @param {Object} data - The data to update.

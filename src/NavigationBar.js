@@ -25,6 +25,7 @@ class NavigationBar extends Component {
         e.preventDefault();
         this.props.linkClick(value)
     }
+    
     /**
     * 
     * @function render

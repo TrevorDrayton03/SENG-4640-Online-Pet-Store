@@ -206,9 +206,18 @@ body {
 }
 
 .col img {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
+  border: 2px solid transparent;
   object-fit: cover;
+}
+
+.col img:hover {
+  border: 2px solid #000080 !important;
+}
+
+.col img.selected {
+  border: 2px solid #000080 !important;
 }
 
 .maxvp {

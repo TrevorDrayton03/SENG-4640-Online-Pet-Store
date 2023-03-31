@@ -14,6 +14,7 @@ import Carousel from 'react-bootstrap/Carousel';
 * @property {Array} pets - An array of featured pets objects
 */
 class Home extends Component {
+
     /**
     * @typedef {Object} HomeState
     * @property {number} index - The index of the selected item.
@@ -31,6 +32,7 @@ class Home extends Component {
             supplyTypes: null
         };
     }
+
     /**
     * @function
     * handlePetIconClick
@@ -97,6 +99,7 @@ class Home extends Component {
             })
             .catch(error => console.log(error))
     }
+    
     /**
     * 
     * @function render

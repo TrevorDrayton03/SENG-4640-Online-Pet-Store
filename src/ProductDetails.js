@@ -8,6 +8,7 @@ import React, { Component } from "react";
 * @returns {JSX.Element} - The ProductDetails component.
 */
 class ProductDetails extends Component {
+  
   /**
   * 
   * @function render

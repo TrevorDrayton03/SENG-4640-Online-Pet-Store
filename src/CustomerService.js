@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 /**
 * CustomerService React Component.
 * Displays frequently asked questions and a contact form for customers to reach out.
@@ -10,6 +11,7 @@ import React, { Component } from 'react';
 * )
 */
 class CustomerService extends Component {
+
     /**
     * Constructor for CustomerService component.
     * @constructor

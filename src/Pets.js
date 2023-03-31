@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProductDetails from "./ProductDetails";
+
 /**
  * React component that displays pets data and details.
  *
@@ -16,6 +17,7 @@ import ProductDetails from "./ProductDetails";
  */
 
 class Pets extends Component {
+
   /**
   * Creates an instance of Pets.
   *
@@ -24,6 +26,7 @@ class Pets extends Component {
   */
   constructor(props) {
     super(props);
+
     /**
     * Component state
     *
@@ -34,7 +37,6 @@ class Pets extends Component {
     * @property {?Object} goodAnimal - Selected pet for details view
     * @property {boolean} isLoading - Whether the component is still loading data
     */
-
     this.state = {
       allPets: null,
       type: "Dog",
@@ -43,6 +45,7 @@ class Pets extends Component {
       isLoading: true,
     };
   }
+
   /**
   * Handles changes in the pet type to display.
   *
@@ -176,10 +179,14 @@ class Pets extends Component {
             <div className="row centerText">
               <h1 className="centerText">Pets</h1>
               {arra.map((type) => {
+                const isSelected = this.state.type === type;
                 return (
                   <div className="col centerText">
                     <a value={type} onClick={() => this.handleChange(type)}>
-                      <img src={require(`./images/${type}.jpg`).default}></img>
+                      <img
+                        src={require(`./images/${type}.jpg`).default}
+                        className={isSelected ? "selected" : ""}
+                      ></img>
                     </a>
                   </div>
                 );

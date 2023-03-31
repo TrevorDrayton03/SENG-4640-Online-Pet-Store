@@ -15,7 +15,6 @@ const container = document.getElementById('root');
 const root = createRoot(container);
 
 /**
-
 * Renders the root component of the application into the DOM.
 * @function
 * @returns {void}

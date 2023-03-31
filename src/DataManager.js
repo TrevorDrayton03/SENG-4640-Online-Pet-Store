@@ -35,6 +35,7 @@ class DataManager extends Component {
         this.handleSearch = this.handleSearch.bind(this);
 
     }
+
     /**
      * Sets the showModal state to true.
      */
@@ -87,6 +88,7 @@ class DataManager extends Component {
             }
         }
     }
+
     /**
     * Updates the fetchedData state with the updated data.
     * @param {object} updatedData - The data to update.
@@ -163,6 +165,7 @@ class DataManager extends Component {
             console.error(error);
         }
     }
+
     /**
     * Renders the DataManager component
     * @function
