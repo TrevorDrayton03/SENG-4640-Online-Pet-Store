@@ -35,6 +35,7 @@ class Pets extends Component {
       chosen: false,
       goodAnimal: null,
       isLoading: true,
+      maxRow: 0,
     };
   }
 
@@ -46,7 +47,7 @@ class Pets extends Component {
   * @returns {void}
   */
   handleChange = (event) => {
-    this.setState({ type: event });
+    this.setState({ type: event, maxRow: 0 });
   };
 
   /**
@@ -186,54 +187,38 @@ class Pets extends Component {
                 );
               })}
             </div>
-            <div id="petDis">
-              {/* for each pet index type, use it to get the pet data we want from all the pets */}
-              {good.map((type) => {
-                return (
-                  <table>
-                    {" "}
-                    <tr>
-                      {" "}
-                      <th>
-                        {" "}
-                        <h1>This is {allPets[type].name} </h1>{" "}
-                      </th>
-                    </tr>
-                    <tr>
-                      <td>
-                        {" "}
-                        <button
-                          value={allPets[type]._id}
-                          onClick={() =>
-                            this.setState({
-                              chosen: !this.state.chosen,
-                              goodAnimal: allPets[type],
-                            })
-                          }
-                        >
-                          <img
-                            className="itemImg"
-                            id={allPets[type]._id}
-                            name={allPets[type].name}
-                            alt={allPets[type].breed}
-                            src={allPets[type].url}
-                            style={{
-                              display: "block",
-                              height: "100%",
-                              width: "100%",
-                            }}
-                          ></img>
-                        </button>
-                      </td>
-                      <td>
-                        <h1>They cost $ {allPets[type].price}</h1>
-                      </td>
-                    </tr>
-                  </table>
-                );
-              })}
-            </div>
-          </div>
+            <div id="petDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection:'row', justifyContent:'space-evenly' }}>
+              {
+                good.map((type) => {
+                  this.state.maxRow += 1;
+                  return (
+                    <div>
+                      <button
+                        value={allPets[type]._id}
+                        onClick={() =>
+                          this.setState({
+                            chosen: !this.state.chosen,
+                            goodAnimal: allPets[type],
+                          })
+                        }
+                      >
+                        <img
+                          className="itemImg"
+                          id={allPets[type]._id}
+                          name={allPets[type].name}
+                          alt={allPets[type].breed}
+                          src={allPets[type].url}
+                          style={{ display: "block", height: "300px", width: "300px", objectFit: 'cover' }}
+                        ></img>
+                      </button>
+                      <h2 className="centerText">{allPets[type].name}</h2>
+                      <h2 className="centerText" style={{ color: "red" }}>$ {allPets[type].price}</h2>
+                    </div>
+                  );
+                })
+              }
+            </div >
+          </div >
         );
       }
     }
