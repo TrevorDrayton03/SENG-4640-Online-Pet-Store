@@ -1,32 +1,88 @@
 import React, { Component } from "react";
-import Data from "./Data";
+import ProductDetails from "./ProductDetails";
+
+/**
+ * React component that displays pets data and details.
+ *
+ * @component
+ * @example
+ * return (
+ *   <Pets addToCart={addToCart} />
+ * )
+ *
+ * @param {Object} props - Component props
+ * @param {function} props.addToCart - Function to add a product to cart
+ *
+ * @returns {JSX.Element} - Rendered component
+ */
 
 class Pets extends Component {
+
+  /**
+  * Creates an instance of Pets.
+  *
+  * @constructor
+  * @param {Object} props - Component props
+  */
   constructor(props) {
     super(props);
+
+    /**
+    * Component state
+    *
+    * @type {Object}
+    * @property {?Array<Object>} allPets - List of all available pets
+    * @property {string} type - Current type of pet to display
+    * @property {boolean} chosen - Whether a pet has been chosen for details view
+    * @property {?Object} goodAnimal - Selected pet for details view
+    * @property {boolean} isLoading - Whether the component is still loading data
+    */
     this.state = {
-      petType: null,
-      value: "Dog",
+      allPets: null,
+      type: "Dog",
       chosen: false,
       goodAnimal: null,
-      isLoading: true
+      isLoading: true,
     };
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-  }
+  /**
+  * Handles changes in the pet type to display.
+  *
+  * @method
+  * @param {string} event - New pet type
+  * @returns {void}
+  */
+  handleChange = (event) => {
+    this.setState({ type: event });
+  };
+
+  /**
+  * Toggles the chosen state between true and false.
+  * 
+  * Used to determine whether the details view should be mounted or dismounted.
+  * @method
+  * @returns {void}
+  */
   handleToggleChosen() {
     this.setState({ chosen: !this.state.chosen });
   }
 
-  // this has to be done instead of passing props down from App if we are going to make pets and pet types clickable from Home
+  /**
+  * Fetches pet data and updates component state.
+  * 
+  * Sets goodAnimal if query parameters exist in the URL.
+  *
+  * @async
+  * @method
+  * @returns {Promise<void>}
+  */
   async componentDidMount() {
     try {
-      const response = await fetch('http://localhost:3000/api/petData');
+      const response = await fetch("http://localhost:3000/api/petData");
       const pets = await response.json();
       this.setState({
-        petType: pets,
+        allPets: pets,
       });
     } catch (error) {
       console.error(error);
@@ -35,35 +91,39 @@ class Pets extends Component {
     // this is how this component knows what to display when clicking on the pet icons or carousel in Home
     const search = window.location.search;
     const params = new URLSearchParams(search);
-    const type = params.get('type');
-    const id = params.get('id');
-    // prevent the code from continueing until petType is set
-    while (!this.state.petType) {
-      await new Promise(resolve => setTimeout(resolve, 10));
+    const type = params.get("type");
+    const id = params.get("id");
+    // prevent the code from continueing until allPets is set
+    while (!this.state.allPets) {
+      await new Promise((resolve) => setTimeout(resolve, 10));
     }
     if (id) {
-      let pet = this.state.petType.find(pets => pets._id === id)
+      let pet = this.state.allPets.find((pets) => pets._id === id);
       this.setState({ goodAnimal: pet, chosen: true });
+    } else if (type && !id) {
+      this.setState({ type: type });
     }
-    else if (type && !id) {
-      this.setState({ value: type });
-    }
-    this.setState({ isLoading: false })
+    this.setState({ isLoading: false });
   }
 
+  /**
+  * Generates an array of distinct pet types from allPets.
+  * @method
+  * @returns {Array<string>} - Array of distinct pet types
+  */
   selectOptions() {
-    let ani = this.state.petType;
+    let ani = this.state.allPets;
     let arra = [];
     let same = false;
     let count = 0;
     for (let i = 0; i < ani.length; i++) {
       for (let j = 0; j < arra.length; j++) {
-        if (ani[i].type == arra[j]) {
+        if (ani[i].type === arra[j]) {
           same = true;
         }
       }
       count++;
-      if (count == 1 && same == false) {
+      if (count === 1 && same === false) {
         arra.push(ani[i].type);
       }
       same = false;
@@ -72,52 +132,70 @@ class Pets extends Component {
     return arra;
   }
 
+  /**
+  * @function handleDisplay
+  * @memberof Pets
+  * @description Creates an array of indexes of pets that match the type of pet selected.
+  * @returns {Array} good - Array of indexes of pets that match the selected type.
+  */
   handleDisplay = () => {
     //meant to create a table that displays to page
-    let allPets = this.state.petType;
+    let allPets = this.state.allPets;
     const good = [];
     for (let anNum = 0; anNum < allPets.length; anNum++) {
-      if (this.state.value == allPets[anNum].type) {
+      if (this.state.type === allPets[anNum].type) {
         good.push(anNum);
       }
     }
     return good;
   };
 
+  /**
+  * 
+  * @function render
+  * @memberof Pets
+  * @description Renders the Pets component.
+  * @returns {JSX.Element} JSX element.
+  */
   render() {
     if (this.state.isLoading) {
-      <div><p>Loading...</p></div>
-    }
-    else if (this.state.petType) {
-      let allPets = this.state.petType;
-      let arra = this.selectOptions(); // this is an array of distinct pet types 
-      let good = this.handleDisplay(); // these are indexes of pets 
+      <div>
+        <p>Loading...</p>
+      </div>;
+    } else if (this.state.allPets) {
+      let allPets = this.state.allPets;
+      let arra = this.selectOptions(); // this is an array of distinct pet types
+      let good = this.handleDisplay(); // these are indexes of pets
 
       if (this.state.chosen === true) {
-        return <Data
-          goodPet={this.state.goodAnimal}
-          addToCart={this.props.addToCart}
-          handleChosen={this.handleToggleChosen.bind(this)}
-        />;
-      }
-      else {
+        return (
+          <ProductDetails
+            goodPet={this.state.goodAnimal}
+            addToCart={this.props.addToCart}
+            handleChosen={this.handleToggleChosen.bind(this)}
+          />
+        );
+      } else {
         return (
           <div className="large">
-            <div className="Pets">
-              <h2>What animals would you like to look at?</h2>
-              <select
-                name="animals"
-                id="petType"
-                value={this.state.value}
-                onChange={this.handleChange.bind(this)}
-              >
-                {arra.map((type) => {
-                  return <option value={type}>{type}</option>;
-                })}
-              </select>
+            <div className="row centerText">
+              <h1 className="centerText">Pets</h1>
+              {arra.map((type) => {
+                const isSelected = this.state.type === type;
+                return (
+                  <div className="col centerText">
+                    <a value={type} onClick={() => this.handleChange(type)}>
+                      <img
+                        src={require(`./images/${type}.jpg`).default}
+                        className={isSelected ? "selected" : ""}
+                      ></img>
+                    </a>
+                  </div>
+                );
+              })}
             </div>
             <div id="petDis">
-              {/* for each pet index value, use it to get the pet data we want from all the pets */}
+              {/* for each pet index type, use it to get the pet data we want from all the pets */}
               {good.map((type) => {
                 return (
                   <table>
@@ -126,28 +204,38 @@ class Pets extends Component {
                       {" "}
                       <th>
                         {" "}
-                        <h1>Their name is {allPets[type].name} </h1>{" "}
+                        <h1>This is {allPets[type].name} </h1>{" "}
                       </th>
                     </tr>
                     <tr>
                       <td>
                         {" "}
-                        <img
-                          className="itemImg"
-                          id={allPets[type]._id}
-                          name={allPets[type].name}
-                          alt={allPets[type].breed}
-                          src={allPets[type].url}
-                        ></img>
+                        <button
+                          value={allPets[type]._id}
+                          onClick={() =>
+                            this.setState({
+                              chosen: !this.state.chosen,
+                              goodAnimal: allPets[type],
+                            })
+                          }
+                        >
+                          <img
+                            className="itemImg"
+                            id={allPets[type]._id}
+                            name={allPets[type].name}
+                            alt={allPets[type].breed}
+                            src={allPets[type].url}
+                            style={{
+                              display: "block",
+                              height: "100%",
+                              width: "100%",
+                            }}
+                          ></img>
+                        </button>
                       </td>
                       <td>
                         <h1>They cost $ {allPets[type].price}</h1>
                       </td>
-                    </tr>
-                    <tr>
-                      <button value={allPets[type]._id} onClick={() => this.setState({ chosen: !this.state.chosen, goodAnimal: allPets[type] })}>
-                        Click here to learn more about them
-                      </button>
                     </tr>
                   </table>
                 );

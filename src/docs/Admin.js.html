@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Admin.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Admin.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import DataManager from "./DataManager";
+
+/**
+* Admin.js is a React component that handles the authentication of the admin user.
+* @component
+* @param {Object} props - The props object that is passed to the component
+* @param {boolean} props.admin - A boolean indicating whether the user is an admin or not
+* @param {function} props.handleLogin - A function that handles the login state of the user
+* @property {Object} state - The state object that is managed by the component
+* @property {string} state.username - The username of the admin user
+* @property {string} state.password - The password of the admin user
+* @example
+* &lt;Admin admin={true} handleLogin={handleLogin}/>
+*/
+class Admin extends Component {
+
+    /**
+    * @param {object} props - The props that were passed to the component
+    */
+    constructor(props) {
+        super(props);
+
+        /**
+        * @property {string} username - The username input value
+        * @property {string} password - The password input value
+        */
+        this.state = {
+            username: '',
+            password: ''
+        };
+
+        this.handleUsernameChange = this.handleUsernameChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+
+    /**
+    * @function handleUsernameChange - Updates the username input value in the component state when the input changes
+    * @memberof Admin
+    * @param {object} e - The event object
+    */
+    handleUsernameChange(e) {
+        this.setState({ username: e.target.value });
+    }
+
+    /**
+     * @function handlePasswordChange - Updates the password input value in the component state when the input changes
+     * @memberof Admin
+     * @param {object} e - The event object
+     * 
+     */
+    handlePasswordChange(e) {
+        this.setState({ password: e.target.value });
+    }
+
+    /**
+     * @function handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false and resetting username and password
+     * @memberof Admin
+     * @param {object} e - The event object
+     */
+    handleLogout(e) {
+        const confirmLogout = window.confirm("Are you sure you want to logout?");
+        if (confirmLogout) {
+            this.props.handleLogin(false);
+            this.setState({username:'', password:''})
+        }
+    }
+
+    /**
+     * @function handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and password
+     * If the response is not okay, an error is thrown
+     * If the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true
+     * @memberof Admin
+     * @param {object} e - The event object
+     */
+    async handleFormSubmit(e) {
+        e.preventDefault();
+        try {
+            const response = await fetch('http://localhost:3000/api/admin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: this.state.username,
+                    password: this.state.password
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to log in');
+            }
+            this.props.handleLogin(true);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    /**
+    * @function render - Renders the component
+    * If the admin state is false, a login form is displayed
+    * If the admin state is true, a logout button and the DataManager component are displayed
+    * @memberof Admin
+    * @returns {JSX.Element}
+    */
+    render() {
+        if (!this.props.admin) {
+            return (
+                &lt;div className="Container">
+                    &lt;form onSubmit={this.handleFormSubmit}>
+                        &lt;div>
+                            &lt;label>
+                                &lt;p>&lt;strong>Username&lt;/strong>&lt;/p>
+                                &lt;input
+                                    type="text"
+                                    onChange={this.handleUsernameChange}
+                                    value={this.state.username}
+                                    className='centerText'
+                                />
+                            &lt;/label>
+                        &lt;/div>
+                        &lt;div>
+                            &lt;label>
+                                &lt;p>&lt;strong>Password&lt;/strong>&lt;/p>
+                                &lt;input
+                                    type="password"
+                                    onChange={this.handlePasswordChange}
+                                    value={this.state.password}
+                                    className='centerText'
+                                />
+                            &lt;/label>
+                        &lt;/div>
+                        &lt;div className='centerText'>
+                            &lt;button
+                                className="btn btn-primary"
+                                type="submit">Submit&lt;/button>
+                        &lt;/div>
+                    &lt;/form>
+                &lt;/div>
+            )
+        }
+        else {
+            return (
+                &lt;div className="Container">
+                    &lt;div className="centerText">
+                        &lt;button
+                            className="btn btn-primary"
+                            type="submit"
+                            onClick={this.handleLogout}
+                            id="logout"
+                        >Logout&lt;/button>
+                    &lt;/div>
+                    &lt;DataManager
+                    />
+                &lt;/div>
+            )
+        }
+    }
+}
+
+export default Admin;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

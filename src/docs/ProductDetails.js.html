@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ProductDetails.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ProductDetails.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from "react";
+
+/**
+* Renders the details of a product, including its name, image, price, description, and options to add to cart or go back to pets.
+* @param {object} goodPet - The product to display.
+* @param {function} handleChosen - Callback function to handle clicking the back button.
+* @param {function} addToCart - Callback function to handle adding the product to cart.
+* @returns {JSX.Element} - The ProductDetails component.
+*/
+class ProductDetails extends Component {
+  
+  /**
+  * 
+  * @function render
+  * @description Renders the ProductDetails component.
+  * @memberof ProductDetails
+  * @returns {JSX.Element} JSX element.
+  */
+  render() {
+    let product = this.props.goodPet;
+    if (product.breed !== undefined) {
+      return (
+        &lt;div className="large">
+          &lt;table>
+            &lt;tr>
+              &lt;th>
+                &lt;h1>This is {product.name}&lt;/h1>
+                &lt;br>&lt;/br>
+                &lt;h1>
+                  They are a {product.breed} and {product.age} year(s) old
+                &lt;/h1>
+              &lt;/th>
+            &lt;/tr>
+            &lt;tr>
+              &lt;td>
+                &lt;img
+                  className="itemImg"
+                  id={product._id}
+                  name={product.name}
+                  alt={product.breed}
+                  src={product.url}
+                >&lt;/img>
+              &lt;/td>
+              &lt;td>
+                &lt;tr>
+                  &lt;h1>They cost $ {product.price}&lt;/h1>
+                  &lt;br>&lt;/br>
+                &lt;/tr>
+                &lt;tr>
+                  &lt;h1>
+                    A little bit about them: &lt;br>&lt;/br>
+                  &lt;/h1>
+                  &lt;h4>
+                    {product.description}
+                  &lt;/h4>
+                &lt;/tr>
+              &lt;/td>
+            &lt;/tr>
+            &lt;tr>
+              &lt;td>
+                &lt;button
+                  id="backToPets"
+                  className="btn btn-secondary"
+                  onClick={() => this.props.handleChosen()}
+                >
+                  {" "}
+                  Back
+                &lt;/button>
+              &lt;/td>
+              &lt;td>
+                &lt;button
+                  id="addToCart"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    this.props.addToCart(product);
+                    this.props.handleChosen();
+                  }}
+                >
+                  {" "}
+                  Add to Cart
+                &lt;/button>
+              &lt;/td>
+            &lt;/tr>
+          &lt;/table>
+        &lt;/div>
+      );
+    } else {
+      return (
+        &lt;div className="large">
+          &lt;table>
+            &lt;tr>
+              &lt;th>
+                &lt;h1>This is a {product.name}&lt;/h1>
+              &lt;/th>
+            &lt;/tr>
+
+            &lt;tr>
+              &lt;td>
+                &lt;img
+                  className="itemImg"
+                  id={product._id}
+                  name={product.name}
+                  src={product.url}
+                >&lt;/img>
+              &lt;/td>
+              &lt;td>
+                &lt;tr>
+                  &lt;h1>It costs $ {product.price}&lt;/h1>
+                  &lt;br>&lt;/br>
+                &lt;/tr>
+                &lt;tr>
+                  &lt;h1>
+                    A little bit about the product: &lt;br>&lt;/br>
+                  &lt;/h1>
+                  &lt;h4>
+                    {product.description}
+                    &lt;br>&lt;/br>
+                    {product.dimension}
+                    &lt;br>&lt;/br>
+                    {product.weight}
+                  &lt;/h4>
+                &lt;/tr>
+              &lt;/td>
+            &lt;/tr>
+            &lt;tr>
+              &lt;td>
+                &lt;button
+                  id="backToPets"
+                  className="btn btn-secondary"
+                  onClick={() => this.props.handleChosen()}
+                >
+                  {" "}
+                  Back
+                &lt;/button>
+              &lt;/td>
+              &lt;td>
+                &lt;button
+                  id="addToCart"
+                  className="btn btn-primary"
+                  onClick={() => {
+                    this.props.addToCart(product);
+                    this.props.handleChosen();
+                  }}
+                >
+                  {" "}
+                  Add to Cart
+                &lt;/button>
+              &lt;/td>
+            &lt;/tr>
+          &lt;/table>
+        &lt;/div>
+      );
+    }
+  }
+}
+export default ProductDetails;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

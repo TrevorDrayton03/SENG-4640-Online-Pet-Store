@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-// PetModal is used to add to the pet collection or update data from the pet collection in our MongoDB.
-
+/**
+* A Modal component used for adding or updating pet data from MongoDB.
+* @extends Component
+*/
 class PetModal extends Component {
+
+    /**
+    * @constructor
+    * @param {Object} props - The props object passed from parent.
+    */
     constructor(props) {
         super(props);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-
+    /**
+     * Method to handle form submission.
+     * @async
+     * @method
+     * @param {Object} e - The event object.
+     */
     handleSubmit = async (e) => {
         e.preventDefault();
         const form = e.currentTarget;
@@ -75,6 +87,12 @@ class PetModal extends Component {
         this.props.handleCloseModal();
     };
 
+    /**
+    * Renders the component.
+    * 
+    * @memberof PetModal
+    * @returns {JSX.Element} - The rendered component.
+    */
     render() {
         if (this.props.job === "update") {
             return (

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Home.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Home.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { Component } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
+
+/**
+*
+* @component
+* Home
+* @description
+* The Home component is the main landing page of the application. It consists of the following sections:
+* About Us section
+* Featured Pets section
+* Shop By Pet section
+* Shop By Supplies section
+* @property {Array} pets - An array of featured pets objects
+*/
+class Home extends Component {
+
+    /**
+    * @typedef {Object} HomeState
+    * @memberof Home
+    * @property {number} index - The index of the selected item.
+    * @property {Array&lt;string>|null} petTypes - The list of available pet types, or null if not yet fetched.
+    * @property {Array&lt;string>|null} supplyTypes - The list of available supply types, or null if not yet fetched.
+    */
+    /**
+    * @type {HomeState}
+    */
+    constructor(props) {
+        super(props);
+        this.state = {
+            index: 0,
+            petTypes: null,
+            supplyTypes: null
+        };
+    }
+
+    /**
+    * @function
+    * handlePetIconClick
+    * @memberof Home
+    * @param {string} type - The type of pet to filter by
+    * @description
+    * This function is used to send the user to the pets page with the type they want to see.
+    */
+    handlePetIconClick = (type) => {
+        window.location.href = '/pets?type=' + type;
+    };
+
+    /**
+    * @function
+    * handleSupplyIconClick
+    * @memberof Home
+    * @param {string} type - The type of supply to filter by
+    * @description
+    * This function is used to send the user to the supplies page with the type they want to see.
+    */
+    handleSupplyIconClick = (type) => {
+        window.location.href = '/supplies?type=' + type;
+    };
+
+    /**
+    * @function
+    * handleCarouselClick
+    * @memberof Home
+    * @param {string} id - The id of the pet to display in detail
+    * @description
+    * This function is used to send the user to the pet detail page with the pet they want to see.
+    */
+    handleCarouselClick = (id) => {
+        window.location.href = '/pets?id=' + id;
+    };
+
+    /**
+    * @function
+    * handleSelect
+    * @memberof Home
+    * @param {number} selectedIndex - The index of the selected carousel item
+    * @description
+    * This function is used to update the index of the carousel item.
+    */
+    handleSelect = (selectedIndex, e) => {
+        this.setState({ index: selectedIndex });
+    };
+
+    /**
+    * @function
+    * componentDidMount
+    * @async
+    * @memberof Home
+    * @description
+    * Fetches pet and supply types from the API to be used in the "Shop By Pet" and "Shop By Supplies" sections.
+    */
+    async componentDidMount() {
+        await fetch('http://localhost:3000/api/petTypes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ petTypes: data });
+            })
+            .catch(error => console.log(error))
+
+        await fetch('http://localhost:3000/api/supplyTypes')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ supplyTypes: data });
+            })
+            .catch(error => console.log(error))
+    }
+
+    /**
+    * 
+    * @function render
+    * @memberof Home
+    * @description Renders the Home component.
+    * @returns {JSX.Element} JSX element.
+    */
+    render() {
+        return (
+            &lt;div className="Container maxvp">
+                &lt;div className="large">
+                    &lt;h1 className="center centerText">About Us&lt;/h1>
+                    &lt;p>
+                        Welcome to Pet Universe, where we believe that every pet is a star! Our mission is to provide the best pet products and supplies that will help your furry friends shine!
+                    &lt;/p>
+                    &lt;p>
+                        We believe that pets are family, and we treat every customer like one of our own. Our knowledgeable and friendly staff are always ready to help you find the perfect products for your pet. We are committed to providing exceptional customer service and making sure that you and your pet have a stellar experience shopping with us.
+                    &lt;/p>
+                    &lt;p>
+                        So join us on a journey to the Pet Universe, where every pet is a star and the possibilities are endless!
+                    &lt;/p>
+                &lt;/div>
+                &lt;div className="maxvp flexCenter whitebg">
+                    &lt;div className="centerText large">
+                        &lt;h1 className="center centerText whitebg">Featured Pets&lt;/h1>
+                        {this.props.pets &amp;&amp; this.props.pets.length > 0 &amp;&amp;
+                            &lt;Carousel activeIndex={this.state.index} onSelect={this.handleSelect}>
+                                &lt;Carousel.Item>
+                                    &lt;a key={this.props.pets[0]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[0]._id)}>
+                                        &lt;img
+                                            className="carouselImg"
+                                            alt="First Slide"
+                                            src={this.props.pets[0].url}
+                                        />
+                                    &lt;/a>
+                                    &lt;Carousel.Caption className="blackTextBorder">
+                                        &lt;h1>{this.props.pets[0].name}&lt;/h1>
+                                        &lt;p>{this.props.pets[0].breed}&lt;/p>
+                                    &lt;/Carousel.Caption>
+
+                                &lt;/Carousel.Item>
+                                &lt;Carousel.Item>
+                                    &lt;a key={this.props.pets[1]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[1]._id)}>
+                                        &lt;img
+                                            className="carouselImg"
+                                            alt="Second Slide"
+                                            src={this.props.pets[1].url}
+                                        />
+                                    &lt;/a >
+                                    &lt;Carousel.Caption className="blackTextBorder">
+                                        &lt;h1>{this.props.pets[1].name}&lt;/h1>
+                                        &lt;p>{this.props.pets[1].breed}&lt;/p>
+                                    &lt;/Carousel.Caption>
+                                &lt;/Carousel.Item>
+                                &lt;Carousel.Item>
+                                    &lt;a key={this.props.pets[2]._id} href="#" onClick={() => this.handleCarouselClick(this.props.pets[2]._id)}>
+                                        &lt;img
+                                            className="carouselImg"
+                                            alt="Second Slide"
+                                            src={this.props.pets[2].url}
+                                        />
+                                    &lt;/a>
+                                    &lt;Carousel.Caption className="blackTextBorder">
+                                        &lt;h1>{this.props.pets[2].name}&lt;/h1>
+                                        &lt;p>{this.props.pets[2].breed}&lt;/p>
+                                    &lt;/Carousel.Caption>
+                                &lt;/Carousel.Item>
+                            &lt;/Carousel>
+                        }
+                    &lt;/div>
+                &lt;/div>
+                &lt;div>
+                &lt;/div>
+                &lt;div className="large" >
+                    &lt;h1 className="centerText">Shop By Pet&lt;/h1>
+                    &lt;div className="row centerText" >
+                        {this.state.petTypes &amp;&amp; this.state.petTypes.map((type) => {
+                            return (
+                                &lt;div className="col centerText" >
+                                    &lt;a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
+                                        &lt;img
+                                            src={require(`./images/${type}.jpg`).default}
+                                        >&lt;/img>
+                                    &lt;/a>
+                                &lt;/div>
+                            )
+                        })}
+
+                    &lt;/div>
+                &lt;/div>
+                &lt;div className="large">
+                    &lt;h1 className="centerText">Shop By Supplies&lt;/h1>
+                    &lt;div className="row centerText" >
+                        {this.state.supplyTypes &amp;&amp; this.state.supplyTypes.map((type) => {
+                            return (
+                                &lt;div className="col centerText">
+                                    &lt;a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
+                                        &lt;img
+                                            src={require(`./images/${type}.jpg`).default}
+                                        >&lt;/img>
+                                    &lt;/a>
+                                &lt;/div>
+                            )
+                        })}
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        );
+    }
+}
+
+export default Home;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="PetModal.html">PetModal</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="SuppliesModal.html">SuppliesModal</a></li><li><a href="module-components.CheckoutModal.html">CheckoutModal</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 21:30:06 GMT-0700 (Pacific Daylight Saving Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

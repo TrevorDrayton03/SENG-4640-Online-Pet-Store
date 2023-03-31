@@ -1,7 +1,30 @@
 import React, { Component } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 
+/**
+*
+* @component
+* Home
+* @description
+* The Home component is the main landing page of the application. It consists of the following sections:
+* About Us section
+* Featured Pets section
+* Shop By Pet section
+* Shop By Supplies section
+* @property {Array} pets - An array of featured pets objects
+*/
 class Home extends Component {
+
+    /**
+    * @typedef {Object} HomeState
+    * @memberof Home
+    * @property {number} index - The index of the selected item.
+    * @property {Array<string>|null} petTypes - The list of available pet types, or null if not yet fetched.
+    * @property {Array<string>|null} supplyTypes - The list of available supply types, or null if not yet fetched.
+    */
+    /**
+    * @type {HomeState}
+    */
     constructor(props) {
         super(props);
         this.state = {
@@ -10,24 +33,63 @@ class Home extends Component {
             supplyTypes: null
         };
     }
-    // used to send the user to the pets page with the type they want to see
+
+    /**
+    * @function
+    * handlePetIconClick
+    * @memberof Home
+    * @param {string} type - The type of pet to filter by
+    * @description
+    * This function is used to send the user to the pets page with the type they want to see.
+    */
     handlePetIconClick = (type) => {
         window.location.href = '/pets?type=' + type;
     };
 
+    /**
+    * @function
+    * handleSupplyIconClick
+    * @memberof Home
+    * @param {string} type - The type of supply to filter by
+    * @description
+    * This function is used to send the user to the supplies page with the type they want to see.
+    */
     handleSupplyIconClick = (type) => {
-        window.location.href = '/petsupplies?type=' + type;
+        window.location.href = '/supplies?type=' + type;
     };
 
+    /**
+    * @function
+    * handleCarouselClick
+    * @memberof Home
+    * @param {string} id - The id of the pet to display in detail
+    * @description
+    * This function is used to send the user to the pet detail page with the pet they want to see.
+    */
     handleCarouselClick = (id) => {
         window.location.href = '/pets?id=' + id;
     };
-    // carousel index handler
+
+    /**
+    * @function
+    * handleSelect
+    * @memberof Home
+    * @param {number} selectedIndex - The index of the selected carousel item
+    * @description
+    * This function is used to update the index of the carousel item.
+    */
     handleSelect = (selectedIndex, e) => {
         this.setState({ index: selectedIndex });
     };
 
-    // ES6 style fetch for getting distinct types
+    /**
+    * @function
+    * componentDidMount
+    * @async
+    * @memberof Home
+    * @description
+    * Fetches pet and supply types from the API to be used in the "Shop By Pet" and "Shop By Supplies" sections.
+    */
     async componentDidMount() {
         await fetch('http://localhost:3000/api/petTypes')
             .then(response => response.json())
@@ -44,19 +106,23 @@ class Home extends Component {
             .catch(error => console.log(error))
     }
 
+    /**
+    * 
+    * @function render
+    * @memberof Home
+    * @description Renders the Home component.
+    * @returns {JSX.Element} JSX element.
+    */
     render() {
         return (
             <div className="Container maxvp">
                 <div className="large">
                     <h1 className="center centerText">About Us</h1>
                     <p>
-                        Welcome to Pet Universe, where we believe that every pet is a star! Our mission is to provide the best pet products and supplies that will help your furry friends shine!.
+                        Welcome to Pet Universe, where we believe that every pet is a star! Our mission is to provide the best pet products and supplies that will help your furry friends shine!
                     </p>
-                    {/* <p>
-                        At Pet Universe, we understand that every pet is unique and special. That's why we offer a wide range of products that cater to different types of pets and their needs. Whether your pet is a shining star, a quirky comet, or a loyal planet, we have everything you need to keep them happy and healthy.
-                    </p> */}
                     <p>
-                        At Pet Universe, we believe that pets are family, and we treat every customer like one of our own. Our knowledgeable and friendly staff are always ready to help you find the perfect products for your pet. We are committed to providing exceptional customer service and making sure that you and your pet have a stellar experience shopping with us.
+                        We believe that pets are family, and we treat every customer like one of our own. Our knowledgeable and friendly staff are always ready to help you find the perfect products for your pet. We are committed to providing exceptional customer service and making sure that you and your pet have a stellar experience shopping with us.
                     </p>
                     <p>
                         So join us on a journey to the Pet Universe, where every pet is a star and the possibilities are endless!
@@ -120,7 +186,9 @@ class Home extends Component {
                             return (
                                 <div className="col centerText" >
                                     <a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
-                                        <img src={require("./images/" + type + ".jpg")}></img>
+                                        <img
+                                            src={require(`./images/${type}.jpg`).default}
+                                        ></img>
                                     </a>
                                 </div>
                             )
@@ -128,22 +196,20 @@ class Home extends Component {
 
                     </div>
                 </div>
-                <div className="maxvp flexCenter whitebg">
-
-                    <div className="large">
-                        <h1 className="centerText">Shop By Product</h1>
-                        <div className="row centerText" >
-                            {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
-                                return (
-                                    <div className="col centerText">
-                                        <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
-                                            <img src={require("./images/" + type + ".jpg")}></img>
-                                        </a>
-                                    </div>
-                                )
-                            })}
-
-                        </div>
+                <div className="large">
+                    <h1 className="centerText">Shop By Supplies</h1>
+                    <div className="row centerText" >
+                        {this.state.supplyTypes && this.state.supplyTypes.map((type) => {
+                            return (
+                                <div className="col centerText">
+                                    <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
+                                        <img
+                                            src={require(`./images/${type}.jpg`).default}
+                                        ></img>
+                                    </a>
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
