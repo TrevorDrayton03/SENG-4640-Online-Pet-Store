@@ -32,7 +32,7 @@ import ProductDetails from "./ProductDetails";
 /**
  * React component that displays pet supplies and their details.
  *
- * @class Supplies
+ * @class
  * @component
  * @example
  * return (
@@ -48,11 +48,13 @@ class Supplies extends Component {
 
   /**
   * Creates an instance of Supplies.
-  * @param {*} props
-  * @memberof Supplies
+  *
+  * @constructor
+  * @param {Object} props - Component props
   */
   constructor(props) {
     super(props);
+
     /**
     * State object of the Supplies component
     * @property {Array|null} allSupplies - list of all pet supplies fetched from the API
@@ -192,10 +194,14 @@ class Supplies extends Component {
             &lt;div className="row centerText">
               &lt;h1 className="centerText">Supplies&lt;/h1>
               {arra.map((type) => {
+                const isSelected = this.state.type === type;
                 return (
                   &lt;div className="col centerText">
                     &lt;a onClick={() => this.handleChange(type)} value={type}>
-                      &lt;img src={require(`./images/${type}.jpg`).default}>&lt;/img>
+                      &lt;img
+                        src={require(`./images/${type}.jpg`).default}
+                        className={isSelected ? "selected" : ""}
+                      >&lt;/img>
                     &lt;/a>
                   &lt;/div>
                 );
@@ -266,13 +272,13 @@ export default Supplies;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li><li><a href="Supplies.Supplies.html">Supplies</a></li></ul><h3>Global</h3><ul><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#handleCarouselClick">handleCarouselClick</a></li><li><a href="global.html#handleDisplay">handleDisplay</a></li><li><a href="global.html#handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue">handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true</a></li><li><a href="global.html#handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalse">handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false</a></li><li><a href="global.html#handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges">handlePasswordChange - Updates the password input value in the component state when the input changes</a></li><li><a href="global.html#handlePetIconClick">handlePetIconClick</a></li><li><a href="global.html#handleSelect">handleSelect</a></li><li><a href="global.html#handleSupplyIconClick">handleSupplyIconClick</a></li><li><a href="global.html#handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges">handleUsernameChange - Updates the username input value in the component state when the input changes</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed">render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-index.html">index</a></li></ul><h3>Classes</h3><ul><li><a href="Admin.html">Admin</a></li><li><a href="App.html">App</a></li><li><a href="Cart.html">Cart</a></li><li><a href="CartItem.html">CartItem</a></li><li><a href="DataManager.html">DataManager</a></li><li><a href="DataTable.html">DataTable</a></li><li><a href="Home.html">Home</a></li><li><a href="NavigationBar.html">NavigationBar</a></li><li><a href="Pets.html">Pets</a></li><li><a href="ProductDetails.html">ProductDetails</a></li><li><a href="Supplies.html">Supplies</a></li></ul><h3>Global</h3><ul><li><a href="global.html#componentDidMount">componentDidMount</a></li><li><a href="global.html#handleCarouselClick">handleCarouselClick</a></li><li><a href="global.html#handleDisplay">handleDisplay</a></li><li><a href="global.html#handleFormSubmit-SendsaPOSTrequesttotheservertoauthenticatetheuserwiththeenteredusernameandpasswordIftheresponseisnotokay,anerroristhrownIftheresponseisokay,thehandleLoginfunctionintheparentcomponentiscalledwithavalueoftruetosettheadminstatetotrue">handleFormSubmit - Sends a POST request to the server to authenticate the user with the entered username and passwordIf the response is not okay, an error is thrownIf the response is okay, the handleLogin function in the parent component is called with a value of true to set the admin state to true</a></li><li><a href="global.html#handleLogout-LogstheuseroutoftheadmininterfacebycallingthehandleLoginfunctionintheparentcomponentwithavalueoffalse">handleLogout - Logs the user out of the admin interface by calling the handleLogin function in the parent component with a value of false</a></li><li><a href="global.html#handlePasswordChange-Updatesthepasswordinputvalueinthecomponentstatewhentheinputchanges">handlePasswordChange - Updates the password input value in the component state when the input changes</a></li><li><a href="global.html#handlePetIconClick">handlePetIconClick</a></li><li><a href="global.html#handleSelect">handleSelect</a></li><li><a href="global.html#handleSupplyIconClick">handleSupplyIconClick</a></li><li><a href="global.html#handleUsernameChange-Updatestheusernameinputvalueinthecomponentstatewhentheinputchanges">handleUsernameChange - Updates the username input value in the component state when the input changes</a></li><li><a href="global.html#render">render</a></li><li><a href="global.html#render-RendersthecomponentIftheadminstateisfalse,aloginformisdisplayedIftheadminstateistrue,alogoutbuttonandtheDataManagercomponentaredisplayed">render - Renders the componentIf the admin state is false, a login form is displayedIf the admin state is true, a logout button and the DataManager component are displayed</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 17:55:44 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Mar 30 2023 18:43:22 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

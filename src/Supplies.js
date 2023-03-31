@@ -4,7 +4,7 @@ import ProductDetails from "./ProductDetails";
 /**
  * React component that displays pet supplies and their details.
  *
- * @class Supplies
+ * @class
  * @component
  * @example
  * return (
@@ -20,7 +20,9 @@ class Supplies extends Component {
 
   /**
   * Creates an instance of Supplies.
-  * @param {*} props
+  *
+  * @constructor
+  * @param {Object} props - Component props
   */
   constructor(props) {
     super(props);
