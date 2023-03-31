@@ -336,7 +336,7 @@ app.use('/api/saveSupply', async (req, res) => {
 
 /**
 * Route to get a random set of pets for the carousel
-* @name /api/carousel
+* @name /api/git chc
 * @function
 * @memberof module:Server~routes
 * @inner
