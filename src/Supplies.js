@@ -169,7 +169,7 @@ class Supplies extends Component {
                     <div className="col centerText">
                       <a onClick={() => this.handleChange(type)} value={type}>
                         <img
-                          src={require(`./images/${type}.jpg`).default}
+                          src={require(`./images/${type}.jpg`)}
                           className={isSelected ? "selected" : ""}
                           style={{ cursor: "pointer" }}
                         ></img>

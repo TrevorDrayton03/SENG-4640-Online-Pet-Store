@@ -183,7 +183,7 @@ class Home extends Component {
                                 <div className="col centerText" >
                                     <a key={type} href="#" onClick={() => this.handlePetIconClick(type)}>
                                         <img
-                                            src={require(`./images/${type}.jpg`).default}
+                                            src={require(`./images/${type}.jpg`)}
                                         ></img>
                                     </a>
                                 </div>
@@ -200,7 +200,7 @@ class Home extends Component {
                                 <div className="col centerText">
                                     <a key={type} href="#" onClick={() => this.handleSupplyIconClick(type)}>
                                         <img
-                                            src={require(`./images/${type}.jpg`).default}
+                                            src={require(`./images/${type}.jpg`)}
                                         ></img>
                                     </a>
                                 </div>
