@@ -27,7 +27,7 @@ class CustomerService extends Component {
         return (
             <div className="Container maxvp">
                 <div className="large centerText">
-                    <h1 className="center centerText">FAQ & Customer Service</h1>
+                    <h1 className="center centerText">Frequently Asked Questions</h1>
                     <h2>
                         Where do you get your pets from?
                     </h2>
@@ -47,11 +47,11 @@ class CustomerService extends Component {
                         We allow refunds up to 14 days with our pets and 30 days with our supplies if they have not been damaged.
                     </p>
                     <br></br>
-                    <h2 style={{ fontWeight: 'bold' }}>
-                        Have any further questions or concerns? Let us know right away!
-                    </h2>
-                    <p>
-                        Email us below or call us at 1 (250) 789-1234.
+                    <h1 style={{ fontWeight: 'bold' }}>
+                        Have any further questions or concerns?
+                    </h1>
+                    <p className='noPadTopBottom'>
+                        Let us know right away! Email us below or call us at 1 (250) 555-1234.
                     </p>
                     <form target="_blank" action="https://formsubmit.co/trevorpdrayton@gmail.com" method="POST">
                         <div className="form-group">

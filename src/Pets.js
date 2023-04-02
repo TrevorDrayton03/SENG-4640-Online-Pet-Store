@@ -23,10 +23,10 @@ class Pets extends Component {
     /**
     * Component state
     * @property {Object} state - Component state
-    * @property {?Array<Object>} state.allPets - List of all available pets
+    * @property {Array<Object>} state.allPets - List of all available pets fetched from API
     * @property {string} state.type - Current type of pet to display
     * @property {boolean} state.chosen - Whether a pet has been chosen for details view
-    * @property {?Object} state.goodAnimal - Selected pet for details view
+    * @property {Object} state.goodAnimal - Selected pet for details view
     * @property {boolean} state.isLoading - Whether the component is still loading data
     */
     this.state = {
@@ -34,6 +34,18 @@ class Pets extends Component {
       type: "Dog",
       chosen: false,
       goodAnimal: null,
+      // goodAnimal: {
+      //   _id: 1,
+      //   name: 'Fluffy',
+      //   breed: 'Persian',
+      //   url: 'https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*',
+      //   price: '25.00',
+      //   type: "Dog",
+      //   age: 0.5,
+      //   description: "The name says it all. The name says it all. The name says it all. The name says it all. The name says it all."
+      // },             // for testing
+      // chosen: true,  // for testing
+      // allPets: true, // for testing
       isLoading: true,
     };
   }
@@ -125,6 +137,7 @@ class Pets extends Component {
   }
 
   /**
+  * Creates an array of indexes of pets that match the type of pet selected.
   * @function handleDisplay
   * @memberof Pets
   * @description Creates an array of indexes of pets that match the type of pet selected.
@@ -142,10 +155,8 @@ class Pets extends Component {
   };
 
   /**
-  * 
-  * @function render
+  * Renders the Pets component.
   * @memberof Pets
-  * @description Renders the Pets component.
   * @returns {JSX.Element} JSX element.
   */
   render() {
@@ -168,60 +179,63 @@ class Pets extends Component {
         );
       } else {
         return (
-          <div className="large">
-            <div className="row centerText">
-              <h1 className="centerText">Pets</h1>
-              {arra.map((type) => {
-                const isSelected = this.state.type === type;
-                return (
-                  <div className="col centerText">
-                    <a value={type} onClick={() => this.handleChange(type)}>
-                      <img
-                        src={require(`./images/${type}.jpg`).default}
-                        className={isSelected ? "selected" : ""}
-                        style={{ cursor: "pointer" }}
-                      ></img>
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
-            <div id="petDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              {
-                good.map((type) => {
+          <div className="Container maxvp flexCenter">
+            <div className="large">
+              <div className="row centerText">
+                {/* <h1 className="centerText">Pets</h1> */}
+                {arra.map((type) => {
+                  const isSelected = this.state.type === type;
                   return (
-                    <div>
-                      <button
-                        value={allPets[type]._id}
-                        style={{ padding: 0, margin: 0 }}
-                        onClick={() =>
-                          this.setState({
-                            chosen: !this.state.chosen,
-                            goodAnimal: allPets[type],
-                          })
-                        }
-                      >
+                    <div className="col centerText">
+                      <a value={type} onClick={() => this.handleChange(type)}>
                         <img
-                          id={allPets[type]._id}
-                          name={allPets[type].name}
-                          alt={allPets[type].breed}
-                          src={allPets[type].url}
-                          style={{
-                            height: "300px",
-                            width: "300px",
-                            objectFit: 'cover'
-                          }}
+                          src={require(`./images/${type}.jpg`).default}
+                          className={isSelected ? "selected" : ""}
+                          style={{ cursor: "pointer" }}
                         ></img>
-                      </button>
-                      <h2 className="centerText">{allPets[type].name}</h2>
-                      <h2 className="centerText" style={{ color: "red" }}>$ {allPets[type].price}</h2>
+                      </a>
                     </div>
                   );
-                })
-              }
+                })}
+              </div>
+            </div>
+            <div className="maxvp whitebg flexCenter">
+              <div id="petDis" className="centerText flexCenter large" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                {
+                  good.map((type) => {
+                    return (
+                      <div>
+                        <button
+                          value={allPets[type]._id}
+                          style={{ padding: 0, margin: 0 }}
+                          onClick={() =>
+                            this.setState({
+                              chosen: !this.state.chosen,
+                              goodAnimal: allPets[type],
+                            })
+                          }
+                        >
+                          <img
+                            id={allPets[type]._id}
+                            name={allPets[type].name}
+                            alt={allPets[type].breed}
+                            src={allPets[type].url}
+                            style={{
+                              height: "300px",
+                              width: "300px",
+                              objectFit: 'cover'
+                            }}
+                          ></img>
+                        </button>
+                        <h2 className="centerText">{allPets[type].name}</h2>
+                        <h3 className="centerText">${allPets[type].price}</h3>
+                      </div>
+                    );
+                  })
+                }
+              </div >
             </div >
-          </div >
-        );
+          </div >);
       }
     }
   }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import ProductDetails from "./ProductDetails";
 
 /**
- * Supplies.js is the component component that displays pet supplies and their details.
+ * Supplies.js is the componen t component that displays pet supplies and their details.
  *
  * @extends React.Component
  * @example
@@ -26,10 +26,10 @@ class Supplies extends Component {
 
     /**
     * @property {Object} state - Component state
-    * @property {Array|null} state.allSupplies - list of all pet supplies fetched from the API
+    * @property {Array<Object>} state.allSupplies - list of all pet supplies fetched from API
     * @property {string} state.type - selected type of pet supply
     * @property {boolean} state.chosen - selection state of a pet supply
-    * @property {object|null} state.supply - pet supply object that is currently selected
+    * @property {Object} state.supply - pet supply object that is currently selected
     * @property {boolean} state.isLoading - loading state of the component
     */
     this.state = {
@@ -92,7 +92,7 @@ class Supplies extends Component {
   /**
   * Select distinct types of pet supplies
   * @memberof Supplies
-  * @returns {Array} distinct types of pet supplies
+  * @returns {Array<string>} distinct types of pet supplies
   */
   selectOptions() {
     let sup = this.state.allSupplies;
@@ -116,12 +116,12 @@ class Supplies extends Component {
   }
 
   /**
-  * Select pet supplies of the chosen type
+  * Creates an array of indexes of supplies that match the type of supplies selected.
+  * @function handleDisplay
   * @memberof Supplies
   * @returns {Array} indexes of the pet supplies to be displayed
   */
   handleDisplay = () => {
-    //meant to create a table that displays to page
     let allSup = this.state.allSupplies;
     const good = [];
     for (let anNum = 0; anNum < allSup.length; anNum++) {
@@ -159,55 +159,59 @@ class Supplies extends Component {
         );
       } else {
         return (
-          <div className="large">
-            <div className="row centerText">
-              <h1 className="centerText">Supplies</h1>
-              {arra.map((type) => {
-                const isSelected = this.state.type === type;
-                return (
-                  <div className="col centerText">
-                    <a onClick={() => this.handleChange(type)} value={type}>
-                      <img
-                        src={require(`./images/${type}.jpg`).default}
-                        className={isSelected ? "selected" : ""}
-                        style={{ cursor: "pointer" }}
-                      ></img>
-                    </a>
-                  </div>
-                );
-              })}
+          <div className="Container maxvp flexCenter">
+            <div className="large">
+              <div className="row centerText">
+                {/* <h1 className="centerText">Supplies</h1> */}
+                {arra.map((type) => {
+                  const isSelected = this.state.type === type;
+                  return (
+                    <div className="col centerText">
+                      <a onClick={() => this.handleChange(type)} value={type}>
+                        <img
+                          src={require(`./images/${type}.jpg`).default}
+                          className={isSelected ? "selected" : ""}
+                          style={{ cursor: "pointer" }}
+                        ></img>
+                      </a>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-            <div id="supDis" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
-              {good.map((type) => {
-                return (
-                  <div style={{ padding: 0, margin: 0 }}>
-                    <button
-                      value={allSup[type]._id}
-                      style={{ padding: 0, margin: 0 }}
-                      onClick={() =>
-                        this.setState({
-                          chosen: !this.state.chosen,
-                          supply: allSup[type],
-                        })
-                      }
-                    >
-                      <img
-                        id={allSup[type]._id}
-                        name={allSup[type].name}
-                        alt={allSup[type].breed}
-                        src={allSup[type].url}
-                        style={{
-                          height: "300px",
-                          width: "300px",
-                          objectFit: 'cover'
-                        }}
-                      ></img>
-                    </button>
-                    <h2 className="centerText">{allSup[type].name}</h2>
-                    <h2 className="centerText" style={{ color: "red" }}>$ {allSup[type].price}</h2>
-                  </div>
-                );
-              })}
+            <div className="maxvp whitebg flexCenter">
+              <div id="supDis" className="centerText flexCenter large" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                {good.map((type) => {
+                  return (
+                    <div style={{ padding: 0, margin: 0 }}>
+                      <button
+                        value={allSup[type]._id}
+                        style={{ padding: 0, margin: 0 }}
+                        onClick={() =>
+                          this.setState({
+                            chosen: !this.state.chosen,
+                            supply: allSup[type],
+                          })
+                        }
+                      >
+                        <img
+                          id={allSup[type]._id}
+                          name={allSup[type].name}
+                          alt={allSup[type].breed}
+                          src={allSup[type].url}
+                          style={{
+                            height: "300px",
+                            width: "300px",
+                            objectFit: 'cover',
+                          }}
+                        ></img>
+                      </button>
+                      <h2 className="centerText">{allSup[type].name}</h2>
+                      <h3 className="centerText">${allSup[type].price}</h3>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

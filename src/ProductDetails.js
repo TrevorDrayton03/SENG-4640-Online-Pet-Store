@@ -26,134 +26,113 @@ class ProductDetails extends Component {
     let product = this.props.goodPet;
     if (product.breed !== undefined) {
       return (
-        <div className="large">
-          <table>
-            <tr>
-              <th>
-                <h1>This is {product.name}</h1>
-                <br></br>
-                <h1>
-                  They are a {product.breed} and {product.age} year(s) old
-                </h1>
-              </th>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  className="itemImg"
-                  id={product._id}
-                  name={product.name}
-                  alt={product.breed}
-                  src={product.url}
-                ></img>
-              </td>
-              <td>
-                <tr>
-                  <h1>They cost $ {product.price}</h1>
-                  <br></br>
-                </tr>
-                <tr>
-                  <h1>
-                    A little bit about them: <br></br>
-                  </h1>
-                  <h4>
-                    {product.description}
-                  </h4>
-                </tr>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  id="backToPets"
-                  className="btn btn-secondary"
-                  onClick={() => this.props.handleChosen()}
-                >
-                  {" "}
-                  Back
-                </button>
-              </td>
-              <td>
-                <button
-                  id="addToCart"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    this.props.addToCart(product);
-                    this.props.handleChosen();
-                  }}
-                >
-                  {" "}
-                  Add to Cart
-                </button>
-              </td>
-            </tr>
-          </table>
+        <div className="large" style={{ marginTop: '20px', flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+          <div className="col flexCenter centerText">
+            <img
+              id={product._id}
+              name={product.name}
+              alt={product.breed}
+              src={product.url}
+              className="productDetailsImg"
+            ></img>
+          </div>
+          <div className="row" style={{ marginLeft: '20px', marginRight: '100px', }}>
+            <div className="col">
+              <div className="row">
+                <h2>Name: <h3>{product.name}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Breed: <h3>{product.breed}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Age: <h3>{product.age}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Description: <h3>{product.description}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Price: <h3>${product.price}</h3></h2>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <button
+              style={{ display: "block", width: '120px' }}
+              id="addToCart"
+              className="btn btn-primary"
+              onClick={() => {
+                this.props.addToCart(product);
+                this.props.handleChosen();
+              }}
+            >
+              {" "}
+              Add to Cart
+            </button>
+            <button
+              style={{ display: "block", width: '120px' }}
+              id="backToPets"
+              className="btn btn-secondary"
+              onClick={() => this.props.handleChosen()}
+            >
+              {" "}
+              Back
+            </button>
+          </div>
         </div>
       );
     } else {
       return (
-        <div className="large">
-          <table>
-            <tr>
-              <th>
-                <h1>This is a {product.name}</h1>
-              </th>
-            </tr>
-
-            <tr>
-              <td>
-                <img
-                  className="itemImg"
-                  id={product._id}
-                  name={product.name}
-                  src={product.url}
-                ></img>
-              </td>
-              <td>
-                <tr>
-                  <h1>It costs $ {product.price}</h1>
-                  <br></br>
-                </tr>
-                <tr>
-                  <h1>
-                    A little bit about the product: <br></br>
-                  </h1>
-                  <h4>
-                    {product.description}
-                    <br></br>
-                    {product.dimension}
-                    <br></br>
-                    {product.weight}
-                  </h4>
-                </tr>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <button
-                  id="backToPets"
-                  className="btn btn-secondary"
-                  onClick={() => this.props.handleChosen()}
-                >
-                  {" "}
-                  Back
-                </button>
-              </td>
-              <td>
-                <button
-                  id="addToCart"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    this.props.addToCart(product);
-                    this.props.handleChosen();
-                  }}
-                >
-                  {" "}
-                  Add to Cart
-                </button>
-              </td>
-            </tr>
-          </table>
+        <div className="large" style={{ marginTop: '20px', flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+          <div className="col flexCenter centerText">
+            <img
+              id={product._id}
+              name={product.name}
+              src={product.url}
+              className="productDetailsImg"
+            ></img>
+          </div>
+          <div className="row" style={{ marginLeft: '20px', marginRight: '100px', }}>
+            <div className="col">
+              <div className="row">
+                <h2>Name: <h3>{product.name}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Description: <h3>{product.description}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Weight: <h3>{product.weight}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Dimensions: <h3>{product.dimension}</h3></h2>
+              </div>
+              <div className="row">
+                <h2>Price: <h3>${product.price}</h3></h2>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <button
+              style={{ display: "block", width: '120px' }}
+              id="addToCart"
+              className="btn btn-primary"
+              onClick={() => {
+                this.props.addToCart(product);
+                this.props.handleChosen();
+              }}
+            >
+              {" "}
+              Add to Cart
+            </button>
+            <button
+              style={{ display: "block", width: '120px' }}
+              id="backToPets"
+              className="btn btn-secondary"
+              onClick={() => this.props.handleChosen()}
+            >
+              {" "}
+              Back
+            </button>
+          </div>
         </div>
       );
     }

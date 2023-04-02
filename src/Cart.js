@@ -69,10 +69,10 @@ class Cart extends Component {
                     </CheckoutModal>
                     {this.props.items.length === 0 ?
                         (<><h1 className="centerText">
-                            Empty Cart
-                        </h1> <p>Why don't you try adding some items?</p></>) : <h1 className="centerText">
-                            Cart
-                        </h1>
+                            Cart is Empty
+                        </h1> <p>Why don't you try adding some items?</p></>)
+                        : ''
+                        // <h1 className="centerText"></h1>
                     }
                     <div style={{ justifyContent: "space-evenly", width: '100%' }}>
                         {this.props.items.length !== 0 && this.props.items.map((item) => (
