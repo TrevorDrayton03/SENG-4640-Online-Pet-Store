@@ -26,6 +26,6 @@
     },
     "opts": {
         "destination": "docs/",
-        "template": "templates/default"
+        "template": "custom-jsdoc-template"
     }
 }
