@@ -25,6 +25,7 @@
         ]
     },
     "opts": {
-        "destination": "docs/"
+        "destination": "docs/",
+        "template": "templates/default"
     }
 }

@@ -30,7 +30,7 @@
 import ProductDetails from "./ProductDetails";
 
 /**
- * Supplies.js is the component component that displays pet supplies and their details.
+ * Supplies.js is the componen t component that displays pet supplies and their details.
  *
  * @extends React.Component
  * @example
@@ -54,10 +54,10 @@ class Supplies extends Component {
 
     /**
     * @property {Object} state - Component state
-    * @property {Array|null} state.allSupplies - list of all pet supplies fetched from the API
+    * @property {Array&lt;Object>} state.allSupplies - list of all pet supplies fetched from API
     * @property {string} state.type - selected type of pet supply
     * @property {boolean} state.chosen - selection state of a pet supply
-    * @property {object|null} state.supply - pet supply object that is currently selected
+    * @property {Object} state.supply - pet supply object that is currently selected
     * @property {boolean} state.isLoading - loading state of the component
     */
     this.state = {
@@ -107,7 +107,7 @@ class Supplies extends Component {
     const search = window.location.search;
     const params = new URLSearchParams(search);
     const type = params.get("type");
-    // prevent the code from continueing until allSupplies is set
+    // prevent the code from continuing until allSupplies is set
     while (!this.state.allSupplies) {
       await new Promise((resolve) => setTimeout(resolve, 10));
     }
@@ -120,7 +120,7 @@ class Supplies extends Component {
   /**
   * Select distinct types of pet supplies
   * @memberof Supplies
-  * @returns {Array} distinct types of pet supplies
+  * @returns {Array&lt;string>} distinct types of pet supplies
   */
   selectOptions() {
     let sup = this.state.allSupplies;
@@ -144,12 +144,12 @@ class Supplies extends Component {
   }
 
   /**
-  * Select pet supplies of the chosen type
+  * Creates an array of indexes of supplies that match the type of supplies selected.
+  * @function handleDisplay
   * @memberof Supplies
   * @returns {Array} indexes of the pet supplies to be displayed
   */
   handleDisplay = () => {
-    //meant to create a table that displays to page
     let allSup = this.state.allSupplies;
     const good = [];
     for (let anNum = 0; anNum &lt; allSup.length; anNum++) {
@@ -187,69 +187,59 @@ class Supplies extends Component {
         );
       } else {
         return (
-          &lt;div className="large">
-            &lt;div className="row centerText">
-              &lt;h1 className="centerText">Supplies&lt;/h1>
-              {arra.map((type) => {
-                const isSelected = this.state.type === type;
-                return (
-                  &lt;div className="col centerText">
-                    &lt;a onClick={() => this.handleChange(type)} value={type}>
-                      &lt;img
-                        src={require(`./images/${type}.jpg`).default}
-                        className={isSelected ? "selected" : ""}
-                      >&lt;/img>
-                    &lt;/a>
-                  &lt;/div>
-                );
-              })}
+          &lt;div className="Container maxvp flexCenter">
+            &lt;div className="large">
+              &lt;div className="row centerText">
+                {/* &lt;h1 className="centerText">Supplies&lt;/h1> */}
+                {arra.map((type) => {
+                  const isSelected = this.state.type === type;
+                  return (
+                    &lt;div className="col centerText">
+                      &lt;a onClick={() => this.handleChange(type)} value={type}>
+                        &lt;img
+                          src={require(`./images/${type}.jpg`).default}
+                          className={isSelected ? "selected" : ""}
+                          style={{ cursor: "pointer" }}
+                        >&lt;/img>
+                      &lt;/a>
+                    &lt;/div>
+                  );
+                })}
+              &lt;/div>
             &lt;/div>
-            &lt;div id="petDis">
-              {/* for each supplyToBeBought index type, use it to get the supplyToBeBought data we want from all the supplyWanted */}
-              {good.map((type) => {
-                return (
-                  &lt;table>
-                    {" "}
-                    &lt;tr>
-                      {" "}
-                      &lt;th>
-                        {" "}
-                        &lt;h1>{allSup[type].name} &lt;/h1>{" "}
-                      &lt;/th>
-                    &lt;/tr>
-                    &lt;tr>
-                      &lt;td>
-                        {" "}
-                        &lt;button
-                          value={allSup[type]._id}
-                          onClick={() =>
-                            this.setState({
-                              chosen: !this.state.chosen,
-                              supply: allSup[type],
-                            })
-                          }
-                        >
-                          &lt;img
-                            className="itemImg"
-                            id={allSup[type]._id}
-                            name={allSup[type].name}
-                            alt={allSup[type].breed}
-                            src={allSup[type].url}
-                            style={{
-                              display: "block",
-                              height: "100%",
-                              width: "100%",
-                            }}
-                          >&lt;/img>
-                        &lt;/button>
-                      &lt;/td>
-                      &lt;td>
-                        &lt;h1>${allSup[type].price}&lt;/h1>
-                      &lt;/td>
-                    &lt;/tr>
-                  &lt;/table>
-                );
-              })}
+            &lt;div className="maxvp whitebg flexCenter">
+              &lt;div id="supDis" className="centerText flexCenter large" style={{ display: 'flex', flexWrap: 'wrap', width: '100%', flexDirection: 'row', justifyContent: 'space-evenly' }}>
+                {good.map((type) => {
+                  return (
+                    &lt;div style={{ padding: 0, margin: 0 }}>
+                      &lt;button
+                        value={allSup[type]._id}
+                        style={{ padding: 0, margin: 0 }}
+                        onClick={() =>
+                          this.setState({
+                            chosen: !this.state.chosen,
+                            supply: allSup[type],
+                          })
+                        }
+                      >
+                        &lt;img
+                          id={allSup[type]._id}
+                          name={allSup[type].name}
+                          alt={allSup[type].breed}
+                          src={allSup[type].url}
+                          style={{
+                            height: "300px",
+                            width: "300px",
+                            objectFit: 'cover',
+                          }}
+                        >&lt;/img>
+                      &lt;/button>
+                      &lt;h2 className="centerText">{allSup[type].name}&lt;/h2>
+                      &lt;h3 className="centerText">${allSup[type].price}&lt;/h3>
+                    &lt;/div>
+                  );
+                })}
+              &lt;/div>
             &lt;/div>
           &lt;/div>
         );
@@ -275,7 +265,7 @@ export default Supplies;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 16:08:37 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 01 2023 21:44:45 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>

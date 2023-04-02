@@ -54,134 +54,113 @@ class ProductDetails extends Component {
     let product = this.props.goodPet;
     if (product.breed !== undefined) {
       return (
-        &lt;div className="large">
-          &lt;table>
-            &lt;tr>
-              &lt;th>
-                &lt;h1>This is {product.name}&lt;/h1>
-                &lt;br>&lt;/br>
-                &lt;h1>
-                  They are a {product.breed} and {product.age} year(s) old
-                &lt;/h1>
-              &lt;/th>
-            &lt;/tr>
-            &lt;tr>
-              &lt;td>
-                &lt;img
-                  className="itemImg"
-                  id={product._id}
-                  name={product.name}
-                  alt={product.breed}
-                  src={product.url}
-                >&lt;/img>
-              &lt;/td>
-              &lt;td>
-                &lt;tr>
-                  &lt;h1>They cost $ {product.price}&lt;/h1>
-                  &lt;br>&lt;/br>
-                &lt;/tr>
-                &lt;tr>
-                  &lt;h1>
-                    A little bit about them: &lt;br>&lt;/br>
-                  &lt;/h1>
-                  &lt;h4>
-                    {product.description}
-                  &lt;/h4>
-                &lt;/tr>
-              &lt;/td>
-            &lt;/tr>
-            &lt;tr>
-              &lt;td>
-                &lt;button
-                  id="backToPets"
-                  className="btn btn-secondary"
-                  onClick={() => this.props.handleChosen()}
-                >
-                  {" "}
-                  Back
-                &lt;/button>
-              &lt;/td>
-              &lt;td>
-                &lt;button
-                  id="addToCart"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    this.props.addToCart(product);
-                    this.props.handleChosen();
-                  }}
-                >
-                  {" "}
-                  Add to Cart
-                &lt;/button>
-              &lt;/td>
-            &lt;/tr>
-          &lt;/table>
+        &lt;div className="large" style={{ marginTop: '20px', flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+          &lt;div className="col flexCenter centerText">
+            &lt;img
+              id={product._id}
+              name={product.name}
+              alt={product.breed}
+              src={product.url}
+              className="productDetailsImg"
+            >&lt;/img>
+          &lt;/div>
+          &lt;div className="row" style={{ marginLeft: '20px', marginRight: '100px', }}>
+            &lt;div className="col">
+              &lt;div className="row">
+                &lt;h2>Name: &lt;h3>{product.name}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Breed: &lt;h3>{product.breed}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Age: &lt;h3>{product.age}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Description: &lt;h3>{product.description}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Price: &lt;h3>${product.price}&lt;/h3>&lt;/h2>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="col">
+            &lt;button
+              style={{ display: "block", width: '120px' }}
+              id="addToCart"
+              className="btn btn-primary"
+              onClick={() => {
+                this.props.addToCart(product);
+                this.props.handleChosen();
+              }}
+            >
+              {" "}
+              Add to Cart
+            &lt;/button>
+            &lt;button
+              style={{ display: "block", width: '120px' }}
+              id="backToPets"
+              className="btn btn-secondary"
+              onClick={() => this.props.handleChosen()}
+            >
+              {" "}
+              Back
+            &lt;/button>
+          &lt;/div>
         &lt;/div>
       );
     } else {
       return (
-        &lt;div className="large">
-          &lt;table>
-            &lt;tr>
-              &lt;th>
-                &lt;h1>This is a {product.name}&lt;/h1>
-              &lt;/th>
-            &lt;/tr>
-
-            &lt;tr>
-              &lt;td>
-                &lt;img
-                  className="itemImg"
-                  id={product._id}
-                  name={product.name}
-                  src={product.url}
-                >&lt;/img>
-              &lt;/td>
-              &lt;td>
-                &lt;tr>
-                  &lt;h1>It costs $ {product.price}&lt;/h1>
-                  &lt;br>&lt;/br>
-                &lt;/tr>
-                &lt;tr>
-                  &lt;h1>
-                    A little bit about the product: &lt;br>&lt;/br>
-                  &lt;/h1>
-                  &lt;h4>
-                    {product.description}
-                    &lt;br>&lt;/br>
-                    {product.dimension}
-                    &lt;br>&lt;/br>
-                    {product.weight}
-                  &lt;/h4>
-                &lt;/tr>
-              &lt;/td>
-            &lt;/tr>
-            &lt;tr>
-              &lt;td>
-                &lt;button
-                  id="backToPets"
-                  className="btn btn-secondary"
-                  onClick={() => this.props.handleChosen()}
-                >
-                  {" "}
-                  Back
-                &lt;/button>
-              &lt;/td>
-              &lt;td>
-                &lt;button
-                  id="addToCart"
-                  className="btn btn-primary"
-                  onClick={() => {
-                    this.props.addToCart(product);
-                    this.props.handleChosen();
-                  }}
-                >
-                  {" "}
-                  Add to Cart
-                &lt;/button>
-              &lt;/td>
-            &lt;/tr>
-          &lt;/table>
+        &lt;div className="large" style={{ marginTop: '20px', flexDirection: 'row', display: 'flex', alignItems: 'center' }}>
+          &lt;div className="col flexCenter centerText">
+            &lt;img
+              id={product._id}
+              name={product.name}
+              src={product.url}
+              className="productDetailsImg"
+            >&lt;/img>
+          &lt;/div>
+          &lt;div className="row" style={{ marginLeft: '20px', marginRight: '100px', }}>
+            &lt;div className="col">
+              &lt;div className="row">
+                &lt;h2>Name: &lt;h3>{product.name}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Description: &lt;h3>{product.description}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Weight: &lt;h3>{product.weight}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Dimensions: &lt;h3>{product.dimension}&lt;/h3>&lt;/h2>
+              &lt;/div>
+              &lt;div className="row">
+                &lt;h2>Price: &lt;h3>${product.price}&lt;/h3>&lt;/h2>
+              &lt;/div>
+            &lt;/div>
+          &lt;/div>
+          &lt;div className="col">
+            &lt;button
+              style={{ display: "block", width: '120px' }}
+              id="addToCart"
+              className="btn btn-primary"
+              onClick={() => {
+                this.props.addToCart(product);
+                this.props.handleChosen();
+              }}
+            >
+              {" "}
+              Add to Cart
+            &lt;/button>
+            &lt;button
+              style={{ display: "block", width: '120px' }}
+              id="backToPets"
+              className="btn btn-secondary"
+              onClick={() => this.props.handleChosen()}
+            >
+              {" "}
+              Back
+            &lt;/button>
+          &lt;/div>
         &lt;/div>
       );
     }
@@ -204,7 +183,7 @@ export default ProductDetails;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Fri Mar 31 2023 16:08:37 GMT-0700 (Pacific Daylight Saving Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sat Apr 01 2023 21:44:45 GMT-0700 (Pacific Daylight Saving Time)
 </footer>
 
 <script> prettyPrint(); </script>
