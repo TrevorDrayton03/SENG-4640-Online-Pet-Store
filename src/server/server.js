@@ -4,6 +4,9 @@
  * @requires express
  * @requires path
  * @requires body-parser
+ * @requires AdminModel
+ * @requires SuppliesModel
+ * @requires PetModel
  */
 
 /**
