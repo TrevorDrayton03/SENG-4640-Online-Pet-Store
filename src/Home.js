@@ -70,7 +70,6 @@ class Home extends Component {
     * This function is used to send the user to the pet detail page with the pet they want to see.
     */
     handleCarouselClick = (id) => {
-        // window.location.href = '/pets?id=' + id;
         const queryParams = new URLSearchParams(window.location.search);
         queryParams.set('id', id);
         const newUrl = '/pets?' + queryParams.toString();
