@@ -145,7 +145,7 @@ class App extends Component {
   /**
   * Handles removing an item from the cart.
   * Updates the component state with the new cart items.
-  * @param {number} key - The _id of the item to be removed from the cart.
+  * @param {ObjectId} key - The _id of the item to be removed from the cart.
   * @returns {void}
   */
   handleRemoveFromCart(key) {
@@ -184,7 +184,7 @@ class App extends Component {
   /**
   * Function that handles incrementing the quantity of an item and updating the total price.
   * @param {number} price - The price of the item to increment.
-  * @param {number} key - The unique identifier of the item to increment.
+  * @param {ObjectId} key - The unique identifier of the item to increment.
   */
   handleIncrementTotal = (price, key) => {
     const updatedCart = this.state.cartItems.map((cartItem) => {
@@ -205,7 +205,7 @@ class App extends Component {
   /**
   * Function that handles decrementing the quantity of an item and updating the total price.
   * @param {number} price - The price of the item to decrement.
-  * @param {number} key - The unique identifier of the item to decrement.
+  * @param {ObjectId} key - The unique identifier of the item to decrement.
   */
   handleDecrementTotal = (price, key) => {
     const currentCart = this.state.cartItems
@@ -265,7 +265,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <NavigationBar linkClick={this.handleLinkClick.bind(this)} itemCount={this.state.cartItems.length}></NavigationBar>
+        <NavigationBar
+          linkClick={this.handleLinkClick.bind(this)}
+          itemCount={this.state.cartItems.length}
+          route={this.state.route}
+        />
         {this.state.route === '/' && <Home pets={this.state.carouselData} />}
         {this.state.route === '/pets' && <Pets addToCart={this.handleAddToCart.bind(this)} />}
         {this.state.route === '/admin' && <Admin handleLogin={this.handleLogin.bind(this)} admin={this.state.admin} />}

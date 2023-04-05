@@ -120,7 +120,7 @@ class DataManager extends Component {
     * Function that handles the deletion of a pet or a supply from the database
     * @async
     * @function
-    * @param {string} key - the unique key that identifies the item to be deleted
+    * @param {ObjectId} key - the unique key that identifies the item to be deleted
     * @returns {void}
     */
     handleDelete = async (key) => {
