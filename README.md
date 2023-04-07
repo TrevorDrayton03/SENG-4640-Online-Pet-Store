@@ -10,11 +10,12 @@ An online pet store for pets and supplies developed with MERN (MongoDB, Express.
 React components, schemas, and the server.js file are documented using JSDoc.
 
 ## Running the Application
-1. Download the files into your IDE (we used Visual Studio Code)
-2. ```npm install```
-3. Cd to lists/src/server
-4. ```npm run build```
-5. ```node server.js```
+1. Cd to lists/
+2. Download the files into your IDE (we used Visual Studio Code)
+3. Run ```npm install``` in the root directory.
+4. Cd to lists/src/server
+5. ```npm run build```
+6. ```node server.js```
 
 ## Generating and Viewing Documentation
 1. Cd to lists/src/ 
