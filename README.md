@@ -15,8 +15,6 @@ React components, schemas, and the server.js file are documented using JSDoc.
 3. Cd to lists/src/server
 4. ```npm run build```
 5. ```node server.js```
-6. ``` npm install react-icons```
-7. ```npm install -g jsdoc```
 
 ## Generating and Viewing Documentation
 1. Cd to lists/src/ 
