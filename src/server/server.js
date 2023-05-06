@@ -19,7 +19,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
-const cors = require("cors")
+const cors = require("cors");
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../../build')));
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '../../build')));
 // parse application/json (header content type)
 app.use(bodyParser.json());
 
-app.use(cors())
+app.use(cors());
 
 const PetModel = require("../schemas/Pet.js");
 const SuppliesModel = require("../schemas/Supplies.js");
@@ -377,6 +377,6 @@ app.get('*', (req, res) => {
 * @memberof module:Controller~routes
 * @inner
 */
-app.listen(() => {
+app.listen(3000, () => {
   console.log('Listening');
 });
