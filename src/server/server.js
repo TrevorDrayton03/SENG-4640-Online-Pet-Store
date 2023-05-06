@@ -19,12 +19,15 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyParser = require("body-parser");
+const cors = require("cors")
 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../../build')));
 
 // parse application/json (header content type)
 app.use(bodyParser.json());
+
+app.use(cors())
 
 const PetModel = require("../schemas/Pet.js");
 const SuppliesModel = require("../schemas/Supplies.js");
