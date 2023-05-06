@@ -374,6 +374,6 @@ app.get('*', (req, res) => {
 * @memberof module:Controller~routes
 * @inner
 */
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.listen(() => {
+  console.log('Listening');
 });
