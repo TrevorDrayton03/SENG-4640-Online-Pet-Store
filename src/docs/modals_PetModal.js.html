@@ -75,7 +75,7 @@ class PetModal extends Component {
 
         if (this.props.job === "update") {
             try {
-                const response = await fetch('http://localhost:3000/api/updatePet', {
+                const response = await fetch('https://p-u-backend-only.onrender.com/api/updatePet', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ class PetModal extends Component {
         }
         else if (this.props.job === "save") {
             try {
-                const response = await fetch('http://localhost:3000/api/savePet', {
+                const response = await fetch('https://p-u-backend-only.onrender.com/api/savePet', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

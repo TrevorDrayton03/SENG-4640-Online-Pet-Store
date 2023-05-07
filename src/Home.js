@@ -97,14 +97,14 @@ class Home extends Component {
     * Fetches pet and supply types from the API to be used in the "Shop By Pet" and "Shop By Supplies" sections.
     */
     async componentDidMount() {
-        await fetch('http://localhost:3000/api/petTypes')
+        await fetch('https://p-u-backend-only.onrender.com/api/petTypes')
             .then(response => response.json())
             .then(data => {
                 this.setState({ petTypes: data });
             })
             .catch(error => console.log(error))
 
-        await fetch('http://localhost:3000/api/supplyTypes')
+        await fetch('https://p-u-backend-only.onrender.com/api/supplyTypes')
             .then(response => response.json())
             .then(data => {
                 this.setState({ supplyTypes: data });

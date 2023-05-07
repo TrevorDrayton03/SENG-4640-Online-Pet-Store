@@ -80,7 +80,7 @@ class CartItem extends Component {
     * @returns {void}
     */
     async componentDidMount() {
-        await fetch('http://localhost:3000/api/petTypes')
+        await fetch('https://p-u-backend-only.onrender.com/api/petTypes')
             .then(response => response.json())
             .then(data => {
                 if (data.includes(this.props.type)) {
@@ -101,7 +101,7 @@ class CartItem extends Component {
     */
     async componentDidUpdate(prevProps) {
         if (prevProps !== this.props) {
-            await fetch('http://localhost:3000/api/petTypes')
+            await fetch('https://p-u-backend-only.onrender.com/api/petTypes')
                 .then(response => response.json())
                 .then(data => {
                     if (data.includes(this.props.type)) {

@@ -111,7 +111,7 @@ class Pets extends Component {
   */
   async componentDidMount() {
     try {
-      const response = await fetch("http://localhost:3000/api/petData");
+      const response = await fetch("https://p-u-backend-only.onrender.com/api/petData");
       const pets = await response.json();
       this.setState({
         allPets: pets,
