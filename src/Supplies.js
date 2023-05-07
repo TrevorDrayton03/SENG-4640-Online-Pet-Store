@@ -66,7 +66,7 @@ class Supplies extends Component {
   */
   async componentDidMount() {
     try {
-      const response = await fetch("https://p-u-backend-only.onrender.com/api/suppliesData");
+      const response = await fetch("https://pet-universe.onrender.com/api/suppliesData");
       const petsupplies = await response.json();
       this.setState({
         allSupplies: petsupplies,

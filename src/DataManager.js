@@ -69,7 +69,7 @@ class DataManager extends Component {
         this.setState({ type: e.target.value })
         if (e.target.value === "pets") {
             try {
-                const response = await fetch('https://p-u-backend-only.onrender.com/api/petData');
+                const response = await fetch('https://pet-universe.onrender.com/api/petData');
                 const pets = await response.json();
                 this.setState({
                     fetchedData: pets
@@ -80,7 +80,7 @@ class DataManager extends Component {
         }
         else if (e.target.value === "supplies") {
             try {
-                const response = await fetch('https://p-u-backend-only.onrender.com/api/suppliesData');
+                const response = await fetch('https://pet-universe.onrender.com/api/suppliesData');
                 const supplies = await response.json();
                 this.setState({
                     fetchedData: supplies
@@ -128,7 +128,7 @@ class DataManager extends Component {
         if (confirmDelete) {
             if (this.state.type === "pets")
                 try {
-                    await fetch(`https://p-u-backend-only.onrender.com/api/deletePet?key=${key}`);
+                    await fetch(`https://pet-universe.onrender.com/api/deletePet?key=${key}`);
                     // update the state to remove the deleted item
                     // filter creates a shallow copy of the array and filters what does not pass the conditional statement
                     const updatedData = this.state.fetchedData.filter(data => data._id !== key);
@@ -138,7 +138,7 @@ class DataManager extends Component {
                 }
             else if (this.state.type === "supplies") {
                 try {
-                    await fetch(`https://p-u-backend-only.onrender.com/api/deleteSupply?key=${key}`);
+                    await fetch(`https://pet-universe.onrender.com/api/deleteSupply?key=${key}`);
                     // update the state to remove the deleted item
                     // filter creates a shallow copy of the array and filters what does not pass the conditional statement
                     const updatedData = this.state.fetchedData.filter(data => data._id !== key);
@@ -158,7 +158,7 @@ class DataManager extends Component {
     */
     async componentDidMount() {
         try {
-            const response = await fetch('https://p-u-backend-only.onrender.com/api/petData');
+            const response = await fetch('https://pet-universe.onrender.com/api/petData');
             const pets = await response.json();
             this.setState({
                 fetchedData: pets

@@ -94,7 +94,7 @@ class App extends Component {
     });
 
     try {
-      const response = await fetch('https://p-u-backend-only.onrender.com/api/petData');
+      const response = await fetch('https://pet-universe.onrender.com/api/petData');
       const pets = await response.json();
       this.setState({
         allPets: pets,
@@ -104,7 +104,7 @@ class App extends Component {
     }
 
     try {
-      const response = await fetch('https://p-u-backend-only.onrender.com/api/suppliesData');
+      const response = await fetch('https://pet-universe.onrender.com/api/suppliesData');
       const supplies = await response.json();
       this.setState({
         allSupplies: supplies,
@@ -114,7 +114,7 @@ class App extends Component {
     }
 
     try {
-      const response = await fetch('https://p-u-backend-only.onrender.com/api/carousel');
+      const response = await fetch('https://pet-universe.onrender.com/api/carousel');
       const carouselPets = await response.json();
       this.setState({
         carouselData: carouselPets
@@ -159,7 +159,7 @@ class App extends Component {
   */
   async handleCheckoutCart() {
     const keys = this.state.cartItems.map((obj => obj._id));
-    await fetch('https://p-u-backend-only.onrender.com/api/checkout', {
+    await fetch('https://pet-universe.onrender.com/api/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

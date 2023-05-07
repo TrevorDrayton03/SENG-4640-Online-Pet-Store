@@ -36,7 +36,7 @@ class SuppliesModal extends Component {
 
         if (this.props.job === "update") {
             try {
-                const response = await fetch('https://p-u-backend-only.onrender.com/api/updateSupply', {
+                const response = await fetch('https://pet-universe.onrender.com/api/updateSupply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ class SuppliesModal extends Component {
         }
         else if (this.props.job === "save") {
             try {
-                const response = await fetch('https://p-u-backend-only.onrender.com/api/saveSupply', {
+                const response = await fetch('https://pet-universe.onrender.com/api/saveSupply', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -72,7 +72,7 @@ class Admin extends Component {
     async handleFormSubmit(e) {
         e.preventDefault();
         try {
-            const response = await fetch('https://p-u-backend-only.onrender.com/api/admin', {
+            const response = await fetch('https://pet-universe.onrender.com/api/admin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

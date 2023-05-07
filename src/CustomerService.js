@@ -62,7 +62,7 @@ class CustomerService extends Component {
                                 <div className="col">
                                     <input type="email" name="email" className="form-control" placeholder="Email Address" required />
                                 </div>
-                                <input type="hidden" name="_next" value="https://p-u-backend-only.onrender.com/" />
+                                <input type="hidden" name="_next" value="https://pet-universe.onrender.com/" />
                             </div>
                         </div>
                         <div className="form-group">
