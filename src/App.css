@@ -62,11 +62,6 @@ body {
   border-radius: 30px;
 }
 
-.navbar .navbar-nav .nav-item .nav-link:hover {
-  border: 2px solid white;
-  border-radius: 30px;
-}
-
 .active-nav-link {
   border: 2px solid white !important;
   border-radius: 30px !important;
@@ -85,12 +80,6 @@ body {
 .navbar .navbar-brand {
   border: 2px solid transparent;
   border-radius: 30px;
-}
-
-.navbar .navbar-brand:hover {
-  border: 2px solid white;
-  border-radius: 30px;
-
 }
 
 .navbar-custom {
