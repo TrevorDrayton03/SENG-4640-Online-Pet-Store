@@ -11,6 +11,9 @@ React components, schemas, and the server.js file are documented using JSDoc.
 
 Click this link to try the website (please give it up to one minute to load for the first time): https://pet-universe.onrender.com/.
 
+## Database Manager Component
+![image](https://github.com/TrevorDrayton03/SENG-4640-Online-Pet-Store/assets/56656811/00ac794a-9fbc-40d7-9256-09476755ea18)
+
 ## Running the Application
 1. Download the files into your IDE (we used Visual Studio Code)
 2. Run ```npm install``` in the root directory.
